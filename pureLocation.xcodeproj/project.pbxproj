@@ -7,21 +7,69 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D231BA6A2A63CAF5009D0B82 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D231BA692A63CAF5009D0B82 /* RegisterViewController.swift */; };
+		D231BA712A63CC3A009D0B82 /* Asset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D231BA702A63CC3A009D0B82 /* Asset.xcassets */; };
+		D2541F652A5DA1E0000AC372 /* BSImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = D2541F642A5DA1E0000AC372 /* BSImagePicker */; };
+		D2541F6A2A5E6994000AC372 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2541F692A5E6994000AC372 /* LoginController.swift */; };
+		D2541F702A5E6B75000AC372 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2541F6F2A5E6B75000AC372 /* APIConstants.swift */; };
+		D2541F722A5E6FBC000AC372 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2541F712A5E6FBC000AC372 /* NetworkResult.swift */; };
+		D2541F742A5E704B000AC372 /* SingupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2541F732A5E704B000AC372 /* SingupModel.swift */; };
+		D2541F782A5E717A000AC372 /* Sercive.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2541F772A5E717A000AC372 /* Sercive.swift */; };
+		D2541F7B2A5E7202000AC372 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D2541F7A2A5E7202000AC372 /* Alamofire */; };
+		D2541F7D2A5E7BD5000AC372 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2541F7C2A5E7BD5000AC372 /* SignUpController.swift */; };
+		D2541F7F2A5E8145000AC372 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2541F7E2A5E8145000AC372 /* LoginModel.swift */; };
+		D2541F812A5FC844000AC372 /* DeleteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2541F802A5FC844000AC372 /* DeleteModel.swift */; };
+		D2541F852A6040D1000AC372 /* TravelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2541F842A6040D1000AC372 /* TravelController.swift */; };
+		D2541F872A6044C2000AC372 /* TravelModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2541F862A6044C2000AC372 /* TravelModel.swift */; };
+		D2541F892A604BBA000AC372 /* PhotoSaveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2541F882A604BBA000AC372 /* PhotoSaveModel.swift */; };
+		D2541F8B2A610561000AC372 /* CalculateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2541F8A2A610561000AC372 /* CalculateModel.swift */; };
+		D2541F8D2A612259000AC372 /* testmodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2541F8C2A612259000AC372 /* testmodel.swift */; };
+		D2541FB82A627D62000AC372 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2541FB72A627D62000AC372 /* LoginViewController.swift */; };
+		D2541FDC2A62823C000AC372 /* NanumSquareRoundEB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2541FDE2A62823C000AC372 /* NanumSquareRoundEB.ttf */; };
+		D2541FDF2A628241000AC372 /* NanumSquareRoundOTFR.otf in Resources */ = {isa = PBXBuildFile; fileRef = D2541FE12A628241000AC372 /* NanumSquareRoundOTFR.otf */; };
+		D2541FE22A62824F000AC372 /* NanumSquareRoundB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2541FE42A62824F000AC372 /* NanumSquareRoundB.ttf */; };
+		D2541FE52A6282FC000AC372 /* NanumSquareRoundL.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2541FE72A6282FC000AC372 /* NanumSquareRoundL.ttf */; };
+		D2541FE82A6282FF000AC372 /* NanumSquareRoundOTFB.otf in Resources */ = {isa = PBXBuildFile; fileRef = D2541FEA2A6282FF000AC372 /* NanumSquareRoundOTFB.otf */; };
+		D2541FEB2A628302000AC372 /* NanumSquareRoundOTFEB.otf in Resources */ = {isa = PBXBuildFile; fileRef = D2541FED2A628302000AC372 /* NanumSquareRoundOTFEB.otf */; };
+		D2541FEE2A628306000AC372 /* NanumSquareRoundOTFL.otf in Resources */ = {isa = PBXBuildFile; fileRef = D2541FF02A628306000AC372 /* NanumSquareRoundOTFL.otf */; };
+		D2541FF12A62830B000AC372 /* NanumSquareRoundR.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2541FF32A62830B000AC372 /* NanumSquareRoundR.ttf */; };
 		D29BD94D2A5D970C0010587C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29BD94C2A5D970C0010587C /* AppDelegate.swift */; };
 		D29BD94F2A5D970C0010587C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29BD94E2A5D970C0010587C /* SceneDelegate.swift */; };
 		D29BD9512A5D970C0010587C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29BD9502A5D970C0010587C /* ViewController.swift */; };
 		D29BD9542A5D970C0010587C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D29BD9522A5D970C0010587C /* Main.storyboard */; };
-		D29BD9562A5D970D0010587C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D29BD9552A5D970D0010587C /* Assets.xcassets */; };
 		D29BD9592A5D970D0010587C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D29BD9572A5D970D0010587C /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D231BA692A63CAF5009D0B82 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		D231BA702A63CC3A009D0B82 /* Asset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Asset.xcassets; sourceTree = "<group>"; };
+		D2541F692A5E6994000AC372 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		D2541F6F2A5E6B75000AC372 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
+		D2541F712A5E6FBC000AC372 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
+		D2541F732A5E704B000AC372 /* SingupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingupModel.swift; sourceTree = "<group>"; };
+		D2541F772A5E717A000AC372 /* Sercive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sercive.swift; sourceTree = "<group>"; };
+		D2541F7C2A5E7BD5000AC372 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
+		D2541F7E2A5E8145000AC372 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		D2541F802A5FC844000AC372 /* DeleteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteModel.swift; sourceTree = "<group>"; };
+		D2541F842A6040D1000AC372 /* TravelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelController.swift; sourceTree = "<group>"; };
+		D2541F862A6044C2000AC372 /* TravelModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelModel.swift; sourceTree = "<group>"; };
+		D2541F882A604BBA000AC372 /* PhotoSaveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSaveModel.swift; sourceTree = "<group>"; };
+		D2541F8A2A610561000AC372 /* CalculateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateModel.swift; sourceTree = "<group>"; };
+		D2541F8C2A612259000AC372 /* testmodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testmodel.swift; sourceTree = "<group>"; };
+		D2541FB72A627D62000AC372 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		D2541FDD2A62823C000AC372 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/NanumSquareRoundEB.ttf; sourceTree = "<group>"; };
+		D2541FE02A628241000AC372 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/NanumSquareRoundOTFR.otf; sourceTree = "<group>"; };
+		D2541FE32A62824F000AC372 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/NanumSquareRoundB.ttf; sourceTree = "<group>"; };
+		D2541FE62A6282FC000AC372 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/NanumSquareRoundL.ttf; sourceTree = "<group>"; };
+		D2541FE92A6282FF000AC372 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/NanumSquareRoundOTFB.otf; sourceTree = "<group>"; };
+		D2541FEC2A628302000AC372 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/NanumSquareRoundOTFEB.otf; sourceTree = "<group>"; };
+		D2541FEF2A628306000AC372 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/NanumSquareRoundOTFL.otf; sourceTree = "<group>"; };
+		D2541FF22A62830B000AC372 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/NanumSquareRoundR.ttf; sourceTree = "<group>"; };
 		D29BD9492A5D970C0010587C /* pureLocation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pureLocation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29BD94C2A5D970C0010587C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D29BD94E2A5D970C0010587C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D29BD9502A5D970C0010587C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D29BD9532A5D970C0010587C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		D29BD9552A5D970D0010587C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D29BD9582A5D970D0010587C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D29BD95A2A5D970D0010587C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -31,15 +79,77 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2541F652A5DA1E0000AC372 /* BSImagePicker in Frameworks */,
+				D2541F7B2A5E7202000AC372 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D2541F662A5DA216000AC372 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D29BD9502A5D970C0010587C /* ViewController.swift */,
+				D2541F692A5E6994000AC372 /* LoginController.swift */,
+				D2541F7C2A5E7BD5000AC372 /* SignUpController.swift */,
+				D2541F842A6040D1000AC372 /* TravelController.swift */,
+				D2541FB72A627D62000AC372 /* LoginViewController.swift */,
+				D231BA692A63CAF5009D0B82 /* RegisterViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D2541F6E2A5E6B5F000AC372 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D2541F732A5E704B000AC372 /* SingupModel.swift */,
+				D2541F7E2A5E8145000AC372 /* LoginModel.swift */,
+				D2541F802A5FC844000AC372 /* DeleteModel.swift */,
+				D2541F862A6044C2000AC372 /* TravelModel.swift */,
+				D2541F882A604BBA000AC372 /* PhotoSaveModel.swift */,
+				D2541F8A2A610561000AC372 /* CalculateModel.swift */,
+				D2541F8C2A612259000AC372 /* testmodel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D2541F752A5E7158000AC372 /* DataStruct */ = {
+			isa = PBXGroup;
+			children = (
+				D2541F6F2A5E6B75000AC372 /* APIConstants.swift */,
+				D2541F712A5E6FBC000AC372 /* NetworkResult.swift */,
+			);
+			path = DataStruct;
+			sourceTree = "<group>";
+		};
+		D2541F762A5E716D000AC372 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				D2541F772A5E717A000AC372 /* Sercive.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		D2541F8F2A6278E6000AC372 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				D2541FE42A62824F000AC372 /* NanumSquareRoundB.ttf */,
+				D2541FDE2A62823C000AC372 /* NanumSquareRoundEB.ttf */,
+				D2541FE72A6282FC000AC372 /* NanumSquareRoundL.ttf */,
+				D2541FEA2A6282FF000AC372 /* NanumSquareRoundOTFB.otf */,
+				D2541FED2A628302000AC372 /* NanumSquareRoundOTFEB.otf */,
+				D2541FF02A628306000AC372 /* NanumSquareRoundOTFL.otf */,
+				D2541FE12A628241000AC372 /* NanumSquareRoundOTFR.otf */,
+				D2541FF32A62830B000AC372 /* NanumSquareRoundR.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		D29BD9402A5D970C0010587C = {
 			isa = PBXGroup;
 			children = (
+				D231BA702A63CC3A009D0B82 /* Asset.xcassets */,
 				D29BD94B2A5D970C0010587C /* pureLocation */,
 				D29BD94A2A5D970C0010587C /* Products */,
 			);
@@ -56,13 +166,16 @@
 		D29BD94B2A5D970C0010587C /* pureLocation */ = {
 			isa = PBXGroup;
 			children = (
+				D2541F8F2A6278E6000AC372 /* Font */,
+				D2541F762A5E716D000AC372 /* Service */,
+				D2541F752A5E7158000AC372 /* DataStruct */,
+				D2541F6E2A5E6B5F000AC372 /* Model */,
 				D29BD94C2A5D970C0010587C /* AppDelegate.swift */,
 				D29BD94E2A5D970C0010587C /* SceneDelegate.swift */,
-				D29BD9502A5D970C0010587C /* ViewController.swift */,
 				D29BD9522A5D970C0010587C /* Main.storyboard */,
-				D29BD9552A5D970D0010587C /* Assets.xcassets */,
 				D29BD9572A5D970D0010587C /* LaunchScreen.storyboard */,
 				D29BD95A2A5D970D0010587C /* Info.plist */,
+				D2541F662A5DA216000AC372 /* Controller */,
 			);
 			path = pureLocation;
 			sourceTree = "<group>";
@@ -83,6 +196,10 @@
 			dependencies = (
 			);
 			name = pureLocation;
+			packageProductDependencies = (
+				D2541F642A5DA1E0000AC372 /* BSImagePicker */,
+				D2541F7A2A5E7202000AC372 /* Alamofire */,
+			);
 			productName = pureLocation;
 			productReference = D29BD9492A5D970C0010587C /* pureLocation.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +228,10 @@
 				Base,
 			);
 			mainGroup = D29BD9402A5D970C0010587C;
+			packageReferences = (
+				D2541F632A5DA1E0000AC372 /* XCRemoteSwiftPackageReference "BSImagePicker" */,
+				D2541F792A5E7202000AC372 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = D29BD94A2A5D970C0010587C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -125,8 +246,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2541FEB2A628302000AC372 /* NanumSquareRoundOTFEB.otf in Resources */,
+				D231BA712A63CC3A009D0B82 /* Asset.xcassets in Resources */,
 				D29BD9592A5D970D0010587C /* LaunchScreen.storyboard in Resources */,
-				D29BD9562A5D970D0010587C /* Assets.xcassets in Resources */,
+				D2541FE22A62824F000AC372 /* NanumSquareRoundB.ttf in Resources */,
+				D2541FF12A62830B000AC372 /* NanumSquareRoundR.ttf in Resources */,
+				D2541FDC2A62823C000AC372 /* NanumSquareRoundEB.ttf in Resources */,
+				D2541FEE2A628306000AC372 /* NanumSquareRoundOTFL.otf in Resources */,
+				D2541FE82A6282FF000AC372 /* NanumSquareRoundOTFB.otf in Resources */,
+				D2541FE52A6282FC000AC372 /* NanumSquareRoundL.ttf in Resources */,
+				D2541FDF2A628241000AC372 /* NanumSquareRoundOTFR.otf in Resources */,
 				D29BD9542A5D970C0010587C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,7 +267,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2541F742A5E704B000AC372 /* SingupModel.swift in Sources */,
+				D2541F782A5E717A000AC372 /* Sercive.swift in Sources */,
+				D2541F7D2A5E7BD5000AC372 /* SignUpController.swift in Sources */,
+				D231BA6A2A63CAF5009D0B82 /* RegisterViewController.swift in Sources */,
 				D29BD9512A5D970C0010587C /* ViewController.swift in Sources */,
+				D2541F8B2A610561000AC372 /* CalculateModel.swift in Sources */,
+				D2541F702A5E6B75000AC372 /* APIConstants.swift in Sources */,
+				D2541F7F2A5E8145000AC372 /* LoginModel.swift in Sources */,
+				D2541F812A5FC844000AC372 /* DeleteModel.swift in Sources */,
+				D2541F892A604BBA000AC372 /* PhotoSaveModel.swift in Sources */,
+				D2541F852A6040D1000AC372 /* TravelController.swift in Sources */,
+				D2541F872A6044C2000AC372 /* TravelModel.swift in Sources */,
+				D2541F8D2A612259000AC372 /* testmodel.swift in Sources */,
+				D2541F6A2A5E6994000AC372 /* LoginController.swift in Sources */,
+				D2541FB82A627D62000AC372 /* LoginViewController.swift in Sources */,
+				D2541F722A5E6FBC000AC372 /* NetworkResult.swift in Sources */,
 				D29BD94D2A5D970C0010587C /* AppDelegate.swift in Sources */,
 				D29BD94F2A5D970C0010587C /* SceneDelegate.swift in Sources */,
 			);
@@ -147,6 +291,78 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		D2541FDE2A62823C000AC372 /* NanumSquareRoundEB.ttf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D2541FDD2A62823C000AC372 /* Base */,
+			);
+			name = NanumSquareRoundEB.ttf;
+			path = "../../../../Downloads/nanum-square-round";
+			sourceTree = "<group>";
+		};
+		D2541FE12A628241000AC372 /* NanumSquareRoundOTFR.otf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D2541FE02A628241000AC372 /* Base */,
+			);
+			name = NanumSquareRoundOTFR.otf;
+			path = "../../../../Downloads/nanum-square-round";
+			sourceTree = "<group>";
+		};
+		D2541FE42A62824F000AC372 /* NanumSquareRoundB.ttf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D2541FE32A62824F000AC372 /* Base */,
+			);
+			name = NanumSquareRoundB.ttf;
+			path = "../../../../Downloads/nanum-square-round";
+			sourceTree = "<group>";
+		};
+		D2541FE72A6282FC000AC372 /* NanumSquareRoundL.ttf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D2541FE62A6282FC000AC372 /* Base */,
+			);
+			name = NanumSquareRoundL.ttf;
+			path = "../../../../Downloads/nanum-square-round";
+			sourceTree = "<group>";
+		};
+		D2541FEA2A6282FF000AC372 /* NanumSquareRoundOTFB.otf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D2541FE92A6282FF000AC372 /* Base */,
+			);
+			name = NanumSquareRoundOTFB.otf;
+			path = "../../../../Downloads/nanum-square-round";
+			sourceTree = "<group>";
+		};
+		D2541FED2A628302000AC372 /* NanumSquareRoundOTFEB.otf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D2541FEC2A628302000AC372 /* Base */,
+			);
+			name = NanumSquareRoundOTFEB.otf;
+			path = "../../../../Downloads/nanum-square-round";
+			sourceTree = "<group>";
+		};
+		D2541FF02A628306000AC372 /* NanumSquareRoundOTFL.otf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D2541FEF2A628306000AC372 /* Base */,
+			);
+			name = NanumSquareRoundOTFL.otf;
+			path = "../../../../Downloads/nanum-square-round";
+			sourceTree = "<group>";
+		};
+		D2541FF32A62830B000AC372 /* NanumSquareRoundR.ttf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D2541FF22A62830B000AC372 /* Base */,
+			);
+			name = NanumSquareRoundR.ttf;
+			path = "../../../../Downloads/nanum-square-round";
+			sourceTree = "<group>";
+		};
 		D29BD9522A5D970C0010587C /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -285,11 +501,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FHYRWZCT6D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = pureLocation/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진 수집이 필요합니다";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -313,11 +532,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FHYRWZCT6D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = pureLocation/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진 수집이 필요합니다";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -358,6 +580,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D2541F632A5DA1E0000AC372 /* XCRemoteSwiftPackageReference "BSImagePicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mikaoj/BSImagePicker.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		D2541F792A5E7202000AC372 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D2541F642A5DA1E0000AC372 /* BSImagePicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D2541F632A5DA1E0000AC372 /* XCRemoteSwiftPackageReference "BSImagePicker" */;
+			productName = BSImagePicker;
+		};
+		D2541F7A2A5E7202000AC372 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D2541F792A5E7202000AC372 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D29BD9412A5D970C0010587C /* Project object */;
 }
