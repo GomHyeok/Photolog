@@ -228,7 +228,7 @@ class UserService {
     }
     
     func test (token : String, id : Int, log: Double, lat: Double, completion: @escaping (NetworkResult<Any>) -> Void) {
-        let url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + String(lat) + "," + String(log) + "&key=AIzaSyDstkkUqoCFutr1fsmHm8rogfNi96wqQiU"
+        let url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + String(lat) + "," + String(log) + APIConstants.GoogleKey
         //print(url)
 //        print(log)
 //        print(lat)
@@ -236,6 +236,8 @@ class UserService {
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
         ]
+        
+        
         
         //Request 생성
         //통신 주소, HTTP메소드, 요청방식, 인코딩방식, 요청헤더
@@ -261,6 +263,77 @@ class UserService {
         }
     }
     
+    func userInfo ( id : Int, token:String, completion: @escaping (NetworkResult<Any>) -> Void) {
+        let url = APIConstants.uerInfoURL + String(id)
+        //print(url)
+//        print(log)
+//        print(lat)
+        //HTTP Header 요청 헤더
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization" : token
+        ]
+        
+        //Request 생성
+        //통신 주소, HTTP메소드, 요청방식, 인코딩방식, 요청헤더
+        let dataRequest = AF.request(
+            url,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: headers
+        )
+        //request 시작, responseData를 호출하면서 데이터 통신 시작
+        dataRequest.responseData{
+            response in//데이터 통신 결과 저장
+            switch response.result {
+                case .success :
+                    guard let statusCode = response.response?.statusCode else {return}
+                    guard let value = response.value else {return}
+                    
+                    let networkResult = self.judgeStatus(by : statusCode, value, types: "UserInfo")
+                    completion(networkResult)
+                case .failure :
+                    completion(.networkFail)
+            }
+        }
+    }
+    
+    func travelName ( id : Int, token:String, travelId : Int, title : String, completion: @escaping (NetworkResult<Any>) -> Void) {
+        let url = APIConstants.travelNameURL + String(travelId)
+        
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization" : token
+        ]
+        
+        let body : Parameters = ["title" : title]
+        
+        //Request 생성
+        //통신 주소, HTTP메소드, 요청방식, 인코딩방식, 요청헤더
+        let dataRequest = AF.request(
+            url,
+            method: .patch,
+            parameters: body,
+            encoding: JSONEncoding.default,
+            headers: headers
+        )
+        //request 시작, responseData를 호출하면서 데이터 통신 시작
+        dataRequest.responseData{
+            response in//데이터 통신 결과 저장
+            switch response.result {
+                case .success :
+                    guard let statusCode = response.response?.statusCode else {return}
+                    guard let value = response.value else {return}
+                    
+                    let networkResult = self.judgeStatus(by : statusCode, value, types: "TravelName")
+                    completion(networkResult)
+                case .failure :
+                    completion(.networkFail)
+            }
+        }
+    }
+    
+    
     private func judgeStatus(by statusCode : Int, _ data:Data, types : String) -> NetworkResult<Any> {
         switch statusCode {
             case ..<300 : return isVaildData(data: data, types : types)
@@ -273,6 +346,8 @@ class UserService {
         }
     }
     
+    
+//MARK: - isVailData
     private func isVaildData(data : Data ,types : String) ->NetworkResult<Any> {
         let decoder = JSONDecoder()//서버에서 받은 데이터를 codable로 선택
         var decodeData : Any?
@@ -315,6 +390,18 @@ class UserService {
         
         else if types == "test" {
             guard let decoded = try? decoder.decode(testmodel.self, from: data)
+            else {return .pathErr}
+            decodeData = decoded
+        }
+        
+        else if types == "UserInfo" {
+            guard let decoded = try? decoder.decode(UserInfoResponse.self, from: data)
+            else {return .pathErr}
+            decodeData = decoded
+        }
+        
+        else if types == "TravelName" {
+            guard let decoded = try? decoder.decode(TravelNameResponse.self, from: data)
             else {return .pathErr}
             decodeData = decoded
         }

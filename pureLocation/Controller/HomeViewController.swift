@@ -160,7 +160,7 @@ extension HomeViewController {
     }
     
     func photoSave(img : UIImage, log : Double, lat: Double, date : String, completion: @escaping () -> Void) {
-        UserService.shared.PhotoSave(travelId: travelId, token: token, img: img, dateTime: dateTime, log: log, lat: lat, city: level1, fullAddress : formatted){
+        UserService.shared.PhotoSave(travelId: travelId, token: token, img: img, dateTime: date, log: log, lat: lat, city: level1, fullAddress : formatted){
                 response in
                 switch response {
                     case .success(let data) :
