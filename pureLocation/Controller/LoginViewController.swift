@@ -16,6 +16,7 @@ class LoginViewController: UIViewController {
     
     var token : String = ""
     var id : Int = 0
+    var check : Bool = false
     
     @IBOutlet weak var Password: UITextField!
     @IBOutlet weak var Email: UITextField!
@@ -31,8 +32,23 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func LoginButton(_ sender: UIButton) {
-        print("Login")
-        login()
+        check = false
+        let dispatchGroup = DispatchGroup()
+        login() {
+            if self.check {
+                let storyboard = UIStoryboard(name: "Home", bundle: nil)
+                if let homeView = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController {
+                    homeView.token = self.token
+                    homeView.id = self.id
+                    
+                    self.navigationController?.pushViewController(homeView, animated: true)
+                }
+                else {print("홈뷰 문제")}
+            }
+            else {
+                self.alert(message: "로그인에 실패하였습니다.")
+            }
+        }
     }
     
     @IBAction func SecurityType(_ sender: UIButton) {
@@ -46,7 +62,7 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController {
-    func login() {
+    func login(completion : @escaping () -> Void) {
         guard let email = Email.text else {return}
         guard let password = Password.text else {return}
         
@@ -62,15 +78,21 @@ extension LoginViewController {
                     guard let data = data as? LoginResponse else {return}
                     self.token = data.data?.token ?? ""
                     self.id = data.data?.userId ?? 0
-                    self.alert(message : data.message)
+                    self.check = true
+                    if(self.check) { print("True") }
+                    completion()
                 case .requsetErr(let err) :
                     print(err)
+                    completion()
                 case .pathErr:
                     print("pathErr")
+                    completion()
                 case .serverErr:
                     print("serverErr")
+                    completion()
                 case .networkFail:
                     print("networkFail")
+                    completion()
                 }
             }
     }

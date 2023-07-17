@@ -157,7 +157,12 @@ class UserService {
     
     func PhotoSave(travelId: Int, token: String, img: UIImage, dateTime: String, log: Double, lat: Double, city: String, fullAddress : String, completion: @escaping (NetworkResult<Any>) -> Void) {
         let url = APIConstants.PhotoSaveURL + String(travelId)
-        print(url)
+        
+//        print(log)
+//        print(lat)
+//        print(city)
+//        print(fullAddress)
+//        print(dateTime)
         
         // Prepare HTTPHeaders
         let headers: HTTPHeaders = [
@@ -213,7 +218,7 @@ class UserService {
                 case .success :
                     guard let statusCode = response.response?.statusCode else {return}
                     guard let value = response.value else {return}
-                    
+                    print(statusCode)
                     let networkResult = self.judgeStatus(by : statusCode, value, types: "Calculate")
                     completion(networkResult)
                 case .failure :
@@ -225,6 +230,8 @@ class UserService {
     func test (token : String, id : Int, log: Double, lat: Double, completion: @escaping (NetworkResult<Any>) -> Void) {
         let url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + String(lat) + "," + String(log) + "&key=AIzaSyDstkkUqoCFutr1fsmHm8rogfNi96wqQiU"
         //print(url)
+//        print(log)
+//        print(lat)
         //HTTP Header 요청 헤더
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
@@ -256,9 +263,10 @@ class UserService {
     
     private func judgeStatus(by statusCode : Int, _ data:Data, types : String) -> NetworkResult<Any> {
         switch statusCode {
-        case ..<300 : return isVaildData(data: data, types : types)
+            case ..<300 : return isVaildData(data: data, types : types)
             case 400..<500 :
                 print(statusCode)
+                print(types)
                 return .pathErr
             case 500..<600 : return .serverErr
             default : return .networkFail
@@ -300,7 +308,7 @@ class UserService {
         }
         
         else if types == "Calculate" {
-            guard let decoded = try? decoder.decode(PhotoSaveResponse.self, from: data)
+            guard let decoded = try? decoder.decode(CalculateResponse.self, from: data)
             else {return .pathErr}
             decodeData = decoded
         }

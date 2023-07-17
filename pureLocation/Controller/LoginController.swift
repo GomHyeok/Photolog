@@ -227,7 +227,6 @@ extension LoginController {
                     guard let data = data as? CalculateResponse else {return}
                         print(data)
                         print(data.status)
-                        self.travelId = data.data ?? 0
                         self.alert(message : data.message)
                     case .requsetErr(let err) :
                         print(err)

@@ -7,8 +7,18 @@
 
 import Foundation
 
-struct CalculateResponse : Codable {
+struct CalculateResponse : Codable{
     let status : Bool
     let message : String
-    let data : Int?
+    let data : CalculateData?
+}
+
+struct CalculateData : Codable {
+    let night : Int
+    let day : Int
+    let startDate : String
+    let endDate : String
+    let locationNum : Int
+    let photoNum : Int
+    let locationList : [Int]
 }
