@@ -17,7 +17,7 @@ class TravelNameViewController: UIViewController {
     @IBOutlet weak var NameFiled: UITextField!
     
     override func viewDidLayoutSubviews() {
-        let lineColor = UIColor(red:256, green:112, blue:66, alpha:1.0)
+        let lineColor = UIColor(red:0.58, green:0.25, blue:0.17, alpha:1.0)
         self.NameFiled.setBottomLine(borderColor: lineColor)
     }
     
@@ -29,6 +29,17 @@ class TravelNameViewController: UIViewController {
     @IBAction func NextButton(_ sender: UIButton) {
         travelName() {
             print("travelName")
+            let storyboard = UIStoryboard(name: "Home", bundle: nil)
+            if let
+                daylog = storyboard.instantiateViewController(withIdentifier: "DayLogViewController") as? DayLogViewController {
+                daylog.token = self.token
+                daylog.id = self.id
+                daylog.travelId = self.travelId
+                daylog.datas = self.datas
+                
+                self.navigationController?.pushViewController(daylog, animated: true)
+            }
+            else {print("daylog 문제")}
         }
     }
     

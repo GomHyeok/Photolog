@@ -29,4 +29,25 @@ struct APIConstants {
 
     //CalculateURL
     static let calculateURL = baseURL + "/api/travel/calculate/"
+    
+    //UserInfoURL
+    static let uerInfoURL = baseURL + "/api/user/"
+    
+    //Google Key
+    static let GoogleKey = "&key=AIzaSyDstkkUqoCFutr1fsmHm8rogfNi96wqQiU"
+    
+    //TravelNameURL
+    static let travelNameURL = baseURL + "/api/travel/title/"
+    
+    //LocationInfoURL
+    static let locationInfoURL = baseURL + "/api/location/"
+    
+    //ChangeLocationNameURL
+    static let changeLocationNameURL = baseURL + "/api/location/name/"
+    
+    //ChangeDescriptionURL
+    static let changeDescriptionURL = baseURL + "/api/location/description/"
+    
+    //TravelInfoURL
+    static let travelInfoURL = baseURL + "/api/travel/textSummary/"
 }

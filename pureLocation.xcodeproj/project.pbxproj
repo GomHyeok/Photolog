@@ -17,6 +17,13 @@
 		D2323EE02A6564B80040F165 /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2323EDF2A6564B80040F165 /* UserInfoModel.swift */; };
 		D2323EE22A6577730040F165 /* TravelNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2323EE12A6577730040F165 /* TravelNameViewController.swift */; };
 		D2323EE42A657D110040F165 /* TravelNameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2323EE32A657D110040F165 /* TravelNameModel.swift */; };
+		D2323EE62A658B390040F165 /* DayLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2323EE52A658B390040F165 /* DayLogViewController.swift */; };
+		D2323EE82A6656FE0040F165 /* LocationInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2323EE72A6656FE0040F165 /* LocationInfoModel.swift */; };
+		D2323EEA2A6669FD0040F165 /* StaticModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2323EE92A6669FD0040F165 /* StaticModel.swift */; };
+		D2323EEE2A6677D30040F165 /* DayLogcollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2323EED2A6677D30040F165 /* DayLogcollectionViewCell.swift */; };
+		D25343A92A673D9D007558CD /* TotalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25343A82A673D9D007558CD /* TotalViewController.swift */; };
+		D25343AB2A673F51007558CD /* TravelInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25343AA2A673F51007558CD /* TravelInfoModel.swift */; };
+		D25343AD2A67B146007558CD /* TotalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25343AC2A67B146007558CD /* TotalTableViewCell.swift */; };
 		D2541F652A5DA1E0000AC372 /* BSImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = D2541F642A5DA1E0000AC372 /* BSImagePicker */; };
 		D2541F6A2A5E6994000AC372 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2541F692A5E6994000AC372 /* LoginController.swift */; };
 		D2541F702A5E6B75000AC372 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2541F6F2A5E6B75000AC372 /* APIConstants.swift */; };
@@ -59,6 +66,13 @@
 		D2323EDF2A6564B80040F165 /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		D2323EE12A6577730040F165 /* TravelNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelNameViewController.swift; sourceTree = "<group>"; };
 		D2323EE32A657D110040F165 /* TravelNameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelNameModel.swift; sourceTree = "<group>"; };
+		D2323EE52A658B390040F165 /* DayLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayLogViewController.swift; sourceTree = "<group>"; };
+		D2323EE72A6656FE0040F165 /* LocationInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInfoModel.swift; sourceTree = "<group>"; };
+		D2323EE92A6669FD0040F165 /* StaticModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticModel.swift; sourceTree = "<group>"; };
+		D2323EED2A6677D30040F165 /* DayLogcollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayLogcollectionViewCell.swift; sourceTree = "<group>"; };
+		D25343A82A673D9D007558CD /* TotalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalViewController.swift; sourceTree = "<group>"; };
+		D25343AA2A673F51007558CD /* TravelInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelInfoModel.swift; sourceTree = "<group>"; };
+		D25343AC2A67B146007558CD /* TotalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalTableViewCell.swift; sourceTree = "<group>"; };
 		D2541F692A5E6994000AC372 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		D2541F6F2A5E6B75000AC372 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		D2541F712A5E6FBC000AC372 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
@@ -124,6 +138,8 @@
 				D231BA762A6428C8009D0B82 /* HomeViewController.swift */,
 				D2323EDD2A6547B60040F165 /* SummaryViewController.swift */,
 				D2323EE12A6577730040F165 /* TravelNameViewController.swift */,
+				D2323EE52A658B390040F165 /* DayLogViewController.swift */,
+				D25343A82A673D9D007558CD /* TotalViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -140,6 +156,9 @@
 				D2541F8C2A612259000AC372 /* testmodel.swift */,
 				D2323EDF2A6564B80040F165 /* UserInfoModel.swift */,
 				D2323EE32A657D110040F165 /* TravelNameModel.swift */,
+				D2323EE72A6656FE0040F165 /* LocationInfoModel.swift */,
+				D2323EE92A6669FD0040F165 /* StaticModel.swift */,
+				D25343AA2A673F51007558CD /* TravelInfoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -149,6 +168,8 @@
 			children = (
 				D2541F6F2A5E6B75000AC372 /* APIConstants.swift */,
 				D2541F712A5E6FBC000AC372 /* NetworkResult.swift */,
+				D2323EED2A6677D30040F165 /* DayLogcollectionViewCell.swift */,
+				D25343AC2A67B146007558CD /* TotalTableViewCell.swift */,
 			);
 			path = DataStruct;
 			sourceTree = "<group>";
@@ -304,6 +325,7 @@
 				D2541F782A5E717A000AC372 /* Sercive.swift in Sources */,
 				D2323EE42A657D110040F165 /* TravelNameModel.swift in Sources */,
 				D2541F7D2A5E7BD5000AC372 /* SignUpController.swift in Sources */,
+				D2323EE82A6656FE0040F165 /* LocationInfoModel.swift in Sources */,
 				D231BA6A2A63CAF5009D0B82 /* RegisterViewController.swift in Sources */,
 				D29BD9512A5D970C0010587C /* ViewController.swift in Sources */,
 				D2541F8B2A610561000AC372 /* CalculateModel.swift in Sources */,
@@ -312,16 +334,22 @@
 				D2323EE02A6564B80040F165 /* UserInfoModel.swift in Sources */,
 				D2541F702A5E6B75000AC372 /* APIConstants.swift in Sources */,
 				D2541F7F2A5E8145000AC372 /* LoginModel.swift in Sources */,
+				D25343AB2A673F51007558CD /* TravelInfoModel.swift in Sources */,
 				D2541F812A5FC844000AC372 /* DeleteModel.swift in Sources */,
 				D2541F892A604BBA000AC372 /* PhotoSaveModel.swift in Sources */,
+				D2323EEE2A6677D30040F165 /* DayLogcollectionViewCell.swift in Sources */,
 				D2541F852A6040D1000AC372 /* TravelController.swift in Sources */,
 				D2541F872A6044C2000AC372 /* TravelModel.swift in Sources */,
 				D2541F8D2A612259000AC372 /* testmodel.swift in Sources */,
 				D2323EDE2A6547B60040F165 /* SummaryViewController.swift in Sources */,
 				D2541F6A2A5E6994000AC372 /* LoginController.swift in Sources */,
 				D231BA772A6428C8009D0B82 /* HomeViewController.swift in Sources */,
+				D2323EEA2A6669FD0040F165 /* StaticModel.swift in Sources */,
+				D25343A92A673D9D007558CD /* TotalViewController.swift in Sources */,
 				D2541FB82A627D62000AC372 /* LoginViewController.swift in Sources */,
+				D25343AD2A67B146007558CD /* TotalTableViewCell.swift in Sources */,
 				D2541F722A5E6FBC000AC372 /* NetworkResult.swift in Sources */,
+				D2323EE62A658B390040F165 /* DayLogViewController.swift in Sources */,
 				D29BD94D2A5D970C0010587C /* AppDelegate.swift in Sources */,
 				D29BD94F2A5D970C0010587C /* SceneDelegate.swift in Sources */,
 				D2323EE22A6577730040F165 /* TravelNameViewController.swift in Sources */,
