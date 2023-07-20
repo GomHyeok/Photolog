@@ -15,4 +15,6 @@ class TotalTableViewCell : UITableViewCell {
     @IBOutlet weak var ButtonLabel: UILabel!
     @IBOutlet weak var ButtonImage: UIImageView!
     
+    var row : Int = 0
+    var col : Int = 0
 }

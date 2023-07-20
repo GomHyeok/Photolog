@@ -76,8 +76,6 @@ class HomeViewController: UIViewController {
                     if let image = image {
                         dispatchGroup.enter()
                         self?.test(img : image, asset: asset){
-                            print(self?.level1)
-                            print(self?.formatted)
                             dispatchGroup.leave()
                         }
                     }

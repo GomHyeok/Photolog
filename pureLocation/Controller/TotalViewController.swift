@@ -107,11 +107,36 @@ extension TotalViewController : UITableViewDataSource {
         let urlString = self.locationArray[indexPath.section][indexPath.row].photoUrls[0]
         let url = URL(string: urlString)!
         
+        var totalCellCount = 0
+            
+        for section in 0..<indexPath.section {
+            let rowCount = tableView.numberOfRows(inSection: section)
+            totalCellCount += rowCount
+        }
+        totalCellCount += indexPath.row
+        
+        cell.cellButton.tag = totalCellCount
         cell.ButtonImage.load(url: url)
         cell.ButtonLabel.text = locationArray[indexPath.section][indexPath.row].description ?? ""
         
         
+        cell.cellButton.addTarget(self, action: #selector(cellaction(_:)), for: .touchUpInside)
+        
         return cell
+    }
+    
+    @objc func cellaction(_ sender : UIButton) {
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        if let daylog = storyboard.instantiateViewController(withIdentifier: "DayLogViewController") as? DayLogViewController {
+            daylog.token = self.token
+            daylog.id = self.id
+            daylog.travelId = self.travelId
+            daylog.datas = self.datas
+            daylog.cnt = sender.tag
+            
+            self.navigationController?.pushViewController(daylog, animated: true)
+        }
+        else {print("summary 문제")}
     }
 }
 
