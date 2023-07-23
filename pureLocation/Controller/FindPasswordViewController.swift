@@ -9,21 +9,15 @@ import UIKit
 
 class FindPasswordViewController: UIViewController {
 
+    @IBOutlet weak var NextButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        self.NextButton.layer.cornerRadius = 10
+        self.NextButton.layer.borderWidth=1
+        self.NextButton.layer.borderColor = self.NextButton.backgroundColor?.cgColor
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

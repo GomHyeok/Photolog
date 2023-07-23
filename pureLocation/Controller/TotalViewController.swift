@@ -55,6 +55,19 @@ class TotalViewController: UIViewController {
         else {print("home 문제")}
     }
     
+    
+    @IBAction func MapButton(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        if let mapView = storyboard.instantiateViewController(withIdentifier: "MapViewController") as? MapViewController {
+            mapView.token = self.token
+            mapView.id = self.id
+            mapView.travelId = self.travelId
+            
+            self.navigationController?.pushViewController(mapView, animated: true)
+        }
+        else {print("map 문제")}
+    }
+    
 }
 
 extension TotalViewController {

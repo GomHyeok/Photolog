@@ -30,19 +30,32 @@ class DayLogViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         PlaceName.isUserInteractionEnabled = false
         Description.isUserInteractionEnabled = false
-        locationId = datas?.data?.locationList ?? []
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        ImageCollectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        ImageCollectionView.dataSource = self
+        ImageCollectionView.delegate = self
+        
+        if let layout = ImageCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+            layout.itemSize = CGSize(width: ImageCollectionView.bounds.width / 2, height: ImageCollectionView.bounds.height)
+        }
+        
+        self.locationId = datas?.data?.locationList ?? []
         print(locationId.count)
-        locationInfo(locationId: locationId[cnt]) {
+        locationInfo(locationId: self.locationId[cnt]) {
             DispatchQueue.main.async{
                 self.day.text = String(self.settingData?.data?.sequence ?? 0) + "일차"
                 self.years.text = self.settingData?.data?.date ?? "날자를 알수 없습니다."
                 self.place.text = self.settingData?.data?.fullAddress ?? "장소를 알 수 없습니다."
                 
-                if self.settingData?.data?.title == nil {
+                if self.settingData?.data?.name == nil {
                     self.PlaceName.text = "이름을 입력해주세요"
                 }
                 else {
-                    self.PlaceName.text = self.settingData?.data?.title
+                    self.PlaceName.text = self.settingData?.data?.name
                 }
                 
                 if self.settingData?.data?.description == nil {
@@ -61,18 +74,6 @@ class DayLogViewController: UIViewController {
             DispatchQueue.main.async {
                 self.ImageCollectionView.reloadData()
             }
-        }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        ImageCollectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        ImageCollectionView.dataSource = self
-        ImageCollectionView.delegate = self
-        
-        if let layout = ImageCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .horizontal
-            layout.itemSize = CGSize(width: ImageCollectionView.bounds.width / 2, height: ImageCollectionView.bounds.height)
         }
 
     }
@@ -113,11 +114,11 @@ class DayLogViewController: UIViewController {
                     self.years.text = self.settingData?.data?.date ?? "날자를 알수 없습니다."
                     self.place.text = self.settingData?.data?.fullAddress ?? "장소를 알 수 없습니다."
                     
-                    if self.settingData?.data?.title == nil {
+                    if self.settingData?.data?.name == nil {
                         self.PlaceName.text = "이름을 입력해주세요"
                     }
                     else {
-                        self.PlaceName.text = self.settingData?.data?.title
+                        self.PlaceName.text = self.settingData?.data?.name
                     }
                     
                     if self.settingData?.data?.description == nil {

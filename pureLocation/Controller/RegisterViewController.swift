@@ -12,12 +12,16 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var Password: UITextField!
     @IBOutlet weak var Email: UITextField!
     @IBOutlet weak var NickName: UITextField!
+    @IBOutlet weak var NextButton: UIButton!
     
     override func viewDidLayoutSubviews() {
         let lineColor = UIColor(red:0.12, green:0.23, blue:0.35, alpha:1.0)
         self.Password.setBottomLine(borderColor: lineColor)
         self.Email.setBottomLine(borderColor: lineColor)
         self.NickName.setBottomLine(borderColor: lineColor)
+        self.NextButton.layer.cornerRadius = 10
+        self.NextButton.layer.borderWidth=1
+        self.NextButton.layer.borderColor = self.NextButton.backgroundColor?.cgColor
     }
     
     override func viewDidLoad() {
@@ -26,6 +30,9 @@ class RegisterViewController: UIViewController {
 
     @IBAction func RegisterBUtton(_ sender: UIButton) {
         print("Register")
+        Password.text = ""
+        Email.text = ""
+        NickName.text = ""
         signUp()
     }
     
@@ -37,6 +44,16 @@ class RegisterViewController: UIViewController {
             Password.isSecureTextEntry = true
         }
     }
+    
+    @IBAction func FindPassword(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let passWordView = storyboard.instantiateViewController(withIdentifier: "FindPasswordViewController") as? FindPasswordViewController {
+            
+            self.navigationController?.pushViewController(passWordView, animated: true)
+        }
+        else {print("비밀번호 찾기 문제")}
+    }
+    
 }
 
 extension RegisterViewController {

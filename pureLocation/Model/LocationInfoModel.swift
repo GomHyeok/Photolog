@@ -21,5 +21,5 @@ struct LocationInfoData :Codable {
     let urlList : [String]
     let fullAddress : String
     let description : String?
-    let title : String?
+    let name : String?
 }

@@ -20,15 +20,19 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var Password: UITextField!
     @IBOutlet weak var Email: UITextField!
+    @IBOutlet weak var nexButton: UIButton!
     
     override func viewDidLayoutSubviews() {
-        let lineColor = UIColor(red:0.12, green:0.23, blue:0.35, alpha:1.0)
-        self.Email.setBottomLine(borderColor: lineColor)
-        self.Password.setBottomLine(borderColor: lineColor)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let lineColor = UIColor(red:0.12, green:0.23, blue:0.35, alpha:1.0)
+        self.Email.setBottomLine(borderColor: lineColor)
+        self.Password.setBottomLine(borderColor: lineColor)
+        self.nexButton.layer.cornerRadius = 10
+        self.nexButton.layer.borderWidth=1
+        self.nexButton.layer.borderColor = self.nexButton.backgroundColor?.cgColor
     }
     
     @IBAction func LoginButton(_ sender: UIButton) {
@@ -110,8 +114,18 @@ extension UITextField {
         self.borderStyle = UITextField.BorderStyle.none
         self.backgroundColor = UIColor.clear
         let borderLine = UIView()
-      borderLine.frame = CGRect(x: 0, y: Double(self.frame.height) - 0.3, width: Double(self.frame.width), height: 0.3)
+        borderLine.frame = CGRect(x: 0, y: Double(self.frame.height), width: Double(self.frame.width), height: 0.3)
         borderLine.backgroundColor = borderColor
         self.addSubview(borderLine)
    }
+}
+
+extension UILabel {
+    func setBottomLine(borderColor: UIColor) {
+          self.backgroundColor = UIColor.clear
+          let borderLine = UIView()
+          borderLine.frame = CGRect(x: 0, y: Double(self.frame.height), width: Double(self.frame.width), height: 0.3)
+          borderLine.backgroundColor = borderColor
+          self.addSubview(borderLine)
+     }
 }

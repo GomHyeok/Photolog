@@ -459,10 +459,42 @@ class UserService {
         }
     }
     
+    func mapInfo ( travelId : Int, token : String, completion: @escaping (NetworkResult<Any>) -> Void) {
+        let url = APIConstants.MapInfoURL + String(travelId)
+        print(url)
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization" : token
+        ]
+        
+        let dataRequest = AF.request(
+            url,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: headers
+        )
+        
+        dataRequest.responseData{
+            response in
+            switch response.result {
+                case .success :
+                    guard let statusCode = response.response?.statusCode else {return}
+                    guard let value = response.value else {return}
+                    
+                    let networkResult = self.judgeStatus(by : statusCode, value, types: "MapInfo")
+                    completion(networkResult)
+                case .failure :
+                    completion(.networkFail)
+            }
+        }
+    }
+    
 //MARK: - judgeStatus
     private func judgeStatus(by statusCode : Int, _ data:Data, types : String) -> NetworkResult<Any> {
         switch statusCode {
-            case ..<300 : return isVaildData(data: data, types : types)
+            case ..<300 :
+                print(statusCode)
+                return isVaildData(data: data, types : types)
             case 400..<500 :
                 print(statusCode)
                 print(types)
@@ -548,6 +580,12 @@ class UserService {
         
         else if types == "TravelInfo" {
             guard let decoded = try? decoder.decode(TravelInfoResponse.self, from: data)
+            else {return .pathErr}
+            decodeData = decoded
+        }
+        
+        else if types == "MapInfo" {
+            guard let decoded = try? decoder.decode(MapInfoResponse.self, from: data)
             else {return .pathErr}
             decodeData = decoded
         }
