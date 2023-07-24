@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class DayLogViewController: UIViewController {
     
@@ -17,6 +18,7 @@ class DayLogViewController: UIViewController {
     var locationId : [Int] = []
     var settingData : LocationInfoResponse?
     var urlArray : [URL] = []
+    var images : [UIImage] = []
 
     
     @IBOutlet weak var Description: UITextView!
@@ -269,7 +271,7 @@ extension DayLogViewController : UICollectionViewDataSource {
         
         print(indexPath.item)
         //이미지에 대한 설정
-        cell.location.load(url: self.urlArray[indexPath.item])
+        cell.location.kf.setImage(with: urlArray[indexPath.item])
         
         return cell
     }

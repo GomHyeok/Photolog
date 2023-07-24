@@ -106,7 +106,7 @@ extension SummaryViewController : UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SummaryViewCollectionViewCell
         
         //이미지에 대한 설정
-        cell.collectionImage.load(url: self.urls[indexPath.item])
+        cell.collectionImage.kf.setImage(with: self.urls[indexPath.item])
         cell.collectionImage.layer.cornerRadius = cell.collectionImage.frame.size.width / 9
         cell.collectionImage.clipsToBounds = true
         
