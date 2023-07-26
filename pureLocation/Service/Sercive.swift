@@ -57,7 +57,7 @@ class UserService {
     
     func login(email: String, password: String, completion: @escaping (NetworkResult<Any>) -> Void) {
         let url = APIConstants.loginURL
-        //HTTP Header 요청 헤더
+        
         let headers: HTTPHeaders = [
             "Content-Type": "application/json"
         ]
@@ -158,12 +158,6 @@ class UserService {
     func PhotoSave(travelId: Int, token: String, img: UIImage, dateTime: String, log: Double, lat: Double, city: String, fullAddress : String, completion: @escaping (NetworkResult<Any>) -> Void) {
         let url = APIConstants.PhotoSaveURL + String(travelId)
         
-//        print(log)
-//        print(lat)
-//        print(city)
-//        print(fullAddress)
-//        print(dateTime)
-        
         // Prepare HTTPHeaders
         let headers: HTTPHeaders = [
             "Authorization": token,
@@ -229,9 +223,7 @@ class UserService {
     
     func test (token : String, id : Int, log: Double, lat: Double, completion: @escaping (NetworkResult<Any>) -> Void) {
         let url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + String(lat) + "," + String(log) + APIConstants.GoogleKey
-        //print(url)
-//        print(log)
-//        print(lat)
+
         //HTTP Header 요청 헤더
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
@@ -265,9 +257,6 @@ class UserService {
     
     func userInfo ( id : Int, token:String, completion: @escaping (NetworkResult<Any>) -> Void) {
         let url = APIConstants.uerInfoURL + String(id)
-        //print(url)
-//        print(log)
-//        print(lat)
         //HTTP Header 요청 헤더
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
@@ -489,6 +478,38 @@ class UserService {
         }
     }
     
+    func TravelAPI ( token : String, completion: @escaping (NetworkResult<Any>) -> Void) {
+        let url = APIConstants.travelAPI
+        print(url)
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization" : token
+        ]
+        
+        let dataRequest = AF.request(
+            url,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: headers
+        )
+        
+        dataRequest.responseData{
+            response in
+            switch response.result {
+                case .success :
+                    guard let statusCode = response.response?.statusCode else {return}
+                    guard let value = response.value else {return}
+                    
+                    let networkResult = self.judgeStatus(by : statusCode, value, types: "TravelAPI")
+                    completion(networkResult)
+                case .failure :
+                    completion(.networkFail)
+            }
+        }
+    }
+    
+    
+    
 //MARK: - judgeStatus
     private func judgeStatus(by statusCode : Int, _ data:Data, types : String) -> NetworkResult<Any> {
         switch statusCode {
@@ -502,7 +523,9 @@ class UserService {
             case 500..<600 :
                 print(statusCode)
                 return .serverErr
-            default : return .networkFail
+            default :
+                print(statusCode)
+                return .networkFail
         }
     }
     
@@ -586,6 +609,12 @@ class UserService {
         
         else if types == "MapInfo" {
             guard let decoded = try? decoder.decode(MapInfoResponse.self, from: data)
+            else {return .pathErr}
+            decodeData = decoded
+        }
+        
+        else if types == "TravelAPI" {
+            guard let decoded = try? decoder.decode(TravelAPIResponse.self, from: data)
             else {return .pathErr}
             decodeData = decoded
         }

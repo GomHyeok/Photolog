@@ -58,14 +58,15 @@ class TotalViewController: UIViewController {
     
     @IBAction func MapButton(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        if let mapView = storyboard.instantiateViewController(withIdentifier: "MapViewController") as? MapViewController {
-            mapView.token = self.token
-            mapView.id = self.id
-            mapView.travelId = self.travelId
+        if let totalMapView = storyboard.instantiateViewController(withIdentifier: "TotalMapViewController") as? TotalMapViewController {
+            totalMapView.token = self.token
+            totalMapView.id = self.id
+            totalMapView.travelId = self.travelId
+            totalMapView.sequences = self.sequences
             
-            self.navigationController?.pushViewController(mapView, animated: true)
+            self.navigationController?.pushViewController(totalMapView, animated: true)
         }
-        else {print("map 문제")}
+        else {print("mapview 문제")}
     }
     
 }

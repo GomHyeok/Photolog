@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreImage
 
 class SummaryViewController: UIViewController {
     
@@ -18,10 +19,10 @@ class SummaryViewController: UIViewController {
     
     @IBOutlet weak var TavleCalcu: UILabel!
     @IBOutlet weak var ImageCollection: UICollectionView!
-    
+    @IBOutlet weak var NextButton: UIButton!
     
     override func viewDidLayoutSubviews() {
-        
+        self.ImageCollection.reloadData()
     }
     
     override func viewDidLoad() {
@@ -34,17 +35,10 @@ class SummaryViewController: UIViewController {
         self.ImageCollection.dataSource = self
         self.ImageCollection.delegate = self
         self.TavleCalcu.setBottomLine(borderColor: UIColor.black)
-        let locationList = self.datas?.data?.locationList ?? []
-        let dispatchGropup = DispatchGroup()
-        for location in locationList {
-            dispatchGropup.enter()
-            locationInfo(locationId: location) {
-                dispatchGropup.leave()
-            }
-        }
-        dispatchGropup.notify(queue: .main) {
-            self.ImageCollection.reloadData()
-        }
+        
+        self.NextButton.layer.cornerRadius = 10
+        self.NextButton.layer.borderWidth=1
+        self.NextButton.layer.borderColor = self.NextButton.backgroundColor?.cgColor
     }
     
     
@@ -95,8 +89,7 @@ extension SummaryViewController : UICollectionViewDelegate {
 
 extension SummaryViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(urls.count)
-        return urls.count
+        return self.datas?.data?.locationImg.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -105,18 +98,20 @@ extension SummaryViewController : UICollectionViewDataSource {
         //셀의 인스턴스
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SummaryViewCollectionViewCell
         
+        cell.collectionImage.kf.setImage(with: URL(string : self.datas?.data?.locationImg[indexPath.item] ?? "")!)
+        
         //이미지에 대한 설정
-        cell.collectionImage.kf.setImage(with: self.urls[indexPath.item])
         cell.collectionImage.layer.cornerRadius = cell.collectionImage.frame.size.width / 9
         cell.collectionImage.clipsToBounds = true
         
-        cell.locationNaem.text = self.address[indexPath.item]
+        cell.locationNaem.text = self.datas?.data?.locationAddress[indexPath.item]
         
         cell.nights.text = String(datas?.data?.night ?? 0) + "박" + String(datas?.data?.day ?? 0) + "일"
         cell.During.text = datas?.data?.startDate ?? ""
         cell.During.text! += " ~ "
         cell.During.text! += datas?.data?.endDate ?? ""
         cell.locationNum.text = "총" + String(datas?.data?.locationNum ?? 0)+"군데를 방문하셨군요"
+        cell.customBackgroundView.layer.cornerRadius = cell.customBackgroundView.frame.size.width / 9
         
         return cell
     }

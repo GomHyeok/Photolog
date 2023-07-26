@@ -61,20 +61,20 @@
 		D2541F8B2A610561000AC372 /* CalculateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2541F8A2A610561000AC372 /* CalculateModel.swift */; };
 		D2541F8D2A612259000AC372 /* testmodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2541F8C2A612259000AC372 /* testmodel.swift */; };
 		D2541FB82A627D62000AC372 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2541FB72A627D62000AC372 /* LoginViewController.swift */; };
-		D2541FDC2A62823C000AC372 /* NanumSquareRoundEB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2541FDE2A62823C000AC372 /* NanumSquareRoundEB.ttf */; };
-		D2541FDF2A628241000AC372 /* NanumSquareRoundOTFR.otf in Resources */ = {isa = PBXBuildFile; fileRef = D2541FE12A628241000AC372 /* NanumSquareRoundOTFR.otf */; };
-		D2541FE22A62824F000AC372 /* NanumSquareRoundB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2541FE42A62824F000AC372 /* NanumSquareRoundB.ttf */; };
-		D2541FE52A6282FC000AC372 /* NanumSquareRoundL.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2541FE72A6282FC000AC372 /* NanumSquareRoundL.ttf */; };
-		D2541FE82A6282FF000AC372 /* NanumSquareRoundOTFB.otf in Resources */ = {isa = PBXBuildFile; fileRef = D2541FEA2A6282FF000AC372 /* NanumSquareRoundOTFB.otf */; };
-		D2541FEB2A628302000AC372 /* NanumSquareRoundOTFEB.otf in Resources */ = {isa = PBXBuildFile; fileRef = D2541FED2A628302000AC372 /* NanumSquareRoundOTFEB.otf */; };
-		D2541FEE2A628306000AC372 /* NanumSquareRoundOTFL.otf in Resources */ = {isa = PBXBuildFile; fileRef = D2541FF02A628306000AC372 /* NanumSquareRoundOTFL.otf */; };
-		D2541FF12A62830B000AC372 /* NanumSquareRoundR.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2541FF32A62830B000AC372 /* NanumSquareRoundR.ttf */; };
 		D29BD94D2A5D970C0010587C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29BD94C2A5D970C0010587C /* AppDelegate.swift */; };
 		D29BD94F2A5D970C0010587C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29BD94E2A5D970C0010587C /* SceneDelegate.swift */; };
 		D29BD9542A5D970C0010587C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D29BD9522A5D970C0010587C /* Main.storyboard */; };
 		D29BD9592A5D970D0010587C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D29BD9572A5D970D0010587C /* LaunchScreen.storyboard */; };
 		D2CFEEAC2A6C755B000BAC7A /* SummaryViewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CFEEAB2A6C755B000BAC7A /* SummaryViewCollectionViewCell.swift */; };
 		D2CFEEAF2A6E04CF000BAC7A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D2CFEEAE2A6E04CF000BAC7A /* Kingfisher */; };
+		D2E14D262A6FFD96000D2CF0 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D2E14D232A6FFC64000D2CF0 /* Pretendard-Bold.otf */; };
+		D2E14D272A6FFD9A000D2CF0 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D2E14D242A6FFC64000D2CF0 /* Pretendard-ExtraBold.otf */; };
+		D2E14D282A6FFD9E000D2CF0 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D2E14D252A6FFC64000D2CF0 /* Pretendard-Regular.otf */; };
+		D2E14D2A2A70022E000D2CF0 /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E14D292A70022E000D2CF0 /* HomeCell.swift */; };
+		D2E14D2C2A700CAA000D2CF0 /* TravelAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E14D2B2A700CAA000D2CF0 /* TravelAPIModel.swift */; };
+		D2E14D2E2A708D07000D2CF0 /* HomeNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E14D2D2A708D07000D2CF0 /* HomeNameViewController.swift */; };
+		D2E14D302A7091E0000D2CF0 /* TravelAPINameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E14D2F2A7091E0000D2CF0 /* TravelAPINameModel.swift */; };
+		D2E14D322A709E10000D2CF0 /* TotalMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E14D312A709E10000D2CF0 /* TotalMapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -130,14 +130,6 @@
 		D2541F8A2A610561000AC372 /* CalculateModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateModel.swift; sourceTree = "<group>"; };
 		D2541F8C2A612259000AC372 /* testmodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testmodel.swift; sourceTree = "<group>"; };
 		D2541FB72A627D62000AC372 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		D2541FDD2A62823C000AC372 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/NanumSquareRoundEB.ttf; sourceTree = "<group>"; };
-		D2541FE02A628241000AC372 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/NanumSquareRoundOTFR.otf; sourceTree = "<group>"; };
-		D2541FE32A62824F000AC372 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/NanumSquareRoundB.ttf; sourceTree = "<group>"; };
-		D2541FE62A6282FC000AC372 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/NanumSquareRoundL.ttf; sourceTree = "<group>"; };
-		D2541FE92A6282FF000AC372 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/NanumSquareRoundOTFB.otf; sourceTree = "<group>"; };
-		D2541FEC2A628302000AC372 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/NanumSquareRoundOTFEB.otf; sourceTree = "<group>"; };
-		D2541FEF2A628306000AC372 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/NanumSquareRoundOTFL.otf; sourceTree = "<group>"; };
-		D2541FF22A62830B000AC372 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/NanumSquareRoundR.ttf; sourceTree = "<group>"; };
 		D29BD9492A5D970C0010587C /* pureLocation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pureLocation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D29BD94C2A5D970C0010587C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D29BD94E2A5D970C0010587C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -145,6 +137,14 @@
 		D29BD9582A5D970D0010587C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D29BD95A2A5D970D0010587C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2CFEEAB2A6C755B000BAC7A /* SummaryViewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewCollectionViewCell.swift; sourceTree = "<group>"; };
+		D2E14D232A6FFC64000D2CF0 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-Bold.otf"; path = "Pretendard-1.3.8/public/static/Pretendard-Bold.otf"; sourceTree = SOURCE_ROOT; };
+		D2E14D242A6FFC64000D2CF0 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-ExtraBold.otf"; path = "Pretendard-1.3.8/public/static/Pretendard-ExtraBold.otf"; sourceTree = SOURCE_ROOT; };
+		D2E14D252A6FFC64000D2CF0 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-Regular.otf"; path = "Pretendard-1.3.8/public/static/Pretendard-Regular.otf"; sourceTree = SOURCE_ROOT; };
+		D2E14D292A70022E000D2CF0 /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
+		D2E14D2B2A700CAA000D2CF0 /* TravelAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelAPIModel.swift; sourceTree = "<group>"; };
+		D2E14D2D2A708D07000D2CF0 /* HomeNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNameViewController.swift; sourceTree = "<group>"; };
+		D2E14D2F2A7091E0000D2CF0 /* TravelAPINameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelAPINameModel.swift; sourceTree = "<group>"; };
+		D2E14D312A709E10000D2CF0 /* TotalMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalMapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +223,8 @@
 				D2323EE52A658B390040F165 /* DayLogViewController.swift */,
 				D25343A82A673D9D007558CD /* TotalViewController.swift */,
 				D205E92F2A69CCB500E7D0A5 /* MapViewController.swift */,
+				D2E14D2D2A708D07000D2CF0 /* HomeNameViewController.swift */,
+				D2E14D312A709E10000D2CF0 /* TotalMapViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -243,6 +245,8 @@
 				D2323EE92A6669FD0040F165 /* StaticModel.swift */,
 				D25343AA2A673F51007558CD /* TravelInfoModel.swift */,
 				D205E9312A6A4A6F00E7D0A5 /* MapInfoModel.swift */,
+				D2E14D2B2A700CAA000D2CF0 /* TravelAPIModel.swift */,
+				D2E14D2F2A7091E0000D2CF0 /* TravelAPINameModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -257,6 +261,7 @@
 				D22A57C92A6B107900B5E55B /* MapTableViewCell.swift */,
 				D22A57CB2A6B108600B5E55B /* LocationInfoCell.swift */,
 				D2CFEEAB2A6C755B000BAC7A /* SummaryViewCollectionViewCell.swift */,
+				D2E14D292A70022E000D2CF0 /* HomeCell.swift */,
 			);
 			path = DataStruct;
 			sourceTree = "<group>";
@@ -272,14 +277,9 @@
 		D2541F8F2A6278E6000AC372 /* Font */ = {
 			isa = PBXGroup;
 			children = (
-				D2541FE42A62824F000AC372 /* NanumSquareRoundB.ttf */,
-				D2541FDE2A62823C000AC372 /* NanumSquareRoundEB.ttf */,
-				D2541FE72A6282FC000AC372 /* NanumSquareRoundL.ttf */,
-				D2541FEA2A6282FF000AC372 /* NanumSquareRoundOTFB.otf */,
-				D2541FED2A628302000AC372 /* NanumSquareRoundOTFEB.otf */,
-				D2541FF02A628306000AC372 /* NanumSquareRoundOTFL.otf */,
-				D2541FE12A628241000AC372 /* NanumSquareRoundOTFR.otf */,
-				D2541FF32A62830B000AC372 /* NanumSquareRoundR.ttf */,
+				D2E14D232A6FFC64000D2CF0 /* Pretendard-Bold.otf */,
+				D2E14D242A6FFC64000D2CF0 /* Pretendard-ExtraBold.otf */,
+				D2E14D252A6FFC64000D2CF0 /* Pretendard-Regular.otf */,
 			);
 			path = Font;
 			sourceTree = "<group>";
@@ -393,18 +393,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2541FEB2A628302000AC372 /* NanumSquareRoundOTFEB.otf in Resources */,
 				D231BA712A63CC3A009D0B82 /* Asset.xcassets in Resources */,
+				D2E14D262A6FFD96000D2CF0 /* Pretendard-Bold.otf in Resources */,
+				D2E14D272A6FFD9A000D2CF0 /* Pretendard-ExtraBold.otf in Resources */,
 				D29BD9592A5D970D0010587C /* LaunchScreen.storyboard in Resources */,
 				D231BA752A642876009D0B82 /* Home.storyboard in Resources */,
-				D2541FE22A62824F000AC372 /* NanumSquareRoundB.ttf in Resources */,
-				D2541FF12A62830B000AC372 /* NanumSquareRoundR.ttf in Resources */,
+				D2E14D282A6FFD9E000D2CF0 /* Pretendard-Regular.otf in Resources */,
 				D205E90D2A69CB5900E7D0A5 /* GoogleMaps.bundle in Resources */,
-				D2541FDC2A62823C000AC372 /* NanumSquareRoundEB.ttf in Resources */,
-				D2541FEE2A628306000AC372 /* NanumSquareRoundOTFL.otf in Resources */,
-				D2541FE82A6282FF000AC372 /* NanumSquareRoundOTFB.otf in Resources */,
-				D2541FE52A6282FC000AC372 /* NanumSquareRoundL.ttf in Resources */,
-				D2541FDF2A628241000AC372 /* NanumSquareRoundOTFR.otf in Resources */,
 				D29BD9542A5D970C0010587C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -424,10 +419,12 @@
 				D22A57CC2A6B108600B5E55B /* LocationInfoCell.swift in Sources */,
 				D2541F8B2A610561000AC372 /* CalculateModel.swift in Sources */,
 				D205E9322A6A4A6F00E7D0A5 /* MapInfoModel.swift in Sources */,
+				D2E14D302A7091E0000D2CF0 /* TravelAPINameModel.swift in Sources */,
 				D22D8A8F2A646B100015CB24 /* CollectionViewCell.swift in Sources */,
 				D231BA732A642721009D0B82 /* FindPasswordViewController.swift in Sources */,
 				D2323EE02A6564B80040F165 /* UserInfoModel.swift in Sources */,
 				D2541F702A5E6B75000AC372 /* APIConstants.swift in Sources */,
+				D2E14D2E2A708D07000D2CF0 /* HomeNameViewController.swift in Sources */,
 				D2541F7F2A5E8145000AC372 /* LoginModel.swift in Sources */,
 				D25343AB2A673F51007558CD /* TravelInfoModel.swift in Sources */,
 				D2541F812A5FC844000AC372 /* DeleteModel.swift in Sources */,
@@ -442,12 +439,15 @@
 				D2323EEA2A6669FD0040F165 /* StaticModel.swift in Sources */,
 				D25343A92A673D9D007558CD /* TotalViewController.swift in Sources */,
 				D2541FB82A627D62000AC372 /* LoginViewController.swift in Sources */,
+				D2E14D322A709E10000D2CF0 /* TotalMapViewController.swift in Sources */,
 				D25343AD2A67B146007558CD /* TotalTableViewCell.swift in Sources */,
 				D2541F722A5E6FBC000AC372 /* NetworkResult.swift in Sources */,
 				D2323EE62A658B390040F165 /* DayLogViewController.swift in Sources */,
 				D22A57CA2A6B107900B5E55B /* MapTableViewCell.swift in Sources */,
+				D2E14D2A2A70022E000D2CF0 /* HomeCell.swift in Sources */,
 				D29BD94D2A5D970C0010587C /* AppDelegate.swift in Sources */,
 				D29BD94F2A5D970C0010587C /* SceneDelegate.swift in Sources */,
+				D2E14D2C2A700CAA000D2CF0 /* TravelAPIModel.swift in Sources */,
 				D2323EE22A6577730040F165 /* TravelNameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -455,78 +455,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		D2541FDE2A62823C000AC372 /* NanumSquareRoundEB.ttf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D2541FDD2A62823C000AC372 /* Base */,
-			);
-			name = NanumSquareRoundEB.ttf;
-			path = "../../../../Downloads/nanum-square-round";
-			sourceTree = "<group>";
-		};
-		D2541FE12A628241000AC372 /* NanumSquareRoundOTFR.otf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D2541FE02A628241000AC372 /* Base */,
-			);
-			name = NanumSquareRoundOTFR.otf;
-			path = "../../../../Downloads/nanum-square-round";
-			sourceTree = "<group>";
-		};
-		D2541FE42A62824F000AC372 /* NanumSquareRoundB.ttf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D2541FE32A62824F000AC372 /* Base */,
-			);
-			name = NanumSquareRoundB.ttf;
-			path = "../../../../Downloads/nanum-square-round";
-			sourceTree = "<group>";
-		};
-		D2541FE72A6282FC000AC372 /* NanumSquareRoundL.ttf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D2541FE62A6282FC000AC372 /* Base */,
-			);
-			name = NanumSquareRoundL.ttf;
-			path = "../../../../Downloads/nanum-square-round";
-			sourceTree = "<group>";
-		};
-		D2541FEA2A6282FF000AC372 /* NanumSquareRoundOTFB.otf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D2541FE92A6282FF000AC372 /* Base */,
-			);
-			name = NanumSquareRoundOTFB.otf;
-			path = "../../../../Downloads/nanum-square-round";
-			sourceTree = "<group>";
-		};
-		D2541FED2A628302000AC372 /* NanumSquareRoundOTFEB.otf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D2541FEC2A628302000AC372 /* Base */,
-			);
-			name = NanumSquareRoundOTFEB.otf;
-			path = "../../../../Downloads/nanum-square-round";
-			sourceTree = "<group>";
-		};
-		D2541FF02A628306000AC372 /* NanumSquareRoundOTFL.otf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D2541FEF2A628306000AC372 /* Base */,
-			);
-			name = NanumSquareRoundOTFL.otf;
-			path = "../../../../Downloads/nanum-square-round";
-			sourceTree = "<group>";
-		};
-		D2541FF32A62830B000AC372 /* NanumSquareRoundR.ttf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D2541FF22A62830B000AC372 /* Base */,
-			);
-			name = NanumSquareRoundR.ttf;
-			path = "../../../../Downloads/nanum-square-round";
-			sourceTree = "<group>";
-		};
 		D29BD9522A5D970C0010587C /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

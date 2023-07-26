@@ -20,5 +20,7 @@ struct CalculateData : Codable {
     let endDate : String
     let locationNum : Int
     let photoNum : Int
-    let locationList : [Int]
+    let locationIdList : [Int]
+    let locationAddress : [String]
+    let locationImg : [String]
 }

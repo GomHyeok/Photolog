@@ -30,12 +30,14 @@ class DayLogViewController: UIViewController {
     
     
     override func viewDidLayoutSubviews() {
-        PlaceName.isUserInteractionEnabled = false
-        Description.isUserInteractionEnabled = false
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let lineColor = UIColor(red:192/255, green:192/255, blue:192/255, alpha:1.0)
+        self.PlaceName.setBottomLine(borderColor: lineColor)
+        
         ImageCollectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         ImageCollectionView.dataSource = self
         ImageCollectionView.delegate = self
@@ -45,21 +47,21 @@ class DayLogViewController: UIViewController {
             layout.itemSize = CGSize(width: ImageCollectionView.bounds.width / 2, height: ImageCollectionView.bounds.height)
         }
         
-        self.locationId = datas?.data?.locationList ?? []
-        print(locationId.count)
+        self.locationId = datas?.data?.locationIdList ?? []
         locationInfo(locationId: self.locationId[cnt]) {
             DispatchQueue.main.async{
-                self.day.text = String(self.settingData?.data?.sequence ?? 0) + "일차"
+                self.day.text = "DAY"
+                self.day.text! += String(self.settingData?.data?.sequence ?? 0)
                 self.years.text = self.settingData?.data?.date ?? "날자를 알수 없습니다."
                 self.place.text = self.settingData?.data?.fullAddress ?? "장소를 알 수 없습니다."
-                
+
                 if self.settingData?.data?.name == nil {
                     self.PlaceName.text = "이름을 입력해주세요"
                 }
                 else {
                     self.PlaceName.text = self.settingData?.data?.name
                 }
-                
+
                 if self.settingData?.data?.description == nil {
                     self.Description.text = "설명을 추가해주세요"
                 }
@@ -67,12 +69,12 @@ class DayLogViewController: UIViewController {
                     self.Description.text = self.settingData?.data?.description
                 }
             }
-            
+
             if let urlList = self.settingData?.data?.urlList {
                 let urls = urlList.compactMap { URL(string: $0) }
                 self.urlArray = urls
             }
-            
+
             DispatchQueue.main.async {
                 self.ImageCollectionView.reloadData()
             }
@@ -80,79 +82,61 @@ class DayLogViewController: UIViewController {
 
     }
     
-    @IBAction func MakePlaceName(_ sender: UIButton) {
-        if PlaceName.isUserInteractionEnabled {
-            PlaceName.isUserInteractionEnabled = false
-            locationName(locationId: self.locationId[self.cnt], title: PlaceName.text!)
-            {
-                print("change location name")
-            }
-        }
-        else {
-            PlaceName.isUserInteractionEnabled = true
-        }
-    }
-    
-    
-    @IBAction func MakeDiscription(_ sender: UIButton) {
-        if Description.isUserInteractionEnabled {
-            Description.isUserInteractionEnabled = false
-            locationDescription(locationId: locationId[cnt], description: Description.text!)
-            {
-                print("change location Description")
-            }
-        }
-        else {
-            Description.isUserInteractionEnabled = true
-        }
-    }
-    
     @IBAction func NextDayButton(_ sender: UIButton) {
-        cnt += 1
-        if cnt < locationId.count {
-            locationInfo(locationId: locationId[cnt]) {
-                DispatchQueue.main.async{
-                    self.day.text = String(self.settingData?.data?.sequence ?? 0) + "일차"
-                    self.years.text = self.settingData?.data?.date ?? "날자를 알수 없습니다."
-                    self.place.text = self.settingData?.data?.fullAddress ?? "장소를 알 수 없습니다."
-                    
-                    if self.settingData?.data?.name == nil {
-                        self.PlaceName.text = "이름을 입력해주세요"
-                    }
-                    else {
-                        self.PlaceName.text = self.settingData?.data?.name
-                    }
-                    
-                    if self.settingData?.data?.description == nil {
-                        self.Description.text = "설명을 추가해주세요"
-                    }
-                    else {
-                        self.Description.text = self.settingData?.data?.description
+        locationName(locationId: locationId[cnt], title: PlaceName.text!) { [self] in
+            locationDescription(locationId: self.locationId[self.cnt], description: self.Description.text!) {
+                if self.cnt < self.locationId.count {
+                    self.locationInfo(locationId: self.locationId[self.cnt]) {
+                        DispatchQueue.main.async{
+                            self.day.text = "DAY"
+                            self.day.text! += String(self.settingData?.data?.sequence ?? 0)
+                            self.years.text = self.settingData?.data?.date ?? "날자를 알수 없습니다."
+                            self.place.text = self.settingData?.data?.fullAddress ?? "장소를 알 수 없습니다."
+                            
+                            if self.settingData?.data?.name == nil {
+                                self.PlaceName.text = "이름을 입력해주세요"
+                            }
+                            else {
+                                self.PlaceName.text = self.settingData?.data?.name
+                            }
+                            
+                            if self.settingData?.data?.description == nil {
+                                self.Description.text = "설명을 추가해주세요"
+                            }
+                            else {
+                                self.Description.text = self.settingData?.data?.description
+                            }
+                        }
+                        
+                        if let urlList = self.settingData?.data?.urlList {
+                            let urls = urlList.compactMap { URL(string: $0) }
+                            self.urlArray = urls
+                        }
+                        
+                        DispatchQueue.main.async {
+                            self.ImageCollectionView.reloadData()
+                        }
                     }
                 }
-                
-                if let urlList = self.settingData?.data?.urlList {
-                    let urls = urlList.compactMap { URL(string: $0) }
-                    self.urlArray = urls
-                }
-                
-                DispatchQueue.main.async {
-                    self.ImageCollectionView.reloadData()
+                else {
+                    let storyboard = UIStoryboard(name: "Home", bundle: nil)
+                    if let
+                        total = storyboard.instantiateViewController(withIdentifier: "TotalViewController") as? TotalViewController {
+                        total.token = self.token
+                        total.id = self.id
+                        total.travelId = self.travelId
+                        total.datas = self.datas
+                        
+                        self.navigationController?.pushViewController(total, animated: true)
+                    }
+                    else {print("total 문제")}
                 }
             }
+            
         }
-        else {
-            let storyboard = UIStoryboard(name: "Home", bundle: nil)
-            if let
-                total = storyboard.instantiateViewController(withIdentifier: "TotalViewController") as? TotalViewController {
-                total.token = self.token
-                total.id = self.id
-                total.travelId = self.travelId
-                total.datas = self.datas
-                
-                self.navigationController?.pushViewController(total, animated: true)
-            }
-            else {print("total 문제")}
+        cnt+=1
+        if cnt >= locationId.count {
+            cnt = 0
         }
     }
     
@@ -187,7 +171,6 @@ extension DayLogViewController {
                     case .success(let data) :
                         guard let data = data as? staticResponse else {return}
                         print(data)
-                        self.alert(message: "장소 이름이 설정되었습니다.")
                         completion()
                     case .requsetErr(let err) :
                         print(err)
@@ -208,7 +191,6 @@ extension DayLogViewController {
                     case .success(let data) :
                         guard let data = data as? staticResponse else {return}
                         print(data)
-                        self.alert(message: "설명이 설정되었습니다.")
                         completion()
                     case .requsetErr(let err) :
                         print(err)

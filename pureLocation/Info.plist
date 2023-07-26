@@ -6,6 +6,12 @@
 	<true/>
 	<key>NSLocationWhenInUsageDescription</key>
 	<string>위치정보 수집이 필요합니다</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Pretendard-Bold.otf</string>
+		<string>Pretendard-Regular.otf</string>
+		<string>Pretendard-ExtraBold.otf</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -25,16 +31,5 @@
 			</array>
 		</dict>
 	</dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>NanumSquareRoundR.ttf</string>
-		<string>NanumSquareRoundOTFR.otf</string>
-		<string>NanumSquareRoundOTFL.otf</string>
-		<string>NanumSquareRoundOTFEB.otf</string>
-		<string>NanumSquareRoundOTFB.otf</string>
-		<string>NanumSquareRoundL.ttf</string>
-		<string>NanumSquareRoundEB.ttf</string>
-		<string>NanumSquareRoundB.ttf</string>
-	</array>
 </dict>
 </plist>

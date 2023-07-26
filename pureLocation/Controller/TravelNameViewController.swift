@@ -13,17 +13,43 @@ class TravelNameViewController: UIViewController {
     var id : Int = 0
     var travelId: Int = 0
     var datas : CalculateResponse?
+    var imageInfo : [String] = []
+    let gradientLayer = CAGradientLayer()
 
+    @IBOutlet weak var NextButton: UIButton!
+    @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var NameFiled: UITextField!
+    @IBOutlet weak var CustomBackground: UIView!
     
     override func viewDidLayoutSubviews() {
-        let lineColor = UIColor(red:0.58, green:0.25, blue:0.17, alpha:1.0)
-        self.NameFiled.setBottomLine(borderColor: lineColor)
+        gradientLayer.frame = CustomBackground.bounds
+        let colors: [CGColor] =  [
+            .init(red: 1, green: 1, blue: 1, alpha: 1),
+            .init(red: 0, green: 0, blue: 0, alpha: 0)
+        ]
+        gradientLayer.colors = colors
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
+        gradientLayer.locations = [0.3, 0.6]
+        CustomBackground.layer.addSublayer(gradientLayer)
+        
+        backgroundImage.load(url: URL(string : self.datas?.data?.locationImg[0] ?? "")!)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.NextButton.layer.cornerRadius = 10
+        self.NextButton.layer.borderWidth=1
+        self.NextButton.layer.borderColor = self.NextButton.backgroundColor?.cgColor
         
+        NameFiled.borderStyle = .roundedRect
+
+        let red: CGFloat = 255.0 / 255.0
+        let green: CGFloat = 112.0 / 255.0
+        let blue: CGFloat = 66.0 / 255.0
+        NameFiled.layer.borderColor = UIColor(red: red, green: green, blue: blue, alpha: 1.0).cgColor
+        NameFiled.layer.borderWidth = 1.0
+        NameFiled.layer.cornerRadius = 9
     }
     
     @IBAction func NextButton(_ sender: UIButton) {
@@ -66,5 +92,26 @@ extension TravelNameViewController {
                         print("networkFail")
                 }
             }
+    }
+    
+    func locationInfo(locationId : Int, completion : @escaping () -> Void) {
+        UserService.shared.locationInfo(locationId: locationId, token: token) {
+            response in
+            switch response {
+                case .success(let data) :
+                    guard let data = data as? LocationInfoResponse else {return}
+                    print(data)
+                    self.imageInfo = data.data?.urlList ?? []
+                    completion()
+                case .requsetErr(let err) :
+                    print(err)
+                case .pathErr:
+                    print("pathErr")
+                case .serverErr:
+                    print("serverErr")
+                case .networkFail:
+                    print("networkFail")
+            }
+        }
     }
 }

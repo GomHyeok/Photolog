@@ -1,8 +1,8 @@
 //
-//  HomeViewController.swift
+//  HomeNameViewController.swift
 //  pureLocation
 //
-//  Created by 최재혁 on 2023/07/16.
+//  Created by 최재혁 on 2023/07/26.
 //
 
 import UIKit
@@ -10,7 +10,7 @@ import Photos
 import BSImagePicker
 import Kingfisher
 
-class HomeViewController: UIViewController {
+class HomeNameViewController: UIViewController {
     
     var token : String = ""
     var id : Int = 0
@@ -23,17 +23,14 @@ class HomeViewController: UIViewController {
     var data : CalculateResponse?
     var homeData : TravelAPIResponse?
     
+    
     @IBOutlet weak var allView: UIView!
-    @IBOutlet weak var HomeTable: UITableView!
+    @IBOutlet weak var HomeTabelView: UITableView!
     @IBOutlet weak var myLabel: UILabel!
     @IBOutlet weak var allLabel: UILabel!
-
+    
     override func viewDidLayoutSubviews() {
-        TravelApi() {
-            print("travelAPI")
-            self.HomeTable.reloadData()
-        }
-
+        HomeTabelView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -50,19 +47,14 @@ class HomeViewController: UIViewController {
         
         myLabel.font = UIFont(name : "Pretendard-Bold", size: 17)
         allLabel.font = UIFont(name: "Pretendard-Bold", size: 20)
-        
-        
-        
-        
-        HomeTable.dataSource = self
-        HomeTable.delegate = self
-        
+        HomeTabelView.delegate = self
+        HomeTabelView.dataSource = self
     }
     
     
     @IBAction func ChangeView(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        if let homeView = storyboard.instantiateViewController(withIdentifier: "HomeNameViewController") as? HomeNameViewController {
+        if let homeView = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController {
             homeView.token = self.token
             homeView.id = self.id
             homeView.homeData = self.homeData
@@ -73,8 +65,7 @@ class HomeViewController: UIViewController {
     }
     
     
-    @IBAction func TravelCreate(_ sender: UIButton) {
-        
+    @IBAction func MakeTravel(_ sender: Any) {
         PHPhotoLibrary.requestAuthorization { (status) in
             switch status {
             case .notDetermined:
@@ -146,9 +137,8 @@ class HomeViewController: UIViewController {
                 }
             }
         })
-        
-        
     }
+    
     
     func getPhotoLocationInfo(asset: PHAsset) -> (longitude: Double, latitude: Double) {
         print("print location")
@@ -180,9 +170,10 @@ class HomeViewController: UIViewController {
         
         return result
     }
+
 }
 
-extension HomeViewController {
+extension HomeNameViewController {
     func travel(completion: @escaping () -> Void) {
         UserService.shared.travel(
             token: token) {
@@ -305,19 +296,40 @@ extension HomeViewController {
     }
 }
 
-extension HomeViewController : UITableViewDataSource {
+extension HomeNameViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(self.homeData?.data.count)
         return self.homeData?.data.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeCell", for: indexPath) as! HomeCell
-        cell.HomeImageButton.tag = indexPath.row
-        cell.buttonImage.kf.setImage(with: URL(string : homeData?.data[indexPath.item].thumbnail ?? "")!)
-        cell.buttonImage.layer.cornerRadius = cell.buttonImage.frame.width/15
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeNameCell", for: indexPath) as! HomeNameCell
         
-        cell.HomeImageButton.addTarget(self, action: #selector(cellaction(_:)), for: .touchUpInside)
+        cell.ButtonImage.kf.setImage(with: URL(string : homeData?.data[indexPath.item].thumbnail ?? "")!)
+        cell.ButtonImage.layer.cornerRadius = cell.ButtonImage.frame.width/15
+        
+        cell.BookMarkLabel.text = String(self.homeData?.data[indexPath.row].photoCnt ?? 0)
+        cell.BookMarkLabel.font = UIFont(name : "Pretendard-Bold", size: 15)
+        cell.HartLabel.text = String(self.homeData?.data[indexPath.row].photoCnt ?? 0)
+        cell.HartLabel.font = UIFont(name : "Pretendard-Bold", size: 15)
+        
+        cell.During.text = self.homeData?.data[indexPath.row].startDate
+        cell.During.text! += "~"
+        cell.During.text = self.homeData?.data[indexPath.row].endDate
+        cell.During.font = UIFont(name : "Pretendard-Bold", size: 13)
+        
+        cell.Title.text = self.homeData?.data[indexPath.row].title
+        cell.During.font = UIFont(name : "Pretendard-Bold", size: 17)
+        
+        cell.Location.text = self.homeData?.data[indexPath.row].city
+        cell.During.font = UIFont(name : "Pretendard-Bold", size: 10)
+        
+        cell.ImageCnt.text = String(self.homeData?.data[indexPath.row].photoCnt ?? 0)
+        cell.ImageCnt.font = UIFont(name : "Pretendard-Bold", size: 11)
+        
+        cell.ImageCnt.layer.cornerRadius = cell.ImageCnt.frame.width / 10
+        
+        cell.TabelButton.tag = indexPath.row
+        cell.TabelButton.addTarget(self, action: #selector(cellaction(_:)), for: .touchUpInside)
         
         return cell
     }
@@ -338,19 +350,10 @@ extension HomeViewController : UITableViewDataSource {
     
 }
 
-extension HomeViewController : UITableViewDelegate {
+extension HomeNameViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 200.0 // 예시로 높이를 100으로 고정하였습니다.
+        return 150.0 // 예시로 높이를 100으로 고정하였습니다.
     }
 }
 
-extension UILabel {
-    func setBottomLine(borderColor: UIColor, hight : Double) {
-          self.backgroundColor = UIColor.clear
-          let borderLine = UIView()
-          borderLine.frame = CGRect(x: 0, y: Double(self.frame.height), width: Double(self.frame.width), height: hight)
-          borderLine.backgroundColor = borderColor
-          self.addSubview(borderLine)
-     }
-}

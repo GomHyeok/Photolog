@@ -37,7 +37,6 @@ class LoginViewController: UIViewController {
     
     @IBAction func LoginButton(_ sender: UIButton) {
         check = false
-        let dispatchGroup = DispatchGroup()
         login() {
             if self.check {
                 let storyboard = UIStoryboard(name: "Home", bundle: nil)

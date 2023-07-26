@@ -45,7 +45,6 @@ class MapViewController: UIViewController {
         TravelMapTable.dataSource = self
     }
     
-    
 
 }
 
