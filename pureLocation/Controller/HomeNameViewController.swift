@@ -11,6 +11,7 @@ import BSImagePicker
 import Kingfisher
 
 class HomeNameViewController: UIViewController {
+    weak var delegate : ChildViewControllerDelegate?
     
     var token : String = ""
     var id : Int = 0
@@ -35,6 +36,15 @@ class HomeNameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let backButtonImage = UIImage(named: "backButton")?.withRenderingMode(.alwaysOriginal) {
+            let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonAction))
+            
+            navigationItem.leftBarButtonItem = backButton
+        } else {
+            print("backButton image not found")
+        }
+        
         let lineColor = UIColor(red:255/255, green:112/255, blue:66/255, alpha:1.0)
         let lineColor2 = UIColor(red:209/255, green:209/255, blue:214/255, alpha:1.0)
         myLabel.setBottomLine(borderColor: lineColor, hight: 1.0)
@@ -45,23 +55,16 @@ class HomeNameViewController: UIViewController {
         borderLine.backgroundColor = lineColor2
         allView.addSubview(borderLine)
         
-        myLabel.font = UIFont(name : "Pretendard-Bold", size: 17)
+        myLabel.font = UIFont(name : "Pretendard-Bold", size: 20)
         allLabel.font = UIFont(name: "Pretendard-Bold", size: 20)
+        
         HomeTabelView.delegate = self
         HomeTabelView.dataSource = self
     }
     
     
     @IBAction func ChangeView(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        if let homeView = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController {
-            homeView.token = self.token
-            homeView.id = self.id
-            homeView.homeData = self.homeData
-            
-            self.navigationController?.pushViewController(homeView, animated: true)
-        }
-        else {print("홈뷰 문제")}
+        delegate?.switchMaptoTotal()
     }
     
     
@@ -138,6 +141,12 @@ class HomeNameViewController: UIViewController {
             }
         })
     }
+    
+    @objc func backButtonAction() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    
     
     
     func getPhotoLocationInfo(asset: PHAsset) -> (longitude: Double, latitude: Double) {

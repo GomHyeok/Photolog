@@ -9,12 +9,19 @@ import UIKit
 
 class RegisterViewController: UIViewController {
     
+    @IBOutlet weak var SubTitle: UILabel!
+    @IBOutlet weak var MainTitle: UILabel!
     @IBOutlet weak var Password: UITextField!
     @IBOutlet weak var Email: UITextField!
     @IBOutlet weak var NickName: UITextField!
     @IBOutlet weak var NextButton: UIButton!
     
     override func viewDidLayoutSubviews() {
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         let lineColor = UIColor(red:0.12, green:0.23, blue:0.35, alpha:1.0)
         self.Password.setBottomLine(borderColor: lineColor)
         self.Email.setBottomLine(borderColor: lineColor)
@@ -22,10 +29,10 @@ class RegisterViewController: UIViewController {
         self.NextButton.layer.cornerRadius = 10
         self.NextButton.layer.borderWidth=1
         self.NextButton.layer.borderColor = self.NextButton.backgroundColor?.cgColor
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+        
+        MainTitle.font = UIFont(name: "Pretendard-Bold", size: 24)
+        SubTitle.font = UIFont(name: "Pretendard-Regular", size: 21)
+        
     }
 
     @IBAction func RegisterBUtton(_ sender: UIButton) {

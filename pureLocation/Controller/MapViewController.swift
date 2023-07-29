@@ -16,36 +16,92 @@ class MapViewController: UIViewController {
     var token : String = ""
     var id : Int = 0
     var travelId : Int = 0
+    var datas : CalculateResponse?
+    var locationData : TravelInfoResponse?
     var settingData : MapInfoResponse?
     var locationArray : [[LocationsData]] = []
     var sequences : [Int] = []
+    var descriptions : [[String]] = []
+    var urlArray : [[[URL]]] = []
+    var fullAddress : [String] = []
     let pingColor : [UIColor] = [UIColor.systemRed, UIColor.systemBlue, UIColor.systemPurple, UIColor.systemMint, UIColor.systemPink, UIColor.black]
     
     override func viewDidLayoutSubviews() {
-        MapInfo {
-            DispatchQueue.main.async {
-                self.TravelTitle.text = self.settingData?.data?.title ?? "제목을 찾을 수 없습니다."
-                let days = self.settingData?.data?.days ?? []
-                for day in days {
-                    self.locationArray.append(day.locations)
-                    self.sequences.append(day.sequence)
-                }
-            }
-            
-            DispatchQueue.main.async {
-                self.TravelMapTable.reloadData()
-            }
-        }
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let backButtonImage = UIImage(named: "backButton")?.withRenderingMode(.alwaysOriginal) {
+            let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonAction))
+            
+            navigationItem.leftBarButtonItem = backButton
+        } else {
+            print("backButton image not found")
+        }
+        
+        let saveButton = UIBarButtonItem(title: "등록", style: .plain, target: self, action: #selector(saveButtonAction))
+        saveButton.tintColor = UIColor(red: 255/255, green: 112/255, blue: 66/255, alpha: 1)
+        
+        TravelTitle.font = UIFont(name: "Pretendard-Bold", size: 24)
+        
         TravelMapTable.delegate = self
         TravelMapTable.dataSource = self
+        
+        fullAddress = datas?.data?.locationAddress ?? []
+        
+        let group = DispatchGroup()
+        
+        group.enter()
+        MapInfo {
+            self.TravelTitle.text = self.settingData?.data?.title ?? "제목을 찾을 수 없습니다."
+            let days = self.settingData?.data?.days ?? []
+            for day in days {
+                self.locationArray.append(day.locations)
+                self.sequences.append(day.sequence)
+            }
+            group.leave()
+        }
+        
+        group.enter()
+        travelInfo {
+            if let days = self.locationData?.data?.days {
+                for day in days {
+                    var descripts : [String] = []
+                    var urls : [[URL]] = []
+                    for location in day.locations {
+                        var arr : [URL] = []
+                        
+                        descripts.append(location.description ?? "설명을 입력해주세요!")
+                        for url in location.photoUrls {
+                            arr.append(URL(string: url)!)
+                        }
+                        urls.append(arr)
+                    }
+                    self.descriptions.append(descripts)
+                    self.urlArray.append(urls)
+                }
+            }
+            group.leave()
+        }
+        
+        group.notify(queue : .main) {
+            print(self.locationArray)
+            print(self.sequences)
+            print(self.descriptions)
+            print(self.urlArray)
+            self.TravelMapTable.reloadData()
+        }
+    }
+
+    @objc func backButtonAction() {
+        navigationController?.popViewController(animated: true)
     }
     
-
+    @objc func saveButtonAction() {
+        alert(message: "게시물을 저장하지 않고 종료하시겠습니까?")
+    }
 }
 
 
@@ -71,6 +127,27 @@ extension MapViewController {
                 }
             }
     }
+    
+    func travelInfo(completion : @escaping () -> Void) {
+        UserService.shared.travelInfo(travelId: travelId, token: token) {
+            response in
+            switch response {
+                case .success(let data) :
+                    guard let data = data as? TravelInfoResponse else {return}
+                    self.locationData = data
+                    print(data)
+                    completion()
+                case .requsetErr(let err) :
+                    print(err)
+                case .pathErr:
+                    print("pathErr")
+                case .serverErr:
+                    print("serverErr")
+                case .networkFail:
+                    print("networkFail")
+            }
+        }
+    }
 }
 
 extension MapViewController : UITableViewDataSource {
@@ -85,46 +162,79 @@ extension MapViewController : UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return locationArray.count
+        return locationArray.count + 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return locationArray[section].count + 1
+        if section == locationArray.count {
+            return 1
+        }
+        else {
+            return locationArray[section].count + 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MapTableViewCell", for: indexPath) as! MapTableViewCell
+        if indexPath.section == locationArray.count {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "BudgetCell", for: indexPath) as! BudgetCell
             
-            let mapview = GMSMapView(frame: cell.ContainerView.bounds)
-            var cnt : Int = 0
-            
-            mapview.camera = GMSCameraPosition.camera(withLatitude: self.locationArray[indexPath.section][0].coordinate?.latitude ?? 32.3, longitude: self.locationArray[indexPath.section][0].coordinate?.longitude ?? 32.3, zoom: 9.0)
-            
-            for cord in locationArray[indexPath.section] {
-                let lat = cord.coordinate?.latitude
-                let log = cord.coordinate?.longitude
-                let marker = GMSMarker()
-                marker.position = CLLocationCoordinate2D(latitude: lat ?? 32.3, longitude: log ?? 32.3)
-                marker.title = cord.name
-                marker.icon = GMSMarker.markerImage(with: pingColor[cnt])
-                marker.map = mapview
-                
-                cnt+=1
-                if cnt == pingColor.count {
-                    cnt = 0
-                }
-            }
-            
-            cell.ContainerView.addSubview(mapview)
             return cell
         }
         else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "LocationInfoCell", for: indexPath) as! LocationInfoCell
-            
-            cell.LocationTitle.text = locationArray[indexPath.section][indexPath.row-1].name
-            
-            return cell
+            if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "MapTableViewCell", for: indexPath) as! MapTableViewCell
+                
+                let mapview = GMSMapView(frame: cell.ContainerView.bounds)
+                var cnt : Int = 0
+                
+                mapview.camera = GMSCameraPosition.camera(withLatitude: self.locationArray[indexPath.section][0].coordinate?.latitude ?? 32.3, longitude: self.locationArray[indexPath.section][0].coordinate?.longitude ?? 32.3, zoom: 9.0)
+                
+                for cord in locationArray[indexPath.section] {
+                    let lat = cord.coordinate?.latitude
+                    let log = cord.coordinate?.longitude
+                    let marker = GMSMarker()
+                    marker.position = CLLocationCoordinate2D(latitude: lat ?? 32.3, longitude: log ?? 32.3)
+                    marker.title = cord.name
+                    marker.icon = GMSMarker.markerImage(with: pingColor[cnt])
+                    marker.map = mapview
+                    
+                    cnt+=1
+                    if cnt == pingColor.count {
+                        cnt = 0
+                    }
+                }
+                
+                cell.ContainerView.addSubview(mapview)
+                return cell
+            }
+            else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "LocationInfoCell", for: indexPath) as! LocationInfoCell
+                
+                cell.LocationTitle.text = locationArray[indexPath.section][indexPath.row-1].name
+                cell.LocationTitle.font = UIFont(name: "Pretandard-Bold", size: 16)
+                cell.Descriptions.font = UIFont(name: "Pretandard-Regular", size: 14)
+                
+                if indexPath.section < urlArray.count {
+                    if indexPath.row-1 < urlArray[indexPath.section].count {
+                        cell.data = urlArray[indexPath.section][indexPath.row-1]
+                    }
+                }
+                
+                if descriptions.count > indexPath.section {
+                    if descriptions[indexPath.section].count > indexPath.row - 1 {
+                        cell.Descriptions.text = descriptions[indexPath.section][indexPath.row-1]
+                    }
+                    else {
+                        cell.Descriptions.text = "Loading..."
+                    }
+                }
+                else {
+                    cell.Descriptions.text = "Loading..."
+                }
+                cell.setData(urlArray[indexPath.section][indexPath.row-1])
+                
+                return cell
+            }
         }
     }
 }
@@ -135,7 +245,7 @@ extension MapViewController : UITableViewDelegate {
             return 200.0
         }
         else {
-            return 50
+            return 300.0
         }
     }
     
@@ -156,5 +266,15 @@ extension MapViewController : UITableViewDelegate {
         ])
         
         return headerView
+    }
+    
+    func alert(message : String) {
+        let alertVC = UIAlertController(title: message, message: nil, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default)
+        let cancelAction = UIAlertAction(title: "취소", style: .default)
+
+        alertVC.addAction(okAction)
+        alertVC.addAction(cancelAction)
+        present(alertVC, animated: true)
     }
 }

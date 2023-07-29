@@ -33,6 +33,9 @@ class LoginViewController: UIViewController {
         self.nexButton.layer.cornerRadius = 10
         self.nexButton.layer.borderWidth=1
         self.nexButton.layer.borderColor = self.nexButton.backgroundColor?.cgColor
+        
+        LoginTitle.font = UIFont(name: "Pretendard-Bold", size: 24)
+        subTitle.font = UIFont(name: "Pretendard-Regular", size: 21)
     }
     
     @IBAction func LoginButton(_ sender: UIButton) {
@@ -40,7 +43,7 @@ class LoginViewController: UIViewController {
         login() {
             if self.check {
                 let storyboard = UIStoryboard(name: "Home", bundle: nil)
-                if let homeView = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController {
+                if let homeView = storyboard.instantiateViewController(withIdentifier: "HomeParentViewController") as? HomeParentViewController {
                     homeView.token = self.token
                     homeView.id = self.id
                     
@@ -68,9 +71,6 @@ extension LoginViewController {
     func login(completion : @escaping () -> Void) {
         guard let email = Email.text else {return}
         guard let password = Password.text else {return}
-        
-        print(email)
-        print(password)
         
         UserService.shared.login(
             email: email,

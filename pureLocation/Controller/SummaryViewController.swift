@@ -20,6 +20,7 @@ class SummaryViewController: UIViewController {
     @IBOutlet weak var TavleCalcu: UILabel!
     @IBOutlet weak var ImageCollection: UICollectionView!
     @IBOutlet weak var NextButton: UIButton!
+    @IBOutlet weak var PhotoLabel: UILabel!
     
     override func viewDidLayoutSubviews() {
         self.ImageCollection.reloadData()
@@ -27,6 +28,9 @@ class SummaryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.TavleCalcu.font = UIFont(name: "Pretendard-Bold", size: 24)
+        self.PhotoLabel.font = UIFont(name: "Pretendard-Bold", size: 24)
+        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         ImageCollection.collectionViewLayout = layout
@@ -94,6 +98,7 @@ extension SummaryViewController : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cellId = String(describing: SummaryViewCollectionViewCell.self)
+        let font = UIFont(name: "Pretendard-Regular", size: 20)
         
         //셀의 인스턴스
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SummaryViewCollectionViewCell
@@ -105,12 +110,20 @@ extension SummaryViewController : UICollectionViewDataSource {
         cell.collectionImage.clipsToBounds = true
         
         cell.locationNaem.text = self.datas?.data?.locationAddress[indexPath.item]
+        cell.locationNaem.font = UIFont(name: "Pretendard-Regular", size: 14)
+        
         
         cell.nights.text = String(datas?.data?.night ?? 0) + "박" + String(datas?.data?.day ?? 0) + "일"
+        cell.nights.font = font
+        
         cell.During.text = datas?.data?.startDate ?? ""
         cell.During.text! += " ~ "
         cell.During.text! += datas?.data?.endDate ?? ""
+        cell.During.font = UIFont(name: "Pretendard-Regular", size: 16)
+        
         cell.locationNum.text = "총" + String(datas?.data?.locationNum ?? 0)+"군데를 방문하셨군요"
+        cell.locationNum.font = font
+        
         cell.customBackgroundView.layer.cornerRadius = cell.customBackgroundView.frame.size.width / 9
         
         return cell

@@ -124,7 +124,7 @@ class UserService {
     
     func travel(token : String, completion: @escaping (NetworkResult<Any>) -> Void) {
         let url = APIConstants.travelURL
-        print(url)
+        
         //HTTP Header 요청 헤더
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
@@ -156,41 +156,41 @@ class UserService {
     }
     
     func PhotoSave(travelId: Int, token: String, img: UIImage, dateTime: String, log: Double, lat: Double, city: String, fullAddress : String, completion: @escaping (NetworkResult<Any>) -> Void) {
-        let url = APIConstants.PhotoSaveURL + String(travelId)
-        
-        // Prepare HTTPHeaders
-        let headers: HTTPHeaders = [
-            "Authorization": token,
-        ]
-        
-        // Convert image to Data
-        guard let imageData = img.jpegData(compressionQuality: 0.5) else { return }
-        
-        // Alamofire request
-        AF.upload(multipartFormData: { multipartFormData in
-            multipartFormData.append(imageData, withName: "img", fileName: "image.jpg", mimeType: "image/jpg")
-            multipartFormData.append(dateTime.data(using: .utf8)!, withName: "dateTime", mimeType: "application/json")
-            multipartFormData.append("\(log)".data(using: .utf8)!, withName: "log", mimeType: "application/json")
-            multipartFormData.append("\(lat)".data(using: .utf8)!, withName: "lat", mimeType: "application/json")
-            multipartFormData.append("\(city)".data(using: .utf8)!, withName: "city", mimeType: "application/json")
-            multipartFormData.append("\(fullAddress)".data(using: .utf8)!, withName: "fullAddress", mimeType: "application/json")
-        }, to: url, headers: headers).response { response in
-            switch response.result {
-                case .success:
-                    guard let statusCode = response.response?.statusCode else { return }
-                    guard let data = response.data else { return }
-                    print("success")
-                    let networkResult = self.judgeStatus(by: statusCode, data, types: "PhotoSave")
-                    completion(networkResult)
-                case .failure:
-                    completion(.networkFail)
+            let url = APIConstants.PhotoSaveURL + String(travelId)
+            
+            // Prepare HTTPHeaders
+            let headers: HTTPHeaders = [
+                "Authorization": token,
+            ]
+            
+            // Convert image to Data
+            guard let imageData = img.jpegData(compressionQuality: 0.5) else { return }
+            
+            // Alamofire request
+            AF.upload(multipartFormData: { multipartFormData in
+                multipartFormData.append(imageData, withName: "img", fileName: "image.jpg", mimeType: "image/jpg")
+                multipartFormData.append(dateTime.data(using: .utf8)!, withName: "dateTime", mimeType: "application/json")
+                multipartFormData.append("\(log)".data(using: .utf8)!, withName: "log", mimeType: "application/json")
+                multipartFormData.append("\(lat)".data(using: .utf8)!, withName: "lat", mimeType: "application/json")
+                multipartFormData.append("\(city)".data(using: .utf8)!, withName: "city", mimeType: "application/json")
+                multipartFormData.append("\(fullAddress)".data(using: .utf8)!, withName: "fullAddress", mimeType: "application/json")
+            }, to: url, headers: headers).response { response in
+                switch response.result {
+                    case .success:
+                        guard let statusCode = response.response?.statusCode else { return }
+                        guard let data = response.data else { return }
+                        let networkResult = self.judgeStatus(by: statusCode, data, types: "PhotoSave")
+                        completion(networkResult)
+                    case .failure:
+                        completion(.networkFail)
+                }
             }
         }
-    }
+
     
     func calculate (token : String, id : Int, completion: @escaping (NetworkResult<Any>) -> Void) {
         let url = APIConstants.calculateURL + String(id)
-        print(url)
+
         //HTTP Header 요청 헤더
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
@@ -215,7 +215,8 @@ class UserService {
                     print(statusCode)
                     let networkResult = self.judgeStatus(by : statusCode, value, types: "Calculate")
                     completion(networkResult)
-                case .failure :
+                case .failure(let error) :
+                    print("Error: \(error.localizedDescription)")
                     completion(.networkFail)
             }
         }
@@ -508,6 +509,71 @@ class UserService {
         }
     }
     
+    func Theme ( token : String, travelId : Int, theme : [String], completion: @escaping (NetworkResult<Any>) -> Void) {
+        let url = APIConstants.themeURL + String(travelId)
+        print(url)
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization" : token
+        ]
+        
+        let body : Parameters = [
+            "theme" : theme
+        ]
+        
+        let dataRequest = AF.request(
+            url,
+            method: .patch,
+            parameters: body,
+            encoding: JSONEncoding.default,
+            headers: headers
+        )
+        
+        dataRequest.responseData{
+            response in
+            switch response.result {
+                case .success :
+                    guard let statusCode = response.response?.statusCode else {return}
+                    guard let value = response.value else {return}
+                    
+                    let networkResult = self.judgeStatus(by : statusCode, value, types: "ThemeAPI")
+                    completion(networkResult)
+                case .failure :
+                    completion(.networkFail)
+            }
+        }
+    }
+    
+    func makeArticle ( token : String, travelId : Int, completion: @escaping (NetworkResult<Any>) -> Void) {
+        let url = APIConstants.makeArticleURL + String(travelId)
+        print(url)
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization" : token
+        ]
+        
+        let dataRequest = AF.request(
+            url,
+            method: .post,
+            encoding: JSONEncoding.default,
+            headers: headers
+        )
+        
+        dataRequest.responseData{
+            response in
+            switch response.result {
+                case .success :
+                    guard let statusCode = response.response?.statusCode else {return}
+                    guard let value = response.value else {return}
+                    
+                    let networkResult = self.judgeStatus(by : statusCode, value, types: "MakeArticle")
+                    completion(networkResult)
+                case .failure :
+                    completion(.networkFail)
+            }
+        }
+    }
+    
     
     
 //MARK: - judgeStatus
@@ -515,13 +581,36 @@ class UserService {
         switch statusCode {
             case ..<300 :
                 print(statusCode)
+                let decoder = JSONDecoder()
+                do {
+                    let errorMessage = try decoder.decode(FailResponse.self, from: data)
+                    print(errorMessage.message)
+                } catch {
+                    print("Error decoding error message")
+                }
                 return isVaildData(data: data, types : types)
             case 400..<500 :
                 print(statusCode)
                 print(types)
+                let decoder = JSONDecoder()
+                do {
+                    let errorMessage = try decoder.decode(FailResponse.self, from: data)
+                    print(errorMessage.message)
+                } catch {
+                    print("Error decoding error message: \(error)")
+                }
                 return .pathErr
             case 500..<600 :
                 print(statusCode)
+                print(types)
+                // Decode the error message
+                let decoder = JSONDecoder()
+                do {
+                    let errorMessage = try decoder.decode(FailResponse.self, from: data)
+                    print(errorMessage.message)
+                } catch {
+                    print("Error decoding error message: \(error)")
+                }
                 return .serverErr
             default :
                 print(statusCode)
@@ -618,6 +707,19 @@ class UserService {
             else {return .pathErr}
             decodeData = decoded
         }
+        
+        else if types == "ThemeAPI" {
+            guard let decoded = try? decoder.decode(staticResponse.self, from: data)
+            else {return .pathErr}
+            decodeData = decoded
+        }
+        
+        else {
+            guard let decoded = try? decoder.decode(FailResponse.self, from: data)
+            else {return .pathErr}
+            decodeData = decoded
+        }
+        
         
         if let decodeData = decodeData {
             return .success(decodeData)

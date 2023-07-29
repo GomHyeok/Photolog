@@ -16,21 +16,23 @@ class TravelNameViewController: UIViewController {
     var imageInfo : [String] = []
     let gradientLayer = CAGradientLayer()
 
+    @IBOutlet weak var PhotoName: UILabel!
     @IBOutlet weak var NextButton: UIButton!
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var NameFiled: UITextField!
     @IBOutlet weak var CustomBackground: UIView!
+    @IBOutlet weak var TravelName: UILabel!
     
     override func viewDidLayoutSubviews() {
         gradientLayer.frame = CustomBackground.bounds
         let colors: [CGColor] =  [
             .init(red: 1, green: 1, blue: 1, alpha: 1),
-            .init(red: 0, green: 0, blue: 0, alpha: 0)
+            .init(red: 1, green: 1, blue: 1, alpha: 0.1)
         ]
         gradientLayer.colors = colors
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
-        gradientLayer.locations = [0.3, 0.6]
+        gradientLayer.locations = [0.4, 0.7]
         CustomBackground.layer.addSublayer(gradientLayer)
         
         backgroundImage.load(url: URL(string : self.datas?.data?.locationImg[0] ?? "")!)
@@ -50,6 +52,11 @@ class TravelNameViewController: UIViewController {
         NameFiled.layer.borderColor = UIColor(red: red, green: green, blue: blue, alpha: 1.0).cgColor
         NameFiled.layer.borderWidth = 1.0
         NameFiled.layer.cornerRadius = 9
+        
+        NameFiled.font = UIFont(name: "Pretendard-Regular", size: 16)
+        PhotoName.font = UIFont(name: "Pretendard-Regular", size: 14)
+        TravelName.font = UIFont(name: "Pretendard-Bold", size: 24)
+        NextButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 16)
     }
     
     @IBAction func NextButton(_ sender: UIButton) {
@@ -57,15 +64,15 @@ class TravelNameViewController: UIViewController {
             print("travelName")
             let storyboard = UIStoryboard(name: "Home", bundle: nil)
             if let
-                daylog = storyboard.instantiateViewController(withIdentifier: "DayLogViewController") as? DayLogViewController {
-                daylog.token = self.token
-                daylog.id = self.id
-                daylog.travelId = self.travelId
-                daylog.datas = self.datas
+                Thema = storyboard.instantiateViewController(withIdentifier: "ThemaViewController") as? ThemaViewController {
+                Thema.token = self.token
+                Thema.id = self.id
+                Thema.travelId = self.travelId
+                Thema.datas = self.datas
                 
-                self.navigationController?.pushViewController(daylog, animated: true)
+                self.navigationController?.pushViewController(Thema, animated: true)
             }
-            else {print("daylog 문제")}
+            else {print("Thema 문제")}
         }
     }
     

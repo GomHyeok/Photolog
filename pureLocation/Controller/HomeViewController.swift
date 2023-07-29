@@ -11,6 +11,7 @@ import BSImagePicker
 import Kingfisher
 
 class HomeViewController: UIViewController {
+    weak var delegate : ChildViewControllerDelegate?
     
     var token : String = ""
     var id : Int = 0
@@ -29,11 +30,6 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var allLabel: UILabel!
 
     override func viewDidLayoutSubviews() {
-        TravelApi() {
-            print("travelAPI")
-            self.HomeTable.reloadData()
-        }
-
     }
     
     override func viewDidLoad() {
@@ -42,13 +38,17 @@ class HomeViewController: UIViewController {
         let lineColor2 = UIColor(red:209/255, green:209/255, blue:214/255, alpha:1.0)
         myLabel.setBottomLine(borderColor: lineColor, hight: 1.0)
         
+        TravelApi() {
+            self.HomeTable.reloadData()
+        }
+        
         allView.backgroundColor = UIColor.clear
         let borderLine = UIView()
         borderLine.frame = CGRect(x: 0, y: Double(allView.frame.height), width: Double(allView.frame.width), height: 0.3)
         borderLine.backgroundColor = lineColor2
         allView.addSubview(borderLine)
         
-        myLabel.font = UIFont(name : "Pretendard-Bold", size: 17)
+        myLabel.font = UIFont(name : "Pretendard-Bold", size: 20)
         allLabel.font = UIFont(name: "Pretendard-Bold", size: 20)
         
         
@@ -61,15 +61,7 @@ class HomeViewController: UIViewController {
     
     
     @IBAction func ChangeView(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        if let homeView = storyboard.instantiateViewController(withIdentifier: "HomeNameViewController") as? HomeNameViewController {
-            homeView.token = self.token
-            homeView.id = self.id
-            homeView.homeData = self.homeData
-            
-            self.navigationController?.pushViewController(homeView, animated: true)
-        }
-        else {print("홈뷰 문제")}
+        delegate?.switchTotaltToMap()
     }
     
     
@@ -151,7 +143,6 @@ class HomeViewController: UIViewController {
     }
     
     func getPhotoLocationInfo(asset: PHAsset) -> (longitude: Double, latitude: Double) {
-        print("print location")
         guard let location = asset.location else {
             print("No location info available for this asset.")
             return (0,0)
@@ -176,7 +167,6 @@ class HomeViewController: UIViewController {
         } else {
             print("Could not retrieve the creation date.")
         }
-        print("Date")
         
         return result
     }
@@ -264,6 +254,8 @@ extension HomeViewController {
                         }
                     }
                     self.formatted = data.results.first?.formattedAddress ?? "찾을 수 없음"
+                    let index = self.formatted.index(self.formatted.startIndex, offsetBy:  4)
+                    self.formatted = String(self.formatted[index...])
                 case .requsetErr(let err):
                     print(err)
                 case .pathErr:
@@ -307,7 +299,6 @@ extension HomeViewController {
 
 extension HomeViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(self.homeData?.data.count)
         return self.homeData?.data.count ?? 0
     }
     

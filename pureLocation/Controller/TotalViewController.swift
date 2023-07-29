@@ -9,6 +9,7 @@ import UIKit
 
 class TotalViewController: UIViewController {
     
+    weak var delegate : ChildViewControllerDelegate?
     var token : String = ""
     var id : Int = 0
     var travelId : Int = 0
@@ -19,8 +20,22 @@ class TotalViewController: UIViewController {
     
     @IBOutlet weak var InfoTable: UITableView!
     @IBOutlet weak var TravelTitle: UILabel!
+    @IBOutlet weak var NextButton: UIButton!
     
     override func viewDidLayoutSubviews() {
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        InfoTable.dataSource = self
+        InfoTable.delegate = self
+        TravelTitle.font = UIFont(name: "Pretendard-Bold", size: 20)
+        
+        NextButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
+        NextButton.layer.cornerRadius = 10
+        
         travelInfo {
             DispatchQueue.main.async {
                 self.TravelTitle.text = self.settingData?.data?.title ?? "여행 제목을 찾을 수 없습니다."
@@ -35,15 +50,33 @@ class TotalViewController: UIViewController {
                 self.InfoTable.reloadData()
             }
         }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        InfoTable.dataSource = self
-        InfoTable.delegate = self
+        
     }
     
     @IBAction func HomeButton(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        if let
+            saveView = storyboard.instantiateViewController(withIdentifier: "MapViewController") as? MapViewController {
+            saveView.token = self.token
+            saveView.id = self.id
+            saveView.travelId = self.travelId
+            saveView.datas = self.datas
+            
+            self.navigationController?.pushViewController(saveView, animated: true)
+        }
+        else {print("total 문제")}
+    }
+    
+    
+    @IBAction func MapButton(_ sender: UIButton) {
+        delegate?.switchTotaltToMap()
+    }
+    
+    @objc func backButtonAction() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func saveButtonAction() {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         if let homeView = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController {
             homeView.token = self.token
@@ -53,20 +86,6 @@ class TotalViewController: UIViewController {
             self.navigationController?.pushViewController(homeView, animated: true)
         }
         else {print("home 문제")}
-    }
-    
-    
-    @IBAction func MapButton(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        if let totalMapView = storyboard.instantiateViewController(withIdentifier: "TotalMapViewController") as? TotalMapViewController {
-            totalMapView.token = self.token
-            totalMapView.id = self.id
-            totalMapView.travelId = self.travelId
-            totalMapView.sequences = self.sequences
-            
-            self.navigationController?.pushViewController(totalMapView, animated: true)
-        }
-        else {print("mapview 문제")}
     }
     
 }
@@ -91,6 +110,21 @@ extension TotalViewController {
                         print("networkFail")
                 }
             }
+    }
+    
+    func alert(message : String) -> Bool {
+        var result : Bool = false
+        let alertVC = UIAlertController(title: message, message: nil, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default) { (action) in
+            result = true
+        }
+        let cancleAction = UIAlertAction(title: "취소", style: .default)
+
+        alertVC.addAction(okAction)
+        alertVC.addAction(cancleAction)
+        present(alertVC, animated: true)
+        
+        return result
     }
 }
 
@@ -118,6 +152,8 @@ extension TotalViewController : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TotalTableViewCell", for: indexPath) as! TotalTableViewCell
         
         cell.PlaceName?.text = locationArray[indexPath.section][indexPath.row].name ?? ""
+        cell.PlaceName.font = UIFont(name: "Pretendard-Bold", size: 15)
+        
         let urlString = self.locationArray[indexPath.section][indexPath.row].photoUrls[0]
         let url = URL(string: urlString)!
         
@@ -129,9 +165,10 @@ extension TotalViewController : UITableViewDataSource {
         }
         totalCellCount += indexPath.row
         
-        cell.cellButton.tag = totalCellCount
+        cell.cellButton.tag = indexPath.section
         cell.ButtonImage.load(url: url)
         cell.ButtonLabel.text = locationArray[indexPath.section][indexPath.row].description ?? ""
+        cell.ButtonLabel.font = UIFont(name: "Pretendard-Regular", size: 12)
         
         
         cell.cellButton.addTarget(self, action: #selector(cellaction(_:)), for: .touchUpInside)
@@ -141,7 +178,7 @@ extension TotalViewController : UITableViewDataSource {
     
     @objc func cellaction(_ sender : UIButton) {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        if let daylog = storyboard.instantiateViewController(withIdentifier: "DayLogViewController") as? DayLogViewController {
+        if let daylog = storyboard.instantiateViewController(withIdentifier: "DayLogParentViewController") as? DayLogParentViewController {
             daylog.token = self.token
             daylog.id = self.id
             daylog.travelId = self.travelId
@@ -164,7 +201,7 @@ extension TotalViewController : UITableViewDelegate {
             
             let label = UILabel()
             label.textColor = UIColor.init(red: 0.33, green: 0.33, blue: 0.34, alpha: 1.0) // 텍스트 색상 설정
-            label.font = UIFont.boldSystemFont(ofSize: 20) // 폰트 크기 및 스타일 설정
+            label.font = UIFont(name: "Pretendard-Bold", size: 20) // 폰트 크기 및 스타일 설정
             label.text = self.tableView(tableView, titleForHeaderInSection: section)
             
             label.translatesAutoresizingMaskIntoConstraints = false

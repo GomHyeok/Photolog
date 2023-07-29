@@ -29,11 +29,16 @@
 		D205E92E2A69CBE100E7D0A5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D205E92D2A69CBE100E7D0A5 /* UIKit.framework */; };
 		D205E9302A69CCB500E7D0A5 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D205E92F2A69CCB500E7D0A5 /* MapViewController.swift */; };
 		D205E9322A6A4A6F00E7D0A5 /* MapInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D205E9312A6A4A6F00E7D0A5 /* MapInfoModel.swift */; };
+		D20BCA262A73E57500F396AE /* HomeParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA252A73E57500F396AE /* HomeParentViewController.swift */; };
+		D20BCA282A74334700F396AE /* MapCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA272A74334700F396AE /* MapCollectionCell.swift */; };
+		D20BCA2A2A7442A600F396AE /* MakeArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA292A7442A600F396AE /* MakeArticleModel.swift */; };
+		D20BCA2C2A7505C700F396AE /* BudgetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA2B2A7505C700F396AE /* BudgetCell.swift */; };
+		D20BCA2E2A752CD100F396AE /* FailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA2D2A752CD100F396AE /* FailModel.swift */; };
 		D22A57CA2A6B107900B5E55B /* MapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22A57C92A6B107900B5E55B /* MapTableViewCell.swift */; };
 		D22A57CC2A6B108600B5E55B /* LocationInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22A57CB2A6B108600B5E55B /* LocationInfoCell.swift */; };
 		D22D8A8F2A646B100015CB24 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22D8A8E2A646B100015CB24 /* CollectionViewCell.swift */; };
 		D231BA6A2A63CAF5009D0B82 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D231BA692A63CAF5009D0B82 /* RegisterViewController.swift */; };
-		D231BA712A63CC3A009D0B82 /* Asset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D231BA702A63CC3A009D0B82 /* Asset.xcassets */; };
+		D231BA712A63CC3A009D0B82 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D231BA702A63CC3A009D0B82 /* Assets.xcassets */; };
 		D231BA732A642721009D0B82 /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D231BA722A642721009D0B82 /* FindPasswordViewController.swift */; };
 		D231BA752A642876009D0B82 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D231BA742A642876009D0B82 /* Home.storyboard */; };
 		D231BA772A6428C8009D0B82 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D231BA762A6428C8009D0B82 /* HomeViewController.swift */; };
@@ -41,13 +46,21 @@
 		D2323EE02A6564B80040F165 /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2323EDF2A6564B80040F165 /* UserInfoModel.swift */; };
 		D2323EE22A6577730040F165 /* TravelNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2323EE12A6577730040F165 /* TravelNameViewController.swift */; };
 		D2323EE42A657D110040F165 /* TravelNameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2323EE32A657D110040F165 /* TravelNameModel.swift */; };
-		D2323EE62A658B390040F165 /* DayLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2323EE52A658B390040F165 /* DayLogViewController.swift */; };
 		D2323EE82A6656FE0040F165 /* LocationInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2323EE72A6656FE0040F165 /* LocationInfoModel.swift */; };
 		D2323EEA2A6669FD0040F165 /* StaticModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2323EE92A6669FD0040F165 /* StaticModel.swift */; };
 		D2323EEE2A6677D30040F165 /* DayLogcollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2323EED2A6677D30040F165 /* DayLogcollectionViewCell.swift */; };
 		D25343A92A673D9D007558CD /* TotalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25343A82A673D9D007558CD /* TotalViewController.swift */; };
 		D25343AB2A673F51007558CD /* TravelInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25343AA2A673F51007558CD /* TravelInfoModel.swift */; };
 		D25343AD2A67B146007558CD /* TotalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25343AC2A67B146007558CD /* TotalTableViewCell.swift */; };
+		D253B9322A72A71500326A84 /* ParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253B9312A72A71500326A84 /* ParentViewController.swift */; };
+		D253B9342A72A8F500326A84 /* SwitchChildProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253B9332A72A8F500326A84 /* SwitchChildProtocol.swift */; };
+		D253B9362A72EA4100326A84 /* DayLogTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253B9352A72EA4100326A84 /* DayLogTagCell.swift */; };
+		D253B9382A72ED9800326A84 /* DayTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253B9372A72ED9800326A84 /* DayTagViewController.swift */; };
+		D253B93A2A72EDD700326A84 /* DayLogParentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253B9392A72EDD700326A84 /* DayLogParentViewController.swift */; };
+		D253B93C2A73126100326A84 /* DayTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253B93B2A73126100326A84 /* DayTagCell.swift */; };
+		D253B93E2A731FEE00326A84 /* DayLogTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253B93D2A731FEE00326A84 /* DayLogTextCell.swift */; };
+		D253B9402A7321E000326A84 /* DayTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253B93F2A7321E000326A84 /* DayTextViewController.swift */; };
+		D253B9422A739DC800326A84 /* SummuryMapcCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D253B9412A739DC800326A84 /* SummuryMapcCell.swift */; };
 		D2541F652A5DA1E0000AC372 /* BSImagePicker in Frameworks */ = {isa = PBXBuildFile; productRef = D2541F642A5DA1E0000AC372 /* BSImagePicker */; };
 		D2541F702A5E6B75000AC372 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2541F6F2A5E6B75000AC372 /* APIConstants.swift */; };
 		D2541F722A5E6FBC000AC372 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2541F712A5E6FBC000AC372 /* NetworkResult.swift */; };
@@ -75,6 +88,7 @@
 		D2E14D2E2A708D07000D2CF0 /* HomeNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E14D2D2A708D07000D2CF0 /* HomeNameViewController.swift */; };
 		D2E14D302A7091E0000D2CF0 /* TravelAPINameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E14D2F2A7091E0000D2CF0 /* TravelAPINameModel.swift */; };
 		D2E14D322A709E10000D2CF0 /* TotalMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E14D312A709E10000D2CF0 /* TotalMapViewController.swift */; };
+		D2E14D342A714259000D2CF0 /* ThemaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E14D332A714259000D2CF0 /* ThemaViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,11 +114,16 @@
 		D205E92D2A69CBE100E7D0A5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D205E92F2A69CCB500E7D0A5 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		D205E9312A6A4A6F00E7D0A5 /* MapInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapInfoModel.swift; sourceTree = "<group>"; };
+		D20BCA252A73E57500F396AE /* HomeParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeParentViewController.swift; sourceTree = "<group>"; };
+		D20BCA272A74334700F396AE /* MapCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCollectionCell.swift; sourceTree = "<group>"; };
+		D20BCA292A7442A600F396AE /* MakeArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeArticleModel.swift; sourceTree = "<group>"; };
+		D20BCA2B2A7505C700F396AE /* BudgetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetCell.swift; sourceTree = "<group>"; };
+		D20BCA2D2A752CD100F396AE /* FailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailModel.swift; sourceTree = "<group>"; };
 		D22A57C92A6B107900B5E55B /* MapTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTableViewCell.swift; sourceTree = "<group>"; };
 		D22A57CB2A6B108600B5E55B /* LocationInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInfoCell.swift; sourceTree = "<group>"; };
 		D22D8A8E2A646B100015CB24 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		D231BA692A63CAF5009D0B82 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
-		D231BA702A63CC3A009D0B82 /* Asset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Asset.xcassets; sourceTree = "<group>"; };
+		D231BA702A63CC3A009D0B82 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D231BA722A642721009D0B82 /* FindPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
 		D231BA742A642876009D0B82 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		D231BA762A6428C8009D0B82 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -112,13 +131,21 @@
 		D2323EDF2A6564B80040F165 /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
 		D2323EE12A6577730040F165 /* TravelNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelNameViewController.swift; sourceTree = "<group>"; };
 		D2323EE32A657D110040F165 /* TravelNameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelNameModel.swift; sourceTree = "<group>"; };
-		D2323EE52A658B390040F165 /* DayLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayLogViewController.swift; sourceTree = "<group>"; };
 		D2323EE72A6656FE0040F165 /* LocationInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInfoModel.swift; sourceTree = "<group>"; };
 		D2323EE92A6669FD0040F165 /* StaticModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticModel.swift; sourceTree = "<group>"; };
 		D2323EED2A6677D30040F165 /* DayLogcollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayLogcollectionViewCell.swift; sourceTree = "<group>"; };
 		D25343A82A673D9D007558CD /* TotalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalViewController.swift; sourceTree = "<group>"; };
 		D25343AA2A673F51007558CD /* TravelInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelInfoModel.swift; sourceTree = "<group>"; };
 		D25343AC2A67B146007558CD /* TotalTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalTableViewCell.swift; sourceTree = "<group>"; };
+		D253B9312A72A71500326A84 /* ParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentViewController.swift; sourceTree = "<group>"; };
+		D253B9332A72A8F500326A84 /* SwitchChildProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchChildProtocol.swift; sourceTree = "<group>"; };
+		D253B9352A72EA4100326A84 /* DayLogTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayLogTagCell.swift; sourceTree = "<group>"; };
+		D253B9372A72ED9800326A84 /* DayTagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTagViewController.swift; sourceTree = "<group>"; };
+		D253B9392A72EDD700326A84 /* DayLogParentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayLogParentViewController.swift; sourceTree = "<group>"; };
+		D253B93B2A73126100326A84 /* DayTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTagCell.swift; sourceTree = "<group>"; };
+		D253B93D2A731FEE00326A84 /* DayLogTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayLogTextCell.swift; sourceTree = "<group>"; };
+		D253B93F2A7321E000326A84 /* DayTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTextViewController.swift; sourceTree = "<group>"; };
+		D253B9412A739DC800326A84 /* SummuryMapcCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummuryMapcCell.swift; sourceTree = "<group>"; };
 		D2541F6F2A5E6B75000AC372 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		D2541F712A5E6FBC000AC372 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
 		D2541F732A5E704B000AC372 /* SingupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingupModel.swift; sourceTree = "<group>"; };
@@ -145,6 +172,7 @@
 		D2E14D2D2A708D07000D2CF0 /* HomeNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNameViewController.swift; sourceTree = "<group>"; };
 		D2E14D2F2A7091E0000D2CF0 /* TravelAPINameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelAPINameModel.swift; sourceTree = "<group>"; };
 		D2E14D312A709E10000D2CF0 /* TotalMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalMapViewController.swift; sourceTree = "<group>"; };
+		D2E14D332A714259000D2CF0 /* ThemaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemaViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,14 +245,19 @@
 				D2541FB72A627D62000AC372 /* LoginViewController.swift */,
 				D231BA692A63CAF5009D0B82 /* RegisterViewController.swift */,
 				D231BA722A642721009D0B82 /* FindPasswordViewController.swift */,
+				D20BCA252A73E57500F396AE /* HomeParentViewController.swift */,
 				D231BA762A6428C8009D0B82 /* HomeViewController.swift */,
+				D2E14D2D2A708D07000D2CF0 /* HomeNameViewController.swift */,
 				D2323EDD2A6547B60040F165 /* SummaryViewController.swift */,
 				D2323EE12A6577730040F165 /* TravelNameViewController.swift */,
-				D2323EE52A658B390040F165 /* DayLogViewController.swift */,
+				D2E14D332A714259000D2CF0 /* ThemaViewController.swift */,
+				D253B9392A72EDD700326A84 /* DayLogParentViewController.swift */,
+				D253B9372A72ED9800326A84 /* DayTagViewController.swift */,
+				D253B93F2A7321E000326A84 /* DayTextViewController.swift */,
+				D253B9312A72A71500326A84 /* ParentViewController.swift */,
 				D25343A82A673D9D007558CD /* TotalViewController.swift */,
-				D205E92F2A69CCB500E7D0A5 /* MapViewController.swift */,
-				D2E14D2D2A708D07000D2CF0 /* HomeNameViewController.swift */,
 				D2E14D312A709E10000D2CF0 /* TotalMapViewController.swift */,
+				D205E92F2A69CCB500E7D0A5 /* MapViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -247,6 +280,8 @@
 				D205E9312A6A4A6F00E7D0A5 /* MapInfoModel.swift */,
 				D2E14D2B2A700CAA000D2CF0 /* TravelAPIModel.swift */,
 				D2E14D2F2A7091E0000D2CF0 /* TravelAPINameModel.swift */,
+				D20BCA292A7442A600F396AE /* MakeArticleModel.swift */,
+				D20BCA2D2A752CD100F396AE /* FailModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -262,6 +297,12 @@
 				D22A57CB2A6B108600B5E55B /* LocationInfoCell.swift */,
 				D2CFEEAB2A6C755B000BAC7A /* SummaryViewCollectionViewCell.swift */,
 				D2E14D292A70022E000D2CF0 /* HomeCell.swift */,
+				D253B9352A72EA4100326A84 /* DayLogTagCell.swift */,
+				D253B93B2A73126100326A84 /* DayTagCell.swift */,
+				D253B93D2A731FEE00326A84 /* DayLogTextCell.swift */,
+				D253B9412A739DC800326A84 /* SummuryMapcCell.swift */,
+				D20BCA272A74334700F396AE /* MapCollectionCell.swift */,
+				D20BCA2B2A7505C700F396AE /* BudgetCell.swift */,
 			);
 			path = DataStruct;
 			sourceTree = "<group>";
@@ -270,6 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				D2541F772A5E717A000AC372 /* Sercive.swift */,
+				D253B9332A72A8F500326A84 /* SwitchChildProtocol.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -291,7 +333,7 @@
 				D205E9082A69CB3F00E7D0A5 /* GoogleMaps.xcframework */,
 				D205E9092A69CB3F00E7D0A5 /* GoogleMapsCore.xcframework */,
 				D205E9062A69CB3000E7D0A5 /* GoogleMapsBase.xcframework */,
-				D231BA702A63CC3A009D0B82 /* Asset.xcassets */,
+				D231BA702A63CC3A009D0B82 /* Assets.xcassets */,
 				D29BD94B2A5D970C0010587C /* pureLocation */,
 				D29BD94A2A5D970C0010587C /* Products */,
 				D205E90E2A69CB7600E7D0A5 /* Frameworks */,
@@ -393,7 +435,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D231BA712A63CC3A009D0B82 /* Asset.xcassets in Resources */,
+				D231BA712A63CC3A009D0B82 /* Assets.xcassets in Resources */,
 				D2E14D262A6FFD96000D2CF0 /* Pretendard-Bold.otf in Resources */,
 				D2E14D272A6FFD9A000D2CF0 /* Pretendard-ExtraBold.otf in Resources */,
 				D29BD9592A5D970D0010587C /* LaunchScreen.storyboard in Resources */,
@@ -412,42 +454,56 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2541F742A5E704B000AC372 /* SingupModel.swift in Sources */,
+				D253B93C2A73126100326A84 /* DayTagCell.swift in Sources */,
+				D253B93E2A731FEE00326A84 /* DayLogTextCell.swift in Sources */,
 				D2541F782A5E717A000AC372 /* Sercive.swift in Sources */,
 				D2323EE42A657D110040F165 /* TravelNameModel.swift in Sources */,
 				D2323EE82A6656FE0040F165 /* LocationInfoModel.swift in Sources */,
+				D253B93A2A72EDD700326A84 /* DayLogParentViewController.swift in Sources */,
 				D231BA6A2A63CAF5009D0B82 /* RegisterViewController.swift in Sources */,
 				D22A57CC2A6B108600B5E55B /* LocationInfoCell.swift in Sources */,
+				D253B9322A72A71500326A84 /* ParentViewController.swift in Sources */,
 				D2541F8B2A610561000AC372 /* CalculateModel.swift in Sources */,
+				D2E14D342A714259000D2CF0 /* ThemaViewController.swift in Sources */,
 				D205E9322A6A4A6F00E7D0A5 /* MapInfoModel.swift in Sources */,
 				D2E14D302A7091E0000D2CF0 /* TravelAPINameModel.swift in Sources */,
+				D253B9402A7321E000326A84 /* DayTextViewController.swift in Sources */,
 				D22D8A8F2A646B100015CB24 /* CollectionViewCell.swift in Sources */,
 				D231BA732A642721009D0B82 /* FindPasswordViewController.swift in Sources */,
 				D2323EE02A6564B80040F165 /* UserInfoModel.swift in Sources */,
 				D2541F702A5E6B75000AC372 /* APIConstants.swift in Sources */,
 				D2E14D2E2A708D07000D2CF0 /* HomeNameViewController.swift in Sources */,
+				D20BCA2A2A7442A600F396AE /* MakeArticleModel.swift in Sources */,
+				D253B9362A72EA4100326A84 /* DayLogTagCell.swift in Sources */,
 				D2541F7F2A5E8145000AC372 /* LoginModel.swift in Sources */,
+				D253B9342A72A8F500326A84 /* SwitchChildProtocol.swift in Sources */,
 				D25343AB2A673F51007558CD /* TravelInfoModel.swift in Sources */,
 				D2541F812A5FC844000AC372 /* DeleteModel.swift in Sources */,
 				D2541F892A604BBA000AC372 /* PhotoSaveModel.swift in Sources */,
 				D2323EEE2A6677D30040F165 /* DayLogcollectionViewCell.swift in Sources */,
+				D20BCA262A73E57500F396AE /* HomeParentViewController.swift in Sources */,
 				D2CFEEAC2A6C755B000BAC7A /* SummaryViewCollectionViewCell.swift in Sources */,
 				D2541F872A6044C2000AC372 /* TravelModel.swift in Sources */,
+				D20BCA2C2A7505C700F396AE /* BudgetCell.swift in Sources */,
 				D2541F8D2A612259000AC372 /* testmodel.swift in Sources */,
 				D2323EDE2A6547B60040F165 /* SummaryViewController.swift in Sources */,
 				D205E9302A69CCB500E7D0A5 /* MapViewController.swift in Sources */,
+				D20BCA2E2A752CD100F396AE /* FailModel.swift in Sources */,
 				D231BA772A6428C8009D0B82 /* HomeViewController.swift in Sources */,
 				D2323EEA2A6669FD0040F165 /* StaticModel.swift in Sources */,
 				D25343A92A673D9D007558CD /* TotalViewController.swift in Sources */,
 				D2541FB82A627D62000AC372 /* LoginViewController.swift in Sources */,
 				D2E14D322A709E10000D2CF0 /* TotalMapViewController.swift in Sources */,
+				D253B9382A72ED9800326A84 /* DayTagViewController.swift in Sources */,
 				D25343AD2A67B146007558CD /* TotalTableViewCell.swift in Sources */,
 				D2541F722A5E6FBC000AC372 /* NetworkResult.swift in Sources */,
-				D2323EE62A658B390040F165 /* DayLogViewController.swift in Sources */,
 				D22A57CA2A6B107900B5E55B /* MapTableViewCell.swift in Sources */,
 				D2E14D2A2A70022E000D2CF0 /* HomeCell.swift in Sources */,
 				D29BD94D2A5D970C0010587C /* AppDelegate.swift in Sources */,
 				D29BD94F2A5D970C0010587C /* SceneDelegate.swift in Sources */,
 				D2E14D2C2A700CAA000D2CF0 /* TravelAPIModel.swift in Sources */,
+				D20BCA282A74334700F396AE /* MapCollectionCell.swift in Sources */,
+				D253B9422A739DC800326A84 /* SummuryMapcCell.swift in Sources */,
 				D2323EE22A6577730040F165 /* TravelNameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

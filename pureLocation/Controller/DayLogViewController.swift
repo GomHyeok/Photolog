@@ -54,7 +54,6 @@ class DayLogViewController: UIViewController {
                 self.day.text! += String(self.settingData?.data?.sequence ?? 0)
                 self.years.text = self.settingData?.data?.date ?? "날자를 알수 없습니다."
                 self.place.text = self.settingData?.data?.fullAddress ?? "장소를 알 수 없습니다."
-
                 if self.settingData?.data?.name == nil {
                     self.PlaceName.text = "이름을 입력해주세요"
                 }
@@ -118,25 +117,23 @@ class DayLogViewController: UIViewController {
                         }
                     }
                 }
-                else {
-                    let storyboard = UIStoryboard(name: "Home", bundle: nil)
-                    if let
-                        total = storyboard.instantiateViewController(withIdentifier: "TotalViewController") as? TotalViewController {
-                        total.token = self.token
-                        total.id = self.id
-                        total.travelId = self.travelId
-                        total.datas = self.datas
-                        
-                        self.navigationController?.pushViewController(total, animated: true)
-                    }
-                    else {print("total 문제")}
-                }
             }
             
         }
         cnt+=1
         if cnt >= locationId.count {
             cnt = 0
+            let storyboard = UIStoryboard(name: "Home", bundle: nil)
+            if let
+                total = storyboard.instantiateViewController(withIdentifier: "ParentViewController") as? ParentViewController {
+                total.token = self.token
+                total.id = self.id
+                total.travelId = self.travelId
+                total.datas = self.datas
+                
+                self.navigationController?.pushViewController(total, animated: true)
+            }
+            else {print("total 문제")}
         }
     }
     
@@ -209,21 +206,6 @@ extension DayLogViewController {
         let okAction = UIAlertAction(title: "확인", style: .default)
         alertVC.addAction(okAction)
         present(alertVC, animated: true)
-    }
-}
-
-extension UIImageView {
-    func load(url : URL) {
-        DispatchQueue.global().async { [weak self] in
-            if let data = try? Data(contentsOf: url) {
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        self?.image = image
-                    }
-                }
-            }
-            
-        }
     }
 }
 
