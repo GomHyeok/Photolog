@@ -544,7 +544,7 @@ class UserService {
         }
     }
     
-    func makeArticle ( token : String, travelId : Int, completion: @escaping (NetworkResult<Any>) -> Void) {
+    func makeArticle ( token : String, travelId : Int, title : String, summary : String, locationContent : [String], budget : Int, completion: @escaping (NetworkResult<Any>) -> Void) {
         let url = APIConstants.makeArticleURL + String(travelId)
         print(url)
         let headers: HTTPHeaders = [
@@ -552,9 +552,17 @@ class UserService {
             "Authorization" : token
         ]
         
+        let body : Parameters = [
+            "title" : title,
+            "summary" : summary,
+            "locationContent" : locationContent,
+            "budget" : budget
+        ]
+        
         let dataRequest = AF.request(
             url,
             method: .post,
+            parameters: body,
             encoding: JSONEncoding.default,
             headers: headers
         )
@@ -709,6 +717,12 @@ class UserService {
         }
         
         else if types == "ThemeAPI" {
+            guard let decoded = try? decoder.decode(staticResponse.self, from: data)
+            else {return .pathErr}
+            decodeData = decoded
+        }
+        
+        else if types == "MakeArticle" {
             guard let decoded = try? decoder.decode(staticResponse.self, from: data)
             else {return .pathErr}
             decodeData = decoded

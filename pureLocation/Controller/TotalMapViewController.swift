@@ -187,6 +187,6 @@ extension TotalMapViewController : UITableViewDataSource {
 extension TotalMapViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 50.0 // 예시로 높이를 100으로 고정하였습니다.
+        return 50.0
     }
 }

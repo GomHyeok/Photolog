@@ -21,6 +21,7 @@ class MapViewController: UIViewController {
     var settingData : MapInfoResponse?
     var locationArray : [[LocationsData]] = []
     var sequences : [Int] = []
+    var locationContent : [String] = []
     var descriptions : [[String]] = []
     var urlArray : [[[URL]]] = []
     var fullAddress : [String] = []
@@ -43,6 +44,8 @@ class MapViewController: UIViewController {
         
         let saveButton = UIBarButtonItem(title: "등록", style: .plain, target: self, action: #selector(saveButtonAction))
         saveButton.tintColor = UIColor(red: 255/255, green: 112/255, blue: 66/255, alpha: 1)
+        navigationItem.rightBarButtonItem = saveButton
+        
         
         TravelTitle.font = UIFont(name: "Pretendard-Bold", size: 24)
         
@@ -72,7 +75,7 @@ class MapViewController: UIViewController {
                     var urls : [[URL]] = []
                     for location in day.locations {
                         var arr : [URL] = []
-                        
+                        self.locationContent.append(location.description ?? "")
                         descripts.append(location.description ?? "설명을 입력해주세요!")
                         for url in location.photoUrls {
                             arr.append(URL(string: url)!)
@@ -99,8 +102,27 @@ class MapViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    @objc func saveButtonAction() {
-        alert(message: "게시물을 저장하지 않고 종료하시겠습니까?")
+    @objc func saveButtonAction() {let lastSectionIndex = TravelMapTable.numberOfSections - 1 // 마지막 섹션의 인덱스
+        let lastRowIndex = TravelMapTable.numberOfRows(inSection: lastSectionIndex) - 1
+        var budget : Int = 0
+        let indexPath = IndexPath(row: lastRowIndex, section: lastSectionIndex)
+        if let cell = TravelMapTable.cellForRow(at: indexPath) as? BudgetCell {
+            budget = cell.getBudget()
+        } else {
+            self.alert(message: "예산을 선택해주세요")
+        }
+        
+        makeArticle(budget: budget) {
+            self.navigationController?.popViewController(animated: true)
+            let storyboard = UIStoryboard(name: "Home", bundle: nil)
+            if let homeView = storyboard.instantiateViewController(withIdentifier: "HomeParentViewController") as? HomeParentViewController {
+                homeView.token = self.token
+                homeView.id = self.id
+                
+                self.navigationController?.pushViewController(homeView, animated: true)
+            }
+            else {print("홈뷰 문제")}
+        }
     }
 }
 
@@ -148,6 +170,36 @@ extension MapViewController {
             }
         }
     }
+    
+    func makeArticle (budget : Int, completion : @escaping () -> Void) {
+        UserService.shared.makeArticle(token: token, travelId: travelId, title: self.TravelTitle.text!, summary: "미정", locationContent: self.locationContent, budget: budget){
+            response in
+            switch response {
+                case .success(let data) :
+                    guard let data = data as? MakeArticleResponse else {return}
+                    completion()
+                case .requsetErr(let err) :
+                    print(err)
+                case .pathErr:
+                    print("pathErr")
+                    completion()
+                case .serverErr:
+                    print("serverErr")
+                case .networkFail:
+                    print("networkFail")
+            }
+        }
+    }
+    
+    func alert(message : String) {
+        let alertVC = UIAlertController(title: message, message: nil, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default)
+        let cancleAction = UIAlertAction(title: "취소", style: .default)
+
+        alertVC.addAction(okAction)
+        alertVC.addAction(cancleAction)
+        present(alertVC, animated: true)
+    }
 }
 
 extension MapViewController : UITableViewDataSource {
@@ -157,8 +209,13 @@ extension MapViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let st = String(self.sequences[section]) + "일차"
-        return st
+        if(section < locationArray.count){
+            let st = String(self.sequences[section]) + "일차"
+            return st
+        }
+        else {
+            return nil
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -231,6 +288,7 @@ extension MapViewController : UITableViewDataSource {
                 else {
                     cell.Descriptions.text = "Loading..."
                 }
+                cell.FullAddress.text = "api 수정이 필요합니다"
                 cell.setData(urlArray[indexPath.section][indexPath.row-1])
                 
                 return cell
@@ -266,15 +324,5 @@ extension MapViewController : UITableViewDelegate {
         ])
         
         return headerView
-    }
-    
-    func alert(message : String) {
-        let alertVC = UIAlertController(title: message, message: nil, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "확인", style: .default)
-        let cancelAction = UIAlertAction(title: "취소", style: .default)
-
-        alertVC.addAction(okAction)
-        alertVC.addAction(cancelAction)
-        present(alertVC, animated: true)
     }
 }

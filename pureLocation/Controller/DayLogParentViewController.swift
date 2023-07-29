@@ -23,7 +23,7 @@ class DayLogParentViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        cnt = 0
         if let backButtonImage = UIImage(named: "backButton")?.withRenderingMode(.alwaysOriginal) {
             let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonAction))
             
@@ -110,13 +110,13 @@ extension DayLogParentViewController {
 extension DayLogParentViewController : ChildDelegate {
     
     func tagToText(cnt: Int) {
-            self.firstChild.willMove(toParent: nil)
-            self.firstChild.view.removeFromSuperview()
-            self.firstChild.removeFromParent()
+        self.firstChild.willMove(toParent: nil)
+        self.firstChild.view.removeFromSuperview()
+        self.firstChild.removeFromParent()
 
-            // setupSecondChild를 호출하여 새로운 뷰 컨트롤러 인스턴스를 생성하고 설정합니다.
-            setupSecondChild(cnt: cnt)
-        }
+        // setupSecondChild를 호출하여 새로운 뷰 컨트롤러 인스턴스를 생성하고 설정합니다.
+        setupSecondChild(cnt: cnt)
+    }
         
     func textToTag(cnt: Int) {
         self.secondChild.willMove(toParent: nil)

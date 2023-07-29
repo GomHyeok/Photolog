@@ -24,12 +24,16 @@ class BudgetCell : UITableViewCell {
     override func awakeFromNib() {
         self.buttons = [self.under20, self.for40, self.for60, self.for80, self.for100, self.above100]
         let font = UIFont(name: "Pretendard-Regular", size: 14)
+        var cnt = 1
         
         for setButton in buttons {
             setButton.titleLabel?.font = font
             setButton.tag = 0
             setButton.layer.cornerRadius = setButton.frame.width/10
             setButton.addTarget(self, action: #selector(settingButton), for: .touchUpInside)
+            setButton.titleLabel?.font = UIFont(name: "Pretandard-Regular", size: 14)
+            setButton.tag = cnt*20
+            cnt+=1
         }
     }
     
@@ -39,16 +43,31 @@ class BudgetCell : UITableViewCell {
         let green: CGFloat = 112.0 / 255.0
         let blue: CGFloat = 66.0 / 255.0
         let colorRed = UIColor(red: red, green: green, blue: blue, alpha: 1.0)
+        var cnt = 1
         
         for setButton in buttons {
             setButton.setTitleColor(color, for: .normal)
             setButton.setTitleColor(color, for: .highlighted)
             setButton.setTitleColor(color, for: .selected)
+            setButton.tag = cnt*20
         }
         
         sender.setTitleColor(colorRed, for: .normal)
         sender.setTitleColor(colorRed, for: .highlighted)
         sender.setTitleColor(colorRed, for: .selected)
+        sender.tag = sender.tag * 100
+        
+    }
+    
+    func getBudget() -> Int {
+        var budget : Int = 0
+        for setButton in buttons {
+            if setButton.tag > 100 {
+                budget = setButton.tag/100
+                break
+            }
+        }
+        return budget
     }
     
 }

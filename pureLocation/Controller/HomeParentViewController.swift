@@ -7,10 +7,11 @@
 
 import UIKit
 
-class HomeParentViewController: UIViewController, ChildViewControllerDelegate {
+class HomeParentViewController: UIViewController, homeDelegate {
     
     var firstChild : HomeViewController!
     var secondChild : HomeNameViewController!
+    var homeData : TravelAPIResponse?
     var token : String = ""
     var id : Int = 0
 
@@ -18,9 +19,7 @@ class HomeParentViewController: UIViewController, ChildViewControllerDelegate {
         super.viewDidLoad()
         
         //네비게이션 뷰 버튼 수정
-        let backButton = UIBarButtonItem(title: "로그아웃", style: .plain, target: self, action: #selector(backButtonAction))
-        backButton.tintColor = UIColor.black
-        navigationItem.leftBarButtonItem = backButton
+        self.navigationController?.isNavigationBarHidden = true
         
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         firstChild = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController
@@ -38,17 +37,14 @@ class HomeParentViewController: UIViewController, ChildViewControllerDelegate {
         firstChild.didMove(toParent: self)
     }
     
-    @objc func backButtonAction() {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    func switchTotaltToMap() {
+    func switchTotaltToMap(data : TravelAPIResponse?) {
         firstChild.willMove(toParent: nil)
         firstChild.view.removeFromSuperview()
         firstChild.removeFromParent()
         
         secondChild.token = self.token
         secondChild.id = self.id
+        secondChild.homeData = data
         
         // 두 번째 자식 뷰 컨트롤러를 추가합니다.
         addChild(secondChild)

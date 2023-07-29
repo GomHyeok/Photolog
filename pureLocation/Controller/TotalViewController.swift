@@ -17,6 +17,7 @@ class TotalViewController: UIViewController {
     var settingData : TravelInfoResponse?
     var sequences : [Int] = []
     var locationArray : [[LocationData]] = []
+    var dates : [String] = []
     
     @IBOutlet weak var InfoTable: UITableView!
     @IBOutlet weak var TravelTitle: UILabel!
@@ -40,7 +41,9 @@ class TotalViewController: UIViewController {
             DispatchQueue.main.async {
                 self.TravelTitle.text = self.settingData?.data?.title ?? "여행 제목을 찾을 수 없습니다."
                 let days = self.settingData?.data?.days ?? []
+                
                 for day in days {
+                    self.dates.append(day.date)
                     self.sequences.append(day.sequence)
                     self.locationArray.append(day.locations)
                 }
@@ -130,50 +133,53 @@ extension TotalViewController {
 
 extension TotalViewController : UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30.0
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let st = String(self.sequences[section]) + "일차"
-        return st
-    }
-    
     //section의 개수
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.sequences.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.locationArray[section].count
+        return self.locationArray[section].count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TotalTableViewCell", for: indexPath) as! TotalTableViewCell
-        
-        cell.PlaceName?.text = locationArray[indexPath.section][indexPath.row].name ?? ""
-        cell.PlaceName.font = UIFont(name: "Pretendard-Bold", size: 15)
-        
-        let urlString = self.locationArray[indexPath.section][indexPath.row].photoUrls[0]
-        let url = URL(string: urlString)!
-        
-        var totalCellCount = 0
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Dayscell", for: indexPath) as! Dayscell
+            cell.Days.text = "Day" + String(self.sequences[indexPath.section])
+            cell.Days.font = UIFont(name: "Pretendard-Bold", size: 24)
             
-        for section in 0..<indexPath.section {
-            let rowCount = tableView.numberOfRows(inSection: section)
-            totalCellCount += rowCount
+            cell.During.text = self.dates[indexPath.section]
+            cell.During.font = UIFont(name : "Pretendard-Regular", size: 13)
+            
+            return cell
         }
-        totalCellCount += indexPath.row
-        
-        cell.cellButton.tag = indexPath.section
-        cell.ButtonImage.load(url: url)
-        cell.ButtonLabel.text = locationArray[indexPath.section][indexPath.row].description ?? ""
-        cell.ButtonLabel.font = UIFont(name: "Pretendard-Regular", size: 12)
-        
-        
-        cell.cellButton.addTarget(self, action: #selector(cellaction(_:)), for: .touchUpInside)
-        
-        return cell
+        else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TotalTableViewCell", for: indexPath) as! TotalTableViewCell
+            
+            cell.PlaceName?.text = locationArray[indexPath.section][indexPath.row-1].name ?? ""
+            cell.PlaceName.font = UIFont(name: "Pretendard-Bold", size: 16)
+            
+            let urlString = self.locationArray[indexPath.section][indexPath.row-1].photoUrls[0]
+            let url = URL(string: urlString)!
+            
+            var totalCellCount = 0
+            
+            for section in 0..<indexPath.section {
+                let rowCount = tableView.numberOfRows(inSection: section)
+                totalCellCount += rowCount
+            }
+            totalCellCount += indexPath.row-1
+            
+            cell.cellButton.tag = indexPath.section
+            cell.ButtonImage.load(url: url)
+            cell.ButtonLabel.text = locationArray[indexPath.section][indexPath.row-1].description ?? ""
+            cell.ButtonLabel.font = UIFont(name: "Pretendard-Regular", size: 12)
+            
+            
+            cell.cellButton.addTarget(self, action: #selector(cellaction(_:)), for: .touchUpInside)
+            
+            return cell
+        }
     }
     
     @objc func cellaction(_ sender : UIButton) {
@@ -193,25 +199,12 @@ extension TotalViewController : UITableViewDataSource {
 
 extension TotalViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            return 200.0
+        if indexPath.row == 0 {
+            return 80
         }
+        else {
+            return 230.0
+        }
+    }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-            let headerView = UIView()
-            
-            let label = UILabel()
-            label.textColor = UIColor.init(red: 0.33, green: 0.33, blue: 0.34, alpha: 1.0) // 텍스트 색상 설정
-            label.font = UIFont(name: "Pretendard-Bold", size: 20) // 폰트 크기 및 스타일 설정
-            label.text = self.tableView(tableView, titleForHeaderInSection: section)
-            
-            label.translatesAutoresizingMaskIntoConstraints = false
-            headerView.addSubview(label)
-            
-            NSLayoutConstraint.activate([
-                label.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
-                label.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
-            ])
-            
-            return headerView
-        }
 }

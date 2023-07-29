@@ -9,7 +9,7 @@ class LocationInfoCell : UITableViewCell {
     @IBOutlet weak var PingImage: UIImageView!
     @IBOutlet weak var LocationTitle: UILabel!
     @IBOutlet weak var MapCollection: UICollectionView!
-    
+    @IBOutlet weak var FullAddress: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,6 +33,7 @@ class LocationInfoCell : UITableViewCell {
 
 
 extension LocationInfoCell : UICollectionViewDelegate {
+    
     
 }
 
@@ -61,6 +62,6 @@ extension LocationInfoCell : UICollectionViewDataSource {
 extension LocationInfoCell : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
             // return the size of item
-            return CGSize(width: collectionView.frame.width / 2, height: collectionView.frame.height)
+            return CGSize(width: collectionView.frame.width / 3, height: collectionView.frame.height)
     }
 }

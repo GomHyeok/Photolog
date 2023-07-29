@@ -34,6 +34,9 @@ class DayTagViewController: UIViewController {
         TagTable.delegate = self
         TagTable.dataSource = self
         
+        Day.font = UIFont(name: "Pretendard-Bold", size: 24)
+        During.font = UIFont(name: "Pretendard-Regular", size: 13)
+        
         days = datas?.data?.days[cnt]
         if let locations = days?.locations {
             for location in locations {
@@ -51,11 +54,11 @@ class DayTagViewController: UIViewController {
         
         locationInfoSequentially(index: 0)
         
-        let footerView = UIView(frame: CGRect(x: 20, y: 0, width: TagTable.frame.size.width-40, height: 40))
+        let footerView = UIView(frame: CGRect(x: 20, y: 0, width: TagTable.frame.size.width-20, height: 40))
         let button = UIButton(frame: footerView.bounds)
         button.setTitle("다음", for: .normal)
         button.backgroundColor  = UIColor(red: 255/255, green: 112/255, blue: 66/255, alpha: 1.0)
-        button.layer.cornerRadius = button.frame.width/20
+        button.layer.cornerRadius = 10
         button.setTitleColor(UIColor.black, for: .normal)
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         footerView.addSubview(button)
@@ -111,6 +114,7 @@ class DayTagViewController: UIViewController {
         dispatchGroup.notify(queue: .main) {
             self.cnt+=1
             if(self.cnt >= self.datas?.data?.days.count ?? 0) {
+                self.cnt-=1
                 let storyboard = UIStoryboard(name: "Home", bundle: nil)
                 if let
                     total = storyboard.instantiateViewController(withIdentifier: "ParentViewController") as? ParentViewController {
@@ -224,12 +228,15 @@ extension DayTagViewController : UITableViewDataSource {
         } else {
             cell.LocationName.text = "Loading..."
         }
+        cell.LocationName.font = UIFont(name: "Pretendard-Bold", size: 24)
 
         if indexPath.row < fullAddress.count {
             cell.PlaceName.text = fullAddress[indexPath.row]
         } else {
             cell.PlaceName.text = "Loading..."
         }
+        cell.PlaceName.font = UIFont(name: "Pretendard-Regular", size: 13)
+        
         cell.setData(urlArray[indexPath.row])
         return cell
     }

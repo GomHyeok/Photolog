@@ -84,10 +84,9 @@ class ThemaViewController: UIViewController {
         for setButton in buttons {
             setButton.titleLabel?.font = font
             setButton.tag = 0
-            setButton.layer.cornerRadius = setButton.frame.width/10
+            setButton.layer.cornerRadius = 16
+            setButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 14)
         }
-        
-        
     }
 
     @IBAction func ButtonsAction(_ sender: UIButton) {

@@ -16,3 +16,8 @@ protocol ChildDelegate : AnyObject {
     func tagToText(cnt : Int)
     func textToTag(cnt : Int)
 }
+
+protocol homeDelegate : AnyObject {
+    func switchTotaltToMap(data : TravelAPIResponse?)
+    func switchMaptoTotal()
+}

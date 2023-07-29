@@ -11,6 +11,6 @@ import UIKit
 class SummuryMapCell : UITableViewCell {
     @IBOutlet weak var DayLabel: UILabel! //16
     @IBOutlet weak var DayImage: UIImageView!
-    
+    @IBOutlet weak var RectangelImage: UIImageView!
     @IBOutlet weak var DuringLabel: UILabel!//13
 }

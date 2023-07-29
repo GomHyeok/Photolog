@@ -11,7 +11,7 @@ import BSImagePicker
 import Kingfisher
 
 class HomeNameViewController: UIViewController {
-    weak var delegate : ChildViewControllerDelegate?
+    weak var delegate : homeDelegate?
     
     var token : String = ""
     var id : Int = 0
@@ -21,29 +21,43 @@ class HomeNameViewController: UIViewController {
     var dateTime : String = ""
     var level1 : String = ""
     var formatted : String = ""
+    var assets : [PHAsset] = []
+    var imgs : [UIImage] = []
+    var currentAssetIndex : Int = 0
+    var assetsCount : Int = 0
     var data : CalculateResponse?
     var homeData : TravelAPIResponse?
     
     
+    @IBOutlet weak var bottomNavigation: UIView!
     @IBOutlet weak var allView: UIView!
     @IBOutlet weak var HomeTabelView: UITableView!
     @IBOutlet weak var myLabel: UILabel!
     @IBOutlet weak var allLabel: UILabel!
     
     override func viewDidLayoutSubviews() {
+        DispatchQueue.main.async {
+            let border = CALayer()
+            let width = CGFloat(0.2)
+            border.borderColor = UIColor.darkGray.cgColor
+            border.frame = CGRect(x: 0, y: self.allView.frame.size.height - width, width:  self.allView.frame.size.width, height: width)
+            border.borderWidth = width
+            self.allView.layer.addSublayer(border)
+            self.allView.layer.masksToBounds = true
+            
+            let upper = CALayer()// 선의 두께
+            upper.borderColor = UIColor.darkGray.cgColor // 선의 색상
+            upper.frame = CGRect(x: 0, y: 0, width:  self.bottomNavigation.frame.size.width, height: width) // 상단에 선을 추가하기 위해 y: 0으로 설정
+            upper.borderWidth = width
+            self.bottomNavigation.layer.addSublayer(upper)
+            self.bottomNavigation.layer.masksToBounds = true
+        }
         HomeTabelView.reloadData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let backButtonImage = UIImage(named: "backButton")?.withRenderingMode(.alwaysOriginal) {
-            let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonAction))
-            
-            navigationItem.leftBarButtonItem = backButton
-        } else {
-            print("backButton image not found")
-        }
+        viewDidLayoutSubviews()
         
         let lineColor = UIColor(red:255/255, green:112/255, blue:66/255, alpha:1.0)
         let lineColor2 = UIColor(red:209/255, green:209/255, blue:214/255, alpha:1.0)
@@ -104,7 +118,7 @@ class HomeNameViewController: UIViewController {
             
             // User finished selection assets.
             for asset in assets {
-                
+                dispatchGroup.enter()
                 let manager = PHImageManager.default()
                 let option = PHImageRequestOptions()
                 option.isSynchronous = true
@@ -114,30 +128,16 @@ class HomeNameViewController: UIViewController {
                 
                 manager.requestImage(for: asset, targetSize: CGSize(width: asset.pixelWidth, height: asset.pixelHeight), contentMode: .aspectFill, options: option, resultHandler: { (image, _) in
                     if let image = image {
-                        dispatchGroup.enter()
-                        self?.test(img : image, asset: asset){
-                            dispatchGroup.leave()
-                        }
+                        self?.assets.append(asset)
+                        self?.imgs.append(image)
                     }
-                    else {
-                        dispatchGroup.leave()
-                    }
+                    dispatchGroup.leave()
                })
             }
-            dispatchGroup.notify(queue: .main) {
-                print("ALL photos saved")
-                self?.calculate() {
-                    let storyboard = UIStoryboard(name: "Home", bundle: nil)
-                    if let summaryView = storyboard.instantiateViewController(withIdentifier: "SummaryViewController") as? SummaryViewController {
-                        summaryView.token = self?.token ?? ""
-                        summaryView.id = self?.id ?? 0
-                        summaryView.travelId = self?.travelId ?? 0
-                        summaryView.datas = self?.data
-                        
-                        self?.navigationController?.pushViewController(summaryView, animated: true)
-                    }
-                    else {print("summary 문제")}
-                }
+            
+            dispatchGroup.notify(queue : .main) {
+                self?.assetsCount = self!.assets.count
+                self?.processNextAsset()
             }
         })
     }
@@ -178,6 +178,34 @@ class HomeNameViewController: UIViewController {
         print("Date")
         
         return result
+    }
+    
+    func processNextAsset() {
+        if currentAssetIndex < assetsCount {
+            let asset = assets[currentAssetIndex]
+            let img = imgs[currentAssetIndex]
+            currentAssetIndex += 1
+
+            // Process asset (i.e. call photoSave or other async function)
+            self.test(img : img, asset: asset) {
+                // Once processing is done, process next asset
+                self.processNextAsset()
+            }
+            
+        } else {
+            calculate {
+                let storyboard = UIStoryboard(name: "Home", bundle: nil)
+                if let summaryView = storyboard.instantiateViewController(withIdentifier: "SummaryViewController") as? SummaryViewController {
+                    summaryView.token = self.token
+                    summaryView.id = self.id
+                    summaryView.travelId = self.travelId
+                    summaryView.datas = self.data
+                    
+                    self.navigationController?.pushViewController(summaryView, animated: true)
+                }
+                else {print("summary 문제")}
+            }
+        }
     }
 
 }
@@ -316,21 +344,24 @@ extension HomeNameViewController : UITableViewDataSource {
         cell.ButtonImage.kf.setImage(with: URL(string : homeData?.data[indexPath.item].thumbnail ?? "")!)
         cell.ButtonImage.layer.cornerRadius = cell.ButtonImage.frame.width/15
         
-        cell.BookMarkLabel.text = String(self.homeData?.data[indexPath.row].photoCnt ?? 0)
-        cell.BookMarkLabel.font = UIFont(name : "Pretendard-Bold", size: 15)
-        cell.HartLabel.text = String(self.homeData?.data[indexPath.row].photoCnt ?? 0)
-        cell.HartLabel.font = UIFont(name : "Pretendard-Bold", size: 15)
-        
         cell.During.text = self.homeData?.data[indexPath.row].startDate
         cell.During.text! += "~"
-        cell.During.text = self.homeData?.data[indexPath.row].endDate
-        cell.During.font = UIFont(name : "Pretendard-Bold", size: 13)
+        cell.During.text! += self.homeData?.data[indexPath.row].endDate ?? ""
+        cell.During.font = UIFont(name : "Pretendard-Regular", size: 13)
         
         cell.Title.text = self.homeData?.data[indexPath.row].title
-        cell.During.font = UIFont(name : "Pretendard-Bold", size: 17)
+        cell.Title.font = UIFont(name : "Pretendard-Bold", size: 16)
         
         cell.Location.text = self.homeData?.data[indexPath.row].city
-        cell.During.font = UIFont(name : "Pretendard-Bold", size: 10)
+        cell.Location.font = UIFont(name : "Pretendard-Regular", size: 10)
+        let border = CALayer()
+        let width = CGFloat(0.2)
+        border.borderColor = UIColor(red: 0.46, green: 0.46, blue: 0.48, alpha: 1.0).cgColor
+        border.frame = CGRect(x: 0, y:cell.Location.frame.size.height - width, width: cell.Location.frame.size.width, height: width)
+        border.borderWidth = width
+        cell.Location.layer.addSublayer(border)
+        cell.Location.layer.masksToBounds = true
+        
         
         cell.ImageCnt.text = String(self.homeData?.data[indexPath.row].photoCnt ?? 0)
         cell.ImageCnt.font = UIFont(name : "Pretendard-Bold", size: 11)
@@ -346,7 +377,7 @@ extension HomeNameViewController : UITableViewDataSource {
     @objc func cellaction(_ sender : UIButton) {
         print(self.homeData?.data[sender.tag].travelId ?? 0)
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        if let daylog = storyboard.instantiateViewController(withIdentifier: "TotalViewController") as? TotalViewController {
+        if let daylog = storyboard.instantiateViewController(withIdentifier: "ParentViewController") as? ParentViewController {
             daylog.token = self.token
             daylog.id = self.id
             daylog.travelId = self.homeData?.data[sender.tag].travelId ?? 0

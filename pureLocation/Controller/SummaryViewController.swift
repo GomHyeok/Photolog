@@ -28,6 +28,7 @@ class SummaryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = false
         self.TavleCalcu.font = UIFont(name: "Pretendard-Bold", size: 24)
         self.PhotoLabel.font = UIFont(name: "Pretendard-Bold", size: 24)
         

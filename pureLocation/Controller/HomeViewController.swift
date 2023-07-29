@@ -11,7 +11,7 @@ import BSImagePicker
 import Kingfisher
 
 class HomeViewController: UIViewController {
-    weak var delegate : ChildViewControllerDelegate?
+    weak var delegate : homeDelegate?
     
     var token : String = ""
     var id : Int = 0
@@ -21,38 +21,52 @@ class HomeViewController: UIViewController {
     var dateTime : String = ""
     var level1 : String = ""
     var formatted : String = ""
+    var assets : [PHAsset] = []
+    var imgs : [UIImage] = []
     var data : CalculateResponse?
     var homeData : TravelAPIResponse?
+    var currentAssetIndex : Int = 0
+    var assetsCount : Int = 0
     
+    
+    @IBOutlet weak var bottomNavigation: UIView!
     @IBOutlet weak var allView: UIView!
     @IBOutlet weak var HomeTable: UITableView!
     @IBOutlet weak var myLabel: UILabel!
     @IBOutlet weak var allLabel: UILabel!
 
     override func viewDidLayoutSubviews() {
+        DispatchQueue.main.async {
+            let border = CALayer()
+            let width = CGFloat(0.5)
+            border.borderColor = UIColor.darkGray.cgColor
+            border.frame = CGRect(x: 0, y: self.allView.frame.size.height - width, width:  self.allView.frame.size.width, height: width)
+            border.borderWidth = width
+            self.allView.layer.addSublayer(border)
+            self.allView.layer.masksToBounds = true
+            
+            let upper = CALayer()// 선의 두께
+            upper.borderColor = UIColor.darkGray.cgColor // 선의 색상
+            upper.frame = CGRect(x: 0, y: 0, width:  self.bottomNavigation.frame.size.width, height: width) // 상단에 선을 추가하기 위해 y: 0으로 설정
+            upper.borderWidth = width
+            self.bottomNavigation.layer.addSublayer(upper)
+            self.bottomNavigation.layer.masksToBounds = true
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewDidLayoutSubviews()
         let lineColor = UIColor(red:255/255, green:112/255, blue:66/255, alpha:1.0)
-        let lineColor2 = UIColor(red:209/255, green:209/255, blue:214/255, alpha:1.0)
+        
         myLabel.setBottomLine(borderColor: lineColor, hight: 1.0)
         
         TravelApi() {
             self.HomeTable.reloadData()
         }
         
-        allView.backgroundColor = UIColor.clear
-        let borderLine = UIView()
-        borderLine.frame = CGRect(x: 0, y: Double(allView.frame.height), width: Double(allView.frame.width), height: 0.3)
-        borderLine.backgroundColor = lineColor2
-        allView.addSubview(borderLine)
-        
         myLabel.font = UIFont(name : "Pretendard-Bold", size: 20)
         allLabel.font = UIFont(name: "Pretendard-Bold", size: 20)
-        
-        
-        
         
         HomeTable.dataSource = self
         HomeTable.delegate = self
@@ -61,7 +75,7 @@ class HomeViewController: UIViewController {
     
     
     @IBAction func ChangeView(_ sender: UIButton) {
-        delegate?.switchTotaltToMap()
+        delegate?.switchTotaltToMap(data: self.homeData)
     }
     
     
@@ -99,10 +113,9 @@ class HomeViewController: UIViewController {
             // User canceled selection.
         }, finish: { [weak self](assets) in
             let dispatchGroup = DispatchGroup()
-            
             // User finished selection assets.
             for asset in assets {
-                
+                dispatchGroup.enter()
                 let manager = PHImageManager.default()
                 let option = PHImageRequestOptions()
                 option.isSynchronous = true
@@ -112,37 +125,22 @@ class HomeViewController: UIViewController {
                 
                 manager.requestImage(for: asset, targetSize: CGSize(width: asset.pixelWidth, height: asset.pixelHeight), contentMode: .aspectFill, options: option, resultHandler: { (image, _) in
                     if let image = image {
-                        dispatchGroup.enter()
-                        self?.test(img : image, asset: asset){
-                            dispatchGroup.leave()
-                        }
+                        self?.assets.append(asset)
+                        self?.imgs.append(image)
                     }
-                    else {
-                        dispatchGroup.leave()
-                    }
+                    dispatchGroup.leave()
                })
             }
-            dispatchGroup.notify(queue: .main) {
-                print("ALL photos saved")
-                self?.calculate() {
-                    let storyboard = UIStoryboard(name: "Home", bundle: nil)
-                    if let summaryView = storyboard.instantiateViewController(withIdentifier: "SummaryViewController") as? SummaryViewController {
-                        summaryView.token = self?.token ?? ""
-                        summaryView.id = self?.id ?? 0
-                        summaryView.travelId = self?.travelId ?? 0
-                        summaryView.datas = self?.data
-                        
-                        self?.navigationController?.pushViewController(summaryView, animated: true)
-                    }
-                    else {print("summary 문제")}
-                }
+            
+            dispatchGroup.notify(queue : .main) {
+                self?.assetsCount = self!.assets.count
+                self?.processNextAsset()
             }
         })
-        
-        
     }
     
     func getPhotoLocationInfo(asset: PHAsset) -> (longitude: Double, latitude: Double) {
+
         guard let location = asset.location else {
             print("No location info available for this asset.")
             return (0,0)
@@ -170,6 +168,36 @@ class HomeViewController: UIViewController {
         
         return result
     }
+    
+    func processNextAsset() {
+        if currentAssetIndex < assetsCount {
+            let asset = assets[currentAssetIndex]
+            let img = imgs[currentAssetIndex]
+            currentAssetIndex += 1
+
+            // Process asset (i.e. call photoSave or other async function)
+            self.test(img : img, asset: asset) {
+                // Once processing is done, process next asset
+                self.processNextAsset()
+            }
+            
+        } else {
+            calculate {
+                let storyboard = UIStoryboard(name: "Home", bundle: nil)
+                if let summaryView = storyboard.instantiateViewController(withIdentifier: "SummaryViewController") as? SummaryViewController {
+                    summaryView.token = self.token
+                    summaryView.id = self.id
+                    summaryView.travelId = self.travelId
+                    summaryView.datas = self.data
+                    
+                    self.navigationController?.pushViewController(summaryView, animated: true)
+                }
+                else {print("summary 문제")}
+            }
+        }
+    }
+
+
 }
 
 extension HomeViewController {
@@ -254,7 +282,7 @@ extension HomeViewController {
                         }
                     }
                     self.formatted = data.results.first?.formattedAddress ?? "찾을 수 없음"
-                    let index = self.formatted.index(self.formatted.startIndex, offsetBy:  4)
+                    let index = self.formatted.index(self.formatted.startIndex, offsetBy: 5)
                     self.formatted = String(self.formatted[index...])
                 case .requsetErr(let err):
                     print(err)
@@ -316,7 +344,7 @@ extension HomeViewController : UITableViewDataSource {
     @objc func cellaction(_ sender : UIButton) {
         print(self.homeData?.data[sender.tag].travelId ?? 0)
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        if let daylog = storyboard.instantiateViewController(withIdentifier: "TotalViewController") as? TotalViewController {
+        if let daylog = storyboard.instantiateViewController(withIdentifier: "ParentViewController") as? ParentViewController {
             daylog.token = self.token
             daylog.id = self.id
             daylog.travelId = self.homeData?.data[sender.tag].travelId ?? 0
