@@ -27,6 +27,7 @@ class HomeNameViewController: UIViewController {
     var assetsCount : Int = 0
     var data : CalculateResponse?
     var homeData : TravelAPIResponse?
+    var check = true
     
     
     @IBOutlet weak var bottomNavigation: UIView!
@@ -37,20 +38,24 @@ class HomeNameViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         DispatchQueue.main.async {
-            let border = CALayer()
-            let width = CGFloat(0.2)
-            border.borderColor = UIColor.darkGray.cgColor
-            border.frame = CGRect(x: 0, y: self.allView.frame.size.height - width, width:  self.allView.frame.size.width, height: width)
-            border.borderWidth = width
-            self.allView.layer.addSublayer(border)
-            self.allView.layer.masksToBounds = true
-            
-            let upper = CALayer()// 선의 두께
-            upper.borderColor = UIColor.darkGray.cgColor // 선의 색상
-            upper.frame = CGRect(x: 0, y: 0, width:  self.bottomNavigation.frame.size.width, height: width) // 상단에 선을 추가하기 위해 y: 0으로 설정
-            upper.borderWidth = width
-            self.bottomNavigation.layer.addSublayer(upper)
-            self.bottomNavigation.layer.masksToBounds = true
+            if self.check {
+                let border = CALayer()
+                let width = CGFloat(0.2)
+                border.borderColor = UIColor.darkGray.cgColor
+                border.frame = CGRect(x: 0, y: self.allView.frame.size.height - width, width:  self.allView.frame.size.width, height: width)
+                border.borderWidth = width
+                self.allView.layer.addSublayer(border)
+                self.allView.layer.masksToBounds = true
+                
+                let upper = CALayer()// 선의 두께
+                upper.borderColor = UIColor.darkGray.cgColor // 선의 색상
+                upper.frame = CGRect(x: 0, y: 0, width:  self.bottomNavigation.frame.size.width, height: width) // 상단에 선을 추가하기 위해 y: 0으로 설정
+                upper.borderWidth = width
+                
+                self.bottomNavigation.layer.addSublayer(upper)
+                self.bottomNavigation.layer.masksToBounds = true
+                self.check = false
+            }
         }
         HomeTabelView.reloadData()
     }
@@ -76,6 +81,10 @@ class HomeNameViewController: UIViewController {
         HomeTabelView.dataSource = self
     }
     
+    
+    @IBAction func BoardButton(_ sender: UIButton) {
+        delegate?.switchToBoard(pos: 11)
+    }
     
     @IBAction func ChangeView(_ sender: UIButton) {
         delegate?.switchMaptoTotal()

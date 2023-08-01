@@ -35,6 +35,7 @@ struct LocationsData : Codable{
     let description : String?
     let photoUrl : String
     let coordinate : CordinateData?
+    let city : String
 }
 
 struct CordinateData : Codable{

@@ -20,4 +20,6 @@ protocol ChildDelegate : AnyObject {
 protocol homeDelegate : AnyObject {
     func switchTotaltToMap(data : TravelAPIResponse?)
     func switchMaptoTotal()
+    func switchToBoard(pos : Int)
+    func switchToHome(pos : Int)
 }

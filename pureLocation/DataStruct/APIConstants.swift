@@ -50,4 +50,21 @@ struct APIConstants {
     
     //TravelInfoURL
     static let travelInfoURL = baseURL + "/api/travel/textSummary/"
+    
+    //MapInfoURL
+    static let MapInfoURL = baseURL + "/api/travel/mapSummary/"
+    
+    //FindPassword
+    
+    //Tavel
+    static let travelAPI = baseURL + "/api/travel"
+    
+    //ThemeURL
+    static let themeURL = baseURL + "/api/travel/theme/"
+    
+    //makeArticle
+    static let makeArticleURL = baseURL + "/api/articles/"
+    
+    //articleFiltering
+    static let ArticleFilteringURL = baseURL + "/api/articles/filtering"
 }

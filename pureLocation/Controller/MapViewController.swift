@@ -12,6 +12,7 @@ class MapViewController: UIViewController {
     
     @IBOutlet weak var TravelTitle: UILabel!
     @IBOutlet weak var TravelMapTable: UITableView!
+    @IBOutlet weak var ContentFiled: UITextView!
     
     var token : String = ""
     var id : Int = 0
@@ -23,6 +24,7 @@ class MapViewController: UIViewController {
     var sequences : [Int] = []
     var locationContent : [String] = []
     var descriptions : [[String]] = []
+    var citys : [[String]] = []
     var urlArray : [[[URL]]] = []
     var fullAddress : [String] = []
     let pingColor : [UIColor] = [UIColor.systemRed, UIColor.systemBlue, UIColor.systemPurple, UIColor.systemMint, UIColor.systemPink, UIColor.black]
@@ -33,6 +35,8 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.isNavigationBarHidden = false
         
         if let backButtonImage = UIImage(named: "backButton")?.withRenderingMode(.alwaysOriginal) {
             let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonAction))
@@ -61,8 +65,13 @@ class MapViewController: UIViewController {
             self.TravelTitle.text = self.settingData?.data?.title ?? "제목을 찾을 수 없습니다."
             let days = self.settingData?.data?.days ?? []
             for day in days {
+                var city : [String] = []
                 self.locationArray.append(day.locations)
                 self.sequences.append(day.sequence)
+                for location in day.locations {
+                    city.append(location.city)
+                }
+                self.citys.append(city)
             }
             group.leave()
         }
@@ -102,7 +111,8 @@ class MapViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    @objc func saveButtonAction() {let lastSectionIndex = TravelMapTable.numberOfSections - 1 // 마지막 섹션의 인덱스
+    @objc func saveButtonAction() {
+        let lastSectionIndex = TravelMapTable.numberOfSections - 1 // 마지막 섹션의 인덱스
         let lastRowIndex = TravelMapTable.numberOfRows(inSection: lastSectionIndex) - 1
         var budget : Int = 0
         let indexPath = IndexPath(row: lastRowIndex, section: lastSectionIndex)
@@ -172,7 +182,7 @@ extension MapViewController {
     }
     
     func makeArticle (budget : Int, completion : @escaping () -> Void) {
-        UserService.shared.makeArticle(token: token, travelId: travelId, title: self.TravelTitle.text!, summary: "미정", locationContent: self.locationContent, budget: budget){
+        UserService.shared.makeArticle(token: token, travelId: travelId, title: self.TravelTitle.text!, summary: self.ContentFiled.text, locationContent: self.locationContent, budget: budget){
             response in
             switch response {
                 case .success(let data) :
@@ -267,7 +277,13 @@ extension MapViewController : UITableViewDataSource {
             else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "LocationInfoCell", for: indexPath) as! LocationInfoCell
                 
-                cell.LocationTitle.text = locationArray[indexPath.section][indexPath.row-1].name
+                if "" == locationArray[indexPath.section][indexPath.row-1].name {
+                    cell.LocationTitle.text = "이름을 입력해주세요"
+                }
+                else {
+                    cell.LocationTitle.text = locationArray[indexPath.section][indexPath.row-1].name
+                }
+                
                 cell.LocationTitle.font = UIFont(name: "Pretandard-Bold", size: 16)
                 cell.Descriptions.font = UIFont(name: "Pretandard-Regular", size: 14)
                 
@@ -288,7 +304,7 @@ extension MapViewController : UITableViewDataSource {
                 else {
                     cell.Descriptions.text = "Loading..."
                 }
-                cell.FullAddress.text = "api 수정이 필요합니다"
+                cell.FullAddress.text = citys[indexPath.section][indexPath.row-1]
                 cell.setData(urlArray[indexPath.section][indexPath.row-1])
                 
                 return cell

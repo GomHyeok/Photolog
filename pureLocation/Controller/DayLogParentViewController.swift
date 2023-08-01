@@ -23,6 +23,9 @@ class DayLogParentViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.isNavigationBarHidden = false
+        
         cnt = 0
         if let backButtonImage = UIImage(named: "backButton")?.withRenderingMode(.alwaysOriginal) {
             let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonAction))

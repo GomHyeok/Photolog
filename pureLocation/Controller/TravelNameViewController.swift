@@ -40,6 +40,9 @@ class TravelNameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.isNavigationBarHidden = false
+        
         self.NextButton.layer.cornerRadius = 10
         self.NextButton.layer.borderWidth=1
         self.NextButton.layer.borderColor = self.NextButton.backgroundColor?.cgColor

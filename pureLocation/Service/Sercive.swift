@@ -474,6 +474,7 @@ class UserService {
                     let networkResult = self.judgeStatus(by : statusCode, value, types: "MapInfo")
                     completion(networkResult)
                 case .failure :
+                print(response)
                     completion(.networkFail)
             }
         }
@@ -582,6 +583,54 @@ class UserService {
         }
     }
     
+    func ArticleFiltering (token : String, Filters : [String : String], completion: @escaping (NetworkResult<Any>) -> Void) {
+        var url = APIConstants.ArticleFilteringURL
+        if Filters.count > 0 {
+            url += "?"
+        }
+        for filter in Filters {
+            url += filter.key
+            if let encodedValue = filter.value.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+                url += "=" + encodedValue
+            } else {
+                print("Invalid filter value: \(filter.value)")
+            }
+            url += "&"
+        }
+        
+        if Filters.count > 0 {
+            url = String(url.dropLast())
+        }
+        print(url)
+        
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization" : token
+        ]
+        
+        let dataRequest = AF.request(
+            url,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: headers
+        )
+        
+        dataRequest.responseData{
+            response in
+            switch response.result {
+                case .success :
+                    guard let statusCode = response.response?.statusCode else {return}
+                    guard let value = response.value else {return}
+                    
+                    let networkResult = self.judgeStatus(by : statusCode, value, types: "ArticleFiltering")
+                    completion(networkResult)
+                case .failure :
+                    print(response)
+                    completion(.networkFail)
+            }
+        }
+    }
+    
     
     
 //MARK: - judgeStatus
@@ -622,6 +671,13 @@ class UserService {
                 return .serverErr
             default :
                 print(statusCode)
+                let decoder = JSONDecoder()
+                do {
+                    let errorMessage = try decoder.decode(FailResponse.self, from: data)
+                    print(errorMessage.message)
+                } catch {
+                    print("Error decoding error message: \(error)")
+                }
                 return .networkFail
         }
     }
@@ -629,7 +685,6 @@ class UserService {
     
 //MARK: - isVailData
     private func isVaildData(data : Data ,types : String) ->NetworkResult<Any> {
-        print(data)
         let decoder = JSONDecoder()//서버에서 받은 데이터를 codable로 선택
         var decodeData : Any?
         //데이터가 변환이 되게끔 response 구조체로 데이터를 변환해서넣고 해당 데이터를 networkresult success 파라미터로 전달
@@ -724,6 +779,12 @@ class UserService {
         
         else if types == "MakeArticle" {
             guard let decoded = try? decoder.decode(staticResponse.self, from: data)
+            else {return .pathErr}
+            decodeData = decoded
+        }
+        
+        else if types == "ArticleFiltering" {
+            guard let decoded = try? decoder.decode(ArticlesFilteringResponse.self, from: data)
             else {return .pathErr}
             decodeData = decoded
         }

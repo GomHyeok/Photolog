@@ -73,6 +73,9 @@ class HomeViewController: UIViewController {
         
     }
     
+    @IBAction func BoardButton(_ sender: UIButton) {
+        delegate?.switchToBoard(pos: 1)
+    }
     
     @IBAction func ChangeView(_ sender: UIButton) {
         delegate?.switchTotaltToMap(data: self.homeData)
