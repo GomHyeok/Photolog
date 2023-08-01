@@ -21,6 +21,16 @@ class KeywordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.isNavigationBarHidden = false
+        
+        if let backButtonImage = UIImage(named: "backButton")?.withRenderingMode(.alwaysOriginal) {
+            let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonAction))
+            
+            navigationItem.leftBarButtonItem = backButton
+        } else {
+            print("backButton image not found")
+        }
+        
         KeywardLabel.font = UIFont(name: "Pretendard-Bold", size: 20)
         LabelTom.font = UIFont(name: "Pretendard_Regular", size: 14)
         LabelBottom.font = UIFont(name: "Pretendard_Regular", size: 14)
@@ -39,16 +49,20 @@ class KeywordViewController: UIViewController {
         KeywordTable.tableFooterView = footerView
     }
     
+    @objc func backButtonAction() {
+        navigationController?.popViewController(animated: true)
+    }
+    
     @objc func buttonTapped() {
         let storyboard = UIStoryboard(name: "Board", bundle: nil)
         if let
-            Keyword = storyboard.instantiateViewController(withIdentifier: "BoardMainViewController") as? BoardMainViewController {
+            Keyword = storyboard.instantiateViewController(withIdentifier: "AfterKeywordViewController") as? AfterKeywordViewController {
             
             Keyword.token = self.token
             Keyword.id = self.id
             
             var filter : [String : String] = [:]
-            
+
             var indexPath = IndexPath(row: 0, section: 0)
             var cell = KeywordTable.cellForRow(at: indexPath) as! PlaceCell
             if cell.getString() != nil {
@@ -56,25 +70,27 @@ class KeywordViewController: UIViewController {
             }
             indexPath = IndexPath(row: 1, section: 0)
             var cell1 = KeywordTable.cellForRow(at: indexPath) as! budgets
-            
+
             if cell1.getBudget() > 0 {
-                Keyword.budget = cell1.getBudget()
+                var budget = cell1.getBudget()
+                filter["endBudget"] = String(budget)
             }
-            
+
             indexPath = IndexPath(row: 2, section: 0)
             var cell2 = KeywordTable.cellForRow(at: indexPath) as!NingtCell
-            
+
             if cell2.getString() != nil {
-                Keyword.day = cell2.getString()!
+                var day = cell2.getString()!
+                filter["day"] = String(day)
             }
-            
+
             indexPath = IndexPath(row: 3, section: 0)
             var cell3 = KeywordTable.cellForRow(at: indexPath) as!ThemaCell
-            
+
             if cell3.getString() != nil {
                 Keyword.themas = cell3.getString()!
             }
-            
+
             Keyword.filters = filter
             
             self.navigationController?.pushViewController(Keyword, animated: true)

@@ -13,7 +13,7 @@ class BoardMainViewController: UIViewController {
     var token : String = ""
     var id : Int = 0
     var settingData : ArticlesFilteringResponse?
-    var filters : [String : String] = ["degree":"경기도"]
+    var filters : [String : String] = [:]
     var themas : [String] = []
     var budget : Int = 0
     var day : Int = 0
@@ -28,6 +28,9 @@ class BoardMainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.isNavigationBarHidden = true
+        
         KeywordSearch.font = UIFont(name: "Pretendard-Regular", size: 14)
         SortRecent.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
         SortLike.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
@@ -81,7 +84,7 @@ class BoardMainViewController: UIViewController {
 
 extension BoardMainViewController {
     func ArticleFiltering(completion: @escaping () -> Void) {
-        UserService.shared.ArticleFiltering(token: token, Filters: filters) {
+        UserService.shared.ArticleFiltering(token: token, Filters: filters, thema: []) {
                 response in
                 switch response {
                     case .success(let data) :

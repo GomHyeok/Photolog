@@ -583,7 +583,7 @@ class UserService {
         }
     }
     
-    func ArticleFiltering (token : String, Filters : [String : String], completion: @escaping (NetworkResult<Any>) -> Void) {
+    func ArticleFiltering (token : String, Filters : [String : String], thema : [String], completion: @escaping (NetworkResult<Any>) -> Void) {
         var url = APIConstants.ArticleFilteringURL
         if Filters.count > 0 {
             url += "?"
@@ -594,6 +594,16 @@ class UserService {
                 url += "=" + encodedValue
             } else {
                 print("Invalid filter value: \(filter.value)")
+            }
+            url += "&"
+        }
+        
+        for them in thema {
+            url += "thema"
+            if let encodedValue = them.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+                url += "=" + encodedValue
+            } else {
+                print("Invalid filter value: \(them)")
             }
             url += "&"
         }

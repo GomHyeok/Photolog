@@ -13,6 +13,7 @@ class HomeParentViewController: UIViewController, homeDelegate {
     var firstChild : HomeViewController!
     var secondChild : HomeNameViewController!
     var boardChild : BoardMainViewController!
+    var keywordChild : AfterKeywordViewController!
     var homeData : TravelAPIResponse?
     var token : String = ""
     var id : Int = 0
@@ -29,6 +30,9 @@ class HomeParentViewController: UIViewController, homeDelegate {
         
         let board = UIStoryboard(name: "Board", bundle: nil)
         boardChild = board.instantiateViewController(withIdentifier: "BoardMainViewController") as? BoardMainViewController
+        
+        let keyword = UIStoryboard(name: "Board", bundle: nil)
+        keywordChild = keyword.instantiateViewController(withIdentifier: "AfterKeywordViewController") as? AfterKeywordViewController
         
         firstChild.token = self.token
         firstChild.id = self.id
@@ -97,6 +101,30 @@ class HomeParentViewController: UIViewController, homeDelegate {
             boardChild.willMove(toParent: nil)
             boardChild.view.removeFromSuperview()
             boardChild.removeFromParent()
+            
+            firstChild.token = self.token
+            firstChild.id = self.id
+            
+            
+            addChild(firstChild)
+            view.addSubview(firstChild.view)
+            firstChild.didMove(toParent: self)
+        }
+        
+        if pos == 21 {
+            boardChild.willMove(toParent: nil)
+            boardChild.view.removeFromSuperview()
+            boardChild.removeFromParent()
+            
+            firstChild.token = self.token
+            firstChild.id = self.id
+            
+            
+            addChild(firstChild)
+            view.addSubview(firstChild.view)
+            keywordChild.willMove(toParent: nil)
+            keywordChild.view.removeFromSuperview()
+            keywordChild.removeFromParent()
             
             firstChild.token = self.token
             firstChild.id = self.id
