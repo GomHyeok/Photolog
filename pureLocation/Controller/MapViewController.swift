@@ -8,11 +8,12 @@
 import UIKit
 import GoogleMaps
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var TravelTitle: UILabel!
     @IBOutlet weak var TravelMapTable: UITableView!
     @IBOutlet weak var ContentFiled: UITextView!
+    @IBOutlet weak var BottomLine: UIView!
     
     var token : String = ""
     var id : Int = 0
@@ -30,13 +31,34 @@ class MapViewController: UIViewController {
     let pingColor : [UIColor] = [UIColor.systemRed, UIColor.systemBlue, UIColor.systemPurple, UIColor.systemMint, UIColor.systemPink, UIColor.black]
     
     override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // 상단에 경계선을 추가
+        let topBorder = CALayer()
+        let width = CGFloat(0.5)
+        topBorder.borderColor = UIColor.darkGray.cgColor
+        topBorder.frame = CGRect(x: 0, y: 0, width: BottomLine.frame.size.width+20, height: width)
+        topBorder.borderWidth = width
+        BottomLine.layer.addSublayer(topBorder)
+        
+        // 하단에 경계선을 추가
+        let bottomBorder = CALayer()
+        bottomBorder.borderColor = UIColor.darkGray.cgColor
+        bottomBorder.frame = CGRect(x: 0, y: BottomLine.frame.size.height - width, width:  BottomLine.frame.size.width+20, height: width)
+        bottomBorder.borderWidth = width
+        BottomLine.layer.addSublayer(bottomBorder)
+        
         self.navigationController?.isNavigationBarHidden = false
+        
+//        ContentFiled.isUserInteractionEnabled = true
+//        ContentFiled.isEditable = true
+//        ContentFiled.delegate = self
+        
         
         if let backButtonImage = UIImage(named: "backButton")?.withRenderingMode(.alwaysOriginal) {
             let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonAction))
@@ -114,26 +136,51 @@ class MapViewController: UIViewController {
     @objc func saveButtonAction() {
         let lastSectionIndex = TravelMapTable.numberOfSections - 1 // 마지막 섹션의 인덱스
         let lastRowIndex = TravelMapTable.numberOfRows(inSection: lastSectionIndex) - 1
+        
         var budget : Int = 0
+        var member : String = ""
         let indexPath = IndexPath(row: lastRowIndex, section: lastSectionIndex)
         if let cell = TravelMapTable.cellForRow(at: indexPath) as? BudgetCell {
             budget = cell.getBudget()
+            member = cell.getGroup()
+            
         } else {
             self.alert(message: "예산을 선택해주세요")
         }
         
-        makeArticle(budget: budget) {
+        makeArticle(budget: budget, member: member) {
             self.navigationController?.popViewController(animated: true)
             let storyboard = UIStoryboard(name: "Home", bundle: nil)
             if let homeView = storyboard.instantiateViewController(withIdentifier: "HomeParentViewController") as? HomeParentViewController {
                 homeView.token = self.token
                 homeView.id = self.id
                 
+                homeView.navigationController?.isNavigationBarHidden = true
                 self.navigationController?.pushViewController(homeView, animated: true)
             }
             else {print("홈뷰 문제")}
         }
     }
+    
+    func setLineSpacing(_ spacing: CGFloat, text: String) -> NSAttributedString {
+      let paragraphStyle = NSMutableParagraphStyle()
+      paragraphStyle.lineSpacing = spacing
+        
+      return NSAttributedString(
+        string: text,
+        attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle]
+      )
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+            let cursorPosition = textView.selectedRange // 현재 커서 위치를 저장
+
+            // 줄간격 적용
+            textView.attributedText = setLineSpacing(10.0, text: textView.text)
+
+            // 커서 위치 복원
+            textView.selectedRange = cursorPosition
+        }
 }
 
 
@@ -181,8 +228,8 @@ extension MapViewController {
         }
     }
     
-    func makeArticle (budget : Int, completion : @escaping () -> Void) {
-        UserService.shared.makeArticle(token: token, travelId: travelId, title: self.TravelTitle.text!, summary: self.ContentFiled.text, locationContent: self.locationContent, budget: budget){
+    func makeArticle (budget : Int, member : String, completion : @escaping () -> Void) {
+        UserService.shared.makeArticle(token: token, travelId: travelId, title: self.TravelTitle.text!, summary: self.ContentFiled.text, locationContent: self.locationContent, budget: budget, member: member){
             response in
             switch response {
                 case .success(let data) :
@@ -220,7 +267,8 @@ extension MapViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if(section < locationArray.count){
-            let st = String(self.sequences[section]) + "일차"
+            var st = "Day "
+            st += String(self.sequences[section])
             return st
         }
         else {
@@ -244,6 +292,8 @@ extension MapViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == locationArray.count {
             let cell = tableView.dequeueReusableCell(withIdentifier: "BudgetCell", for: indexPath) as! BudgetCell
+            cell.Groups.font = UIFont(name: "Pretendard-Bold", size: 16)
+            cell.Budget.font = UIFont(name: "Pretendard-Bold", size: 16)
             
             return cell
         }
@@ -319,26 +369,39 @@ extension MapViewController : UITableViewDelegate {
             return 200.0
         }
         else {
-            return 300.0
+            return 240.0
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        
-        let label = UILabel()
-        label.textColor = UIColor.init(red: 0.33, green: 0.33, blue: 0.34, alpha: 1.0) // 텍스트 색상 설정
-        label.font = UIFont.boldSystemFont(ofSize: 25) // 폰트 크기 및 스타일 설정
-        label.text = self.tableView(tableView, titleForHeaderInSection: section)
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        headerView.addSubview(label)
-        
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
-            label.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
-        ])
-        
-        return headerView
+        if section < locationArray.count {
+            let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
+            headerView.backgroundColor = UIColor.white
+            
+            // 첫 번째 레이블을 생성하고 설정합니다.
+            let label1 = UILabel()
+            label1.frame = CGRect(x: 20, y: 5, width: tableView.frame.width, height: 20)
+            label1.text = "Day "
+            label1.text! += String(self.sequences[section])
+            label1.font = UIFont(name: "Pretendard-Bold", size: 20)
+            label1.textColor = UIColor.black
+            
+            // 두 번째 레이블을 생성하고 설정합니다.
+            let label2 = UILabel()
+            label2.frame = CGRect(x: 80, y: 10, width: tableView.frame.width, height: 20)
+            label2.text = self.settingData?.data?.days[section].date
+            label2.font = UIFont(name: "Pretendard-Regular", size: 16)
+            label2.textColor = UIColor.gray
+            
+            // 각 레이블을 headerView에 추가합니다.
+            headerView.addSubview(label1)
+            headerView.addSubview(label2)
+            
+            return headerView
+        }
+        else {
+            return nil
+        }
     }
+
 }

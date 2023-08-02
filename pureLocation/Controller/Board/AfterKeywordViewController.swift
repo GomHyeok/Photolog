@@ -105,7 +105,7 @@ extension AfterKeywordViewController {
 
 extension AfterKeywordViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 200.0
+        return 150.0
     }
 }
 
@@ -118,14 +118,34 @@ extension AfterKeywordViewController : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AfterKeyword", for: indexPath) as! AfterKeyword
         
         cell.TableImage.kf.setImage(with: URL(string : settingData?.data?[indexPath.row].thumbnail ?? ""))
+        cell.TableImage.layer.cornerRadius = 5
         cell.Title.text = self.settingData?.data?[indexPath.row].title ?? "제목이 없습니다."
         cell.Title.font = UIFont(name: "Pretendard-Bold", size: 16)
+        
         cell.City.text = self.settingData?.data?[indexPath.row].city ?? "도시를 알 수 없습니다."
         cell.City.font = UIFont(name: "Pretendard_Regular", size: 10)
+        cell.sizeToFit()
+        let underline = UIView()
+        underline.backgroundColor = cell.City.textColor
+        underline.translatesAutoresizingMaskIntoConstraints = false
+        cell.City.addSubview(underline)
+        underline.bottomAnchor.constraint(equalTo: cell.City.bottomAnchor).isActive = true
+        underline.leftAnchor.constraint(equalTo: cell.City.leftAnchor).isActive = true
+        underline.rightAnchor.constraint(equalTo: cell.City.rightAnchor).isActive = true
+        underline.heightAnchor.constraint(equalToConstant: 1).isActive = true // 밑줄의 높이를 지정합니다.
+        
         cell.HartNum.text = String(self.settingData?.data?[indexPath.row].likes ?? 0)
+        cell.HartNum.font = UIFont(name: "Pretendard-Regular", size: 13)
         cell.Days.text = self.settingData?.data?[indexPath.row].startDate
         cell.Days.text! += " ~ "
         cell.Days.text! += self.settingData?.data?[indexPath.row].endDate ?? ""
+        cell.PhotoNum.text = String(self.settingData?.data?[indexPath.row].photoCnt ?? 0)
+        cell.PhotoBackGround.layer.cornerRadius = 57
+        
+        cell.PhotoNum.font = UIFont(name: "Pretendard-Regular", size: 10)
+        
+        cell.BookNum.text = String(self.settingData?.data?[indexPath.row].bookmarks ?? 0)
+        cell.BookNum.font = UIFont(name: "Pretendard-Regular", size: 13)
         
         return cell
     }

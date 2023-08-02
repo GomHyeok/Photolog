@@ -43,6 +43,14 @@ class TravelNameViewController: UIViewController {
         
         self.navigationController?.isNavigationBarHidden = false
         
+        if let backButtonImage = UIImage(named: "backButton")?.withRenderingMode(.alwaysOriginal) {
+            let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonAction))
+            
+            navigationItem.leftBarButtonItem = backButton
+        } else {
+            print("backButton image not found")
+        }
+        
         self.NextButton.layer.cornerRadius = 10
         self.NextButton.layer.borderWidth=1
         self.NextButton.layer.borderColor = self.NextButton.backgroundColor?.cgColor
@@ -77,6 +85,10 @@ class TravelNameViewController: UIViewController {
             }
             else {print("Thema 문제")}
         }
+    }
+    
+    @objc func backButtonAction() {
+        navigationController?.popViewController(animated: true)
     }
     
 }

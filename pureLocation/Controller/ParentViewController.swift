@@ -100,7 +100,7 @@ class ParentViewController: UIViewController, ChildViewControllerDelegate {
                 homeView.token = self.token
                 homeView.id = self.id
                 homeView.travelId = self.travelId
-                
+                homeView.navigationController?.isNavigationBarHidden = true
                 self.navigationController?.pushViewController(homeView, animated: true)
             }
             else {print("home 문제")}

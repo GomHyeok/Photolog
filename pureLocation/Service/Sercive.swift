@@ -545,7 +545,7 @@ class UserService {
         }
     }
     
-    func makeArticle ( token : String, travelId : Int, title : String, summary : String, locationContent : [String], budget : Int, completion: @escaping (NetworkResult<Any>) -> Void) {
+    func makeArticle ( token : String, travelId : Int, title : String, summary : String, locationContent : [String], budget : Int, member : String, completion: @escaping (NetworkResult<Any>) -> Void) {
         let url = APIConstants.makeArticleURL + String(travelId)
         print(url)
         let headers: HTTPHeaders = [
@@ -557,7 +557,8 @@ class UserService {
             "title" : title,
             "summary" : summary,
             "locationContent" : locationContent,
-            "budget" : budget
+            "budget" : budget,
+            "member" : member
         ]
         
         let dataRequest = AF.request(
@@ -636,6 +637,36 @@ class UserService {
                     completion(networkResult)
                 case .failure :
                     print(response)
+                    completion(.networkFail)
+            }
+        }
+    }
+    
+    func ArticleInfo ( token : String, articleId : Int, completion: @escaping (NetworkResult<Any>) -> Void) {
+        let url = APIConstants.ArticleInfo + String(articleId)
+        print(url)
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization" : token
+        ]
+        
+        let dataRequest = AF.request(
+            url,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: headers
+        )
+        
+        dataRequest.responseData{
+            response in
+            switch response.result {
+                case .success :
+                    guard let statusCode = response.response?.statusCode else {return}
+                    guard let value = response.value else {return}
+                    
+                    let networkResult = self.judgeStatus(by : statusCode, value, types: "ArticleInfo")
+                    completion(networkResult)
+                case .failure :
                     completion(.networkFail)
             }
         }
@@ -795,6 +826,12 @@ class UserService {
         
         else if types == "ArticleFiltering" {
             guard let decoded = try? decoder.decode(ArticlesFilteringResponse.self, from: data)
+            else {return .pathErr}
+            decodeData = decoded
+        }
+        
+        else if types == "ArticleInfo" {
+            guard let decoded = try? decoder.decode(ArticleInfoResponse.self, from: data)
             else {return .pathErr}
             decodeData = decoded
         }

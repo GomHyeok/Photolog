@@ -29,6 +29,15 @@ class SummaryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
+        
+        if let backButtonImage = UIImage(named: "backButton")?.withRenderingMode(.alwaysOriginal) {
+            let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonAction))
+            
+            navigationItem.leftBarButtonItem = backButton
+        } else {
+            print("backButton image not found")
+        }
+        
         self.TavleCalcu.font = UIFont(name: "Pretendard-Bold", size: 24)
         self.PhotoLabel.font = UIFont(name: "Pretendard-Bold", size: 24)
         
@@ -61,6 +70,11 @@ class SummaryViewController: UIViewController {
         else {print("summary 문제")}
     }
     
+    
+    @objc func backButtonAction() {
+        self.navigationController?.isNavigationBarHidden = true
+        navigationController?.popViewController(animated: true)
+    }
 }
 
 extension SummaryViewController {

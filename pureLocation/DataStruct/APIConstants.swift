@@ -67,4 +67,7 @@ struct APIConstants {
     
     //articleFiltering
     static let ArticleFilteringURL = baseURL + "/api/articles/filtering"
+    
+    //articleInfo
+    static let ArticleInfo = baseURL + "/api/articles/"
 }

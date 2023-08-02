@@ -40,7 +40,7 @@ class HomeViewController: UIViewController {
             let border = CALayer()
             let width = CGFloat(0.5)
             border.borderColor = UIColor.darkGray.cgColor
-            border.frame = CGRect(x: 0, y: self.allView.frame.size.height - width, width:  self.allView.frame.size.width, height: width)
+            border.frame = CGRect(x: 20, y: self.allView.frame.size.height - width, width:  self.allView.frame.size.width-28, height: width)
             border.borderWidth = width
             self.allView.layer.addSublayer(border)
             self.allView.layer.masksToBounds = true
@@ -337,7 +337,7 @@ extension HomeViewController : UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeCell", for: indexPath) as! HomeCell
         cell.HomeImageButton.tag = indexPath.row
         cell.buttonImage.kf.setImage(with: URL(string : homeData?.data[indexPath.item].thumbnail ?? "")!)
-        cell.buttonImage.layer.cornerRadius = cell.buttonImage.frame.width/15
+        cell.buttonImage.layer.cornerRadius = 8
         
         cell.HomeImageButton.addTarget(self, action: #selector(cellaction(_:)), for: .touchUpInside)
         

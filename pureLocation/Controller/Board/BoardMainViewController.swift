@@ -26,6 +26,10 @@ class BoardMainViewController: UIViewController {
     private let itemsPerRow: CGFloat = 2
     private let sectionInsets = UIEdgeInsets(top: 10.0, left: 5.0, bottom: 10.0, right: 5.0)
     
+    override func viewDidLayoutSubviews() {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -122,8 +126,24 @@ extension BoardMainViewController : UICollectionViewDataSource {
         cell.HartNum.text = String(self.settingData?.data?[indexPath.row].likes ?? 0)
         cell.Creator.text = "by."
         cell.Creator.text! += self.settingData?.data?[indexPath.row].nickname ?? ""
+        cell.BoardButton.tag = self.settingData?.data?[indexPath.row].id ?? 0
+        cell.BoardButton.addTarget(self, action: #selector(ButtonAction(_:)),for: .touchUpInside)
         
         return cell
+    }
+    
+    @objc func ButtonAction(_ sender : UIButton) {
+        print("button")
+        if let
+            Keyword = storyboard?.instantiateViewController(withIdentifier: "BoardViewController") as? BoardViewController {
+            
+            Keyword.token = self.token
+            Keyword.id = self.id
+            Keyword.ArticleId = sender.tag
+            
+            self.navigationController?.pushViewController(Keyword, animated: true)
+        }
+        else {print("Keyword 문제")}
     }
 }
 

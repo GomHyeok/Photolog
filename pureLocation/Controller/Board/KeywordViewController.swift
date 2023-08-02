@@ -50,6 +50,7 @@ class KeywordViewController: UIViewController {
     }
     
     @objc func backButtonAction() {
+        self.navigationController?.isNavigationBarHidden = true
         navigationController?.popViewController(animated: true)
     }
     

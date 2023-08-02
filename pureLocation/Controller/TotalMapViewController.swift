@@ -43,8 +43,8 @@ class TotalMapViewController: UIViewController {
         MapTableView.delegate = self
         MapTableView.dataSource = self
         
-        TitleLabel.font = UIFont(name: "Pretandard-Bold", size: 20)
-        NextButton.titleLabel?.font = UIFont(name: "Pretandard-Regular", size: 15)
+        TitleLabel.font = UIFont(name: "Pretendard-Bold", size: 20)
+        NextButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
         NextButton.layer.cornerRadius = 10
         
         MapInfo {
@@ -172,7 +172,7 @@ extension TotalMapViewController : UITableViewDataSource {
         print(indexPath.row)
         cell.DayImage.tintColor = self.pingColor[indexPath.row%7]
         cell.DayLabel.text = "Day"
-        cell.DayLabel.text! += String(indexPath.row)
+        cell.DayLabel.text! += String(indexPath.row + 1)
         cell.DayLabel.font = UIFont(name: "Pretendard-Bold", size: 16)
         
         cell.DuringLabel.text = self.dates[indexPath.row]
