@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		95A387EE2A7D487A003D5AC3 /* style.json in Resources */ = {isa = PBXBuildFile; fileRef = 95A387ED2A7D487A003D5AC3 /* style.json */; };
 		D205E9072A69CB3000E7D0A5 /* GoogleMapsBase.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D205E9062A69CB3000E7D0A5 /* GoogleMapsBase.xcframework */; };
 		D205E90A2A69CB3F00E7D0A5 /* GoogleMaps.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D205E9082A69CB3F00E7D0A5 /* GoogleMaps.xcframework */; };
 		D205E90B2A69CB3F00E7D0A5 /* GoogleMapsCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = D205E9092A69CB3F00E7D0A5 /* GoogleMapsCore.xcframework */; };
@@ -127,6 +128,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		95A387ED2A7D487A003D5AC3 /* style.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = style.json; sourceTree = "<group>"; };
 		D205E9062A69CB3000E7D0A5 /* GoogleMapsBase.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleMapsBase.xcframework; sourceTree = "<group>"; };
 		D205E9082A69CB3F00E7D0A5 /* GoogleMaps.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleMaps.xcframework; sourceTree = "<group>"; };
 		D205E9092A69CB3F00E7D0A5 /* GoogleMapsCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleMapsCore.xcframework; sourceTree = "<group>"; };
@@ -508,6 +510,7 @@
 				D29BD94E2A5D970C0010587C /* SceneDelegate.swift */,
 				D29BD95A2A5D970D0010587C /* Info.plist */,
 				D2541F662A5DA216000AC372 /* Controller */,
+				95A387ED2A7D487A003D5AC3 /* style.json */,
 			);
 			path = pureLocation;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 			files = (
 				D231BA712A63CC3A009D0B82 /* Assets.xcassets in Resources */,
 				D20BCA332A75DF7A00F396AE /* Board.storyboard in Resources */,
+				95A387EE2A7D487A003D5AC3 /* style.json in Resources */,
 				D2E14D262A6FFD96000D2CF0 /* Pretendard-Bold.otf in Resources */,
 				D2E14D272A6FFD9A000D2CF0 /* Pretendard-ExtraBold.otf in Resources */,
 				D29BD9592A5D970D0010587C /* LaunchScreen.storyboard in Resources */,

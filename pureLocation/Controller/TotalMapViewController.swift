@@ -27,7 +27,15 @@ class TotalMapViewController: UIViewController {
                                  UIColor(hexString: "929DFF"),
                                  UIColor(hexString: "D692FF"),
                                  UIColor(hexString: "FF92EE")]
-
+    let markerImages: [UIImage] = [
+        UIImage(named: "day1")!,
+        UIImage(named: "day2")!,
+        UIImage(named: "day3")!,
+        UIImage(named: "day4")!,
+        UIImage(named: "day5")!,
+        UIImage(named: "day6")!,
+        UIImage(named: "day7")!
+    ]
     @IBOutlet weak var TitleLabel: UILabel!
     @IBOutlet weak var ConTainView: UIView!
     @IBOutlet weak var MapTableView: UITableView!
@@ -58,24 +66,51 @@ class TotalMapViewController: UIViewController {
                 self.TitleLabel.text = self.settingData?.data?.title ?? "제목을 찾을 수 없습니다."
                 
                 let mapView = GMSMapView(frame: self.ConTainView.bounds)
-                mapView.camera = GMSCameraPosition.camera(withLatitude: self.locationArray[0][0].coordinate?.latitude ?? 32.3, longitude: self.locationArray[0][0].coordinate?.longitude ?? 32.3, zoom: 9.0)
-                self.ConTainView.addSubview(mapView)
-                
-                for location in self.locationArray {
-                        for cord in location {
-                            let lat = cord.coordinate?.latitude
-                            let log = cord.coordinate?.longitude
-                            let marker = GMSMarker()
-                            marker.position = CLLocationCoordinate2D(latitude: lat ?? 32.3, longitude: log ?? 32.3)
-                            marker.title = cord.name
-                            marker.icon = GMSMarker.markerImage(with: self.pingColor[self.cnt])
-                            marker.map = mapView
+                                
+                do {
+                    // style.json 파일은 프로젝트에 추가해야 합니다.
+                    if let styleURL = Bundle.main.url(forResource: "style", withExtension: "json") {
+                        mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+                    } else {
+                        NSLog("Unable to find style.json")
                     }
-                    self.cnt+=1
-                    if self.cnt == self.pingColor.count {
-                        self.cnt = 0
-                    }
+                } catch {
+                    NSLog("One or more of the map styles failed to load. \(error)")
                 }
+
+                // 초기 위치 설정
+                var bounds = GMSCoordinateBounds()
+
+                for (dayIndex, locations) in self.locationArray.enumerated() {
+                    var path = GMSMutablePath()
+                    for cord in locations {
+                        let lat = cord.coordinate?.latitude ?? 32.3
+                        let log = cord.coordinate?.longitude ?? 32.3
+                        let marker = GMSMarker()
+                        marker.position = CLLocationCoordinate2D(latitude: lat, longitude: log)
+                        marker.title = cord.name
+                        marker.icon = self.markerImages[dayIndex % self.markerImages.count]
+                        marker.groundAnchor = CGPoint(x: 0.5, y: 0.5)  // 마커의 중앙이 지도의 좌표에 매핑되도록 설정
+                        marker.map = mapView
+
+                        path.add(marker.position) // 경로에 좌표 추가
+
+                        // 모든 위치에 대해 bounds를 업데이트합니다.
+                        bounds = bounds.includingCoordinate(marker.position)
+                    }
+
+                    // 경로를 지도에 추가
+                    let polyline = GMSPolyline(path: path)
+                    polyline.strokeWidth = 2.0 // 선 굵기 설정
+                    polyline.strokeColor = .gray // 선 색상을 회색으로 설정
+                    polyline.map = mapView
+                }
+
+                // 모든 마커를 포함하도록 카메라를 업데이트합니다.
+                let update = GMSCameraUpdate.fit(bounds, withPadding: 50.0) // 필요한 패딩을 추가하세요
+                mapView.moveCamera(update)
+
+                self.ConTainView.addSubview(mapView)
                 
                 if let days = self.settingData?.data?.days {
                     for day in days {
