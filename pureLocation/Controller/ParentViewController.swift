@@ -15,6 +15,7 @@ class ParentViewController: UIViewController, ChildViewControllerDelegate {
     var id : Int = 0
     var travelId : Int = 0
     var datas : CalculateResponse?
+    var check : Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,6 +86,9 @@ class ParentViewController: UIViewController, ChildViewControllerDelegate {
     }
     
     @objc func backButtonAction() {
+        if check {
+            self.navigationController?.isNavigationBarHidden = true
+        }
         navigationController?.popViewController(animated: true)
     }
     

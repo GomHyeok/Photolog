@@ -18,16 +18,27 @@ class BoardMainViewController: UIViewController {
     var budget : Int = 0
     var day : Int = 0
     
+    
+    
     @IBOutlet weak var KeywordSearch: UITextField!
     @IBOutlet weak var BoardCollection: UICollectionView!
     @IBOutlet weak var SortRecent: UIButton!
     @IBOutlet weak var SortLike: UIButton!
+    @IBOutlet weak var bottomNavigation: UIView!
     
     private let itemsPerRow: CGFloat = 2
     private let sectionInsets = UIEdgeInsets(top: 10.0, left: 5.0, bottom: 10.0, right: 5.0)
     
     override func viewDidLayoutSubviews() {
-        
+        DispatchQueue.main.async {
+            let border = CALayer()
+            let width = CGFloat(0.5)
+            border.borderColor = UIColor(red: 227/255, green: 227/255, blue: 227/255, alpha: 1.0).cgColor
+            border.frame = CGRect(x: 0, y: 0, width:  self.bottomNavigation.frame.size.width, height: width)
+            border.borderWidth = width
+            self.bottomNavigation.layer.addSublayer(border)
+            self.bottomNavigation.layer.masksToBounds = true
+        }
     }
     
     override func viewDidLoad() {
@@ -52,7 +63,7 @@ class BoardMainViewController: UIViewController {
     }
 
     @IBAction func HomeButton(_ sender: UIButton) {
-        delegate?.switchToHome(pos: 2)
+        delegate?.switchToHome()
     }
     
     @IBAction func RecentButton(_ sender: UIButton) {
@@ -62,6 +73,11 @@ class BoardMainViewController: UIViewController {
         ArticleFiltering {
             self.BoardCollection.reloadData()
         }
+    }
+    
+    
+    @IBAction func MyPageButton(_ sender: UIButton) {
+        delegate?.switchToMypage()
     }
     
     
@@ -122,10 +138,18 @@ extension BoardMainViewController : UICollectionViewDataSource {
         
         cell.BoardImage.kf.setImage(with: URL(string : settingData?.data?[indexPath.row].thumbnail ?? ""))
         cell.Title.text = self.settingData?.data?[indexPath.row].title ?? "제목이 없습니다."
+        cell.Title.font = UIFont(name: "Pretendard-Medium", size: 14)
+        
         cell.City.text = self.settingData?.data?[indexPath.row].city ?? "도시를 알 수 없습니다."
+        cell.City.font = UIFont(name: "Pretendard-Regular", size: 8)
+        cell.City.setBottomLine(borderColor: UIColor(red: 227/255, green: 227/255, blue: 227/255, alpha: 1.0), hight: 0.5, bottom: 0)
+        
         cell.HartNum.text = String(self.settingData?.data?[indexPath.row].likes ?? 0)
+        
         cell.Creator.text = "by."
         cell.Creator.text! += self.settingData?.data?[indexPath.row].nickname ?? ""
+        cell.Creator.font = UIFont(name: "Pretendard-Regular", size: 10)
+        
         cell.BoardButton.tag = self.settingData?.data?[indexPath.row].id ?? 0
         cell.BoardButton.addTarget(self, action: #selector(ButtonAction(_:)),for: .touchUpInside)
         
@@ -150,22 +174,27 @@ extension BoardMainViewController : UICollectionViewDataSource {
 extension BoardMainViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let paddingSpace = sectionInsets.left * (itemsPerRow)
+        let itemsPerRow: CGFloat = 2
+        let paddingSpace = 2 * (itemsPerRow - 1)
         let availableWidth = collectionView.frame.width - paddingSpace
         let widthPerItem = availableWidth / itemsPerRow
         
-        return CGSize(width: widthPerItem, height: widthPerItem * 1.8)  // 높이를 두 배로 늘림
+        return CGSize(width: widthPerItem, height: widthPerItem * 1.6)  // 높이를 두 배로 늘림
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10.0, left: 1, bottom: 10.0, right: 1)
-    }
+       return UIEdgeInsets(top: 10.0, left: 0, bottom: 10.0, right: 0) // 좌우 여백을 0으로 수정
+   }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return sectionInsets.left/10
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return sectionInsets.left/10
-    }
+   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+       let itemsPerRow: CGFloat = 2
+       let paddingSpace = 2 * (itemsPerRow - 1)
+       return paddingSpace / (itemsPerRow - 1) // 여백을 2로 설정
+   }
+   
+   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+       let itemsPerRow: CGFloat = 2
+       let paddingSpace = 2 * (itemsPerRow - 1)
+       return paddingSpace / (itemsPerRow - 1) // 여백을 2로 설정
+   }
 }

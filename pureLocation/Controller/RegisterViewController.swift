@@ -22,6 +22,15 @@ class RegisterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let backButtonImage = UIImage(named: "backButton")?.withRenderingMode(.alwaysOriginal) {
+            let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonAction))
+            
+            navigationItem.leftBarButtonItem = backButton
+        } else {
+            print("backButton image not found")
+        }
+        
         let lineColor = UIColor(red:0.12, green:0.23, blue:0.35, alpha:1.0)
         self.Password.setBottomLine(borderColor: lineColor)
         self.Email.setBottomLine(borderColor: lineColor)
@@ -36,11 +45,12 @@ class RegisterViewController: UIViewController {
     }
 
     @IBAction func RegisterBUtton(_ sender: UIButton) {
-        print("Register")
-        Password.text = ""
-        Email.text = ""
-        NickName.text = ""
         signUp()
+    }
+    
+    @objc func backButtonAction() {
+
+        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func SecurityType(_ sender: UIButton) {

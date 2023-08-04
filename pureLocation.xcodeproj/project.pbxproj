@@ -53,6 +53,22 @@
 		D20BCA552A79424B00F396AE /* ArticleInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA542A79424B00F396AE /* ArticleInfoModel.swift */; };
 		D20BCA572A7949FC00F396AE /* DayLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA562A7949FC00F396AE /* DayLabel.swift */; };
 		D20BCA592A794D9600F396AE /* BoardStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA582A794D9600F396AE /* BoardStart.swift */; };
+		D20BCA5D2A7A7BA600F396AE /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D20BCA5C2A7A7BA600F396AE /* Pretendard-SemiBold.otf */; };
+		D20BCA5F2A7AE5CA00F396AE /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = D20BCA5E2A7AE5CA00F396AE /* Pretendard-Medium.otf */; };
+		D20BCA612A7B162100F396AE /* MyPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D20BCA602A7B162100F396AE /* MyPage.storyboard */; };
+		D20BCA642A7B993100F396AE /* MyPageMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA632A7B993100F396AE /* MyPageMainViewController.swift */; };
+		D20BCA672A7BC3C700F396AE /* BookMarkBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA662A7BC3C700F396AE /* BookMarkBoard.swift */; };
+		D20BCA692A7BC81E00F396AE /* BookMarkDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA682A7BC81E00F396AE /* BookMarkDelete.swift */; };
+		D20BCA6B2A7BCC7800F396AE /* NoBookMarkBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA6A2A7BCC7800F396AE /* NoBookMarkBoardViewController.swift */; };
+		D20BCA6D2A7BCCE200F396AE /* BookMarkBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA6C2A7BCCE200F396AE /* BookMarkBoardViewController.swift */; };
+		D20BCA6F2A7BCD6600F396AE /* DeleteBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA6E2A7BCD6600F396AE /* DeleteBoardViewController.swift */; };
+		D20BCA712A7BE13C00F396AE /* BookMarkedArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA702A7BE13C00F396AE /* BookMarkedArticle.swift */; };
+		D20BCA732A7C787A00F396AE /* MyPageTour.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA722A7C787A00F396AE /* MyPageTour.swift */; };
+		D20BCA752A7C789500F396AE /* TourDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA742A7C789500F396AE /* TourDelete.swift */; };
+		D20BCA772A7C7ABA00F396AE /* BookMarkTourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA762A7C7ABA00F396AE /* BookMarkTourViewController.swift */; };
+		D20BCA792A7C7AC900F396AE /* DeleteTourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA782A7C7AC900F396AE /* DeleteTourViewController.swift */; };
+		D20BCA7B2A7C7AD900F396AE /* NoTourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA7A2A7C7AD900F396AE /* NoTourViewController.swift */; };
+		D20BCA7D2A7C84CB00F396AE /* TourBookMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA7C2A7C84CB00F396AE /* TourBookMark.swift */; };
 		D22A57CA2A6B107900B5E55B /* MapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22A57C92A6B107900B5E55B /* MapTableViewCell.swift */; };
 		D22A57CC2A6B108600B5E55B /* LocationInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22A57CB2A6B108600B5E55B /* LocationInfoCell.swift */; };
 		D22D8A8F2A646B100015CB24 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22D8A8E2A646B100015CB24 /* CollectionViewCell.swift */; };
@@ -157,6 +173,22 @@
 		D20BCA542A79424B00F396AE /* ArticleInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleInfoModel.swift; sourceTree = "<group>"; };
 		D20BCA562A7949FC00F396AE /* DayLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayLabel.swift; sourceTree = "<group>"; };
 		D20BCA582A794D9600F396AE /* BoardStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardStart.swift; sourceTree = "<group>"; };
+		D20BCA5C2A7A7BA600F396AE /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		D20BCA5E2A7AE5CA00F396AE /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
+		D20BCA602A7B162100F396AE /* MyPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPage.storyboard; sourceTree = "<group>"; };
+		D20BCA632A7B993100F396AE /* MyPageMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageMainViewController.swift; sourceTree = "<group>"; };
+		D20BCA662A7BC3C700F396AE /* BookMarkBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkBoard.swift; sourceTree = "<group>"; };
+		D20BCA682A7BC81E00F396AE /* BookMarkDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkDelete.swift; sourceTree = "<group>"; };
+		D20BCA6A2A7BCC7800F396AE /* NoBookMarkBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoBookMarkBoardViewController.swift; sourceTree = "<group>"; };
+		D20BCA6C2A7BCCE200F396AE /* BookMarkBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkBoardViewController.swift; sourceTree = "<group>"; };
+		D20BCA6E2A7BCD6600F396AE /* DeleteBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteBoardViewController.swift; sourceTree = "<group>"; };
+		D20BCA702A7BE13C00F396AE /* BookMarkedArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkedArticle.swift; sourceTree = "<group>"; };
+		D20BCA722A7C787A00F396AE /* MyPageTour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTour.swift; sourceTree = "<group>"; };
+		D20BCA742A7C789500F396AE /* TourDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourDelete.swift; sourceTree = "<group>"; };
+		D20BCA762A7C7ABA00F396AE /* BookMarkTourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkTourViewController.swift; sourceTree = "<group>"; };
+		D20BCA782A7C7AC900F396AE /* DeleteTourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTourViewController.swift; sourceTree = "<group>"; };
+		D20BCA7A2A7C7AD900F396AE /* NoTourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTourViewController.swift; sourceTree = "<group>"; };
+		D20BCA7C2A7C84CB00F396AE /* TourBookMark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourBookMark.swift; sourceTree = "<group>"; };
 		D22A57C92A6B107900B5E55B /* MapTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTableViewCell.swift; sourceTree = "<group>"; };
 		D22A57CB2A6B108600B5E55B /* LocationInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInfoCell.swift; sourceTree = "<group>"; };
 		D22D8A8E2A646B100015CB24 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
@@ -276,6 +308,7 @@
 				D231BA742A642876009D0B82 /* Home.storyboard */,
 				D29BD9572A5D970D0010587C /* LaunchScreen.storyboard */,
 				D20BCA322A75DF7A00F396AE /* Board.storyboard */,
+				D20BCA602A7B162100F396AE /* MyPage.storyboard */,
 			);
 			path = StoryBoards;
 			sourceTree = "<group>";
@@ -308,6 +341,29 @@
 			path = Keyword;
 			sourceTree = "<group>";
 		};
+		D20BCA622A7B992100F396AE /* Mypage */ = {
+			isa = PBXGroup;
+			children = (
+				D20BCA632A7B993100F396AE /* MyPageMainViewController.swift */,
+				D20BCA6A2A7BCC7800F396AE /* NoBookMarkBoardViewController.swift */,
+				D20BCA6C2A7BCCE200F396AE /* BookMarkBoardViewController.swift */,
+				D20BCA6E2A7BCD6600F396AE /* DeleteBoardViewController.swift */,
+				D20BCA762A7C7ABA00F396AE /* BookMarkTourViewController.swift */,
+				D20BCA782A7C7AC900F396AE /* DeleteTourViewController.swift */,
+				D20BCA7A2A7C7AD900F396AE /* NoTourViewController.swift */,
+			);
+			path = Mypage;
+			sourceTree = "<group>";
+		};
+		D20BCA652A7BC39D00F396AE /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				D20BCA662A7BC3C700F396AE /* BookMarkBoard.swift */,
+				D20BCA682A7BC81E00F396AE /* BookMarkDelete.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
 		D22D8A8D2A646AD30015CB24 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,6 +375,7 @@
 		D2541F662A5DA216000AC372 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D20BCA622A7B992100F396AE /* Mypage */,
 				D231BA692A63CAF5009D0B82 /* RegisterViewController.swift */,
 				D231BA722A642721009D0B82 /* FindPasswordViewController.swift */,
 				D2541FB72A627D62000AC372 /* LoginViewController.swift */,
@@ -362,6 +419,10 @@
 				D20BCA292A7442A600F396AE /* MakeArticleModel.swift */,
 				D20BCA2D2A752CD100F396AE /* FailModel.swift */,
 				D20BCA542A79424B00F396AE /* ArticleInfoModel.swift */,
+				D20BCA702A7BE13C00F396AE /* BookMarkedArticle.swift */,
+				D20BCA722A7C787A00F396AE /* MyPageTour.swift */,
+				D20BCA742A7C789500F396AE /* TourDelete.swift */,
+				D20BCA7C2A7C84CB00F396AE /* TourBookMark.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -369,6 +430,7 @@
 		D2541F752A5E7158000AC372 /* DataStruct */ = {
 			isa = PBXGroup;
 			children = (
+				D20BCA652A7BC39D00F396AE /* MyPage */,
 				D20BCA3F2A77238600F396AE /* Keyword */,
 				D2541F6F2A5E6B75000AC372 /* APIConstants.swift */,
 				D2541F712A5E6FBC000AC372 /* NetworkResult.swift */,
@@ -402,6 +464,8 @@
 		D2541F8F2A6278E6000AC372 /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				D20BCA5E2A7AE5CA00F396AE /* Pretendard-Medium.otf */,
+				D20BCA5C2A7A7BA600F396AE /* Pretendard-SemiBold.otf */,
 				D2E14D232A6FFC64000D2CF0 /* Pretendard-Bold.otf */,
 				D2E14D242A6FFC64000D2CF0 /* Pretendard-ExtraBold.otf */,
 				D2E14D252A6FFC64000D2CF0 /* Pretendard-Regular.otf */,
@@ -523,8 +587,11 @@
 				D29BD9592A5D970D0010587C /* LaunchScreen.storyboard in Resources */,
 				D231BA752A642876009D0B82 /* Home.storyboard in Resources */,
 				D2E14D282A6FFD9E000D2CF0 /* Pretendard-Regular.otf in Resources */,
+				D20BCA612A7B162100F396AE /* MyPage.storyboard in Resources */,
+				D20BCA5D2A7A7BA600F396AE /* Pretendard-SemiBold.otf in Resources */,
 				D205E90D2A69CB5900E7D0A5 /* GoogleMaps.bundle in Resources */,
 				D29BD9542A5D970C0010587C /* Main.storyboard in Resources */,
+				D20BCA5F2A7AE5CA00F396AE /* Pretendard-Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -549,8 +616,10 @@
 				D22A57CC2A6B108600B5E55B /* LocationInfoCell.swift in Sources */,
 				D253B9322A72A71500326A84 /* ParentViewController.swift in Sources */,
 				D20BCA472A77240F00F396AE /* GroupCell.swift in Sources */,
+				D20BCA752A7C789500F396AE /* TourDelete.swift in Sources */,
 				D2541F8B2A610561000AC372 /* CalculateModel.swift in Sources */,
 				D20BCA382A75EDD300F396AE /* BoardMainViewController.swift in Sources */,
+				D20BCA692A7BC81E00F396AE /* BookMarkDelete.swift in Sources */,
 				D2E14D342A714259000D2CF0 /* ThemaViewController.swift in Sources */,
 				D205E9322A6A4A6F00E7D0A5 /* MapInfoModel.swift in Sources */,
 				D20BCA3A2A75FF3600F396AE /* MainBoardCell.swift in Sources */,
@@ -563,10 +632,13 @@
 				D20BCA512A793D7800F396AE /* BoardViewController.swift in Sources */,
 				D2541F702A5E6B75000AC372 /* APIConstants.swift in Sources */,
 				D2E14D2E2A708D07000D2CF0 /* HomeNameViewController.swift in Sources */,
+				D20BCA712A7BE13C00F396AE /* BookMarkedArticle.swift in Sources */,
+				D20BCA672A7BC3C700F396AE /* BookMarkBoard.swift in Sources */,
 				D20BCA532A793DA800F396AE /* BoardBudget.swift in Sources */,
 				D20BCA2A2A7442A600F396AE /* MakeArticleModel.swift in Sources */,
 				D253B9362A72EA4100326A84 /* DayLogTagCell.swift in Sources */,
 				D2541F7F2A5E8145000AC372 /* LoginModel.swift in Sources */,
+				D20BCA772A7C7ABA00F396AE /* BookMarkTourViewController.swift in Sources */,
 				D253B9342A72A8F500326A84 /* SwitchChildProtocol.swift in Sources */,
 				D25343AB2A673F51007558CD /* TravelInfoModel.swift in Sources */,
 				D2541F812A5FC844000AC372 /* DeleteModel.swift in Sources */,
@@ -574,8 +646,11 @@
 				D2541F892A604BBA000AC372 /* PhotoSaveModel.swift in Sources */,
 				D2323EEE2A6677D30040F165 /* DayLogcollectionViewCell.swift in Sources */,
 				D20BCA412A77239F00F396AE /* PlaceCell.swift in Sources */,
+				D20BCA6D2A7BCCE200F396AE /* BookMarkBoardViewController.swift in Sources */,
 				D20BCA492A77242100F396AE /* ThemaCell.swift in Sources */,
+				D20BCA6B2A7BCC7800F396AE /* NoBookMarkBoardViewController.swift in Sources */,
 				D20BCA4D2A791E2400F396AE /* afterKeyword.swift in Sources */,
+				D20BCA732A7C787A00F396AE /* MyPageTour.swift in Sources */,
 				D20BCA262A73E57500F396AE /* HomeParentViewController.swift in Sources */,
 				D2CFEEAC2A6C755B000BAC7A /* SummaryViewCollectionViewCell.swift in Sources */,
 				D2541F872A6044C2000AC372 /* TravelModel.swift in Sources */,
@@ -588,12 +663,15 @@
 				D231BA772A6428C8009D0B82 /* HomeViewController.swift in Sources */,
 				D2323EEA2A6669FD0040F165 /* StaticModel.swift in Sources */,
 				D25343A92A673D9D007558CD /* TotalViewController.swift in Sources */,
+				D20BCA7B2A7C7AD900F396AE /* NoTourViewController.swift in Sources */,
 				D2541FB82A627D62000AC372 /* LoginViewController.swift in Sources */,
 				D2E14D322A709E10000D2CF0 /* TotalMapViewController.swift in Sources */,
 				D20BCA3E2A77235500F396AE /* KeywordViewController.swift in Sources */,
+				D20BCA642A7B993100F396AE /* MyPageMainViewController.swift in Sources */,
 				D253B9382A72ED9800326A84 /* DayTagViewController.swift in Sources */,
 				D25343AD2A67B146007558CD /* TotalTableViewCell.swift in Sources */,
 				D2541F722A5E6FBC000AC372 /* NetworkResult.swift in Sources */,
+				D20BCA6F2A7BCD6600F396AE /* DeleteBoardViewController.swift in Sources */,
 				D22A57CA2A6B107900B5E55B /* MapTableViewCell.swift in Sources */,
 				D20BCA4B2A78F70300F396AE /* Budgets.swift in Sources */,
 				D2E14D2A2A70022E000D2CF0 /* HomeCell.swift in Sources */,
@@ -605,6 +683,8 @@
 				D20BCA4F2A79208A00F396AE /* AfterKeywordViewController.swift in Sources */,
 				D253B9422A739DC800326A84 /* SummuryMapcCell.swift in Sources */,
 				D2323EE22A6577730040F165 /* TravelNameViewController.swift in Sources */,
+				D20BCA7D2A7C84CB00F396AE /* TourBookMark.swift in Sources */,
+				D20BCA792A7C7AC900F396AE /* DeleteTourViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

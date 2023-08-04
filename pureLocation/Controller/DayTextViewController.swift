@@ -54,11 +54,11 @@ class DayTextViewController: UIViewController {
         
         locationInfoSequentially(index: 0)
         
-        let footerView = UIView(frame: CGRect(x: 30, y: 0, width: TagTable.frame.size.width-40, height: 40))
+        let footerView = UIView(frame: CGRect(x: 30, y: 0, width: TagTable.frame.size.width-40, height: 53))
         let button = UIButton(frame: footerView.bounds)
         button.setTitle("다음", for: .normal)
         button.backgroundColor  = UIColor(red: 255/255, green: 112/255, blue: 66/255, alpha: 1.0)
-        button.layer.cornerRadius = button.frame.width/20
+        button.layer.cornerRadius = 24
         button.setTitleColor(UIColor.black, for: .normal)
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         footerView.addSubview(button)
@@ -90,9 +90,12 @@ class DayTextViewController: UIViewController {
             let indexPath = IndexPath(row: i, section: 0) // change these numbers to the index of the cell you want
             let cell = TagTable.cellForRow(at: indexPath) as! DayLogTextCell
             let text = cell.Description.text!
+            let name = cell.PlaceName.text!
             dispatchGroup.enter()
             locationDescription(locationId: locationId[i], description: text) {
-                dispatchGroup.leave()
+                self.locationName(locationId: self.locationId[i], title: name) {
+                    dispatchGroup.leave()
+                }
             }
         }
         dispatchGroup.notify(queue: .main) {
@@ -106,9 +109,12 @@ class DayTextViewController: UIViewController {
             let indexPath = IndexPath(row: i, section: 0) // change these numbers to the index of the cell you want
             let cell = TagTable.cellForRow(at: indexPath) as! DayLogTextCell
             let text = cell.Description.text!
+            let name = cell.PlaceName.text!
             dispatchGroup.enter()
             locationDescription(locationId: locationId[i], description: text) {
-                dispatchGroup.leave()
+                self.locationName(locationId: self.locationId[i], title: name) {
+                    dispatchGroup.leave()
+                }
             }
         }
         dispatchGroup.notify(queue: .main) {
@@ -177,6 +183,7 @@ extension DayTextViewController : UITableViewDataSource {
             cell.Description.text = "Loading..."
         }
         cell.Description.font = UIFont(name: "Pretendard-Regular", size: 14)
+        cell.Description.delegate = self
         
         
         cell.setData(urlArray[indexPath.row])
@@ -230,10 +237,37 @@ extension DayTextViewController {
             }
     }
     
+    func locationName (locationId : Int, title : String, completion : @escaping () -> Void) {
+        UserService.shared.locationName(locationId: locationId, token: token, title: title) {
+                response in
+                switch response {
+                    case .success(let data) :
+                        guard let data = data as? staticResponse else {return}
+                        print(data)
+                        completion()
+                    case .requsetErr(let err) :
+                        print(err)
+                    case .pathErr:
+                        print("pathErr")
+                    case .serverErr:
+                        print("serverErr")
+                    case .networkFail:
+                        print("networkFail")
+                }
+            }
+    }
+    
     func alert(message : String) {
         let alertVC = UIAlertController(title: message, message: nil, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "확인", style: .default)
         alertVC.addAction(okAction)
         present(alertVC, animated: true)
+    }
+}
+
+extension DayTextViewController : UITextViewDelegate {
+    func textFieldDidBeginEditing(_ textView: UITextView) {
+        // Clear the existing text of the text field
+        textView.text = ""
     }
 }

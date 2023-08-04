@@ -4,6 +4,7 @@ import UIKit
 class LocationInfoCell : UITableViewCell {
     var data : [URL] = []
     
+    @IBOutlet weak var LocationCount: UILabel!
     @IBOutlet weak var Descriptions: UITextView!
     @IBOutlet weak var LineImage: UIImageView!
     @IBOutlet weak var PingImage: UIImageView!

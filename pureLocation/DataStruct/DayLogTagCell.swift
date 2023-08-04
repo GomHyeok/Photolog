@@ -10,6 +10,7 @@ import UIKit
 
 class DayLogTagCell : UITableViewCell {
     
+    @IBOutlet weak var Places: UIView!
     @IBOutlet weak var LocationName: UITextField!
     @IBOutlet weak var DayLogCollection: UICollectionView!
     @IBOutlet weak var PlaceName: UILabel!

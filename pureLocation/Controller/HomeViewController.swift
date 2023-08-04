@@ -29,6 +29,8 @@ class HomeViewController: UIViewController {
     var assetsCount : Int = 0
     
     
+    @IBOutlet weak var Home2: UIImageView!
+    @IBOutlet weak var Home1: UIImageView!
     @IBOutlet weak var bottomNavigation: UIView!
     @IBOutlet weak var allView: UIView!
     @IBOutlet weak var HomeTable: UITableView!
@@ -40,7 +42,7 @@ class HomeViewController: UIViewController {
             let border = CALayer()
             let width = CGFloat(0.5)
             border.borderColor = UIColor.darkGray.cgColor
-            border.frame = CGRect(x: 20, y: self.allView.frame.size.height - width, width:  self.allView.frame.size.width-28, height: width)
+            border.frame = CGRect(x: 20, y: self.allView.frame.size.height - width, width:  self.allView.frame.size.width-30, height: width)
             border.borderWidth = width
             self.allView.layer.addSublayer(border)
             self.allView.layer.masksToBounds = true
@@ -52,20 +54,26 @@ class HomeViewController: UIViewController {
             self.bottomNavigation.layer.addSublayer(upper)
             self.bottomNavigation.layer.masksToBounds = true
         }
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         viewDidLayoutSubviews()
+        
+        self.navigationController?.isNavigationBarHidden = true
+        
         let lineColor = UIColor(red:255/255, green:112/255, blue:66/255, alpha:1.0)
         
-        myLabel.setBottomLine(borderColor: lineColor, hight: 1.0)
+        myLabel.setBottomLine(borderColor: lineColor, hight: 3.0, bottom: 12)
+        Home1.layer.cornerRadius = 2
+        Home2.layer.cornerRadius = 2
         
         TravelApi() {
             self.HomeTable.reloadData()
         }
         
-        myLabel.font = UIFont(name : "Pretendard-Bold", size: 20)
+        myLabel.font = UIFont(name : "Pretendard-SemiBold", size: 20)
         allLabel.font = UIFont(name: "Pretendard-Bold", size: 20)
         
         HomeTable.dataSource = self
@@ -74,11 +82,16 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func BoardButton(_ sender: UIButton) {
-        delegate?.switchToBoard(pos: 1)
+        delegate?.switchToBoard()
     }
     
     @IBAction func ChangeView(_ sender: UIButton) {
         delegate?.switchTotaltToMap(data: self.homeData)
+    }
+    
+    
+    @IBAction func MyPageButton(_ sender: UIButton) {
+        delegate?.switchToMypage()
     }
     
     
@@ -253,8 +266,6 @@ extension HomeViewController {
                     case .success(let data) :
                         guard let data = data as? CalculateResponse else {return}
                         self.data = data
-                        print(data)
-                        print(data.status)
                         completion()
                     case .requsetErr(let err) :
                         print(err)
@@ -352,7 +363,7 @@ extension HomeViewController : UITableViewDataSource {
             daylog.id = self.id
             daylog.travelId = self.homeData?.data[sender.tag].travelId ?? 0
             daylog.datas = self.data
-            
+            daylog.check = true
             self.navigationController?.pushViewController(daylog, animated: true)
         }
         else {print("summary 문제")}
@@ -368,10 +379,10 @@ extension HomeViewController : UITableViewDelegate {
 }
 
 extension UILabel {
-    func setBottomLine(borderColor: UIColor, hight : Double) {
+    func setBottomLine(borderColor: UIColor, hight : Double, bottom : CGFloat) {
           self.backgroundColor = UIColor.clear
           let borderLine = UIView()
-          borderLine.frame = CGRect(x: 0, y: Double(self.frame.height), width: Double(self.frame.width), height: hight)
+          borderLine.frame = CGRect(x: 0, y: Double(self.frame.height + bottom), width: Double(self.frame.width), height: hight)
           borderLine.backgroundColor = borderColor
           self.addSubview(borderLine)
      }

@@ -27,6 +27,9 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.isNavigationBarHidden = false
+        
         let lineColor = UIColor(red:0.12, green:0.23, blue:0.35, alpha:1.0)
         self.Email.setBottomLine(borderColor: lineColor)
         self.Password.setBottomLine(borderColor: lineColor)

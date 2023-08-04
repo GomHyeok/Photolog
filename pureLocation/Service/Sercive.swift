@@ -672,7 +672,262 @@ class UserService {
         }
     }
     
+    func ArticleReport ( token : String, articleId : Int, completion: @escaping (NetworkResult<Any>) -> Void) {
+        let url = APIConstants.ArticleReport + String(articleId)
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization" : token
+        ]
+        
+        let dataRequest = AF.request(
+            url,
+            method: .post,
+            encoding: JSONEncoding.default,
+            headers: headers
+        )
+        
+        dataRequest.responseData{
+            response in
+            switch response.result {
+                case .success :
+                    guard let statusCode = response.response?.statusCode else {return}
+                    guard let value = response.value else {return}
+                    
+                    let networkResult = self.judgeStatus(by : statusCode, value, types: "ArticleReport")
+                    completion(networkResult)
+                case .failure :
+                    completion(.networkFail)
+            }
+        }
+    }
     
+    func like ( token : String, articleId : Int, completion: @escaping (NetworkResult<Any>) -> Void) {
+        let url = APIConstants.likeURL + String(articleId)
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization" : token
+        ]
+        
+        let dataRequest = AF.request(
+            url,
+            method: .post,
+            encoding: JSONEncoding.default,
+            headers: headers
+        )
+        
+        dataRequest.responseData{
+            response in
+            switch response.result {
+                case .success :
+                    guard let statusCode = response.response?.statusCode else {return}
+                    guard let value = response.value else {return}
+                    
+                    let networkResult = self.judgeStatus(by : statusCode, value, types: "ArticleReport")
+                    completion(networkResult)
+                case .failure :
+                    completion(.networkFail)
+            }
+        }
+    }
+    
+    func likeCancle ( token : String, articleId : Int, completion: @escaping (NetworkResult<Any>) -> Void) {
+        let url = APIConstants.likeURL + String(articleId)
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization" : token
+        ]
+        
+        let dataRequest = AF.request(
+            url,
+            method: .delete,
+            encoding: JSONEncoding.default,
+            headers: headers
+        )
+        
+        dataRequest.responseData{
+            response in
+            switch response.result {
+                case .success :
+                    guard let statusCode = response.response?.statusCode else {return}
+                    guard let value = response.value else {return}
+                    
+                    let networkResult = self.judgeStatus(by : statusCode, value, types: "ArticleReport")
+                    completion(networkResult)
+                case .failure :
+                    completion(.networkFail)
+            }
+        }
+    }
+    
+    func bookmarkCancle ( token : String, articleId : Int, completion: @escaping (NetworkResult<Any>) -> Void) {
+        let url = APIConstants.bookmarkURL + String(articleId)
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization" : token
+        ]
+        
+        let dataRequest = AF.request(
+            url,
+            method: .delete,
+            encoding: JSONEncoding.default,
+            headers: headers
+        )
+        
+        dataRequest.responseData{
+            response in
+            switch response.result {
+                case .success :
+                    guard let statusCode = response.response?.statusCode else {return}
+                    guard let value = response.value else {return}
+                    
+                    let networkResult = self.judgeStatus(by : statusCode, value, types: "ArticleReport")
+                    completion(networkResult)
+                case .failure :
+                    completion(.networkFail)
+            }
+        }
+    }
+    
+    func bookmark ( token : String, articleId : Int, completion: @escaping (NetworkResult<Any>) -> Void) {
+        let url = APIConstants.bookmarkURL + String(articleId)
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization" : token
+        ]
+        
+        let dataRequest = AF.request(
+            url,
+            method: .post,
+            encoding: JSONEncoding.default,
+            headers: headers
+        )
+        
+        dataRequest.responseData{
+            response in
+            switch response.result {
+                case .success :
+                    guard let statusCode = response.response?.statusCode else {return}
+                    guard let value = response.value else {return}
+                    
+                    let networkResult = self.judgeStatus(by : statusCode, value, types: "ArticleReport")
+                    completion(networkResult)
+                case .failure :
+                    completion(.networkFail)
+            }
+        }
+    }
+    
+    func BookMarkedArticle(token : String, completion : @escaping (NetworkResult<Any>) -> Void) {
+        let url = APIConstants.ArticleBookMarkedURL
+        let headers : HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization" : token
+        ]
+        let dataRequest = AF.request(
+            url,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: headers
+        )
+        
+        dataRequest.responseData{
+            response in
+            switch response.result {
+                case .success :
+                    guard let statusCode = response.response?.statusCode else {return}
+                    guard let value = response.value else {return}
+                    
+                    let networkResult = self.judgeStatus(by : statusCode, value, types: "BookMarkedArticle")
+                    completion(networkResult)
+                case .failure :
+                    completion(.networkFail)
+            }
+        }
+    }
+    
+    func TourBookMark(token : String, completion : @escaping (NetworkResult<Any>) -> Void) {
+        let url = APIConstants.TourBookmaredkURL
+        let headers : HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization" : token
+        ]
+        let dataRequest = AF.request(
+            url,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: headers
+        )
+        
+        dataRequest.responseData{
+            response in
+            switch response.result {
+                case .success :
+                    guard let statusCode = response.response?.statusCode else {return}
+                    guard let value = response.value else {return}
+                    
+                    let networkResult = self.judgeStatus(by : statusCode, value, types: "TourBookMarked")
+                    completion(networkResult)
+                case .failure :
+                    completion(.networkFail)
+            }
+        }
+    }
+    
+    func makeTourBookMark(token : String, tourID : Int, completion : @escaping (NetworkResult<Any>) -> Void) {
+        let url = APIConstants.TourBookmarkURL + String(tourID)
+        let headers : HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization" : token
+        ]
+        let dataRequest = AF.request(
+            url,
+            method: .post,
+            encoding: JSONEncoding.default,
+            headers: headers
+        )
+        
+        dataRequest.responseData{
+            response in
+            switch response.result {
+                case .success :
+                    guard let statusCode = response.response?.statusCode else {return}
+                    guard let value = response.value else {return}
+                    
+                    let networkResult = self.judgeStatus(by : statusCode, value, types: "Description")
+                    completion(networkResult)
+                case .failure :
+                    completion(.networkFail)
+            }
+        }
+    }
+    
+    func TourBookMarkCancle(token : String, tourId : Int, completion : @escaping (NetworkResult<Any>) -> Void) {
+        let url = APIConstants.TourBookmarkURL + String(tourId)
+        let headers : HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization" : token
+        ]
+        let dataRequest = AF.request(
+            url,
+            method: .delete,
+            encoding: JSONEncoding.default,
+            headers: headers
+        )
+        
+        dataRequest.responseData{
+            response in
+            switch response.result {
+                case .success :
+                    guard let statusCode = response.response?.statusCode else {return}
+                    guard let value = response.value else {return}
+                    
+                    let networkResult = self.judgeStatus(by : statusCode, value, types: "Description")
+                    completion(networkResult)
+                case .failure :
+                    completion(.networkFail)
+            }
+        }
+    }
     
 //MARK: - judgeStatus
     private func judgeStatus(by statusCode : Int, _ data:Data, types : String) -> NetworkResult<Any> {
@@ -788,7 +1043,7 @@ class UserService {
             else {return .pathErr}
             decodeData = decoded
         }
-        else if types == "LocationName" || types == "Description" {
+        else if types == "LocationName" || types == "Description" || types == "ArticleReport"{
             guard let decoded = try? decoder.decode(staticResponse.self, from: data)
             else {return .pathErr}
             decodeData = decoded
@@ -835,6 +1090,19 @@ class UserService {
             else {return .pathErr}
             decodeData = decoded
         }
+        
+        else if types == "BookMarkedArticle" {
+            guard let decoded = try? decoder.decode(BookMarkedArticleResponse.self, from: data)
+            else {return .pathErr}
+            decodeData = decoded
+        }
+        
+        else if types == "TourBookMarked" {
+            guard let decoded = try? decoder.decode(TourBookMarkResponse.self, from: data)
+            else {return .pathErr}
+            decodeData = decoded
+        }
+        
         
         else {
             guard let decoded = try? decoder.decode(FailResponse.self, from: data)

@@ -28,7 +28,13 @@ class MapViewController: UIViewController, UITextViewDelegate {
     var citys : [[String]] = []
     var urlArray : [[[URL]]] = []
     var fullAddress : [String] = []
-    let pingColor : [UIColor] = [UIColor.systemRed, UIColor.systemBlue, UIColor.systemPurple, UIColor.systemMint, UIColor.systemPink, UIColor.black]
+    let pingColor : [UIColor] = [UIColor(hexString: "FF9292"),
+                                 UIColor(hexString: "FFD392"),
+                                 UIColor(hexString: "AEFF92"),
+                                 UIColor(hexString: "92E5FF"),
+                                 UIColor(hexString: "929DFF"),
+                                 UIColor(hexString: "D692FF"),
+                                 UIColor(hexString: "FF92EE")]
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -41,14 +47,14 @@ class MapViewController: UIViewController, UITextViewDelegate {
         // 상단에 경계선을 추가
         let topBorder = CALayer()
         let width = CGFloat(0.5)
-        topBorder.borderColor = UIColor.darkGray.cgColor
+        topBorder.borderColor =  UIColor(red: 227/255, green: 227/255, blue: 227/255, alpha: 1.0).cgColor
         topBorder.frame = CGRect(x: 0, y: 0, width: BottomLine.frame.size.width+20, height: width)
         topBorder.borderWidth = width
         BottomLine.layer.addSublayer(topBorder)
         
         // 하단에 경계선을 추가
         let bottomBorder = CALayer()
-        bottomBorder.borderColor = UIColor.darkGray.cgColor
+        bottomBorder.borderColor = UIColor(red: 227/255, green: 227/255, blue: 227/255, alpha: 1.0).cgColor
         bottomBorder.frame = CGRect(x: 0, y: BottomLine.frame.size.height - width, width:  BottomLine.frame.size.width+20, height: width)
         bottomBorder.borderWidth = width
         BottomLine.layer.addSublayer(bottomBorder)
@@ -130,6 +136,7 @@ class MapViewController: UIViewController, UITextViewDelegate {
     }
 
     @objc func backButtonAction() {
+        self.navigationController?.isNavigationBarHidden = false
         navigationController?.popViewController(animated: true)
     }
     
@@ -302,7 +309,6 @@ extension MapViewController : UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MapTableViewCell", for: indexPath) as! MapTableViewCell
                 
                 let mapview = GMSMapView(frame: cell.ContainerView.bounds)
-                var cnt : Int = 0
                 
                 mapview.camera = GMSCameraPosition.camera(withLatitude: self.locationArray[indexPath.section][0].coordinate?.latitude ?? 32.3, longitude: self.locationArray[indexPath.section][0].coordinate?.longitude ?? 32.3, zoom: 9.0)
                 
@@ -312,13 +318,8 @@ extension MapViewController : UITableViewDataSource {
                     let marker = GMSMarker()
                     marker.position = CLLocationCoordinate2D(latitude: lat ?? 32.3, longitude: log ?? 32.3)
                     marker.title = cord.name
-                    marker.icon = GMSMarker.markerImage(with: pingColor[cnt])
+                    marker.icon = GMSMarker.markerImage(with: pingColor[indexPath.section%7])
                     marker.map = mapview
-                    
-                    cnt+=1
-                    if cnt == pingColor.count {
-                        cnt = 0
-                    }
                 }
                 
                 cell.ContainerView.addSubview(mapview)
@@ -356,6 +357,10 @@ extension MapViewController : UITableViewDataSource {
                 }
                 cell.FullAddress.text = citys[indexPath.section][indexPath.row-1]
                 cell.setData(urlArray[indexPath.section][indexPath.row-1])
+                cell.PingImage.tintColor = pingColor[indexPath.section%7]
+                cell.LocationCount.text! = String(indexPath.row)
+                cell.LocationCount.font = UIFont(name: "Pretendard-Regular", size: 10)
+                
                 
                 return cell
             }
@@ -365,6 +370,9 @@ extension MapViewController : UITableViewDataSource {
 
 extension MapViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == locationArray.count{
+            return 230.0
+        }
         if indexPath.row == 0 {
             return 200.0
         }
@@ -380,7 +388,7 @@ extension MapViewController : UITableViewDelegate {
             
             // 첫 번째 레이블을 생성하고 설정합니다.
             let label1 = UILabel()
-            label1.frame = CGRect(x: 20, y: 5, width: tableView.frame.width, height: 20)
+            label1.frame = CGRect(x: 20, y: 0, width: tableView.frame.width, height: 20)
             label1.text = "Day "
             label1.text! += String(self.sequences[section])
             label1.font = UIFont(name: "Pretendard-Bold", size: 20)
@@ -388,7 +396,7 @@ extension MapViewController : UITableViewDelegate {
             
             // 두 번째 레이블을 생성하고 설정합니다.
             let label2 = UILabel()
-            label2.frame = CGRect(x: 80, y: 10, width: tableView.frame.width, height: 20)
+            label2.frame = CGRect(x: 90, y: 5, width: tableView.frame.width, height: 20)
             label2.text = self.settingData?.data?.days[section].date
             label2.font = UIFont(name: "Pretendard-Regular", size: 16)
             label2.textColor = UIColor.gray

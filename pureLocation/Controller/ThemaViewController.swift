@@ -76,9 +76,9 @@ class ThemaViewController: UIViewController {
         let font = UIFont(name: "Pretendard-Regular", size: 16)
         MainTitle.font = UIFont(name: "Pretendard-Bold", size: 24)
         SubTitle.font = UIFont(name: "Pretendard-Regular", size: 14)
-        NextButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
         
-        NextButton.layer.cornerRadius = 10
+        NextButton.layer.cornerRadius = 24
+        NextButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
         
         buttons = [Friend, Cruise, Echo, Date, Family, City, Stay
         , Nature, BackPacking, Culture, Adventure, Luxury, Vacation, Article, shopping, camp, spa]

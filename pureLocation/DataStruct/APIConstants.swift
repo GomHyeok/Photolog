@@ -70,4 +70,21 @@ struct APIConstants {
     
     //articleInfo
     static let ArticleInfo = baseURL + "/api/articles/"
+    
+    //articleReport
+    static let ArticleReport = baseURL + "/api/articles/report/"
+    
+    //articleBookMark
+    static let ArticleBookMarkedURL = baseURL + "/api/user/article"
+    
+    //like
+    static let likeURL = baseURL + "/api/article/like/"
+    
+    //bookmark
+    static let bookmarkURL = baseURL + "/api/article/bookmark/"
+    
+    //TourBookMark
+    static let TourBookmaredkURL = baseURL + "/api/user/tour"
+    
+    static let TourBookmarkURL = baseURL + "/api/tour/bookmark"
 }

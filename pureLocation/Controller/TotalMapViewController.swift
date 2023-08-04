@@ -45,7 +45,7 @@ class TotalMapViewController: UIViewController {
         
         TitleLabel.font = UIFont(name: "Pretendard-Bold", size: 20)
         NextButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
-        NextButton.layer.cornerRadius = 10
+        NextButton.layer.cornerRadius = 24
         
         MapInfo {
             DispatchQueue.main.async {

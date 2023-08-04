@@ -8,15 +8,15 @@
 import UIKit
 
 class HomeParentViewController: UIViewController, homeDelegate {
-    
-    
     var firstChild : HomeViewController!
     var secondChild : HomeNameViewController!
     var boardChild : BoardMainViewController!
     var keywordChild : AfterKeywordViewController!
+    var myPageChild : MyPageMainViewController!
     var homeData : TravelAPIResponse?
     var token : String = ""
     var id : Int = 0
+    var currentViewController : UIViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +34,9 @@ class HomeParentViewController: UIViewController, homeDelegate {
         let keyword = UIStoryboard(name: "Board", bundle: nil)
         keywordChild = keyword.instantiateViewController(withIdentifier: "AfterKeywordViewController") as? AfterKeywordViewController
         
+        let mypage = UIStoryboard(name: "MyPage", bundle: nil)
+        myPageChild = mypage.instantiateViewController(withIdentifier: "MyPageMainViewController") as? MyPageMainViewController
+        
         firstChild.token = self.token
         firstChild.id = self.id
         
@@ -41,7 +44,9 @@ class HomeParentViewController: UIViewController, homeDelegate {
         firstChild.delegate = self
         secondChild.delegate = self
         boardChild.delegate = self
-        // 첫 번째 자식 뷰 컨트롤러를 추가합니다.
+        
+        currentViewController = firstChild
+        
         addChild(firstChild)
         view.addSubview(firstChild.view)
         firstChild.didMove(toParent: self)
@@ -55,6 +60,8 @@ class HomeParentViewController: UIViewController, homeDelegate {
         secondChild.token = self.token
         secondChild.id = self.id
         secondChild.homeData = data
+        
+        currentViewController = secondChild
         
         // 두 번째 자식 뷰 컨트롤러를 추가합니다.
         addChild(secondChild)
@@ -70,69 +77,56 @@ class HomeParentViewController: UIViewController, homeDelegate {
         firstChild.token = self.token
         firstChild.id = self.id
         
+        currentViewController = firstChild
         
         addChild(firstChild)
         view.addSubview(firstChild.view)
         firstChild.didMove(toParent: self)
     }
     
-    func switchToBoard(pos : Int) {
-        if pos  == 1 {
-            firstChild.willMove(toParent: nil)
-            firstChild.view.removeFromSuperview()
-            firstChild.removeFromParent()
-        }
-        else if pos == 11 {
-            secondChild.willMove(toParent: nil)
-            secondChild.view.removeFromSuperview()
-            secondChild.removeFromParent()
-        }
+    func switchToBoard() {
+        currentViewController.willMove(toParent: nil)
+        currentViewController.view.removeFromSuperview()
+        currentViewController.removeFromParent()
         
         boardChild.token = self.token
         boardChild.id = self.id
+        
+        currentViewController = boardChild
         
         addChild(boardChild)
         view.addSubview(boardChild.view)
         boardChild.didMove(toParent: self)
     }
     
-    func switchToHome(pos: Int) {
-        if pos == 2 {
-            boardChild.willMove(toParent: nil)
-            boardChild.view.removeFromSuperview()
-            boardChild.removeFromParent()
+    func switchToHome() {
+        currentViewController.willMove(toParent: nil)
+        currentViewController.view.removeFromSuperview()
+        currentViewController.removeFromParent()
             
-            firstChild.token = self.token
-            firstChild.id = self.id
-            
-            
-            addChild(firstChild)
-            view.addSubview(firstChild.view)
-            firstChild.didMove(toParent: self)
-        }
+        firstChild.token = self.token
+        firstChild.id = self.id
         
-        if pos == 21 {
-            boardChild.willMove(toParent: nil)
-            boardChild.view.removeFromSuperview()
-            boardChild.removeFromParent()
-            
-            firstChild.token = self.token
-            firstChild.id = self.id
-            
-            
-            addChild(firstChild)
-            view.addSubview(firstChild.view)
-            keywordChild.willMove(toParent: nil)
-            keywordChild.view.removeFromSuperview()
-            keywordChild.removeFromParent()
-            
-            firstChild.token = self.token
-            firstChild.id = self.id
-            
-            
-            addChild(firstChild)
-            view.addSubview(firstChild.view)
-            firstChild.didMove(toParent: self)
-        }
+        currentViewController = firstChild
+        
+        addChild(firstChild)
+        view.addSubview(firstChild.view)
+        firstChild.didMove(toParent: self)
     }
+    
+    func switchToMypage() {
+        currentViewController.willMove(toParent: nil)
+        currentViewController.view.removeFromSuperview()
+        currentViewController.removeFromParent()
+        
+        myPageChild.token = self.token
+        myPageChild.id = self.id
+        
+        currentViewController = myPageChild
+        
+        addChild(myPageChild)
+        view.addSubview(myPageChild.view)
+        myPageChild.didMove(toParent: self)
+    }
+    
 }

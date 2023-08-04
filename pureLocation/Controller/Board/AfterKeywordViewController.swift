@@ -17,10 +17,23 @@ class AfterKeywordViewController: UIViewController {
     var themas : [String] = []
     
     
+    @IBOutlet weak var bottomNavigation: UIView!
     @IBOutlet weak var ResultTable: UITableView!
     @IBOutlet weak var Like: UIButton!
     @IBOutlet weak var Recent: UIButton!
     @IBOutlet weak var Result: UILabel!
+    
+    override func viewDidLayoutSubviews() {
+        DispatchQueue.main.async {
+            let border = CALayer()
+            let width = CGFloat(0.5)
+            border.borderColor = UIColor(red: 227/255, green: 227/255, blue: 227/255, alpha: 1.0).cgColor
+            border.frame = CGRect(x: 0, y: 0, width:  self.bottomNavigation.frame.size.width, height: width)
+            border.borderWidth = width
+            self.bottomNavigation.layer.addSublayer(border)
+            self.bottomNavigation.layer.masksToBounds = true
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,9 +89,13 @@ class AfterKeywordViewController: UIViewController {
     
     
     @IBAction func Homebutton(_ sender: UIButton) {
-        delegate?.switchToHome(pos: 21)
+        delegate?.switchToHome()
     }
     
+    
+    @IBAction func MyPageButton(_ sender: UIButton) {
+        delegate?.switchToMypage()
+    }
 }
 
 extension AfterKeywordViewController {

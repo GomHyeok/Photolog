@@ -66,7 +66,9 @@ class HomeNameViewController: UIViewController {
         
         let lineColor = UIColor(red:255/255, green:112/255, blue:66/255, alpha:1.0)
         let lineColor2 = UIColor(red:209/255, green:209/255, blue:214/255, alpha:1.0)
-        myLabel.setBottomLine(borderColor: lineColor, hight: 1.0)
+        myLabel.setBottomLine(borderColor: lineColor, hight: 3.0, bottom: 12)
+        
+        self.navigationController?.isNavigationBarHidden = true
         
         allView.backgroundColor = UIColor.clear
         let borderLine = UIView()
@@ -74,7 +76,7 @@ class HomeNameViewController: UIViewController {
         borderLine.backgroundColor = lineColor2
         allView.addSubview(borderLine)
         
-        myLabel.font = UIFont(name : "Pretendard-Bold", size: 20)
+        myLabel.font = UIFont(name : "Pretendard-SemiBold", size: 20)
         allLabel.font = UIFont(name: "Pretendard-Bold", size: 20)
         
         HomeTabelView.delegate = self
@@ -83,13 +85,16 @@ class HomeNameViewController: UIViewController {
     
     
     @IBAction func BoardButton(_ sender: UIButton) {
-        delegate?.switchToBoard(pos: 11)
+        delegate?.switchToBoard()
     }
     
     @IBAction func ChangeView(_ sender: UIButton) {
         delegate?.switchMaptoTotal()
     }
     
+    @IBAction func MyPageButton(_ sender: UIButton) {
+        delegate?.switchToMypage()
+    }
     
     @IBAction func MakeTravel(_ sender: Any) {
         PHPhotoLibrary.requestAuthorization { (status) in
@@ -154,8 +159,6 @@ class HomeNameViewController: UIViewController {
     @objc func backButtonAction() {
         navigationController?.popViewController(animated: true)
     }
-    
-    
     
     
     func getPhotoLocationInfo(asset: PHAsset) -> (longitude: Double, latitude: Double) {
@@ -363,6 +366,7 @@ extension HomeNameViewController : UITableViewDataSource {
         
         cell.Location.text = self.homeData?.data[indexPath.row].city
         cell.Location.font = UIFont(name : "Pretendard-Regular", size: 10)
+        cell.Location.tintColor = UIColor(red: 185/255, green: 188/255, blue: 190.255, alpha: 1.0)
         let border = CALayer()
         let width = CGFloat(0.2)
         border.borderColor = UIColor(red: 0.46, green: 0.46, blue: 0.48, alpha: 1.0).cgColor
@@ -391,7 +395,7 @@ extension HomeNameViewController : UITableViewDataSource {
             daylog.id = self.id
             daylog.travelId = self.homeData?.data[sender.tag].travelId ?? 0
             daylog.datas = self.data
-            
+            daylog.check = true
             self.navigationController?.pushViewController(daylog, animated: true)
         }
         else {print("summary 문제")}

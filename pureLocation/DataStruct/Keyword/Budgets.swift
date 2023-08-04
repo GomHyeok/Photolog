@@ -28,7 +28,7 @@ class budgets : UITableViewCell {
         for setButton in buttons {
             setButton.titleLabel?.font = font
             setButton.tag = 0
-            setButton.layer.cornerRadius = setButton.frame.width/10
+            setButton.layer.cornerRadius = 16
             setButton.addTarget(self, action: #selector(ButtonsAction), for: .touchUpInside)
             setButton.titleLabel?.font = UIFont(name: "Pretandard-Regular", size: 14)
         }
@@ -48,6 +48,7 @@ class budgets : UITableViewCell {
             setButton.setTitleColor(color, for: .highlighted)
             setButton.setTitleColor(color, for: .selected)
             setButton.tag = cnt*20
+            cnt+=1
         }
         
         sender.setTitleColor(colorRed, for: .normal)

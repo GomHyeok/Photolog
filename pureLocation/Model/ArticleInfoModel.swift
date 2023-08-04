@@ -10,19 +10,22 @@ import Foundation
 struct ArticleInfoResponse :Codable{
     let status : Bool
     let message : String
-    let data : ArticleInfoData?
+    var data : ArticleInfoData?
 }
 
 struct ArticleInfoData : Codable{
     let articleId : Int
     let nickname : String
     let title : String?
+    let summary : String?
     let days : [ArticleDayData]?
     let budget : Int
     let member : String?
     let theme : [String]
-    let likes : Int
-    let bookmarks : Int
+    var likes : Int
+    let likeStatus : Bool
+    var bookmarks : Int
+    let bookmarkStatus : Bool
 }
 
 struct ArticleDayData : Codable {

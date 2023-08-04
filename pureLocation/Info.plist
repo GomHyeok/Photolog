@@ -9,8 +9,10 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Pretendard-Bold.otf</string>
+		<string>Pretendard-Medium</string>
 		<string>Pretendard-Regular.otf</string>
 		<string>Pretendard-ExtraBold.otf</string>
+		<string>Pretendard-SemiBold.otf</string>
 	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>

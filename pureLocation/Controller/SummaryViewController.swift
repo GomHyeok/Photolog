@@ -48,11 +48,12 @@ class SummaryViewController: UIViewController {
         self.ImageCollection.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.ImageCollection.dataSource = self
         self.ImageCollection.delegate = self
-        self.TavleCalcu.setBottomLine(borderColor: UIColor.black)
+        self.TavleCalcu.setBottomLine(borderColor: UIColor(red: 227/255, green: 227/255, blue: 227/255, alpha: 1.0))
         
-        self.NextButton.layer.cornerRadius = 10
+        self.NextButton.layer.cornerRadius = 24
         self.NextButton.layer.borderWidth=1
         self.NextButton.layer.borderColor = self.NextButton.backgroundColor?.cgColor
+        self.NextButton.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 15)
     }
     
     
@@ -125,16 +126,21 @@ extension SummaryViewController : UICollectionViewDataSource {
         cell.collectionImage.clipsToBounds = true
         
         cell.locationNaem.text = self.datas?.data?.locationAddress[indexPath.item]
-        cell.locationNaem.font = UIFont(name: "Pretendard-Regular", size: 14)
+        cell.locationNaem.font = UIFont(name: "Pretendard-SemiBold", size: 14)
         
         
         cell.nights.text = String(datas?.data?.night ?? 0) + "박" + String(datas?.data?.day ?? 0) + "일"
-        cell.nights.font = font
+        cell.nights.font = UIFont(name: "Pretendard-SemiBold", size: 14)
         
         cell.During.text = datas?.data?.startDate ?? ""
         cell.During.text! += " ~ "
         cell.During.text! += datas?.data?.endDate ?? ""
-        cell.During.font = UIFont(name: "Pretendard-Regular", size: 16)
+        cell.During.font = UIFont(name: "Pretendard-Medium", size: 16)
+        
+        let labelText = cell.During.text!
+        let attributedString = NSMutableAttributedString(string: labelText)
+        attributedString.addAttribute(NSAttributedString.Key.kern, value: CGFloat(2), range: NSRange(location: 0, length: attributedString.length - 1))
+        cell.During.attributedText = attributedString
         
         cell.locationNum.text = "총" + String(datas?.data?.locationNum ?? 0)+"군데를 방문하셨군요"
         cell.locationNum.font = font
@@ -148,6 +154,6 @@ extension SummaryViewController : UICollectionViewDataSource {
 extension SummaryViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
+        return CGSize(width: collectionView.bounds.width - 50, height: collectionView.bounds.height-20)
     }
 }

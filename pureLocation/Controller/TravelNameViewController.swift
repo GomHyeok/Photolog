@@ -51,7 +51,7 @@ class TravelNameViewController: UIViewController {
             print("backButton image not found")
         }
         
-        self.NextButton.layer.cornerRadius = 10
+        self.NextButton.layer.cornerRadius = 24
         self.NextButton.layer.borderWidth=1
         self.NextButton.layer.borderColor = self.NextButton.backgroundColor?.cgColor
         
@@ -62,7 +62,7 @@ class TravelNameViewController: UIViewController {
         let blue: CGFloat = 66.0 / 255.0
         NameFiled.layer.borderColor = UIColor(red: red, green: green, blue: blue, alpha: 1.0).cgColor
         NameFiled.layer.borderWidth = 1.0
-        NameFiled.layer.cornerRadius = 9
+        NameFiled.layer.cornerRadius = 24
         
         NameFiled.font = UIFont(name: "Pretendard-Regular", size: 16)
         PhotoName.font = UIFont(name: "Pretendard-Regular", size: 14)

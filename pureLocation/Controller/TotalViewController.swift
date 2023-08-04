@@ -35,7 +35,7 @@ class TotalViewController: UIViewController {
         TravelTitle.font = UIFont(name: "Pretendard-Bold", size: 20)
         
         NextButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
-        NextButton.layer.cornerRadius = 10
+        NextButton.layer.cornerRadius = 24
         
         travelInfo {
             DispatchQueue.main.async {
@@ -175,6 +175,20 @@ extension TotalViewController : UITableViewDataSource {
             cell.ButtonLabel.text = locationArray[indexPath.section][indexPath.row-1].description ?? ""
             cell.ButtonLabel.font = UIFont(name: "Pretendard-Regular", size: 12)
             
+            let fontSize: CGFloat = 12
+            let lineHeightPercent: CGFloat = 12*1.63 // 163% = 1.63 in decimal
+
+            let lineSpacing: CGFloat = fontSize * lineHeightPercent - fontSize
+            
+            let labelText = cell.ButtonLabel.text!
+            let attributedString = NSMutableAttributedString(string: labelText)
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = lineSpacing // 줄 간격을 원하는 값으로 설정합니다.
+            attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
+            attributedString.addAttribute(NSAttributedString.Key.kern, value: CGFloat(3), range: NSRange(location: 0, length: attributedString.length))
+            cell.ButtonLabel.attributedText = attributedString
+            
+            cell.BackGroundImage.layer.cornerRadius = 8
             
             cell.cellButton.addTarget(self, action: #selector(cellaction(_:)), for: .touchUpInside)
             
@@ -203,7 +217,7 @@ extension TotalViewController : UITableViewDelegate {
             return 80
         }
         else {
-            return 230.0
+            return 205.0
         }
     }
     
