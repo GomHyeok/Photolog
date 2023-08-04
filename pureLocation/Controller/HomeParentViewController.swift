@@ -26,6 +26,7 @@ class HomeParentViewController: UIViewController, homeDelegate {
         
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         firstChild = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController
+        
         secondChild = storyboard.instantiateViewController(withIdentifier: "HomeNameViewController") as? HomeNameViewController
         
         let board = UIStoryboard(name: "Board", bundle: nil)
@@ -44,6 +45,7 @@ class HomeParentViewController: UIViewController, homeDelegate {
         firstChild.delegate = self
         secondChild.delegate = self
         boardChild.delegate = self
+        myPageChild.delegate = self
         
         currentViewController = firstChild
         
@@ -85,6 +87,7 @@ class HomeParentViewController: UIViewController, homeDelegate {
     }
     
     func switchToBoard() {
+        print("2")
         currentViewController.willMove(toParent: nil)
         currentViewController.view.removeFromSuperview()
         currentViewController.removeFromParent()
@@ -100,6 +103,7 @@ class HomeParentViewController: UIViewController, homeDelegate {
     }
     
     func switchToHome() {
+        print("1")
         currentViewController.willMove(toParent: nil)
         currentViewController.view.removeFromSuperview()
         currentViewController.removeFromParent()

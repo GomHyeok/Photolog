@@ -699,7 +699,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  사진" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q6W-hH-hff">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사진" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q6W-hH-hff">
                                                 <rect key="frame" x="24" y="68.666666666666671" width="343" height="28.666666666666671"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <nil key="textColor"/>
@@ -741,7 +741,7 @@
                                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.50675186258278149" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rRL-ak-we0" userLabel="locationView">
-                                                            <rect key="frame" x="-20" y="396" width="393" height="94"/>
+                                                            <rect key="frame" x="0.0" y="396" width="373" height="94"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3dH-4E-rRV">
                                                                     <rect key="frame" x="64" y="20" width="309" height="54"/>
@@ -752,7 +752,7 @@
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ping" translatesAutoresizingMaskIntoConstraints="NO" id="lrJ-fY-zJK">
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location_on_FILL0_wght400_GRAD0_opsz48 1" translatesAutoresizingMaskIntoConstraints="NO" id="lrJ-fY-zJK">
                                                                     <rect key="frame" x="31" y="35" width="24" height="24"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="24" id="ozk-hE-l4B"/>
@@ -812,12 +812,12 @@
                                                         <constraint firstItem="IPH-at-VWP" firstAttribute="leading" secondItem="chz-Ta-PyZ" secondAttribute="leading" id="BGR-PS-sWe"/>
                                                         <constraint firstItem="nZ8-Fc-RbY" firstAttribute="leading" secondItem="Qis-og-mFV" secondAttribute="leading" id="EHT-jm-nBI"/>
                                                         <constraint firstItem="nZ8-Fc-RbY" firstAttribute="top" secondItem="Qis-og-mFV" secondAttribute="top" constant="20" id="L5t-RA-OgJ"/>
-                                                        <constraint firstItem="chz-Ta-PyZ" firstAttribute="leading" secondItem="Qis-og-mFV" secondAttribute="leading" constant="20" symbolic="YES" id="Nf5-JN-dIg"/>
+                                                        <constraint firstItem="chz-Ta-PyZ" firstAttribute="leading" secondItem="Qis-og-mFV" secondAttribute="leading" constant="16" id="Nf5-JN-dIg"/>
                                                         <constraint firstItem="IPH-at-VWP" firstAttribute="top" secondItem="chz-Ta-PyZ" secondAttribute="top" id="Pwg-fE-gc0"/>
                                                         <constraint firstItem="chz-Ta-PyZ" firstAttribute="trailing" secondItem="IPH-at-VWP" secondAttribute="trailing" id="Vz9-Tg-td2"/>
                                                         <constraint firstAttribute="bottom" secondItem="rRL-ak-we0" secondAttribute="bottom" id="aG7-0Z-grd"/>
                                                         <constraint firstItem="rRL-ak-we0" firstAttribute="leading" secondItem="Qis-og-mFV" secondAttribute="leading" id="eFc-D3-CVV"/>
-                                                        <constraint firstAttribute="trailing" secondItem="chz-Ta-PyZ" secondAttribute="trailing" constant="8" id="yxZ-gq-ecR"/>
+                                                        <constraint firstAttribute="trailing" secondItem="chz-Ta-PyZ" secondAttribute="trailing" id="yxZ-gq-ecR"/>
                                                     </constraints>
                                                 </collectionViewCellContentView>
                                                 <size key="customSize" width="370" height="569"/>
@@ -2962,6 +2962,7 @@
         <image name="home2" width="18" height="18"/>
         <image name="home2-2" width="18" height="18"/>
         <image name="insta" width="28" height="28"/>
+        <image name="location_on_FILL0_wght400_GRAD0_opsz48 1" width="24" height="25"/>
         <image name="map" width="28" height="28"/>
         <image name="map2" width="25" height="24"/>
         <image name="mypage" width="28" height="28"/>

@@ -31,6 +31,7 @@ class DeleteBoardViewController: UIViewController {
                 articleId.append(cell.articleId)
             }
         }
+        print(articleId)
         
         return articleId
     }
@@ -71,7 +72,7 @@ extension DeleteBoardViewController : UITableViewDataSource {
         cell.BookMarkImage.kf.setImage(with: URL(string: self.data?.data?[indexPath.row].thumbnail ?? "")!)
         
         cell.DeleteButton.tag = 0
-        cell.DeleteButton.addTarget(self, action: #selector(buttonTap), for: .touchUpInside)
+        cell.DeleteButton.addTarget(self, action: #selector(buttonTap(_:)), for: .touchUpInside)
         
         cell.articleId = self.data?.data?[indexPath.row].id ?? 0
         

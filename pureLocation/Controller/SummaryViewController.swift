@@ -104,7 +104,10 @@ extension SummaryViewController {
 }
 
 extension SummaryViewController : UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 2
+
+    }
 }
 
 extension SummaryViewController : UICollectionViewDataSource {
@@ -114,7 +117,7 @@ extension SummaryViewController : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cellId = String(describing: SummaryViewCollectionViewCell.self)
-        let font = UIFont(name: "Pretendard-Regular", size: 20)
+        let font = UIFont(name: "Pretendard-SemiBold", size: 20)
         
         //셀의 인스턴스
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! SummaryViewCollectionViewCell
@@ -130,7 +133,7 @@ extension SummaryViewController : UICollectionViewDataSource {
         
         
         cell.nights.text = String(datas?.data?.night ?? 0) + "박" + String(datas?.data?.day ?? 0) + "일"
-        cell.nights.font = UIFont(name: "Pretendard-SemiBold", size: 14)
+        cell.nights.font = font
         
         cell.During.text = datas?.data?.startDate ?? ""
         cell.During.text! += " ~ "

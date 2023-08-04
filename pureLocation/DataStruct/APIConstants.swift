@@ -78,10 +78,10 @@ struct APIConstants {
     static let ArticleBookMarkedURL = baseURL + "/api/user/article"
     
     //like
-    static let likeURL = baseURL + "/api/article/like/"
+    static let likeURL = baseURL + "/api/articles/like/"
     
     //bookmark
-    static let bookmarkURL = baseURL + "/api/article/bookmark/"
+    static let bookmarkURL = baseURL + "/api/articles/bookmark/"
     
     //TourBookMark
     static let TourBookmaredkURL = baseURL + "/api/user/tour"

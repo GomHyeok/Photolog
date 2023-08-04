@@ -291,7 +291,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="BookMarkBoard" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookMarkBoard" rowHeight="154" id="8r7-AM-r4M" userLabel="BookMarkBoard" customClass="BookMarkBoard">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="BookMarkBoard" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookMarkBoard" rowHeight="154" id="8r7-AM-r4M" userLabel="BookMarkBoard" customClass="BookMarkBoard" customModule="pureLocation" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="154"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8r7-AM-r4M" id="5Db-Kd-ZAp">
@@ -375,7 +375,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="BookMark" destination="eOq-p0-Mtd" id="LiF-57-ekD"/>
+                                            <outlet property="BookMark" destination="eOq-p0-Mtd" id="RbA-mA-8z8"/>
                                             <outlet property="BookMarkImage" destination="fbl-5p-c3v" id="F1P-hU-OYr"/>
                                             <outlet property="BookMarkNum" destination="Yr3-uW-6Wi" id="wua-ge-Ngq"/>
                                             <outlet property="CellButton" destination="uCP-x0-NEP" id="Q7W-lU-DsW"/>
@@ -577,7 +577,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="BookMarkBoardDelete" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookMarkBoardDelete" rowHeight="154" id="Zp0-Da-fTB" userLabel="BookMarkBoard" customClass="BookMarkBoardDelete" customModule="pureLocation" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="BookMarkBoardDelete" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookMarkBoardDelete" rowHeight="154" id="Zp0-Da-fTB" userLabel="BookMarkBoardDelete" customClass="BookMarkBoardDelete" customModule="pureLocation" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="154"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zp0-Da-fTB" id="JfW-iq-5Ek">
@@ -666,7 +666,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="BookMark" destination="edp-ua-GrU" id="Dz1-qh-QCk"/>
                                             <outlet property="BookMarkImage" destination="VpW-jS-nBt" id="N1I-pc-pr1"/>
                                             <outlet property="BookMarkNum" destination="E61-aI-Jeh" id="yvH-0c-7Dn"/>
                                             <outlet property="City" destination="F3S-vc-6L8" id="763-iu-1wx"/>
@@ -675,6 +674,7 @@
                                             <outlet property="Hart" destination="C4x-9F-MGp" id="5VS-z9-erG"/>
                                             <outlet property="HartNum" destination="ZCU-Kz-BDM" id="tdB-Ne-qpL"/>
                                             <outlet property="Title" destination="AdC-J0-l0o" id="4sD-oa-hNX"/>
+                                            <outlet property="bookMark" destination="edp-ua-GrU" id="pM0-eV-iJP"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

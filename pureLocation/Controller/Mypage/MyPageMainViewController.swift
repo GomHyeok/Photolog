@@ -84,13 +84,13 @@ class MyPageMainViewController: UIViewController {
     }
     
     @IBAction func BoardPageButton(_ sender: UIButton) {
-        delegate?.switchToBoard()
+        print("board")
+        self.delegate?.switchToBoard()
     }
     
     @IBAction func HomeButton(_ sender: UIButton) {
-        delegate?.switchToHome()
+        self.delegate?.switchToHome()
     }
-    
     
     @IBAction func TourButton(_ sender: UIButton) {
         self.Board.setBottomLines(borderColor: UIColor.white, hight: 0, bottom: 0)
@@ -178,6 +178,7 @@ class MyPageMainViewController: UIViewController {
         else if(self.now == 1) {
             self.now = 2
             EditButton.backgroundColor = UIColor(red: 255/255, green: 112/255, blue: 66/255, alpha: 1.0)
+            EditButton.layer.cornerRadius = 16
             EditButton.titleLabel?.text! = "완료"
             EditButton.tintColor = UIColor.white
             let storyboard = UIStoryboard(name: "MyPage", bundle: nil)
@@ -186,6 +187,8 @@ class MyPageMainViewController: UIViewController {
             self.currentVC?.willMove(toParent: nil)
             self.currentVC?.view.removeFromSuperview()
             self.currentVC?.removeFromParent()
+            
+            initialViewController.data = self.articleData
             
             self.addChild(initialViewController)
             initialViewController.view.frame = self.ContainerView.bounds
@@ -201,11 +204,7 @@ class MyPageMainViewController: UIViewController {
             EditButton.titleLabel?.text! = "편집"
             EditButton.tintColor = UIColor(red: 115/255, green: 115/255, blue: 115/255, alpha: 1.0)
             
-            let storyboard = UIStoryboard(name: "MyPage", bundle: nil)
-            let initialViewController = storyboard.instantiateViewController(withIdentifier: "DeleteBoardViewController") as! DeleteBoardViewController
-            
-            self.articleId = initialViewController.getArticleID()
-            
+            self.articleId = (currentVC as! DeleteBoardViewController).getArticleID()
             for id in self.articleId {
                 dispatchGroup.enter()
                 bookmarkCancle(ArticleId: id) {
@@ -344,6 +343,7 @@ extension MyPageMainViewController {
             switch response {
                 case .success(let data) :
                     guard let data = data as? BookMarkedArticleResponse else {return}
+                    print(data)
                     self.articleData = data
                 case .requsetErr(let err) :
                     print(err)
@@ -418,6 +418,7 @@ extension MyPageMainViewController {
             response in
             switch response {
                 case .success(let data) :
+                    print(data)
                     self.tourData = data as? TourBookMarkResponse
                     completion()
                 case .requsetErr(let err) :
