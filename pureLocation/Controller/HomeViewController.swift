@@ -48,7 +48,7 @@ class HomeViewController: UIViewController {
             self.allView.layer.masksToBounds = true
             
             let upper = CALayer()// 선의 두께
-            upper.borderColor = UIColor.darkGray.cgColor // 선의 색상
+            upper.borderColor = UIColor(red: 227/255, green: 227/255, blue: 227/255, alpha: 1.0).cgColor
             upper.frame = CGRect(x: 0, y: 0, width:  self.bottomNavigation.frame.size.width, height: width) // 상단에 선을 추가하기 위해 y: 0으로 설정
             upper.borderWidth = width
             self.bottomNavigation.layer.addSublayer(upper)

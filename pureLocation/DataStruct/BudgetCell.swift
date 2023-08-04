@@ -90,11 +90,12 @@ class BudgetCell : UITableViewCell {
             setButton.setTitleColor(color, for: .selected)
             setButton.tag = 0
         }
-        
-        sender.setTitleColor(colorRed, for: .normal)
-        sender.setTitleColor(colorRed, for: .highlighted)
-        sender.setTitleColor(colorRed, for: .selected)
-        sender.tag = 1
+        if sender.tag == 0 {
+            sender.setTitleColor(colorRed, for: .normal)
+            sender.setTitleColor(colorRed, for: .highlighted)
+            sender.setTitleColor(colorRed, for: .selected)
+            sender.tag = 1
+        }
     }
     
     func getBudget() -> Int {

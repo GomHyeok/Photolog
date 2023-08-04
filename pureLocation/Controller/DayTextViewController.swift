@@ -90,7 +90,7 @@ class DayTextViewController: UIViewController {
             let indexPath = IndexPath(row: i, section: 0) // change these numbers to the index of the cell you want
             let cell = TagTable.cellForRow(at: indexPath) as! DayLogTextCell
             let text = cell.Description.text!
-            let name = cell.PlaceName.text!
+            let name = cell.LocationName.text!
             dispatchGroup.enter()
             locationDescription(locationId: locationId[i], description: text) {
                 self.locationName(locationId: self.locationId[i], title: name) {
@@ -109,7 +109,7 @@ class DayTextViewController: UIViewController {
             let indexPath = IndexPath(row: i, section: 0) // change these numbers to the index of the cell you want
             let cell = TagTable.cellForRow(at: indexPath) as! DayLogTextCell
             let text = cell.Description.text!
-            let name = cell.PlaceName.text!
+            let name = cell.LocationName.text!
             dispatchGroup.enter()
             locationDescription(locationId: locationId[i], description: text) {
                 self.locationName(locationId: self.locationId[i], title: name) {
@@ -166,7 +166,7 @@ extension DayTextViewController : UITableViewDataSource {
         } else {
             cell.LocationName.text = "Loading..."
         }
-        cell.LocationName.font = UIFont(name: "Pretendard-Bold", size: 24)
+        cell.LocationName.font = UIFont(name: "Pretendard-Medium", size: 24)
 
         if indexPath.row < fullAddress.count {
             print(fullAddress[indexPath.row])
