@@ -61,10 +61,11 @@ class DayTagViewController: UIViewController {
         
         locationInfoSequentially(index: 0)
         
-        let footerView = UIView(frame: CGRect(x: 20, y: 0, width: TagTable.frame.size.width-20, height: 53))
+        let footerView = UIView(frame: CGRect(x: 32, y: 0, width: TagTable.frame.size.width-32, height: 53))
         let button = UIButton(frame: footerView.bounds)
         button.setTitle("다음", for: .normal)
-        button.backgroundColor  = UIColor(red: 255/255, green: 112/255, blue: 66/255, alpha: 1.0)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.backgroundColor  = UIColor(red: 1, green: 0.44, blue: 0.26, alpha: 1)
         button.layer.cornerRadius = 24
         button.setTitleColor(UIColor.black, for: .normal)
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
@@ -235,7 +236,7 @@ extension DayTagViewController : UITableViewDataSource {
         } else {
             cell.LocationName.text = "Loading..."
         }
-        cell.LocationName.font = UIFont(name: "Pretendard-Bold", size: 24)
+        cell.LocationName.font = UIFont(name: "Pretendard-Medium", size: 24)
         cell.LocationName.delegate = self
 
         if indexPath.row < fullAddress.count {

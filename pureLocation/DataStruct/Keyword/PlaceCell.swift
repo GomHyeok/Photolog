@@ -57,10 +57,12 @@ class PlaceCell : UITableViewCell {
             setButton.tag = 0
         }
         
-        sender.setTitleColor(colorRed, for: .normal)
-        sender.setTitleColor(colorRed, for: .highlighted)
-        sender.setTitleColor(colorRed, for: .selected)
-        sender.tag = 1
+        if(sender.tag == 0) {
+            sender.setTitleColor(colorRed, for: .normal)
+            sender.setTitleColor(colorRed, for: .highlighted)
+            sender.setTitleColor(colorRed, for: .selected)
+            sender.tag = 1
+        }
     }
     
     func getString() -> String? {

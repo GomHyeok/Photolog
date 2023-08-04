@@ -166,6 +166,7 @@ extension BoardViewController : UITableViewDataSource {
             
             cell.GroupMemeber.text = self.settingData?.data?.member ?? "구성원이 입력되지 않았습니다."
             cell.GroupMemeber.font = UIFont(name: "Pretendard-Regular", size: 16)
+            cell.BudgetImage.layer.cornerRadius = 10
             
             return cell
         }
@@ -242,7 +243,7 @@ extension BoardViewController : UITableViewDelegate {
             return 200.0
         }
         else {
-            return 250.0
+            return 263.0
         }
     }
     

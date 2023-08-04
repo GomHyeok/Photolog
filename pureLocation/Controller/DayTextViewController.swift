@@ -57,7 +57,7 @@ class DayTextViewController: UIViewController {
         let footerView = UIView(frame: CGRect(x: 30, y: 0, width: TagTable.frame.size.width-40, height: 53))
         let button = UIButton(frame: footerView.bounds)
         button.setTitle("다음", for: .normal)
-        button.backgroundColor  = UIColor(red: 255/255, green: 112/255, blue: 66/255, alpha: 1.0)
+        button.backgroundColor  = UIColor(red: 1, green: 0.44, blue: 0.26, alpha: 1)
         button.layer.cornerRadius = 24
         button.setTitleColor(UIColor.black, for: .normal)
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)

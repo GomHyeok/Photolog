@@ -61,9 +61,8 @@ class MapViewController: UIViewController, UITextViewDelegate {
         
         self.navigationController?.isNavigationBarHidden = false
         
-//        ContentFiled.isUserInteractionEnabled = true
-//        ContentFiled.isEditable = true
-//        ContentFiled.delegate = self
+        self.ContentFiled.delegate = self
+        self.ContentFiled.setBottomLines(borderColor: UIColor(red: 227/255, green: 227/255, blue: 227/255, alpha: 1.0), hight: 0.5, bottom: 0)
         
         
         if let backButtonImage = UIImage(named: "backButton")?.withRenderingMode(.alwaysOriginal) {
@@ -335,8 +334,8 @@ extension MapViewController : UITableViewDataSource {
                     cell.LocationTitle.text = locationArray[indexPath.section][indexPath.row-1].name
                 }
                 
-                cell.LocationTitle.font = UIFont(name: "Pretandard-Bold", size: 16)
-                cell.Descriptions.font = UIFont(name: "Pretandard-Regular", size: 14)
+                cell.LocationTitle.font = UIFont(name: "Pretendard-Bold", size: 16)
+                cell.Descriptions.font = UIFont(name: "Pretendard-Regular", size: 14)
                 
                 if indexPath.section < urlArray.count {
                     if indexPath.row-1 < urlArray[indexPath.section].count {
@@ -377,7 +376,7 @@ extension MapViewController : UITableViewDelegate {
             return 200.0
         }
         else {
-            return 240.0
+            return 274.0
         }
     }
     
@@ -396,7 +395,7 @@ extension MapViewController : UITableViewDelegate {
             
             // 두 번째 레이블을 생성하고 설정합니다.
             let label2 = UILabel()
-            label2.frame = CGRect(x: 90, y: 5, width: tableView.frame.width, height: 20)
+            label2.frame = CGRect(x: 90, y: 7, width: tableView.frame.width, height: 20)
             label2.text = self.settingData?.data?.days[section].date
             label2.font = UIFont(name: "Pretendard-Regular", size: 16)
             label2.textColor = UIColor.gray

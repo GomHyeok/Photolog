@@ -87,7 +87,6 @@ class HomeParentViewController: UIViewController, homeDelegate {
     }
     
     func switchToBoard() {
-        print("2")
         currentViewController.willMove(toParent: nil)
         currentViewController.view.removeFromSuperview()
         currentViewController.removeFromParent()
@@ -103,13 +102,13 @@ class HomeParentViewController: UIViewController, homeDelegate {
     }
     
     func switchToHome() {
-        print("1")
         currentViewController.willMove(toParent: nil)
         currentViewController.view.removeFromSuperview()
         currentViewController.removeFromParent()
             
         firstChild.token = self.token
         firstChild.id = self.id
+        firstChild.viewDidLoad()
         
         currentViewController = firstChild
         
