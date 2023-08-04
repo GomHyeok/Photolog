@@ -1,10 +1,3 @@
-//
-//  MyPageMainViewController.swift
-//  pureLocation
-//
-//  Created by 최재혁 on 2023/08/03.
-//
-
 import UIKit
 
 class MyPageMainViewController: UIViewController {
@@ -51,7 +44,11 @@ class MyPageMainViewController: UIViewController {
         BookMarked {
             if(self.articleData?.data?.count == 0) {
                 let storyboard = UIStoryboard(name: "MyPage", bundle: nil)
-                let initialViewController = storyboard.instantiateViewController(withIdentifier: "NoBookMarkBoardViewController")
+                let initialViewController = storyboard.instantiateViewController(withIdentifier: "NoBookMarkBoardViewController") as! NoBookMarkBoardViewController
+                
+                initialViewController.token = self.token
+                initialViewController.id = self.id
+                
                 self.addChild(initialViewController)
                 initialViewController.view.frame = self.ContainerView.bounds
                 self.ContainerView.addSubview(initialViewController.view)
@@ -93,13 +90,17 @@ class MyPageMainViewController: UIViewController {
     }
     
     @IBAction func TourButton(_ sender: UIButton) {
-        self.Board.setBottomLines(borderColor: UIColor.white, hight: 0, bottom: 0)
+        self.Board.setBottomLines(borderColor: UIColor.white, hight: 2.0, bottom: 5)
         self.Tour.setBottomLines(borderColor: UIColor.black, hight: 2.0, bottom: 5)
         
         tourBookMark {
             if self.tourData?.data?.count == 0 {
                 let storyboard = UIStoryboard(name: "MyPage", bundle: nil)
-                let initialViewController = storyboard.instantiateViewController(withIdentifier: "NoTourViewController")
+                let initialViewController = storyboard.instantiateViewController(withIdentifier: "NoTourViewController") as! NoTourViewController
+                
+                initialViewController.token = self.token
+                initialViewController.id = self.id
+                
                 self.addChild(initialViewController)
                 initialViewController.view.frame = self.ContainerView.bounds
                 self.ContainerView.addSubview(initialViewController.view)
@@ -130,16 +131,19 @@ class MyPageMainViewController: UIViewController {
     
     @IBAction func BoardButton(_ sender: UIButton) {
         self.Board.setBottomLines(borderColor: UIColor.black, hight: 2.0, bottom: 5)
-        self.Tour.setBottomLines(borderColor: UIColor.white, hight: 0.0, bottom: 0)
+        self.Tour.setBottomLines(borderColor: UIColor.white, hight: 2.0, bottom: 5)
         
         BookMarked {
             if(self.articleData?.data?.count == 0) {
                 let storyboard = UIStoryboard(name: "MyPage", bundle: nil)
-                let initialViewController = storyboard.instantiateViewController(withIdentifier: "NoBookMarkBoardViewController")
+                let initialViewController = storyboard.instantiateViewController(withIdentifier: "NoBookMarkBoardViewController") as! NoBookMarkBoardViewController
                 
                 self.currentVC?.willMove(toParent: nil)
                 self.currentVC?.view.removeFromSuperview()
                 self.currentVC?.removeFromParent()
+                
+                initialViewController.token = self.token
+                initialViewController.id = self.id
                 
                 self.addChild(initialViewController)
                 initialViewController.view.frame = self.ContainerView.bounds
@@ -180,7 +184,7 @@ class MyPageMainViewController: UIViewController {
             EditButton.backgroundColor = UIColor(red: 255/255, green: 112/255, blue: 66/255, alpha: 1.0)
             EditButton.layer.cornerRadius = 16
             EditButton.titleLabel?.text! = "완료"
-            EditButton.tintColor = UIColor.white
+            EditButton.setTitleColor(UIColor.white, for: .normal)
             let storyboard = UIStoryboard(name: "MyPage", bundle: nil)
             let initialViewController = storyboard.instantiateViewController(withIdentifier: "DeleteBoardViewController") as! DeleteBoardViewController
             
@@ -202,7 +206,7 @@ class MyPageMainViewController: UIViewController {
             self.now = 1
             EditButton.backgroundColor = UIColor.white
             EditButton.titleLabel?.text! = "편집"
-            EditButton.tintColor = UIColor(red: 115/255, green: 115/255, blue: 115/255, alpha: 1.0)
+            EditButton.setTitleColor(UIColor(red: 115/255, green: 115/255, blue: 115/255, alpha: 1.0), for: .normal)
             
             self.articleId = (currentVC as! DeleteBoardViewController).getArticleID()
             for id in self.articleId {
@@ -216,11 +220,14 @@ class MyPageMainViewController: UIViewController {
                 self.BookMarked {
                     if(self.articleData?.data?.count == 0) {
                         let storyboard = UIStoryboard(name: "MyPage", bundle: nil)
-                        let initialViewController = storyboard.instantiateViewController(withIdentifier: "NoBookMarkBoardViewController")
+                        let initialViewController = storyboard.instantiateViewController(withIdentifier: "NoBookMarkBoardViewController") as! NoBookMarkBoardViewController
                         
                         self.currentVC?.willMove(toParent: nil)
                         self.currentVC?.view.removeFromSuperview()
                         self.currentVC?.removeFromParent()
+                        
+                        initialViewController.token = self.token
+                        initialViewController.id = self.id
                         
                         self.addChild(initialViewController)
                         initialViewController.view.frame = self.ContainerView.bounds
@@ -255,7 +262,7 @@ class MyPageMainViewController: UIViewController {
             self.now = 5
             EditButton.backgroundColor = UIColor(red: 255/255, green: 112/255, blue: 66/255, alpha: 1.0)
             EditButton.titleLabel?.text! = "완료"
-            EditButton.tintColor = UIColor.white
+            EditButton.setTitleColor(UIColor.white, for: .normal)
             let storyboard = UIStoryboard(name: "MyPage", bundle: nil)
             let initialViewController = storyboard.instantiateViewController(withIdentifier: "DeleteTourViewController") as! DeleteTourViewController
             
@@ -278,13 +285,13 @@ class MyPageMainViewController: UIViewController {
             self.now = 4
             EditButton.backgroundColor = UIColor.white
             EditButton.titleLabel?.text! = "편집"
-            EditButton.tintColor = UIColor(red: 115/255, green: 115/255, blue: 115/255, alpha: 1.0)
+            EditButton.setTitleColor(UIColor(red: 115/255, green: 115/255, blue: 115/255, alpha: 1.0), for: .normal)
             
             let dispatchGroup = DispatchGroup()
             let storyboard = UIStoryboard(name: "MyPage", bundle: nil)
             let initialViewController = storyboard.instantiateViewController(withIdentifier: "DeleteTourViewController") as! DeleteTourViewController
             
-            self.tourId = initialViewController.getArticleID()
+            self.tourId = (currentVC as! DeleteTourViewController).getArticleID()
             
             for id in self.tourId {
                 dispatchGroup.enter()
@@ -297,7 +304,10 @@ class MyPageMainViewController: UIViewController {
                 self.tourBookMark {
                     if(self.tourData?.data?.count == 0) {
                         let storyboard = UIStoryboard(name: "MyPage", bundle: nil)
-                        let initialViewController = storyboard.instantiateViewController(withIdentifier: "NoTourViewController")
+                        let initialViewController = storyboard.instantiateViewController(withIdentifier: "NoTourViewController") as! NoTourViewController
+                        
+                        initialViewController.token = self.token
+                        initialViewController.id = self.id
                         
                         self.currentVC?.willMove(toParent: nil)
                         self.currentVC?.view.removeFromSuperview()
@@ -368,6 +378,7 @@ extension MyPageMainViewController {
                     print(err)
                 case .pathErr:
                     print("pathErr")
+                    completion()
                 case .serverErr:
                     print("serverErr")
                 case .networkFail:
@@ -385,6 +396,7 @@ extension MyPageMainViewController {
                 case .requsetErr(let err) :
                     print(err)
                 case .pathErr:
+                    completion()
                     print("pathErr")
                 case .serverErr:
                     print("serverErr")

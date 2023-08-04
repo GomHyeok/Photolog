@@ -8,11 +8,12 @@
 import UIKit
 
 class NoBookMarkBoardViewController: UIViewController {
-    weak var delegate : homeDelegate?
 
     @IBOutlet weak var BookMarkLabel: UILabel!
     @IBOutlet weak var BoardButton: UIButton!
     
+    var token : String = ""
+    var id : Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,13 @@ class NoBookMarkBoardViewController: UIViewController {
     
     
     @IBAction func board(_ sender: UIButton) {
-        delegate?.switchToBoard()
+        let storyboard = UIStoryboard(name: "Board", bundle: nil)
+        if let board = storyboard.instantiateViewController(withIdentifier: "BoardMainViewController") as? BoardMainViewController {
+            board.token = self.token
+            board.id = self.id
+            
+            self.navigationController?.pushViewController(board, animated: true)
+        }
+        else {print("board 문제")}
     }
 }

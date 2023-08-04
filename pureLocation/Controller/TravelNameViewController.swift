@@ -55,7 +55,7 @@ class TravelNameViewController: UIViewController {
         self.NextButton.layer.borderWidth=1
         self.NextButton.layer.borderColor = self.NextButton.backgroundColor?.cgColor
         
-        NameFiled.borderStyle = .roundedRect
+        NameFiled.borderStyle = .none
 
         let red: CGFloat = 255.0 / 255.0
         let green: CGFloat = 112.0 / 255.0

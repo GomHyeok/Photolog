@@ -105,14 +105,13 @@ extension SummaryViewController {
 
 extension SummaryViewController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 2
-
+        return 10
     }
 }
 
 extension SummaryViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.datas?.data?.locationImg.count ?? 0
+        return self.datas?.data?.locationImg.count ?? 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -157,6 +156,6 @@ extension SummaryViewController : UICollectionViewDataSource {
 extension SummaryViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width - 50, height: collectionView.bounds.height-20)
+        return CGSize(width: collectionView.bounds.width - 16, height: collectionView.bounds.height-20)
     }
 }

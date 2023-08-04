@@ -717,7 +717,7 @@
                                         </constraints>
                                     </view>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="S2t-WY-i9v">
-                                        <rect key="frame" x="0.0" y="126.33333333333337" width="375" height="506"/>
+                                        <rect key="frame" x="16" y="126.33333333333337" width="359" height="506"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vxy-R6-IgR">
                                             <size key="itemSize" width="370" height="569"/>
@@ -727,7 +727,7 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="SummaryViewCollectionViewCell" reuseIdentifier="SummaryViewCollectionViewCell" id="o0L-PQ-Yv7" userLabel="SummaryViewCollectionViewCell" customClass="SummaryViewCollectionViewCell" customModule="pureLocation" customModuleProvider="target">
-                                                <rect key="frame" x="2.6666666666666665" y="0.0" width="370" height="569"/>
+                                                <rect key="frame" x="-5.666666666666667" y="0.0" width="370" height="569"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Qis-og-mFV">
                                                     <rect key="frame" x="0.0" y="0.0" width="370" height="569"/>
@@ -812,7 +812,7 @@
                                                         <constraint firstItem="IPH-at-VWP" firstAttribute="leading" secondItem="chz-Ta-PyZ" secondAttribute="leading" id="BGR-PS-sWe"/>
                                                         <constraint firstItem="nZ8-Fc-RbY" firstAttribute="leading" secondItem="Qis-og-mFV" secondAttribute="leading" id="EHT-jm-nBI"/>
                                                         <constraint firstItem="nZ8-Fc-RbY" firstAttribute="top" secondItem="Qis-og-mFV" secondAttribute="top" constant="20" id="L5t-RA-OgJ"/>
-                                                        <constraint firstItem="chz-Ta-PyZ" firstAttribute="leading" secondItem="Qis-og-mFV" secondAttribute="leading" constant="16" id="Nf5-JN-dIg"/>
+                                                        <constraint firstItem="chz-Ta-PyZ" firstAttribute="leading" secondItem="Qis-og-mFV" secondAttribute="leading" id="Nf5-JN-dIg"/>
                                                         <constraint firstItem="IPH-at-VWP" firstAttribute="top" secondItem="chz-Ta-PyZ" secondAttribute="top" id="Pwg-fE-gc0"/>
                                                         <constraint firstItem="chz-Ta-PyZ" firstAttribute="trailing" secondItem="IPH-at-VWP" secondAttribute="trailing" id="Vz9-Tg-td2"/>
                                                         <constraint firstAttribute="bottom" secondItem="rRL-ak-we0" secondAttribute="bottom" id="aG7-0Z-grd"/>
@@ -865,7 +865,7 @@
                                     <constraint firstAttribute="trailing" secondItem="AVM-FD-bgB" secondAttribute="trailing" id="QoJ-EP-fyM"/>
                                     <constraint firstAttribute="bottom" secondItem="AVM-FD-bgB" secondAttribute="bottom" id="TXs-Gg-AyI"/>
                                     <constraint firstItem="AVM-FD-bgB" firstAttribute="top" secondItem="S2t-WY-i9v" secondAttribute="bottom" id="WU4-J4-ssN"/>
-                                    <constraint firstItem="S2t-WY-i9v" firstAttribute="leading" secondItem="iL8-k9-kCh" secondAttribute="leading" id="YFF-nO-dK0"/>
+                                    <constraint firstItem="S2t-WY-i9v" firstAttribute="leading" secondItem="iL8-k9-kCh" secondAttribute="leading" constant="16" id="YFF-nO-dK0"/>
                                     <constraint firstItem="FG6-bC-ZNb" firstAttribute="leading" secondItem="iL8-k9-kCh" secondAttribute="leading" id="bDo-ap-R6I"/>
                                     <constraint firstItem="S2t-WY-i9v" firstAttribute="height" secondItem="FG6-bC-ZNb" secondAttribute="height" multiplier="4" id="ecb-hh-qrf"/>
                                     <constraint firstItem="FG6-bC-ZNb" firstAttribute="top" secondItem="iL8-k9-kCh" secondAttribute="top" id="hAa-EY-rkf"/>
@@ -931,9 +931,9 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="여행 일지 01" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="0xk-Ga-4h1">
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="여행 일지 01" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="0xk-Ga-4h1">
                                                         <rect key="frame" x="20" y="108.66666666666666" width="335" height="64"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="64" id="x9L-Ks-8bQ"/>
                                                         </constraints>
