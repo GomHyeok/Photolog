@@ -87,4 +87,10 @@ struct APIConstants {
     static let TourBookmaredkURL = baseURL + "/api/user/tour"
     
     static let TourBookmarkURL = baseURL + "/api/tour/bookmark"
+    
+    //tourinfo
+    static let TourURL = baseURL + "/api/tour/tag?"
+    
+    //
+    static let TourContentURL = baseURL + "/api/tour/contentId/"
 }

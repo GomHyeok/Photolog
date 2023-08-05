@@ -929,6 +929,69 @@ class UserService {
         }
     }
     
+    func Tour(token : String, page : Int, tag : String?, completion : @escaping (NetworkResult<Any>) -> Void) {
+        var url = APIConstants.TourURL + "page=" + String(page) + "&size=30"
+        
+        if tag != "" && tag != nil{
+            url += "&keyword="
+            url += tag!
+        }
+        
+        let headers : HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization" : token
+        ]
+        let dataRequest = AF.request(
+            url,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: headers
+        )
+        
+        dataRequest.responseData{
+            response in
+            switch response.result {
+                case .success :
+                    guard let statusCode = response.response?.statusCode else {return}
+                    guard let value = response.value else {return}
+                    
+                    let networkResult = self.judgeStatus(by : statusCode, value, types: "Tour")
+                    completion(networkResult)
+                case .failure :
+                    completion(.networkFail)
+            }
+        }
+    }
+    
+    func TourInfo(token : String, contentId : Int, completion : @escaping (NetworkResult<Any>) -> Void) {
+        var url = APIConstants.TourContentURL + String(contentId)
+        
+        let headers : HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization" : token
+        ]
+        let dataRequest = AF.request(
+            url,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: headers
+        )
+        
+        dataRequest.responseData{
+            response in
+            switch response.result {
+                case .success :
+                    guard let statusCode = response.response?.statusCode else {return}
+                    guard let value = response.value else {return}
+                    
+                    let networkResult = self.judgeStatus(by : statusCode, value, types: "TourContent")
+                    completion(networkResult)
+                case .failure :
+                    completion(.networkFail)
+            }
+        }
+    }
+    
 //MARK: - judgeStatus
     private func judgeStatus(by statusCode : Int, _ data:Data, types : String) -> NetworkResult<Any> {
         switch statusCode {
@@ -1099,6 +1162,18 @@ class UserService {
         
         else if types == "TourBookMarked" {
             guard let decoded = try? decoder.decode(TourBookMarkResponse.self, from: data)
+            else {return .pathErr}
+            decodeData = decoded
+        }
+        
+        else if types == "Tour" {
+            guard let decoded = try? decoder.decode(TourResponse.self, from: data)
+            else {return .pathErr}
+            decodeData = decoded
+        }
+        
+        else if types == "TourContent" {
+            guard let decoded = try? decoder.decode(TourInfoResponse.self, from: data)
             else {return .pathErr}
             decodeData = decoded
         }

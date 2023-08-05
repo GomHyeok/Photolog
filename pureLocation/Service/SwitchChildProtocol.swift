@@ -23,4 +23,5 @@ protocol homeDelegate : AnyObject {
     func switchToBoard()
     func switchToHome()
     func switchToMypage()
+    func switchToTag()
 }

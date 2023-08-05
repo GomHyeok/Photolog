@@ -89,6 +89,10 @@ class MyPageMainViewController: UIViewController {
         self.delegate?.switchToHome()
     }
     
+    @IBAction func Tag(_ sender: UIButton) {
+        self.delegate?.switchToTag()
+    }
+    
     @IBAction func TourButton(_ sender: UIButton) {
         self.Board.setBottomLines(borderColor: UIColor.white, hight: 2.0, bottom: 5)
         self.Tour.setBottomLines(borderColor: UIColor.black, hight: 2.0, bottom: 5)

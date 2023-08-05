@@ -96,6 +96,11 @@ class AfterKeywordViewController: UIViewController {
     @IBAction func MyPageButton(_ sender: UIButton) {
         delegate?.switchToMypage()
     }
+    
+    
+    @IBAction func Tag(_ sender: UIButton) {
+        delegate?.switchToTag()
+    }
 }
 
 extension AfterKeywordViewController {

@@ -188,6 +188,9 @@
                                                 <buttonConfiguration key="configuration" style="plain">
                                                     <backgroundConfiguration key="background" image="insta"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="Tag:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="iXm-1i-xZQ"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="emS-LN-AQ0" userLabel="center">
                                                 <rect key="frame" x="184.66666666666666" y="35.333333333333371" width="24" height="24"/>

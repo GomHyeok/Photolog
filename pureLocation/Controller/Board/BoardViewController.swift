@@ -125,6 +125,9 @@ class BoardViewController: UIViewController {
         }
         self.BookNum.text! = String(self.settingData?.data?.bookmarks ?? 0)
     }
+    
+    
+
 }
 
 extension BoardViewController : UITableViewDataSource {
@@ -315,7 +318,7 @@ extension BoardViewController {
                 case .pathErr:
                     print("pathErr")
                 case .serverErr:
-                    self.alert(message: "내가 쓴 글에는 신고할 수 없어요")
+                    self.alert(message: "내가 쓴 글에는 좋아요를 누를 수 없어요")
                     print("serverErr")
                 case .networkFail:
                     print("networkFail")
@@ -334,7 +337,7 @@ extension BoardViewController {
                 case .pathErr:
                     print("pathErr")
                 case .serverErr:
-                    self.alert(message: "내가 쓴 글에는 신고할 수 없어요")
+                    self.alert(message: "내가 쓴 글에는 좋아요를 누를 수 없어요")
                     print("serverErr")
                 case .networkFail:
                     print("networkFail")
@@ -353,7 +356,7 @@ extension BoardViewController {
                 case .pathErr:
                     print("pathErr")
                 case .serverErr:
-                    self.alert(message: "내가 쓴 글에는 신고할 수 없어요")
+                    self.alert(message: "내가 쓴 글에는 북마크 할 수 없어요")
                     print("serverErr")
                 case .networkFail:
                     print("networkFail")
@@ -372,7 +375,7 @@ extension BoardViewController {
                 case .pathErr:
                     print("pathErr")
                 case .serverErr:
-                    self.alert(message: "내가 쓴 글에는 신고할 수 없어요")
+                    self.alert(message: "내가 쓴 글에는 북마크 할 수 없어요")
                     print("serverErr")
                 case .networkFail:
                     print("networkFail")

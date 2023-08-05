@@ -70,6 +70,18 @@
 		D20BCA792A7C7AC900F396AE /* DeleteTourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA782A7C7AC900F396AE /* DeleteTourViewController.swift */; };
 		D20BCA7B2A7C7AD900F396AE /* NoTourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA7A2A7C7AD900F396AE /* NoTourViewController.swift */; };
 		D20BCA7D2A7C84CB00F396AE /* TourBookMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA7C2A7C84CB00F396AE /* TourBookMark.swift */; };
+		D20BCA812A7D50BC00F396AE /* TagPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D20BCA802A7D50BC00F396AE /* TagPage.storyboard */; };
+		D20BCA842A7DE11500F396AE /* TagMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA832A7DE11500F396AE /* TagMainViewController.swift */; };
+		D20BCA862A7DE7B500F396AE /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA852A7DE7B500F396AE /* TagCell.swift */; };
+		D20BCA882A7DE81900F396AE /* TagCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA872A7DE81900F396AE /* TagCollectionViewController.swift */; };
+		D20BCA8A2A7DEF3B00F396AE /* TourModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA892A7DEF3B00F396AE /* TourModel.swift */; };
+		D20BCA8C2A7E029B00F396AE /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA8B2A7E029B00F396AE /* SearchViewController.swift */; };
+		D20BCA8E2A7E3EDB00F396AE /* ArticleTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA8D2A7E3EDB00F396AE /* ArticleTagCell.swift */; };
+		D20BCA902A7E3F5000F396AE /* ArticleTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA8F2A7E3F5000F396AE /* ArticleTagViewController.swift */; };
+		D20BCA922A7E41E300F396AE /* otherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA912A7E41E300F396AE /* otherCell.swift */; };
+		D20BCA942A7E475C00F396AE /* TagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA932A7E475C00F396AE /* TagViewController.swift */; };
+		D20BCA962A7E49A400F396AE /* TagViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA952A7E49A400F396AE /* TagViewCell.swift */; };
+		D20BCA982A7E4AFA00F396AE /* TourInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA972A7E4AFA00F396AE /* TourInfoModel.swift */; };
 		D22A57CA2A6B107900B5E55B /* MapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22A57C92A6B107900B5E55B /* MapTableViewCell.swift */; };
 		D22A57CC2A6B108600B5E55B /* LocationInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22A57CB2A6B108600B5E55B /* LocationInfoCell.swift */; };
 		D22D8A8F2A646B100015CB24 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22D8A8E2A646B100015CB24 /* CollectionViewCell.swift */; };
@@ -191,6 +203,18 @@
 		D20BCA782A7C7AC900F396AE /* DeleteTourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteTourViewController.swift; sourceTree = "<group>"; };
 		D20BCA7A2A7C7AD900F396AE /* NoTourViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTourViewController.swift; sourceTree = "<group>"; };
 		D20BCA7C2A7C84CB00F396AE /* TourBookMark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourBookMark.swift; sourceTree = "<group>"; };
+		D20BCA802A7D50BC00F396AE /* TagPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TagPage.storyboard; sourceTree = "<group>"; };
+		D20BCA832A7DE11500F396AE /* TagMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagMainViewController.swift; sourceTree = "<group>"; };
+		D20BCA852A7DE7B500F396AE /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
+		D20BCA872A7DE81900F396AE /* TagCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCollectionViewController.swift; sourceTree = "<group>"; };
+		D20BCA892A7DEF3B00F396AE /* TourModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourModel.swift; sourceTree = "<group>"; };
+		D20BCA8B2A7E029B00F396AE /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		D20BCA8D2A7E3EDB00F396AE /* ArticleTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTagCell.swift; sourceTree = "<group>"; };
+		D20BCA8F2A7E3F5000F396AE /* ArticleTagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTagViewController.swift; sourceTree = "<group>"; };
+		D20BCA912A7E41E300F396AE /* otherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = otherCell.swift; sourceTree = "<group>"; };
+		D20BCA932A7E475C00F396AE /* TagViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewController.swift; sourceTree = "<group>"; };
+		D20BCA952A7E49A400F396AE /* TagViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagViewCell.swift; sourceTree = "<group>"; };
+		D20BCA972A7E4AFA00F396AE /* TourInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourInfoModel.swift; sourceTree = "<group>"; };
 		D22A57C92A6B107900B5E55B /* MapTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTableViewCell.swift; sourceTree = "<group>"; };
 		D22A57CB2A6B108600B5E55B /* LocationInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInfoCell.swift; sourceTree = "<group>"; };
 		D22D8A8E2A646B100015CB24 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
@@ -311,6 +335,7 @@
 				D29BD9572A5D970D0010587C /* LaunchScreen.storyboard */,
 				D20BCA322A75DF7A00F396AE /* Board.storyboard */,
 				D20BCA602A7B162100F396AE /* MyPage.storyboard */,
+				D20BCA802A7D50BC00F396AE /* TagPage.storyboard */,
 			);
 			path = StoryBoards;
 			sourceTree = "<group>";
@@ -366,6 +391,18 @@
 			path = MyPage;
 			sourceTree = "<group>";
 		};
+		D20BCA822A7DE10400F396AE /* Tag */ = {
+			isa = PBXGroup;
+			children = (
+				D20BCA832A7DE11500F396AE /* TagMainViewController.swift */,
+				D20BCA872A7DE81900F396AE /* TagCollectionViewController.swift */,
+				D20BCA8B2A7E029B00F396AE /* SearchViewController.swift */,
+				D20BCA8F2A7E3F5000F396AE /* ArticleTagViewController.swift */,
+				D20BCA932A7E475C00F396AE /* TagViewController.swift */,
+			);
+			path = Tag;
+			sourceTree = "<group>";
+		};
 		D22D8A8D2A646AD30015CB24 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -377,6 +414,7 @@
 		D2541F662A5DA216000AC372 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D20BCA822A7DE10400F396AE /* Tag */,
 				D20BCA622A7B992100F396AE /* Mypage */,
 				D231BA692A63CAF5009D0B82 /* RegisterViewController.swift */,
 				D231BA722A642721009D0B82 /* FindPasswordViewController.swift */,
@@ -425,6 +463,8 @@
 				D20BCA722A7C787A00F396AE /* MyPageTour.swift */,
 				D20BCA742A7C789500F396AE /* TourDelete.swift */,
 				D20BCA7C2A7C84CB00F396AE /* TourBookMark.swift */,
+				D20BCA892A7DEF3B00F396AE /* TourModel.swift */,
+				D20BCA972A7E4AFA00F396AE /* TourInfoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -450,6 +490,10 @@
 				D20BCA2B2A7505C700F396AE /* BudgetCell.swift */,
 				D20BCA2F2A75CE4E00F396AE /* DaysCell.swift */,
 				D20BCA392A75FF3600F396AE /* MainBoardCell.swift */,
+				D20BCA852A7DE7B500F396AE /* TagCell.swift */,
+				D20BCA8D2A7E3EDB00F396AE /* ArticleTagCell.swift */,
+				D20BCA912A7E41E300F396AE /* otherCell.swift */,
+				D20BCA952A7E49A400F396AE /* TagViewCell.swift */,
 			);
 			path = DataStruct;
 			sourceTree = "<group>";
@@ -591,6 +635,7 @@
 				D29BD9592A5D970D0010587C /* LaunchScreen.storyboard in Resources */,
 				D231BA752A642876009D0B82 /* Home.storyboard in Resources */,
 				D2E14D282A6FFD9E000D2CF0 /* Pretendard-Regular.otf in Resources */,
+				D20BCA812A7D50BC00F396AE /* TagPage.storyboard in Resources */,
 				D20BCA612A7B162100F396AE /* MyPage.storyboard in Resources */,
 				D20BCA5D2A7A7BA600F396AE /* Pretendard-SemiBold.otf in Resources */,
 				D205E90D2A69CB5900E7D0A5 /* GoogleMaps.bundle in Resources */,
@@ -640,6 +685,7 @@
 				D20BCA672A7BC3C700F396AE /* BookMarkBoard.swift in Sources */,
 				D20BCA532A793DA800F396AE /* BoardBudget.swift in Sources */,
 				D20BCA2A2A7442A600F396AE /* MakeArticleModel.swift in Sources */,
+				D20BCA8C2A7E029B00F396AE /* SearchViewController.swift in Sources */,
 				D253B9362A72EA4100326A84 /* DayLogTagCell.swift in Sources */,
 				D2541F7F2A5E8145000AC372 /* LoginModel.swift in Sources */,
 				D20BCA772A7C7ABA00F396AE /* BookMarkTourViewController.swift in Sources */,
@@ -649,8 +695,10 @@
 				D20BCA452A7723D400F396AE /* NigntCell.swift in Sources */,
 				D2541F892A604BBA000AC372 /* PhotoSaveModel.swift in Sources */,
 				D2323EEE2A6677D30040F165 /* DayLogcollectionViewCell.swift in Sources */,
+				D20BCA882A7DE81900F396AE /* TagCollectionViewController.swift in Sources */,
 				D20BCA412A77239F00F396AE /* PlaceCell.swift in Sources */,
 				D20BCA6D2A7BCCE200F396AE /* BookMarkBoardViewController.swift in Sources */,
+				D20BCA8E2A7E3EDB00F396AE /* ArticleTagCell.swift in Sources */,
 				D20BCA492A77242100F396AE /* ThemaCell.swift in Sources */,
 				D20BCA6B2A7BCC7800F396AE /* NoBookMarkBoardViewController.swift in Sources */,
 				D20BCA4D2A791E2400F396AE /* afterKeyword.swift in Sources */,
@@ -660,18 +708,23 @@
 				D2541F872A6044C2000AC372 /* TravelModel.swift in Sources */,
 				D20BCA2C2A7505C700F396AE /* BudgetCell.swift in Sources */,
 				D2541F8D2A612259000AC372 /* testmodel.swift in Sources */,
+				D20BCA842A7DE11500F396AE /* TagMainViewController.swift in Sources */,
 				D2323EDE2A6547B60040F165 /* SummaryViewController.swift in Sources */,
 				D205E9302A69CCB500E7D0A5 /* MapViewController.swift in Sources */,
 				D20BCA2E2A752CD100F396AE /* FailModel.swift in Sources */,
 				D20BCA3C2A76904600F396AE /* ArticleFilteringModel.swift in Sources */,
 				D231BA772A6428C8009D0B82 /* HomeViewController.swift in Sources */,
+				D20BCA8A2A7DEF3B00F396AE /* TourModel.swift in Sources */,
+				D20BCA922A7E41E300F396AE /* otherCell.swift in Sources */,
 				D2323EEA2A6669FD0040F165 /* StaticModel.swift in Sources */,
 				D25343A92A673D9D007558CD /* TotalViewController.swift in Sources */,
+				D20BCA862A7DE7B500F396AE /* TagCell.swift in Sources */,
 				D20BCA7B2A7C7AD900F396AE /* NoTourViewController.swift in Sources */,
 				D2541FB82A627D62000AC372 /* LoginViewController.swift in Sources */,
 				D2E14D322A709E10000D2CF0 /* TotalMapViewController.swift in Sources */,
 				D20BCA3E2A77235500F396AE /* KeywordViewController.swift in Sources */,
 				D20BCA642A7B993100F396AE /* MyPageMainViewController.swift in Sources */,
+				D20BCA962A7E49A400F396AE /* TagViewCell.swift in Sources */,
 				D253B9382A72ED9800326A84 /* DayTagViewController.swift in Sources */,
 				D25343AD2A67B146007558CD /* TotalTableViewCell.swift in Sources */,
 				D2541F722A5E6FBC000AC372 /* NetworkResult.swift in Sources */,
@@ -681,12 +734,15 @@
 				D2E14D2A2A70022E000D2CF0 /* HomeCell.swift in Sources */,
 				D29BD94D2A5D970C0010587C /* AppDelegate.swift in Sources */,
 				D20BCA572A7949FC00F396AE /* DayLabel.swift in Sources */,
+				D20BCA982A7E4AFA00F396AE /* TourInfoModel.swift in Sources */,
 				D29BD94F2A5D970C0010587C /* SceneDelegate.swift in Sources */,
 				D2E14D2C2A700CAA000D2CF0 /* TravelAPIModel.swift in Sources */,
 				D20BCA282A74334700F396AE /* MapCollectionCell.swift in Sources */,
 				D20BCA4F2A79208A00F396AE /* AfterKeywordViewController.swift in Sources */,
 				D253B9422A739DC800326A84 /* SummuryMapcCell.swift in Sources */,
+				D20BCA902A7E3F5000F396AE /* ArticleTagViewController.swift in Sources */,
 				D2323EE22A6577730040F165 /* TravelNameViewController.swift in Sources */,
+				D20BCA942A7E475C00F396AE /* TagViewController.swift in Sources */,
 				D20BCA7D2A7C84CB00F396AE /* TourBookMark.swift in Sources */,
 				D20BCA792A7C7AC900F396AE /* DeleteTourViewController.swift in Sources */,
 			);

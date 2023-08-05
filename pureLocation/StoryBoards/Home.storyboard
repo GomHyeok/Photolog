@@ -264,7 +264,7 @@
                                                 </buttonConfiguration>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ellipse 3" translatesAutoresizingMaskIntoConstraints="NO" id="9vp-zr-u3t">
-                                                <rect key="frame" x="45.666666666666664" y="63.333333333333371" width="5" height="5"/>
+                                                <rect key="frame" x="45.666666666666657" y="63.333333333333371" width="5" height="5"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="5" id="ENR-1I-rFk"/>
                                                     <constraint firstAttribute="height" constant="5" id="Yia-Xi-OiP"/>
@@ -280,6 +280,9 @@
                                                 <buttonConfiguration key="configuration" style="plain">
                                                     <backgroundConfiguration key="background" image="insta"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="Tag:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="AYo-bi-yLv"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -622,6 +625,9 @@
                                                 <buttonConfiguration key="configuration" style="plain">
                                                     <backgroundConfiguration key="background" image="insta"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="Tag:" destination="pFb-jS-aWK" eventType="touchUpInside" id="Z46-g3-3iH"/>
+                                                </connections>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ellipse 3" translatesAutoresizingMaskIntoConstraints="NO" id="bX4-tp-E8Q">
                                                 <rect key="frame" x="46" y="57.333333333333371" width="5" height="5"/>

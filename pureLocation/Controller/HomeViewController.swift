@@ -94,6 +94,11 @@ class HomeViewController: UIViewController {
         delegate?.switchToMypage()
     }
     
+    @IBAction func Tag(_ sender: UIButton) {
+        delegate?.switchToTag()
+    }
+    
+    
     
     @IBAction func TravelCreate(_ sender: UIButton) {
         

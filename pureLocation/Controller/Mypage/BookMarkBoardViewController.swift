@@ -76,6 +76,6 @@ extension BookMarkBoardViewController : UITableViewDataSource {
             
             self.navigationController?.pushViewController(boardView, animated: true)
         }
-        else {print("summary 문제")}
+        else {print("board 문제")}
     }
 }

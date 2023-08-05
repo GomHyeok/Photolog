@@ -13,6 +13,10 @@ class HomeParentViewController: UIViewController, homeDelegate {
     var boardChild : BoardMainViewController!
     var keywordChild : AfterKeywordViewController!
     var myPageChild : MyPageMainViewController!
+    var tagChild : TagMainViewController!
+    var articleTag : ArticleTagViewController!
+    var tag : TagViewController!
+    
     var homeData : TravelAPIResponse?
     var token : String = ""
     var id : Int = 0
@@ -38,6 +42,13 @@ class HomeParentViewController: UIViewController, homeDelegate {
         let mypage = UIStoryboard(name: "MyPage", bundle: nil)
         myPageChild = mypage.instantiateViewController(withIdentifier: "MyPageMainViewController") as? MyPageMainViewController
         
+        let tagpage = UIStoryboard(name: "TagPage", bundle: nil)
+        tagChild = tagpage.instantiateViewController(withIdentifier: "TagMainViewController") as? TagMainViewController
+        
+        articleTag = tagpage.instantiateViewController(withIdentifier: "ArticleTagViewController") as? ArticleTagViewController
+        
+        tag = tagpage.instantiateViewController(withIdentifier: "TagViewController") as? TagViewController
+        
         firstChild.token = self.token
         firstChild.id = self.id
         
@@ -46,6 +57,9 @@ class HomeParentViewController: UIViewController, homeDelegate {
         secondChild.delegate = self
         boardChild.delegate = self
         myPageChild.delegate = self
+        tagChild.delegate = self
+        articleTag.delegate = self
+        tag.delegate = self
         
         currentViewController = firstChild
         
@@ -130,6 +144,21 @@ class HomeParentViewController: UIViewController, homeDelegate {
         addChild(myPageChild)
         view.addSubview(myPageChild.view)
         myPageChild.didMove(toParent: self)
+    }
+    
+    func switchToTag() {
+        currentViewController.willMove(toParent: nil)
+        currentViewController.view.removeFromSuperview()
+        currentViewController.removeFromParent()
+        
+        tagChild.token = self.token
+        tagChild.id = self.id
+        
+        currentViewController = tagChild
+        
+        addChild(tagChild)
+        view.addSubview(tagChild.view)
+        tagChild.didMove(toParent: self)
     }
     
 }

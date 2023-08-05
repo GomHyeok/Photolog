@@ -81,6 +81,10 @@ class BoardMainViewController: UIViewController {
     }
     
     
+    @IBAction func Tag(_ sender: UIButton) {
+        delegate?.switchToTag()
+    }
+    
     @IBAction func GradeButton(_ sender: UIButton) {
         filters["sort"] = nil
         ArticleFiltering {
@@ -104,7 +108,7 @@ class BoardMainViewController: UIViewController {
 
 extension BoardMainViewController {
     func ArticleFiltering(completion: @escaping () -> Void) {
-        UserService.shared.ArticleFiltering(token: token, Filters: filters, thema: []) {
+        UserService.shared.ArticleFiltering(token: token, Filters: filters, thema: themas) {
                 response in
                 switch response {
                     case .success(let data) :
