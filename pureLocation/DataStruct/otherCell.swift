@@ -10,4 +10,5 @@ import UIKit
 
 class otherCell : UITableViewCell {
     @IBOutlet weak var ContainerView: UIView!
+    @IBOutlet weak var ContainLabel: UILabel!
 }

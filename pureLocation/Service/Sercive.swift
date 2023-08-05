@@ -964,7 +964,7 @@ class UserService {
     }
     
     func TourInfo(token : String, contentId : Int, completion : @escaping (NetworkResult<Any>) -> Void) {
-        var url = APIConstants.TourContentURL + String(contentId)
+        let url = APIConstants.TourContentURL + String(contentId)
         
         let headers : HTTPHeaders = [
             "Content-Type": "application/json",
@@ -985,6 +985,71 @@ class UserService {
                     guard let value = response.value else {return}
                     
                     let networkResult = self.judgeStatus(by : statusCode, value, types: "TourContent")
+                    completion(networkResult)
+                case .failure :
+                    completion(.networkFail)
+            }
+        }
+    }
+    
+    func PhotoTag(token : String, tag : String?, page : Int, completion : @escaping (NetworkResult<Any>) -> Void) {
+        var url = APIConstants.PhotoTagURL + "page=" + String(page) + "&size=30"
+        
+        if tag != "" && tag != nil{
+            url += "&keyword="
+            url += tag!
+        }
+        
+        print(url)
+        
+        let headers : HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization" : token
+        ]
+        let dataRequest = AF.request(
+            url,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: headers
+        )
+        
+        dataRequest.responseData{
+            response in
+            switch response.result {
+                case .success :
+                    guard let statusCode = response.response?.statusCode else {return}
+                    guard let value = response.value else {return}
+                    
+                    let networkResult = self.judgeStatus(by : statusCode, value, types: "PhotoTag")
+                    completion(networkResult)
+                case .failure :
+                    completion(.networkFail)
+            }
+        }
+    }
+    
+    func PhotoInfo(token : String, photoId : Int, completion : @escaping (NetworkResult<Any>) -> Void) {
+        let url = APIConstants.PhotoInfo + String(photoId)
+        
+        let headers : HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization" : token
+        ]
+        let dataRequest = AF.request(
+            url,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: headers
+        )
+        
+        dataRequest.responseData{
+            response in
+            switch response.result {
+                case .success :
+                    guard let statusCode = response.response?.statusCode else {return}
+                    guard let value = response.value else {return}
+                    
+                    let networkResult = self.judgeStatus(by : statusCode, value, types: "PhotoInfo")
                     completion(networkResult)
                 case .failure :
                     completion(.networkFail)
@@ -1174,6 +1239,17 @@ class UserService {
         
         else if types == "TourContent" {
             guard let decoded = try? decoder.decode(TourInfoResponse.self, from: data)
+            else {return .pathErr}
+            decodeData = decoded
+        }
+        
+        else if types == "PhotoTag" {
+            guard let decoded = try? decoder.decode(PhotoResponse.self, from: data)
+            else {return .pathErr}
+            decodeData = decoded
+        }
+        else if types == "PhotoInfo" {
+            guard let decoded = try? decoder.decode(PhotoInfoResponse.self, from: data)
             else {return .pathErr}
             decodeData = decoded
         }

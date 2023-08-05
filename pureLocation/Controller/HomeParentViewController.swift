@@ -14,8 +14,6 @@ class HomeParentViewController: UIViewController, homeDelegate {
     var keywordChild : AfterKeywordViewController!
     var myPageChild : MyPageMainViewController!
     var tagChild : TagMainViewController!
-    var articleTag : ArticleTagViewController!
-    var tag : TagViewController!
     
     var homeData : TravelAPIResponse?
     var token : String = ""
@@ -45,21 +43,15 @@ class HomeParentViewController: UIViewController, homeDelegate {
         let tagpage = UIStoryboard(name: "TagPage", bundle: nil)
         tagChild = tagpage.instantiateViewController(withIdentifier: "TagMainViewController") as? TagMainViewController
         
-        articleTag = tagpage.instantiateViewController(withIdentifier: "ArticleTagViewController") as? ArticleTagViewController
-        
-        tag = tagpage.instantiateViewController(withIdentifier: "TagViewController") as? TagViewController
-        
-        firstChild.token = self.token
-        firstChild.id = self.id
-        
         // delegate 설정
         firstChild.delegate = self
         secondChild.delegate = self
         boardChild.delegate = self
         myPageChild.delegate = self
         tagChild.delegate = self
-        articleTag.delegate = self
-        tag.delegate = self
+        
+        firstChild.token = self.token
+        firstChild.id = self.id
         
         currentViewController = firstChild
         
@@ -116,6 +108,7 @@ class HomeParentViewController: UIViewController, homeDelegate {
     }
     
     func switchToHome() {
+        print("home")
         currentViewController.willMove(toParent: nil)
         currentViewController.view.removeFromSuperview()
         currentViewController.removeFromParent()

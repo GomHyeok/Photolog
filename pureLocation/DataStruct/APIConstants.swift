@@ -93,4 +93,10 @@ struct APIConstants {
     
     //
     static let TourContentURL = baseURL + "/api/tour/contentId/"
+    
+    //photoTag
+    static let PhotoTagURL = baseURL + "/api/photo/tag?"
+    
+    //photoInfo
+    static let PhotoInfo = baseURL + "/api/photo/"
 }

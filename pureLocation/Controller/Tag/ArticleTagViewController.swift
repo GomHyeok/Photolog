@@ -8,12 +8,11 @@
 import UIKit
 
 class ArticleTagViewController: UIViewController {
-    weak var delegate : homeDelegate?
     
     var token : String = ""
     var id : Int = 0
     var ArticleId : Int = 0
-    var settingData : ArticleInfoResponse?
+    var settingData : PhotoInfoResponse?
     var bookmarkStatus = false
     var articleData : ArticlesFilteringResponse!
 
@@ -22,6 +21,7 @@ class ArticleTagViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
+        self.navigationItem.title = ""
         
         if let backButtonImage = UIImage(named: "back")?.withRenderingMode(.alwaysOriginal) {
             let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonAction))
@@ -42,7 +42,7 @@ class ArticleTagViewController: UIViewController {
         TableViewin.delegate = self
         TableViewin.dataSource = self
         
-        articleInfo() {
+        photoInfo {
             self.TableViewin.reloadData()
         }
         
@@ -55,21 +55,48 @@ class ArticleTagViewController: UIViewController {
     
     
     @IBAction func home(_ sender: UIButton) {
-        delegate?.switchToHome()
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        if let home = storyboard.instantiateViewController(withIdentifier: "HomeParentViewController") as? HomeParentViewController{
+            home.token = self.token
+            home.id = self.id
+            
+            home.navigationController?.isNavigationBarHidden = true
+            self.navigationController?.pushViewController(home, animated: true)
+        }
     }
     
     
     @IBAction func Board(_ sender: UIButton) {
-        delegate?.switchToBoard()
+        let storyboard = UIStoryboard(name: "Board", bundle: nil)
+        if let home = storyboard.instantiateViewController(withIdentifier: "BoardMainViewController") as? BoardMainViewController{
+            home.token = self.token
+            home.id = self.id
+            
+            home.navigationController?.isNavigationBarHidden = true
+            self.navigationController?.pushViewController(home, animated: true)
+        }
     }
     
     
     @IBAction func Ta(_ sender: Any) {
-        delegate?.switchToTag()
+        let storyboard = UIStoryboard(name: "TagPage", bundle: nil)
+        if let home = storyboard.instantiateViewController(withIdentifier: "TagMainViewController") as? TagMainViewController{
+            home.token = self.token
+            home.id = self.id
+            
+            home.navigationController?.isNavigationBarHidden = true
+            self.navigationController?.pushViewController(home, animated: true)
+        }
     }
     
     @IBAction func MyPage(_ sender: UIButton) {
-        delegate?.switchToMypage()
+        let storyboard = UIStoryboard(name: "MyPage", bundle: nil)
+        if let home = storyboard.instantiateViewController(withIdentifier: "MyPageMainViewController") as? MyPageMainViewController{
+            home.token = self.token
+            home.id = self.id
+            
+            self.navigationController?.pushViewController(home, animated: true)
+        }
     }
     
     func createMenu() -> UIMenu {
@@ -102,78 +129,71 @@ extension ArticleTagViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleTagCell", for: indexPath) as! ArticleTagCell
-            if settingData?.data?.days?.count ?? 0 > 0 {
-                cell.CellImage.kf.setImage(with: URL(string: self.settingData?.data?.days?[0].locations?[0].photoUrls[0] ?? "")!)
-                cell.CellTitle.text = self.settingData?.data?.title ?? ""
-                cell.CellContent.text = self.settingData?.data?.summary ?? ""
-            }
-            if bookmarkStatus {
-                cell.BookMark.setImage(UIImage(named: "blackBook"), for: .normal)
-            }
-            else {
-                cell.BookMark.setImage(UIImage(named: "bookmark"), for: .normal)
-            }
-            cell.BookMark.addTarget(self, action: #selector(bookmarks), for: .touchUpInside)
+            
+            cell.CellImage.kf.setImage(with: URL(string: self.settingData?.data.photoUrl ?? ""))
+            cell.CellTitle.text = self.settingData?.data.articleTitle ?? ""
+            cell.CellContent.text = self.settingData?.data.locationContent ?? ""
+            cell.ArticleButton.tag = self.settingData?.data.articleId ?? 0
+            cell.ArticleButton.addTarget(self, action: #selector(switchArticle), for: .touchUpInside)
             
             return cell
         }
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "otherCell", for: indexPath) as! otherCell
+            cell.ContainLabel.font = UIFont(name: "Pretendard-SemiBold", size: 16)
             
-            ArticleFiltering {
-                let storyboard = UIStoryboard(name: "TagPage", bundle: nil)
-                let initialViewController = storyboard.instantiateViewController(withIdentifier: "TagCollectionViewController") as! TagCollectionViewController
-                
-                initialViewController.token = self.token
-                initialViewController.id = self.id
-                initialViewController.articleData = self.articleData
-                initialViewController.kind = false
-                
-                self.addChild(initialViewController)
-                initialViewController.view.frame = cell.ContainerView.bounds
-                cell.ContainerView.addSubview(initialViewController.view)
-                initialViewController.didMove(toParent: self)
-            }
+            let storyboard = UIStoryboard(name: "TagPage", bundle: nil)
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "TagCollectionViewController") as! TagCollectionViewController
+            
+            initialViewController.token = self.token
+            initialViewController.id = self.id
+            initialViewController.kind = false
+            
+            self.addChild(initialViewController)
+            initialViewController.view.frame = cell.ContainerView.bounds
+            cell.ContainerView.addSubview(initialViewController.view)
+            initialViewController.didMove(toParent: self)
             
             return cell
         }
     }
     
-    @objc func bookmarks(_ sender : UIButton) {
-        if bookmarkStatus {
-            bookmarkCancle()
-            bookmarkStatus = false
-            sender.setImage(UIImage(named: "bookmark"), for: .normal)
+    @objc func switchArticle(_ sender : UIButton) {
+        let storyboard = UIStoryboard(name: "Board", bundle: nil)
+        if let home = storyboard.instantiateViewController(withIdentifier: "BoardViewController") as? BoardViewController{
+            home.token = self.token
+            home.id = self.id
+            home.ArticleId = sender.tag
             
-            self.settingData?.data?.bookmarks -= 1
-        }
-        else {
-            bookmark()
-            bookmarkStatus = true
-            sender.setImage(UIImage(named: "blackBook"), for: .normal)
+            self.navigationController?.pushViewController(home, animated: true)
         }
     }
+    
 }
 
 extension ArticleTagViewController {
-    func articleInfo (completion: @escaping () -> Void) {
-        UserService.shared.ArticleInfo(token: token, articleId: ArticleId) {
-                response in
-                switch response {
-                    case .success(let data) :
-                    guard let data = data as? ArticleInfoResponse else {return}
-                        self.settingData = data
-                        completion()
-                    case .requsetErr(let err) :
-                        print(err)
-                    case .pathErr:
-                        print("pathErr")
-                    case .serverErr:
-                        print("serverErr")
-                    case .networkFail:
-                        print("networkFail")
-                }
+    
+    func photoInfo(completion : @escaping () -> Void) {
+        UserService.shared.PhotoInfo(token: token, photoId: ArticleId) {
+            response in
+            switch response {
+                case .success(let data) :
+                    guard let data = data as? PhotoInfoResponse else { return }
+                    self.settingData = data
+                    print(data)
+                    completion()
+                case .requsetErr(let err) :
+                    print(err)
+                case .pathErr:
+                    print("pathErr")
+                case .serverErr:
+                    self.alert(message: "내가 쓴 글에는 신고할 수 없어요")
+                    print("serverErr")
+                case .networkFail:
+                    print("networkFail")
+            }
         }
+        
     }
     
     func articleReport (completion : @escaping () -> Void) {
@@ -244,26 +264,6 @@ extension ArticleTagViewController {
                 case .networkFail:
                     print("networkFail")
             }
-        }
-    }
-    
-    func ArticleFiltering(completion: @escaping () -> Void) {
-        UserService.shared.ArticleFiltering(token: token, Filters: [:], thema: []) {
-                response in
-                switch response {
-                    case .success(let data) :
-                    guard let data = data as? ArticlesFilteringResponse else {return}
-                        self.articleData = data
-                        completion()
-                    case .requsetErr(let err) :
-                        print(err)
-                    case .pathErr:
-                        print("pathErr")
-                    case .serverErr:
-                        print("serverErr")
-                    case .networkFail:
-                        print("networkFail")
-                }
         }
     }
     

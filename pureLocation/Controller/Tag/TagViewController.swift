@@ -8,7 +8,6 @@
 import UIKit
 
 class TagViewController: UIViewController {
-    weak var delegate : homeDelegate?
     
     var token : String = ""
     var id : Int = 0
@@ -17,6 +16,7 @@ class TagViewController: UIViewController {
     var bookmarkStatus : Bool = false
     
     @IBOutlet weak var TableViewin: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,20 +45,50 @@ class TagViewController: UIViewController {
     }
     
     @IBAction func Home(_ sender: UIButton) {
-        delegate?.switchToHome()
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        if let home = storyboard.instantiateViewController(withIdentifier: "HomeParentViewController") as? HomeParentViewController{
+            home.token = self.token
+            home.id = self.id
+            
+            home.navigationController?.isNavigationBarHidden = true
+            self.navigationController?.pushViewController(home, animated: true)
+        }
     }
     
     
     @IBAction func My(_ sender: Any) {
-        delegate?.switchToMypage()
+        let storyboard = UIStoryboard(name: "MyPage", bundle: nil)
+        if let home = storyboard.instantiateViewController(withIdentifier: "MyPageMainViewController") as? MyPageMainViewController{
+            home.token = self.token
+            home.id = self.id
+            
+            home.navigationController?.isNavigationBarHidden = true
+            self.navigationController?.pushViewController(home, animated: true)
+        }
+        
     }
     
     @IBAction func Tag(_ sender: UIButton) {
-        delegate?.switchToTag()
+        let storyboard = UIStoryboard(name: "TagPage", bundle: nil)
+        if let home = storyboard.instantiateViewController(withIdentifier: "TagMainViewController") as? TagMainViewController{
+            home.token = self.token
+            home.id = self.id
+            
+            home.navigationController?.isNavigationBarHidden = true
+            self.navigationController?.pushViewController(home, animated: true)
+        }
+        
     }
     
     @IBAction func Board(_ sender: Any) {
-        delegate?.switchToBoard()
+        let storyboard = UIStoryboard(name: "Board", bundle: nil)
+        if let home = storyboard.instantiateViewController(withIdentifier: "BoardMainViewController") as? BoardMainViewController{
+            home.token = self.token
+            home.id = self.id
+            
+            home.navigationController?.isNavigationBarHidden = true
+            self.navigationController?.pushViewController(home, animated: true)
+        }
     }
     
 }
@@ -71,7 +101,6 @@ extension TagViewController : UITableViewDelegate {
         else {
             return 415
         }
-        
     }
 }
 
@@ -86,12 +115,18 @@ extension TagViewController : UITableViewDataSource {
             if settingData?.data != nil{
                 cell.CellImage.kf.setImage(with: URL(string: self.settingData?.data?.imageUrl ?? "")!)
                 cell.CellTitle.text = self.settingData?.data?.title ?? ""
+                cell.CellTitle.font = UIFont(name: "Pretendard-SemiBold", size: 20)
+                
                 cell.CellContent.text = self.settingData?.data?.content ?? ""
+                cell.CellContent.font = UIFont(name: "Pretendard-Regular", size: 13)
+                
                 cell.Category.text = self.settingData.data?.cat1 ?? ""
                 cell.Category.text! += ">"
                 cell.Category.text! += self.settingData.data?.cat2 ?? ""
                 cell.Category.text! += ">"
                 cell.Category.text! += self.settingData.data?.cat3 ?? ""
+                cell.Category.font = UIFont(name: "Pretendard-Regular", size: 14)
+                
                 
             }
             
@@ -101,17 +136,20 @@ extension TagViewController : UITableViewDataSource {
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "otherCell", for: indexPath) as! otherCell
             
-                let storyboard = UIStoryboard(name: "TagPage", bundle: nil)
-                let initialViewController = storyboard.instantiateViewController(withIdentifier: "TagCollectionViewController") as! TagCollectionViewController
-                
-                initialViewController.token = self.token
-                initialViewController.id = self.id
-                initialViewController.kind = true
-                
-                self.addChild(initialViewController)
-                initialViewController.view.frame = cell.ContainerView.bounds
-                cell.ContainerView.addSubview(initialViewController.view)
-                initialViewController.didMove(toParent: self)
+            let storyboard = UIStoryboard(name: "TagPage", bundle: nil)
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "TagCollectionViewController") as! TagCollectionViewController
+            
+            initialViewController.token = self.token
+            initialViewController.id = self.id
+            initialViewController.kind = true
+            
+            cell.ContainLabel.font = UIFont(name: "Pretendard-SemiBold", size: 16)
+        
+            
+            self.addChild(initialViewController)
+            initialViewController.view.frame = cell.ContainerView.bounds
+            cell.ContainerView.addSubview(initialViewController.view)
+            initialViewController.didMove(toParent: self)
             
             return cell
         }

@@ -23,23 +23,23 @@ class TagMainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = true
         
-        ArticleFiltering {
-            let storyboard = UIStoryboard(name: "TagPage", bundle: nil)
-            let initialViewController = storyboard.instantiateViewController(withIdentifier: "TagCollectionViewController") as! TagCollectionViewController
+        let storyboard = UIStoryboard(name: "TagPage", bundle: nil)
+        let initialViewController = storyboard.instantiateViewController(withIdentifier: "TagCollectionViewController") as! TagCollectionViewController
+        
+        initialViewController.token = self.token
+        initialViewController.id = self.id
+        initialViewController.kind = false
+        initialViewController.tag = self.tag
+        
+        self.addChild(initialViewController)
+        initialViewController.view.frame = self.ContainerView.bounds
+        self.ContainerView.addSubview(initialViewController.view)
+        initialViewController.didMove(toParent: self)
+        
+        self.currentVC = initialViewController
             
-            initialViewController.token = self.token
-            initialViewController.id = self.id
-            initialViewController.articleData = self.articleData
-            initialViewController.kind = false
-            
-            self.addChild(initialViewController)
-            initialViewController.view.frame = self.ContainerView.bounds
-            self.ContainerView.addSubview(initialViewController.view)
-            initialViewController.didMove(toParent: self)
-            
-            self.currentVC = initialViewController
-        }
         BoardButton.setBottomLines(borderColor: UIColor.black, hight: 2.0, bottom: 5)
     }
     
@@ -70,22 +70,20 @@ class TagMainViewController: UIViewController {
     @IBAction func Board(_ sender: UIButton) {
         self.BoardButton.setBottomLines(borderColor: UIColor.black, hight: 2.0, bottom: 5)
         self.TourButton.setBottomLines(borderColor: UIColor.white, hight: 2.0, bottom: 5)
-        ArticleFiltering {
-            let storyboard = UIStoryboard(name: "TagPage", bundle: nil)
-            let initialViewController = storyboard.instantiateViewController(withIdentifier: "TagCollectionViewController") as! TagCollectionViewController
-            
-            initialViewController.token = self.token
-            initialViewController.id = self.id
-            initialViewController.articleData = self.articleData
-            initialViewController.kind = false
-            
-            self.addChild(initialViewController)
-            initialViewController.view.frame = self.ContainerView.bounds
-            self.ContainerView.addSubview(initialViewController.view)
-            initialViewController.didMove(toParent: self)
-            
-            self.currentVC = initialViewController
-        }
+        let storyboard = UIStoryboard(name: "TagPage", bundle: nil)
+        let initialViewController = storyboard.instantiateViewController(withIdentifier: "TagCollectionViewController") as! TagCollectionViewController
+        
+        initialViewController.token = self.token
+        initialViewController.id = self.id
+        initialViewController.kind = false
+        initialViewController.tag = self.tag
+        
+        self.addChild(initialViewController)
+        initialViewController.view.frame = self.ContainerView.bounds
+        self.ContainerView.addSubview(initialViewController.view)
+        initialViewController.didMove(toParent: self)
+        
+        self.currentVC = initialViewController
     }
     
     
@@ -107,27 +105,5 @@ class TagMainViewController: UIViewController {
         initialViewController.didMove(toParent: self)
         
         self.currentVC = initialViewController
-    }
-}
-
-extension TagMainViewController {
-    func ArticleFiltering(completion: @escaping () -> Void) {
-        UserService.shared.ArticleFiltering(token: token, Filters: filters, thema: []) {
-                response in
-                switch response {
-                    case .success(let data) :
-                    guard let data = data as? ArticlesFilteringResponse else {return}
-                        self.articleData = data
-                        completion()
-                    case .requsetErr(let err) :
-                        print(err)
-                    case .pathErr:
-                        print("pathErr")
-                    case .serverErr:
-                        print("serverErr")
-                    case .networkFail:
-                        print("networkFail")
-                }
-        }
     }
 }

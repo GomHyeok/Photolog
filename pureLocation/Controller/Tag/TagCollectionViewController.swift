@@ -12,7 +12,7 @@ class TagCollectionViewController: UIViewController {
     var token : String = ""
     var id : Int = 0
     var kind : Bool = false
-    var articleData : ArticlesFilteringResponse!
+    var articleData : [Content] = []
     var tourData : [contentData]=[]
     var tag : String = ""
     var currentPage : Int = 0
@@ -26,9 +26,7 @@ class TagCollectionViewController: UIViewController {
         TagCollection.delegate = self
         TagCollection.dataSource = self
         
-        if kind {
-            loadMoreData(page: currentPage)
-        }
+        loadMoreData(page: currentPage)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -42,10 +40,19 @@ class TagCollectionViewController: UIViewController {
     func loadMoreData(page: Int) {
         guard !isLoading else { return }
         isLoading = true
-        Tour {
-            self.TagCollection.reloadData()
-            self.currentPage += 1
-            self.isLoading = false
+        if kind {
+            Tour {
+                self.TagCollection.reloadData()
+                self.currentPage += 1
+                self.isLoading = false
+            }
+        }
+        else {
+            photo {
+                self.TagCollection.reloadData()
+                self.currentPage += 1
+                self.isLoading = false
+            }
         }
     }
 
@@ -61,7 +68,7 @@ extension TagCollectionViewController : UICollectionViewDataSource {
             return tourData.count
         }
         else {
-            return articleData.data?.count ?? 0
+            return articleData.count
         }
     }
     
@@ -85,9 +92,18 @@ extension TagCollectionViewController : UICollectionViewDataSource {
             cell.TagButton.addTarget(self, action: #selector(tourButton), for: .touchUpInside)
         }
         else {
-            cell.TagImage.kf.setImage(with: URL(string: self.articleData.data?[indexPath.row].thumbnail ?? "")!)
-            cell.TagButton.tag = self.articleData.data?[indexPath.row].id ?? 0
-            cell.TagButton.addTarget(self, action: #selector(articleButton), for: .touchUpInside)
+            if self.articleData[indexPath.row].photoUrl != "" {
+                cell.TagImage.kf.setImage(with: URL(string: self.articleData[indexPath.row].photoUrl), completionHandler:  { result in
+                    switch result {
+                    case .success(let value):
+                        print("Image: \(value.image). Got from: \(value.cacheType)")
+                    case .failure(let error):
+                        print("Error: \(error)")
+                    }
+                })
+                cell.TagButton.tag = articleData[indexPath.row].photoId
+                cell.TagButton.addTarget(self, action: #selector(articleButton), for: .touchUpInside)
+            }
         }
         
         return cell
@@ -100,8 +116,6 @@ extension TagCollectionViewController : UICollectionViewDataSource {
             boardView.token = self.token
             boardView.id = self.id
             boardView.ArticleId = sender.tag
-            
-            
             
             self.navigationController?.pushViewController(boardView, animated: true)
         }
@@ -164,6 +178,26 @@ extension TagCollectionViewController {
                     case .networkFail:
                         print("networkFail")
                 }
+        }
+    }
+    
+    func photo(completion: @escaping () -> Void) {
+        UserService.shared.PhotoTag(token: token, tag: tag, page: currentPage){
+                response in
+            switch response {
+                case .success(let data) :
+                guard let data = data as? PhotoResponse else {return}
+                self.articleData.append(contentsOf: data.data.content)
+                    completion()
+                case .requsetErr(let err) :
+                    print(err)
+                case .pathErr:
+                    print("pathErr")
+                case .serverErr:
+                    print("serverErr")
+                case .networkFail:
+                    print("networkFail")
+            }
         }
     }
 }

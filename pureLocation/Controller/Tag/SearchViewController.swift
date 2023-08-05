@@ -9,6 +9,7 @@ import UIKit
 
 class SearchViewController: UIViewController {
 
+    @IBOutlet weak var CancleButton: UIButton!
     @IBOutlet weak var Search: UITextField!
     var token : String = ""
     var id : Int = 0
@@ -16,14 +17,10 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.isNavigationBarHidden = false
-        if let backButtonImage = UIImage(named: "backButton")?.withRenderingMode(.alwaysOriginal) {
-            let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonAction))
-            
-            navigationItem.leftBarButtonItem = backButton
-        } else {
-            print("backButton image not found")
-        }
+        self.navigationController?.isNavigationBarHidden = true
+       
+        CancleButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
+        
         Search.delegate = self
     }
     
