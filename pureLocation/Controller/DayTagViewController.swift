@@ -38,8 +38,14 @@ class DayTagViewController: UIViewController {
         TagTable.delegate = self
         TagTable.dataSource = self
         
-        Day.font = UIFont(name: "Pretendard-Bold", size: 24)
-        During.font = UIFont(name: "Pretendard-Regular", size: 13)
+
+        Day.font = UIFont(name: "Pretendard-SemiBold", size: 24)
+        
+        // Line height: 29 pt
+        Day.attributedText = NSMutableAttributedString(string: "Day 1", attributes: [NSAttributedString.Key.kern: 1.2])
+       
+        During.font = UIFont(name: "Pretendard-Medium", size: 13)
+
         
         days = datas?.data?.days[cnt]
         if let locations = days?.locations {
@@ -52,7 +58,7 @@ class DayTagViewController: UIViewController {
                 locationId.append(location.id)
             }
         }
-        self.Day.text = "Day"
+        self.Day.text = "Day "
         self.Day.text! += String(days?.sequence ?? 0)
         self.During.text = days?.date
         
@@ -61,13 +67,14 @@ class DayTagViewController: UIViewController {
         
         locationInfoSequentially(index: 0)
         
-        let footerView = UIView(frame: CGRect(x: 32, y: 0, width: TagTable.frame.size.width-32, height: 53))
+        let footerView = UIView(frame: CGRect(x: 22, y: 0, width: TagTable.frame.size.width-22, height: 53))
         let button = UIButton(frame: footerView.bounds)
         button.setTitle("다음", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.backgroundColor  = UIColor(red: 1, green: 0.44, blue: 0.26, alpha: 1)
         button.layer.cornerRadius = 24
-        button.setTitleColor(UIColor.black, for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 16)
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         footerView.addSubview(button)
         TagTable.tableFooterView = footerView
@@ -218,7 +225,7 @@ extension DayTagViewController {
 extension DayTagViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 370
+        return 395
     }
 }
 
@@ -230,6 +237,8 @@ extension DayTagViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DayLogTagCell", for: indexPath) as! DayLogTagCell
         
+        cell.BacGroundImage.layer.cornerRadius = 12
+        
         cell.data = urlArray[indexPath.row]
         if indexPath.row < placeNames.count {
             cell.LocationName.text = placeNames[indexPath.row]
@@ -237,6 +246,7 @@ extension DayTagViewController : UITableViewDataSource {
             cell.LocationName.text = "Loading..."
         }
         cell.LocationName.font = UIFont(name: "Pretendard-Medium", size: 24)
+
         cell.LocationName.delegate = self
 
         if indexPath.row < fullAddress.count {
@@ -244,7 +254,11 @@ extension DayTagViewController : UITableViewDataSource {
         } else {
             cell.PlaceName.text = "Loading..."
         }
-        cell.PlaceName.font = UIFont(name: "Pretendard-Regular", size: 13)
+        cell.PlaceName.font = UIFont(name: "Pretendard-Medium", size: 13)
+
+
+        
+        
         
         cell.Places.setBottomLines(borderColor: UIColor(red: 227/255, green: 227/255, blue: 227/255, alpha: 1.0), hight: 1.0, bottom: 0)
         

@@ -43,7 +43,7 @@ class DayLogTextCell : UITableViewCell {
 extension DayLogTextCell : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
             // return the size of item
-            return CGSize(width: collectionView.frame.width / 2, height: collectionView.frame.height)
+            return CGSize(width:148, height: 148)
         }
 }
 

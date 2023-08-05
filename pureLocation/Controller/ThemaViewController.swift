@@ -73,18 +73,16 @@ class ThemaViewController: UIViewController {
             print("backButton image not found")
         }
         
-        let font = UIFont(name: "Pretendard-Regular", size: 16)
-        MainTitle.font = UIFont(name: "Pretendard-Bold", size: 24)
-        SubTitle.font = UIFont(name: "Pretendard-Regular", size: 14)
-        
+        MainTitle.font = UIFont(name: "Pretendard-SemiBold", size: 24)
+        SubTitle.font = UIFont(name: "Pretendard-Medium", size: 14)
+
         NextButton.layer.cornerRadius = 24
-        NextButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
+        NextButton.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         
         buttons = [Friend, Cruise, Echo, Date, Family, City, Stay
         , Nature, BackPacking, Culture, Adventure, Luxury, Vacation, Article, shopping, camp, spa]
         
         for setButton in buttons {
-            setButton.titleLabel?.font = font
             setButton.tag = 0
             setButton.layer.cornerRadius = 16
             setButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 14)

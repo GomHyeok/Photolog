@@ -48,12 +48,12 @@ class SummaryViewController: UIViewController {
         self.ImageCollection.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.ImageCollection.dataSource = self
         self.ImageCollection.delegate = self
-        self.TavleCalcu.setBottomLine(borderColor: UIColor(red: 227/255, green: 227/255, blue: 227/255, alpha: 1.0))
+        self.TavleCalcu.setBottomLine(borderColor: UIColor(red: 227/255, green: 227/255, blue: 227/255, alpha: 1.0), hight: 1.0, bottom: 11)
         
         self.NextButton.layer.cornerRadius = 24
         self.NextButton.layer.borderWidth=1
         self.NextButton.layer.borderColor = self.NextButton.backgroundColor?.cgColor
-        self.NextButton.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 15)
+        self.NextButton.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
     }
     
     
@@ -124,14 +124,29 @@ extension SummaryViewController : UICollectionViewDataSource {
         cell.collectionImage.kf.setImage(with: URL(string : self.datas?.data?.locationImg[indexPath.item] ?? "")!)
         
         //이미지에 대한 설정
-        cell.collectionImage.layer.cornerRadius = cell.collectionImage.frame.size.width / 9
+        cell.collectionImage.layer.cornerRadius = 16
         cell.collectionImage.clipsToBounds = true
+        // 그림자 색상을 검은색 25%로 설정
+        cell.collectionImage.layer.shadowColor = UIColor(white: 0, alpha: 0.25).cgColor
+
+        // 그림자 오프셋 설정 (x: 0, y: 4)
+        cell.collectionImage.layer.shadowOffset = CGSize(width: 0, height: 4)
+
+        // 그림자 투명도 설정
+        cell.collectionImage.layer.shadowOpacity = 0.25
+
+        // 그림자 반경 설정
+        cell.collectionImage.layer.shadowRadius = 4.0
+
+        // 이미지 뷰의 경계를 벗어나는 내용을 표시 (그림자가 나타나게 하려면 이것이 필요함)
+//        cell.collectionImage.layer.masksToBounds = false
+        
         
         cell.locationNaem.text = self.datas?.data?.locationAddress[indexPath.item]
         cell.locationNaem.font = UIFont(name: "Pretendard-SemiBold", size: 14)
         
         
-        cell.nights.text = String(datas?.data?.night ?? 0) + "박" + String(datas?.data?.day ?? 0) + "일"
+        cell.nights.text = String(datas?.data?.night ?? 0) + "박 " + String(datas?.data?.day ?? 0) + "일 동안"
         cell.nights.font = font
         
         cell.During.text = datas?.data?.startDate ?? ""
@@ -139,15 +154,14 @@ extension SummaryViewController : UICollectionViewDataSource {
         cell.During.text! += datas?.data?.endDate ?? ""
         cell.During.font = UIFont(name: "Pretendard-Medium", size: 16)
         
-        let labelText = cell.During.text!
-        let attributedString = NSMutableAttributedString(string: labelText)
-        attributedString.addAttribute(NSAttributedString.Key.kern, value: CGFloat(2), range: NSRange(location: 0, length: attributedString.length - 1))
+        var text = cell.During.text
+        let attributedString = NSMutableAttributedString(string: text ?? "", attributes: [NSAttributedString.Key.kern: -0.32, NSAttributedString.Key.font: UIFont(name: "Pretendard-Medium", size: 16) ?? UIFont.systemFont(ofSize: 16)])
         cell.During.attributedText = attributedString
         
-        cell.locationNum.text = "총" + String(datas?.data?.locationNum ?? 0)+"군데를 방문하셨군요"
+        cell.locationNum.text = "총 " + String(datas?.data?.locationNum ?? 0)+"군데를 방문하셨군요"
         cell.locationNum.font = font
         
-        cell.customBackgroundView.layer.cornerRadius = cell.customBackgroundView.frame.size.width / 9
+        cell.customBackgroundView.layer.cornerRadius = 16
         
         return cell
     }

@@ -10,6 +10,7 @@ import UIKit
 class LoginViewController: UIViewController {
 
     
+    @IBOutlet weak var PasswordFind: UIButton!
     @IBOutlet weak var LoginTitle: UILabel!
     @IBOutlet weak var subTitle: UILabel!
 
@@ -18,6 +19,8 @@ class LoginViewController: UIViewController {
     var id : Int = 0
     var check : Bool = false
     
+    @IBOutlet weak var LoginLabel: UILabel!
+    @IBOutlet weak var SignUpButton: UIButton!
     @IBOutlet weak var Password: UITextField!
     @IBOutlet weak var Email: UITextField!
     @IBOutlet weak var nexButton: UIButton!
@@ -33,12 +36,34 @@ class LoginViewController: UIViewController {
         let lineColor = UIColor(red:0.12, green:0.23, blue:0.35, alpha:1.0)
         self.Email.setBottomLine(borderColor: lineColor)
         self.Password.setBottomLine(borderColor: lineColor)
-        self.nexButton.layer.cornerRadius = 10
+        
+        self.Email.font = UIFont(name: "Pretendard-Medium", size: 12)
+        self.Password.font = UIFont(name: "Pretendard-Medium", size: 12)
+        
+        self.LoginLabel.textColor = UIColor(red: 0.667, green: 0.667, blue: 0.667, alpha: 1)
+        self.LoginLabel.font = UIFont(name: "Pretendard-Regular", size: 14)
+
+        self.nexButton.layer.cornerRadius = 24
         self.nexButton.layer.borderWidth=1
         self.nexButton.layer.borderColor = self.nexButton.backgroundColor?.cgColor
         
-        LoginTitle.font = UIFont(name: "Pretendard-Bold", size: 24)
-        subTitle.font = UIFont(name: "Pretendard-Regular", size: 21)
+        let titleString = NSAttributedString(string: "비밀번호 찾기", attributes: [
+            NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue,
+            NSAttributedString.Key.foregroundColor: UIColor(red: 0.026, green: 0.026, blue: 0.026, alpha: 1),
+            NSAttributedString.Key.font: UIFont(name: "Pretendard-Medium", size: 14) ?? UIFont.systemFont(ofSize: 14)
+        ])
+        PasswordFind.setAttributedTitle(titleString, for: .normal)
+        
+        self.SignUpButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 14)
+        
+        LoginTitle.textColor = UIColor(red: 0.026, green: 0.026, blue: 0.026, alpha: 1)
+        LoginTitle.font = UIFont(name: "Pretendard-SemiBold", size: 24)
+        
+        subTitle.textColor = UIColor(red: 0.667, green: 0.667, blue: 0.667, alpha: 1)
+        subTitle.font = UIFont(name: "Pretendard-Regular", size: 14)
+
+        
+        
     }
     
     @IBAction func LoginButton(_ sender: UIButton) {
