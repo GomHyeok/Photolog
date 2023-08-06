@@ -50,6 +50,7 @@ class TotalMapViewController: UIViewController {
         
         MapTableView.delegate = self
         MapTableView.dataSource = self
+        MapTableView.separatorStyle = .none
         
         TitleLabel.font = UIFont(name: "Pretendard-Bold", size: 20)
         NextButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
@@ -83,28 +84,42 @@ class TotalMapViewController: UIViewController {
 
                 for (dayIndex, locations) in self.locationArray.enumerated() {
                     var path = GMSMutablePath()
-                    for cord in locations {
+                    for (cordIndex, cord) in locations.enumerated() {
                         let lat = cord.coordinate?.latitude ?? 32.3
                         let log = cord.coordinate?.longitude ?? 32.3
                         let marker = GMSMarker()
                         marker.position = CLLocationCoordinate2D(latitude: lat, longitude: log)
                         marker.title = cord.name
-                        marker.icon = self.markerImages[dayIndex % self.markerImages.count]
-                        marker.groundAnchor = CGPoint(x: 0.5, y: 0.5)  // 마커의 중앙이 지도의 좌표에 매핑되도록 설정
+
+                        // 아이콘 이미지 생성
+                        let baseImage = self.markerImages[dayIndex % self.markerImages.count]
+                        let imageSize = baseImage.size
+                        UIGraphicsBeginImageContextWithOptions(imageSize, false, baseImage.scale)
+                        baseImage.draw(in: CGRect(origin: .zero, size: imageSize))
+
+                        let markerNumber = "\(cordIndex + 1)" // 숫자로 표시할 cordIndex
+                        let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.boldSystemFont(ofSize: 12), .foregroundColor: UIColor.white]
+                        let textSize = markerNumber.size(withAttributes: attributes)
+                        let textOrigin = CGPoint(x: (imageSize.width - textSize.width) / 2, y: (imageSize.height - textSize.height) / 2)
+                        markerNumber.draw(at: textOrigin, withAttributes: attributes)
+
+                        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+                        UIGraphicsEndImageContext()
+
+                        marker.icon = newImage
+                        marker.groundAnchor = CGPoint(x: 0.5, y: 0.5)
                         marker.map = mapView
 
                         path.add(marker.position) // 경로에 좌표 추가
-
-                        // 모든 위치에 대해 bounds를 업데이트합니다.
                         bounds = bounds.includingCoordinate(marker.position)
                     }
 
-                    // 경로를 지도에 추가
                     let polyline = GMSPolyline(path: path)
-                    polyline.strokeWidth = 2.0 // 선 굵기 설정
-                    polyline.strokeColor = .gray // 선 색상을 회색으로 설정
+                    polyline.strokeWidth = 2.0
+                    polyline.strokeColor = .white
                     polyline.map = mapView
                 }
+
 
                 // 모든 마커를 포함하도록 카메라를 업데이트합니다.
                 let update = GMSCameraUpdate.fit(bounds, withPadding: 50.0) // 필요한 패딩을 추가하세요
@@ -203,18 +218,31 @@ extension TotalMapViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SummuryMapCell", for: indexPath) as! SummuryMapCell
-        
+
         print(indexPath.row)
         cell.DayImage.tintColor = self.pingColor[indexPath.row%7]
-        cell.DayLabel.text = "Day"
-        cell.DayLabel.text! += String(indexPath.row + 1)
-        cell.DayLabel.font = UIFont(name: "Pretendard-Bold", size: 16)
+        cell.DayLabel.text = "Day " + String(indexPath.row + 1) + " "
+        
+        // Check if the custom font is available, otherwise use system font
+        if let dayLabelFont = UIFont(name: "Pretendard-SemiBold", size: 16) {
+            cell.DayLabel.font = dayLabelFont
+        } else {
+            cell.DayLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        }
         
         cell.DuringLabel.text = self.dates[indexPath.row]
-        cell.DuringLabel.font = UIFont(name: "Pretendard-ReGular", size: 13)
+        cell.DuringLabel.textColor = UIColor(red: 0.663, green: 0.663, blue: 0.663, alpha: 1)
+        
+        // Check if the custom font is available, otherwise use system font
+        if let duringLabelFont = UIFont(name: "Pretendard-Medium", size: 13) {
+            cell.DuringLabel.font = duringLabelFont
+        } else {
+            cell.DuringLabel.font = UIFont.systemFont(ofSize: 13, weight: .medium)
+        }
         
         return cell
     }
+
     
     
 }
@@ -222,6 +250,6 @@ extension TotalMapViewController : UITableViewDataSource {
 extension TotalMapViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 50.0
+        return 45.0
     }
 }

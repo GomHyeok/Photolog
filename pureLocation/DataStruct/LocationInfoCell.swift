@@ -22,6 +22,11 @@ class LocationInfoCell : UITableViewCell {
         if let layout = MapCollection.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
         }
+        // Set the fonts
+//        LocationCount.font = UIFont(name: "Pretendard-Bold", size: 12)
+//        Descriptions.font = UIFont(name: "Pretendard-Regular", size: 14)
+//        LocationTitle.font = UIFont(name: "Pretendard-SemiBold", size: 16)
+//        FullAddress.font = UIFont(name: "Pretendard-Medium", size: 13)
     }
     
     func setData(_ newData: [URL]) {
@@ -30,6 +35,7 @@ class LocationInfoCell : UITableViewCell {
             self.MapCollection.reloadData()
         }
     }
+    
 }
 
 
