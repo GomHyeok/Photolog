@@ -8,7 +8,6 @@
 import UIKit
 
 class DayLogParentViewController: UIViewController {
-    var firstChild : DayTagViewController!
     var secondChild : DayTextViewController!
     
     var token : String = ""
@@ -36,38 +35,19 @@ class DayLogParentViewController: UIViewController {
         }
         
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        firstChild = storyboard.instantiateViewController(withIdentifier: "DayTagViewController") as? DayTagViewController
         secondChild = storyboard.instantiateViewController(withIdentifier: "DayTextViewController") as? DayTextViewController
-        
-        firstChild.delegate = self
         secondChild.delegate = self
         
         travelInfo {
-            self.setupFirstChild(cnt: self.cnt)
+            self.setupSecondChild(cnt: self.cnt)
         }
             
-    }
-    
-    func setupFirstChild(cnt : Int) {
-        let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        firstChild = storyboard.instantiateViewController(withIdentifier: "DayTagViewController") as? DayTagViewController
-        firstChild.delegate = self
-
-        firstChild.token = self.token
-        firstChild.id = self.id
-        firstChild.travelId = self.travelId
-        firstChild.datas = self.settingData
-        firstChild.output = self.datas
-        firstChild.cnt = cnt
-        
-        self.addChild(firstChild)
-        self.view.addSubview(firstChild.view)
-        firstChild.didMove(toParent: self)
     }
     
     func setupSecondChild(cnt: Int) {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         secondChild = storyboard.instantiateViewController(withIdentifier: "DayTextViewController") as? DayTextViewController
+        
         secondChild.delegate = self
 
         secondChild.token = self.token
@@ -113,21 +93,11 @@ extension DayLogParentViewController {
 extension DayLogParentViewController : ChildDelegate {
     
     func tagToText(cnt: Int) {
-        self.firstChild.willMove(toParent: nil)
-        self.firstChild.view.removeFromSuperview()
-        self.firstChild.removeFromParent()
-
-        // setupSecondChild를 호출하여 새로운 뷰 컨트롤러 인스턴스를 생성하고 설정합니다.
-        setupSecondChild(cnt: cnt)
+        
     }
         
     func textToTag(cnt: Int) {
-        self.secondChild.willMove(toParent: nil)
-        self.secondChild.view.removeFromSuperview()
-        self.secondChild.removeFromParent()
         
-        // setupFirstChild를 호출하여 새로운 뷰 컨트롤러 인스턴스를 생성하고 설정합니다.
-        setupFirstChild(cnt : cnt)
     }
     
     

@@ -14,6 +14,7 @@ class SearchViewController: UIViewController {
     var token : String = ""
     var id : Int = 0
     var tag : String = ""
+    var tags : [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,17 +37,23 @@ extension SearchViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         
         tag = textField.text!
+        tags.append(tag)
 
         let storyboard = UIStoryboard(name: "TagPage", bundle: nil)
         let initialViewController = storyboard.instantiateViewController(withIdentifier: "TagMainViewController") as! TagMainViewController
         
         initialViewController.token = self.token
         initialViewController.id = self.id
-        initialViewController.tag = self.tag
+        initialViewController.tag = self.tags
         initialViewController.navigationController?.isNavigationBarHidden = true
         
         self.navigationController?.pushViewController(initialViewController, animated: true)
 
         return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        // When the user starts editing, clear the text field.
+        textField.text = ""
     }
 }
