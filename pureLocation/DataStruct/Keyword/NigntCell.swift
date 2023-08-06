@@ -24,15 +24,17 @@ class NingtCell : UITableViewCell {
     
     override func awakeFromNib() {
         self.buttons = [self.One, self.Seven, self.six, self.Five, self.Four, self.Eight, self.Three, self.Two]
-        let font = UIFont(name: "Pretendard-Regular", size: 14)
-        var cnt  =  1
-        
+        let font = UIFont(name: "Pretendard-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14)
+        let buttonAttributes: [NSAttributedString.Key: Any] = [
+            .font: font
+        ]
+        var cnt = 1
+
         for setButton in buttons {
-            setButton.titleLabel?.font = font
+            setButton.setAttributedTitle(NSMutableAttributedString(string: setButton.titleLabel?.text ?? "", attributes: buttonAttributes), for: .normal)
             setButton.tag = 1
             setButton.layer.cornerRadius = 16
             setButton.addTarget(self, action: #selector(settingButton), for: .touchUpInside)
-            setButton.titleLabel?.font = UIFont(name: "Pretandard-Regular", size: 14)
             cnt += 1
         }
     }
