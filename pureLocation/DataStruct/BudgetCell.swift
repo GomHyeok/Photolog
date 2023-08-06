@@ -40,7 +40,7 @@ class BudgetCell : UITableViewCell {
             setButton.tag = 0
             setButton.layer.cornerRadius = 14
             setButton.addTarget(self, action: #selector(settingButton), for: .touchUpInside)
-            setButton.titleLabel?.font = UIFont(name: "Pretandard-Regular", size: 14)
+            setButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 14)
             setButton.tag = cnt*20
             cnt+=1
         }
@@ -50,7 +50,7 @@ class BudgetCell : UITableViewCell {
             setButton.tag = 0
             setButton.layer.cornerRadius = 14
             setButton.addTarget(self, action: #selector(settingGroup), for: .touchUpInside)
-            setButton.titleLabel?.font = UIFont(name: "Pretandard-Regular", size: 14)
+            setButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 14)
         }
     }
     

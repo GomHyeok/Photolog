@@ -36,6 +36,16 @@ class MapViewController: UIViewController, UITextViewDelegate {
                                  UIColor(hexString: "D692FF"),
                                  UIColor(hexString: "FF92EE")]
     
+    let markerImages: [UIImage] = [
+        UIImage(named: "day1")!,
+        UIImage(named: "day2")!,
+        UIImage(named: "day3")!,
+        UIImage(named: "day4")!,
+        UIImage(named: "day5")!,
+        UIImage(named: "day6")!,
+        UIImage(named: "day7")!
+    ]
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -45,12 +55,12 @@ class MapViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
         
         // 상단에 경계선을 추가
-        let topBorder = CALayer()
+//        let topBorder = CALayer()
         let width = CGFloat(0.5)
-        topBorder.borderColor =  UIColor(red: 227/255, green: 227/255, blue: 227/255, alpha: 1.0).cgColor
-        topBorder.frame = CGRect(x: 0, y: 0, width: BottomLine.frame.size.width+20, height: width)
-        topBorder.borderWidth = width
-        BottomLine.layer.addSublayer(topBorder)
+//        topBorder.borderColor =  UIColor(red: 227/255, green: 227/255, blue: 227/255, alpha: 1.0).cgColor
+//        topBorder.frame = CGRect(x: 0, y: 0, width: BottomLine.frame.size.width+20, height: width)
+//        topBorder.borderWidth = width
+//        BottomLine.layer.addSublayer(topBorder)
         
         // 하단에 경계선을 추가
         let bottomBorder = CALayer()
@@ -61,10 +71,20 @@ class MapViewController: UIViewController, UITextViewDelegate {
         
         self.navigationController?.isNavigationBarHidden = false
         
+        var text = self.ContentFiled.text!
         self.ContentFiled.delegate = self
+
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.48
+
+        let attributedString = NSMutableAttributedString(string: text, attributes: [NSAttributedString.Key.kern: 0.84, NSAttributedString.Key.paragraphStyle: paragraphStyle])
+
+        self.ContentFiled.attributedText = attributedString
+        self.ContentFiled.textColor = UIColor(red: 0.026, green: 0.026, blue: 0.026, alpha: 1)
+        self.ContentFiled.font = UIFont(name: "Pretendard-Regular", size: 14)
         self.ContentFiled.setBottomLines(borderColor: UIColor(red: 227/255, green: 227/255, blue: 227/255, alpha: 1.0), hight: 0.5, bottom: 0)
-        
-        
+
+    
         if let backButtonImage = UIImage(named: "backButton")?.withRenderingMode(.alwaysOriginal) {
             let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonAction))
             
@@ -77,7 +97,7 @@ class MapViewController: UIViewController, UITextViewDelegate {
         saveButton.tintColor = UIColor(red: 255/255, green: 112/255, blue: 66/255, alpha: 1)
         navigationItem.rightBarButtonItem = saveButton
         
-        
+        TravelTitle.textColor = UIColor(red: 0.026, green: 0.026, blue: 0.026, alpha: 1)
         TravelTitle.font = UIFont(name: "Pretendard-Bold", size: 24)
         
         TravelMapTable.delegate = self
@@ -268,18 +288,7 @@ extension MapViewController {
 extension MapViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30.0
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if(section < locationArray.count){
-            var st = "Day "
-            st += String(self.sequences[section])
-            return st
-        }
-        else {
-            return nil
-        }
+        return 50.0
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -298,8 +307,8 @@ extension MapViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == locationArray.count {
             let cell = tableView.dequeueReusableCell(withIdentifier: "BudgetCell", for: indexPath) as! BudgetCell
-            cell.Groups.font = UIFont(name: "Pretendard-Bold", size: 16)
-            cell.Budget.font = UIFont(name: "Pretendard-Bold", size: 16)
+            cell.Groups.font =  UIFont(name: "Pretendard-Medium", size: 20)
+            cell.Budget.font =  UIFont(name: "Pretendard-Medium", size: 20)
             
             return cell
         }
@@ -307,21 +316,52 @@ extension MapViewController : UITableViewDataSource {
             if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MapTableViewCell", for: indexPath) as! MapTableViewCell
                 
-                let mapview = GMSMapView(frame: cell.ContainerView.bounds)
+                let mapView = GMSMapView(frame: cell.ContainerView.bounds)
+                var path = GMSMutablePath()  // 경로 생성
+                var bounds = GMSCoordinateBounds() // 경계 생성
                 
-                mapview.camera = GMSCameraPosition.camera(withLatitude: self.locationArray[indexPath.section][0].coordinate?.latitude ?? 32.3, longitude: self.locationArray[indexPath.section][0].coordinate?.longitude ?? 32.3, zoom: 9.0)
+                mapView.camera = GMSCameraPosition.camera(withLatitude: self.locationArray[indexPath.section][0].coordinate?.latitude ?? 32.3, longitude: self.locationArray[indexPath.section][0].coordinate?.longitude ?? 32.3, zoom: 9.0)
                 
-                for cord in locationArray[indexPath.section] {
+                for (cordIndex, cord) in locationArray[indexPath.section].enumerated() {
                     let lat = cord.coordinate?.latitude
                     let log = cord.coordinate?.longitude
                     let marker = GMSMarker()
                     marker.position = CLLocationCoordinate2D(latitude: lat ?? 32.3, longitude: log ?? 32.3)
                     marker.title = cord.name
-                    marker.icon = GMSMarker.markerImage(with: pingColor[indexPath.section%7])
-                    marker.map = mapview
+
+                    let baseImage = self.markerImages[indexPath.section % self.markerImages.count]
+                    let imageSize = baseImage.size
+                    UIGraphicsBeginImageContextWithOptions(imageSize, false, baseImage.scale)
+                    baseImage.draw(in: CGRect(origin: .zero, size: imageSize))
+
+                    let markerNumber = "\(cordIndex + 1)"
+                    let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.boldSystemFont(ofSize: 12), .foregroundColor: UIColor.white]
+                    let textSize = markerNumber.size(withAttributes: attributes)
+                    let textOrigin = CGPoint(x: (imageSize.width - textSize.width) / 2, y: (imageSize.height - textSize.height) / 2)
+                    markerNumber.draw(at: textOrigin, withAttributes: attributes)
+
+                    let newImage = UIGraphicsGetImageFromCurrentImageContext()
+                    UIGraphicsEndImageContext()
+
+                    marker.icon = newImage
+                    marker.groundAnchor = CGPoint(x: 0.5, y: 0.5)  // 마커 중앙이동
+                    marker.map = mapView
+
+                    path.add(marker.position)  // 마커 위치를 경로에 추가
+                    bounds = bounds.includingCoordinate(marker.position) // 경계 업데이트
                 }
                 
-                cell.ContainerView.addSubview(mapview)
+                // 경로를 지도에 추가
+                let polyline = GMSPolyline(path: path)
+                polyline.strokeWidth = 2.0
+                polyline.strokeColor = .white
+                polyline.map = mapView
+
+                // 모든 마커를 포함하도록 카메라를 업데이트합니다.
+                let update = GMSCameraUpdate.fit(bounds, withPadding: 50.0)
+                mapView.moveCamera(update)
+
+                cell.ContainerView.addSubview(mapView)
                 return cell
             }
             else {
@@ -334,8 +374,7 @@ extension MapViewController : UITableViewDataSource {
                     cell.LocationTitle.text = locationArray[indexPath.section][indexPath.row-1].name
                 }
                 
-                cell.LocationTitle.font = UIFont(name: "Pretendard-Bold", size: 16)
-                cell.Descriptions.font = UIFont(name: "Pretendard-Regular", size: 14)
+                cell.LocationTitle.font = UIFont(name: "Pretendard-SemiBold", size: 16)
                 
                 if indexPath.section < urlArray.count {
                     if indexPath.row-1 < urlArray[indexPath.section].count {
@@ -354,15 +393,32 @@ extension MapViewController : UITableViewDataSource {
                 else {
                     cell.Descriptions.text = "Loading..."
                 }
-                cell.FullAddress.text = citys[indexPath.section][indexPath.row-1]
+                
                 cell.setData(urlArray[indexPath.section][indexPath.row-1])
                 cell.PingImage.tintColor = pingColor[indexPath.section%7]
                 cell.LocationCount.text! = String(indexPath.row)
-                cell.LocationCount.font = UIFont(name: "Pretendard-Regular", size: 10)
+                cell.LocationCount.font = UIFont(name: "Pretendard-Bold", size: 12)
                 
+                let descriptionsFont = UIFont(name: "Pretendard-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14)
+                let descriptionsAttributes: [NSAttributedString.Key: Any] = [
+                    .font: descriptionsFont,
+                    .kern: 1.2,
+                    .foregroundColor: UIColor(red: 0.026, green: 0.026, blue: 0.026, alpha: 1)
+                ]
+                cell.Descriptions.attributedText = NSMutableAttributedString(string: cell.Descriptions.text ?? "", attributes: descriptionsAttributes)
+
+                cell.FullAddress.text = citys[indexPath.section][indexPath.row-1]
+                let fullAddressFont = UIFont(name: "Pretendard-Medium", size: 13) ?? UIFont.systemFont(ofSize: 13)
+                let fullAddressAttributes: [NSAttributedString.Key: Any] = [
+                    .font: fullAddressFont,
+                    .kern: 1.2,
+                    .foregroundColor: UIColor(red: 0.686, green: 0.686, blue: 0.686, alpha: 1)
+                ]
+                cell.FullAddress.attributedText = NSMutableAttributedString(string: cell.FullAddress.text ?? "", attributes: fullAddressAttributes)
                 
                 return cell
             }
+
         }
     }
 }
@@ -376,7 +432,7 @@ extension MapViewController : UITableViewDelegate {
             return 200.0
         }
         else {
-            return 274.0
+            return 314.0
         }
     }
     
@@ -387,18 +443,25 @@ extension MapViewController : UITableViewDelegate {
             
             // 첫 번째 레이블을 생성하고 설정합니다.
             let label1 = UILabel()
-            label1.frame = CGRect(x: 20, y: 0, width: tableView.frame.width, height: 20)
-            label1.text = "Day "
-            label1.text! += String(self.sequences[section])
-            label1.font = UIFont(name: "Pretendard-Bold", size: 20)
-            label1.textColor = UIColor.black
-            
+            label1.frame = CGRect(x: 24, y: 0, width: tableView.frame.width, height: 50)
+            let label1Font = UIFont(name: "Pretendard-SemiBold", size: 20) ?? UIFont.systemFont(ofSize: 20)
+            let label1Attributes: [NSAttributedString.Key: Any] = [
+                .font: label1Font,
+                .kern: 1.2,
+                .foregroundColor: UIColor.black
+            ]
+            label1.attributedText = NSMutableAttributedString(string: "Day " + String(self.sequences[section]), attributes: label1Attributes)
+
             // 두 번째 레이블을 생성하고 설정합니다.
             let label2 = UILabel()
-            label2.frame = CGRect(x: 90, y: 7, width: tableView.frame.width, height: 20)
-            label2.text = self.settingData?.data?.days[section].date
-            label2.font = UIFont(name: "Pretendard-Regular", size: 16)
-            label2.textColor = UIColor.gray
+            label2.frame = CGRect(x: 88, y: 0, width: tableView.frame.width, height: 50)
+            let label2Font = UIFont(name: "Pretendard-Medium", size: 10) ?? UIFont.systemFont(ofSize: 10)
+            let label2Attributes: [NSAttributedString.Key: Any] = [
+                .font: label2Font,
+                .kern: 1.2,
+                .foregroundColor: UIColor.gray
+            ]
+            label2.attributedText = NSMutableAttributedString(string: self.settingData?.data?.days[section].date ?? "", attributes: label2Attributes)
             
             // 각 레이블을 headerView에 추가합니다.
             headerView.addSubview(label1)

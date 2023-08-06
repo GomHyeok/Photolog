@@ -50,9 +50,9 @@ class TotalViewController: UIViewController {
         
         InfoTable.dataSource = self
         InfoTable.delegate = self
-        TravelTitle.font = UIFont(name: "Pretendard-Bold", size: 20)
+        TravelTitle.font = UIFont(name: "Pretendard-SemiBold", size: 20)
         
-        NextButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
+        NextButton.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         NextButton.layer.cornerRadius = 24
         
         travelInfo {
@@ -163,20 +163,36 @@ extension TotalViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Dayscell", for: indexPath) as! Dayscell
-            cell.Days.text = "Day" + String(self.sequences[indexPath.section])
-            cell.Days.font = UIFont(name: "Pretendard-Bold", size: 24)
-            
+            cell.Days.text = "Day " + String(self.sequences[indexPath.section])
+            let daysFont = UIFont(name: "Pretendard-SemiBold", size: 24) ?? UIFont.systemFont(ofSize: 24)
+            let daysAttributes: [NSAttributedString.Key: Any] = [
+                .font: daysFont,
+                .kern: 0.2
+            ]
+            cell.Days.attributedText = NSMutableAttributedString(string: cell.Days.text!, attributes: daysAttributes)
+
+            let duringFont = UIFont(name: "Pretendard-Medium", size: 13) ?? UIFont.systemFont(ofSize: 13)
+            let duringAttributes: [NSAttributedString.Key: Any] = [
+                .font: duringFont,
+                .kern: 0.2
+            ]
             cell.During.text = self.dates[indexPath.section]
-            cell.During.font = UIFont(name : "Pretendard-Regular", size: 13)
-            
+            cell.During.attributedText = NSMutableAttributedString(string: cell.During.text!, attributes: duringAttributes)
+
             return cell
         }
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "TotalTableViewCell", for: indexPath) as! TotalTableViewCell
-            
+
             cell.PlaceName?.text = locationArray[indexPath.section][indexPath.row-1].name ?? ""
-            cell.PlaceName.font = UIFont(name: "Pretendard-Bold", size: 16)
-            
+            cell.PlaceName.textColor = UIColor(red: 0.026, green: 0.026, blue: 0.026, alpha: 1)
+            let placeNameFont = UIFont(name: "Pretendard-SemiBold", size: 16) ?? UIFont.systemFont(ofSize: 16)
+            let placeNameAttributes: [NSAttributedString.Key: Any] = [
+                .font: placeNameFont,
+                .kern: 1.2
+            ]
+            cell.PlaceName?.attributedText = NSMutableAttributedString(string: cell.PlaceName?.text ?? "", attributes: placeNameAttributes)
+
             let urlString = self.locationArray[indexPath.section][indexPath.row-1].photoUrls[0]
             let url = URL(string: urlString)!
             
@@ -188,28 +204,35 @@ extension TotalViewController : UITableViewDataSource {
             }
             totalCellCount += indexPath.row-1
             
-            cell.cellButton.tag = indexPath.section
             cell.ButtonImage.load(url: url)
-            cell.ButtonLabel.text = locationArray[indexPath.section][indexPath.row-1].description ?? ""
-            cell.ButtonLabel.font = UIFont(name: "Pretendard-Regular", size: 12)
+            cell.ButtonImage.layer.cornerRadius = 8
             
+            cell.cellButton.tag = indexPath.section
+            
+            cell.ButtonLabel.text = locationArray[indexPath.section][indexPath.row-1].description ?? ""
+            cell.ButtonLabel.textColor = UIColor(red: 0.426, green: 0.426, blue: 0.426, alpha: 1)
+            let buttonLabelFont = UIFont(name: "Pretendard-Regular", size: 12) ?? UIFont.systemFont(ofSize: 12)
+            var text = cell.ButtonLabel.text!
+
             let fontSize: CGFloat = 12
             let lineHeightPercent: CGFloat = 12*1.63 // 163% = 1.63 in decimal
-
             let lineSpacing: CGFloat = fontSize * lineHeightPercent - fontSize
-            
-            let labelText = cell.ButtonLabel.text!
-            let attributedString = NSMutableAttributedString(string: labelText)
+
             let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.lineSpacing = lineSpacing // 줄 간격을 원하는 값으로 설정합니다.
-            attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
-            attributedString.addAttribute(NSAttributedString.Key.kern, value: CGFloat(3), range: NSRange(location: 0, length: attributedString.length))
-            cell.ButtonLabel.attributedText = attributedString
-            
-            cell.BackGroundImage.layer.cornerRadius = 8
-            
+            paragraphStyle.lineHeightMultiple = 1.37
+            paragraphStyle.lineSpacing = lineSpacing
+
+            let buttonLabelAttributes: [NSAttributedString.Key: Any] = [
+                .font: buttonLabelFont,
+                .kern: 0.36,
+                .paragraphStyle: paragraphStyle
+            ]
+            cell.ButtonLabel.attributedText = NSMutableAttributedString(string: text, attributes: buttonLabelAttributes)
+
+            cell.BackGroundImage.layer.cornerRadius = 16
+
             cell.cellButton.addTarget(self, action: #selector(cellaction(_:)), for: .touchUpInside)
-            
+
             return cell
         }
     }
