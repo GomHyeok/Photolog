@@ -62,12 +62,16 @@ class TravelNameViewController: UIViewController {
         let blue: CGFloat = 66.0 / 255.0
         NameFiled.layer.borderColor = UIColor(red: red, green: green, blue: blue, alpha: 1.0).cgColor
         NameFiled.layer.borderWidth = 1.0
-        NameFiled.layer.cornerRadius = 24
+        NameFiled.layer.cornerRadius = 16
         
-        NameFiled.font = UIFont(name: "Pretendard-Regular", size: 16)
-        PhotoName.font = UIFont(name: "Pretendard-Regular", size: 14)
+        NameFiled.font = UIFont(name: "Pretendard-Medium", size: 16)
+        PhotoName.font =  UIFont(name: "Pretendard-Medium", size: 14)
         TravelName.font = UIFont(name: "Pretendard-Bold", size: 24)
-        NextButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 16)
+        NextButton.titleLabel?.font =  UIFont(name: "Pretendard-SemiBold", size: 16)
+        
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: NameFiled.frame.height))
+        NameFiled.leftView = paddingView
+        NameFiled.leftViewMode = .always
     }
     
     @IBAction func NextButton(_ sender: UIButton) {

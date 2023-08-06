@@ -34,8 +34,12 @@ class DayTextViewController: UIViewController {
         TagTable.delegate = self
         TagTable.dataSource = self
         
-        Day.font = UIFont(name: "Pretendard-Bold", size: 24)
-        During.font = UIFont(name: "Pretendard-Regular", size: 13)
+        Day.font = UIFont(name: "Pretendard-SemiBold", size: 24)
+        
+        // Line height: 29 pt
+        Day.attributedText = NSMutableAttributedString(string: "Day 1", attributes: [NSAttributedString.Key.kern: 1.2])
+       
+        During.font = UIFont(name: "Pretendard-Medium", size: 13)
         
         days = datas?.data?.days[self.cnt]
         if let locations = days?.locations {
@@ -48,7 +52,7 @@ class DayTextViewController: UIViewController {
                 locationId.append(location.id)
             }
         }
-        self.Day.text = "Day"
+        self.Day.text = "Day "
         self.Day.text! += String(days?.sequence ?? 0)
         self.During.text = days?.date
         
@@ -147,7 +151,7 @@ class DayTextViewController: UIViewController {
 extension DayTextViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 400.0 // 예시로 높이를 100으로 고정하였습니다.
+        return 360 // 예시로 높이를 100으로 고정하였습니다.
     }
 }
 
@@ -158,6 +162,8 @@ extension DayTextViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DayLogTextCell", for: indexPath) as! DayLogTextCell
+        
+        cell.BackGroundImage.layer.cornerRadius = 12
         
         cell.data = urlArray[indexPath.row]
         if indexPath.row < placeNames.count {
@@ -172,9 +178,9 @@ extension DayTextViewController : UITableViewDataSource {
             print(fullAddress[indexPath.row])
             cell.PlaceName.text = fullAddress[indexPath.row]
         } else {
-            cell.PlaceName.text = "Loading..."
+            cell.PlaceName.text = "Loadin16g..."
         }
-        cell.PlaceName.font = UIFont(name: "Pretendard-Regular", size: 13)
+        cell.PlaceName.font = UIFont(name: "Pretendard-Medium", size: 13)
         
         if indexPath.row < descriptions.count {
             print(descriptions[indexPath.row])
@@ -183,7 +189,12 @@ extension DayTextViewController : UITableViewDataSource {
             cell.Description.text = "Loading..."
         }
         cell.Description.font = UIFont(name: "Pretendard-Regular", size: 14)
+        let text = cell.Description.text!
+        cell.Description.attributedText = NSMutableAttributedString(string: text, attributes: [NSAttributedString.Key.kern: 0.84, NSAttributedString.Key.paragraphStyle: 1.4])
+
+        
         cell.Description.delegate = self
+        
         
         
         cell.setData(urlArray[indexPath.row])
