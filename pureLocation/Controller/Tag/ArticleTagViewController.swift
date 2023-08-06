@@ -99,6 +99,17 @@ class ArticleTagViewController: UIViewController {
         }
     }
     
+    @IBAction func Map(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Place", bundle: nil)
+        if let home = storyboard.instantiateViewController(withIdentifier: "PlaceMainViewController") as? PlaceMainViewController{
+            home.token = self.token
+            home.id = self.id
+            
+            self.navigationController?.pushViewController(home, animated: true)
+        }
+    }
+    
+    
     func createMenu() -> UIMenu {
         let action1 = UIAction(title: "신고하기", image: UIImage(named: "report")) { action in
             self.check(message: "게시물을 신고하시겠습니까?")
@@ -168,6 +179,8 @@ extension ArticleTagViewController : UITableViewDataSource {
             self.navigationController?.pushViewController(home, animated: true)
         }
     }
+    
+    
     
 }
 

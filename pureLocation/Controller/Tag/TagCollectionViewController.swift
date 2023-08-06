@@ -14,7 +14,7 @@ class TagCollectionViewController: UIViewController {
     var kind : Bool = false
     var articleData : [Content] = []
     var tourData : [contentData]=[]
-    var tag : String = ""
+    var tag : [String] = []
     var currentPage : Int = 0
     var isLoading : Bool = false
 

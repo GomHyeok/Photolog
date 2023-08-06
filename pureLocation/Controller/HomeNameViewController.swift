@@ -100,6 +100,9 @@ class HomeNameViewController: UIViewController {
         delegate?.switchToTag()
     }
     
+    @IBAction func Map(_ sender: UIButton) {
+        delegate?.switchToMap()
+    }
     
     @IBAction func MakeTravel(_ sender: Any) {
         PHPhotoLibrary.requestAuthorization { (status) in

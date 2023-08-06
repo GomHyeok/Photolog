@@ -10,8 +10,12 @@ import UIKit
 
 class DayLogTextCell : UITableViewCell {
     var data : [URL] = []
+    var token : String = ""
+    var locationId : Int = 0
+    var st : String = ""
 
     
+    @IBOutlet weak var AIButton: UIButton!
     @IBOutlet weak var Description: UITextView!
     @IBOutlet weak var LocationName: UITextField!
     @IBOutlet weak var BackGroundImage: UIImageView!
@@ -26,6 +30,8 @@ class DayLogTextCell : UITableViewCell {
         self.DayLogCollection.delegate = self
         self.DayLogCollection.dataSource = self
         
+        self.AIButton.addTarget(self, action: #selector(buttontouch), for: .touchUpInside)
+        
         if let layout = DayLogCollection.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
             layout.itemSize = CGSize(width: DayLogCollection.bounds.width / 2, height: DayLogCollection.bounds.height)
@@ -36,6 +42,15 @@ class DayLogTextCell : UITableViewCell {
         self.data = newData
         DispatchQueue.main.async {
             self.DayLogCollection.reloadData()
+        }
+    }
+    
+    @objc func buttontouch (_ sender : UIButton) {
+        print(token)
+        var keyword : [String] = []
+        keyword = self.Description.text.split(separator: ",").map(String.init)
+        Review(locationId: self.locationId, keyword: keyword) {
+            self.Description.text! = self.st
         }
     }
 }
@@ -66,6 +81,28 @@ extension DayLogTextCell : UICollectionViewDataSource {
         }
         location.kf.setImage(with: data[indexPath.item])
         return cell
+    }
+}
+
+extension DayLogTextCell {
+    func Review (locationId : Int, keyword : [String], completion : @escaping () -> Void) {
+        UserService.shared.Review(token: token, locationId: locationId, keyword: keyword) {
+                response in
+            switch response {
+                case .success(let data) :
+                    guard let data = data as? staticResponse else {return}
+                    self.st = data.data!
+                    completion()
+                case .requsetErr(let err) :
+                    print(err)
+                case .pathErr:
+                    print("pathErr")
+                case .serverErr:
+                    print("serverErr")
+                case .networkFail:
+                    print("networkFail")
+            }
+        }
     }
 }
 

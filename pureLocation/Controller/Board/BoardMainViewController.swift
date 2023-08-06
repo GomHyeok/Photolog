@@ -85,6 +85,11 @@ class BoardMainViewController: UIViewController {
         delegate?.switchToTag()
     }
     
+    
+    @IBAction func Map(_ sender: UIButton) {
+        delegate?.switchToMap()
+    }
+    
     @IBAction func GradeButton(_ sender: UIButton) {
         filters["sort"] = nil
         ArticleFiltering {

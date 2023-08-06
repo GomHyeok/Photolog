@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TagMainViewController: UIViewController {
+class TagMainViewController: UIViewController, UITextFieldDelegate {
     weak var delegate : homeDelegate?
     
     var token : String = ""
@@ -15,8 +15,10 @@ class TagMainViewController: UIViewController {
     let filters : [String : String] = [:]
     var articleData : ArticlesFilteringResponse!
     var currentVC : UIViewController!
-    var tag : String = ""
+    var tag : [String] = []
+    var buttonScrollView = UIScrollView()
     
+    @IBOutlet weak var ButtonContainer: UIView!
     @IBOutlet weak var BoardButton: UIButton!
     @IBOutlet weak var TourButton: UIButton!
     @IBOutlet weak var ContainerView: UIView!
@@ -39,6 +41,8 @@ class TagMainViewController: UIViewController {
         initialViewController.didMove(toParent: self)
         
         self.currentVC = initialViewController
+        
+        createScrollViewWithButtons()
             
         BoardButton.setBottomLines(borderColor: UIColor.black, hight: 2.0, bottom: 5)
     }
@@ -49,6 +53,7 @@ class TagMainViewController: UIViewController {
         
         initialViewController.token = self.token
         initialViewController.id = self.id
+        initialViewController.tags = self.tag
         
         self.navigationController?.pushViewController(initialViewController, animated: true)
     }
@@ -65,6 +70,10 @@ class TagMainViewController: UIViewController {
     
     @IBAction func myPage(_ sender: UIButton) {
         delegate?.switchToMypage()
+    }
+    
+    @IBAction func Map(_ sender: UIButton) {
+        delegate?.switchToMap()
     }
     
     @IBAction func Board(_ sender: UIButton) {
@@ -105,5 +114,56 @@ class TagMainViewController: UIViewController {
         initialViewController.didMove(toParent: self)
         
         self.currentVC = initialViewController
+    }
+    
+    func createScrollViewWithButtons() {
+        // Initialize the ScrollView and add it to buttonContainer.
+        buttonScrollView = UIScrollView()
+        buttonScrollView.translatesAutoresizingMaskIntoConstraints = false
+        ButtonContainer.addSubview(buttonScrollView)
+
+        // Set the constraints for the ScrollView.
+        NSLayoutConstraint.activate([
+            buttonScrollView.topAnchor.constraint(equalTo: ButtonContainer.topAnchor),
+            buttonScrollView.bottomAnchor.constraint(equalTo: ButtonContainer.bottomAnchor),
+            buttonScrollView.leadingAnchor.constraint(equalTo: ButtonContainer.leadingAnchor),
+            buttonScrollView.trailingAnchor.constraint(equalTo: ButtonContainer.trailingAnchor)
+        ])
+
+        // Create a horizontal StackView to contain the buttons.
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        buttonScrollView.addSubview(stackView)
+
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: buttonScrollView.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: buttonScrollView.bottomAnchor),
+            stackView.leadingAnchor.constraint(equalTo: buttonScrollView.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: buttonScrollView.trailingAnchor),
+            stackView.heightAnchor.constraint(equalTo: buttonScrollView.heightAnchor)
+        ])
+
+        // For each tag, create a button and add it to the StackView.
+        var cnt = 0
+        for title in tag {
+            let button = UIButton(type: .system)
+            button.tag = cnt
+            cnt += 1
+            button.setTitle((title + "x"), for: .normal)
+            button.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1.0) // Set your preferred color
+            button.setTitleColor(UIColor(red: 0.45, green: 0.45, blue: 0.45, alpha: 1.0), for: .normal)
+            button.layer.cornerRadius = 16
+            button.addTarget(self, action: #selector(removeTag), for: .touchUpInside)
+            stackView.addArrangedSubview(button)
+        }
+    }
+    
+    @objc func removeTag (_ sender : UIButton) {
+        tag.remove(at: sender.tag)
+        createScrollViewWithButtons()
     }
 }

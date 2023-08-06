@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol CustomCellDelegate: AnyObject {
+    func didTapAIButton(in cell: UITableViewCell)
+}
+
 class DayTextViewController: UIViewController {
     weak var delegate : ChildDelegate?
     
@@ -23,6 +27,7 @@ class DayTextViewController: UIViewController {
     var fullAddress : [String] = []
     var placeNames : [String] = []
     var descriptions : [String] = []
+    var st : String = ""
     
     @IBOutlet weak var Day: UILabel!
     @IBOutlet weak var During: UILabel!
@@ -81,29 +86,10 @@ class DayTextViewController: UIViewController {
         }
 
         let id = locationId[index]
-        print(id)
+        print("id")
         locationInfo(locationId: id) {
+            print("completion")
             self.locationInfoSequentially(index: index + 1)
-        }
-    }
-    
-    
-    @IBAction func SwitchButton(_ sender: UIButton) {
-        let dispatchGroup = DispatchGroup()
-        for i in 0..<locationId.count {
-            let indexPath = IndexPath(row: i, section: 0) // change these numbers to the index of the cell you want
-            let cell = TagTable.cellForRow(at: indexPath) as! DayLogTextCell
-            let text = cell.Description.text!
-            let name = cell.LocationName.text!
-            dispatchGroup.enter()
-            locationDescription(locationId: locationId[i], description: text) {
-                self.locationName(locationId: self.locationId[i], title: name) {
-                    dispatchGroup.leave()
-                }
-            }
-        }
-        dispatchGroup.notify(queue: .main) {
-            self.delegate?.textToTag(cnt: self.cnt)
         }
     }
     
@@ -162,7 +148,6 @@ extension DayTextViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DayLogTextCell", for: indexPath) as! DayLogTextCell
-        
         cell.BackGroundImage.layer.cornerRadius = 12
         
         cell.data = urlArray[indexPath.row]
@@ -189,28 +174,26 @@ extension DayTextViewController : UITableViewDataSource {
             cell.Description.text = "Loading..."
         }
         cell.Description.font = UIFont(name: "Pretendard-Regular", size: 14)
-        let text = cell.Description.text!
-        cell.Description.attributedText = NSMutableAttributedString(string: text, attributes: [NSAttributedString.Key.kern: 0.84, NSAttributedString.Key.paragraphStyle: 1.4])
-
-        
         cell.Description.delegate = self
-        
-        
+        cell.token = self.token
+        cell.locationId = self.locationId[indexPath.row]
         
         cell.setData(urlArray[indexPath.row])
         return cell
     }
+    
+    
 }
 
 
 extension DayTextViewController {
     func locationInfo(locationId : Int, completion : @escaping () -> Void) {
+        print("locationInfo")
         UserService.shared.locationInfo(locationId: locationId, token: token) {
                 response in
                 switch response {
                     case .success(let data) :
                         guard let data = data as? LocationInfoResponse else {return}
-                        print(data)
                         self.fullAddress.append(data.data?.fullAddress ?? "장소를 알 수 없습니다.")
                         self.placeNames.append(data.data?.name ?? "이름을 입력해주세요")
                         self.descriptions.append(data.data?.description ?? "정보를 입력해주세요")
@@ -251,21 +234,41 @@ extension DayTextViewController {
     func locationName (locationId : Int, title : String, completion : @escaping () -> Void) {
         UserService.shared.locationName(locationId: locationId, token: token, title: title) {
                 response in
-                switch response {
-                    case .success(let data) :
-                        guard let data = data as? staticResponse else {return}
-                        print(data)
-                        completion()
-                    case .requsetErr(let err) :
-                        print(err)
-                    case .pathErr:
-                        print("pathErr")
-                    case .serverErr:
-                        print("serverErr")
-                    case .networkFail:
-                        print("networkFail")
-                }
+            switch response {
+                case .success(let data) :
+                    guard let data = data as? staticResponse else {return}
+                    print(data)
+                    completion()
+                case .requsetErr(let err) :
+                    print(err)
+                case .pathErr:
+                    print("pathErr")
+                case .serverErr:
+                    print("serverErr")
+                case .networkFail:
+                    print("networkFail")
             }
+        }
+    }
+    
+    func Review (locationId : Int, keyword : [String], completion : @escaping () -> Void) {
+        UserService.shared.Review(token: token, locationId: locationId, keyword: keyword) {
+                response in
+            switch response {
+                case .success(let data) :
+                    guard let data = data as? staticResponse else {return}
+                    self.st = data.message
+                    completion()
+                case .requsetErr(let err) :
+                    print(err)
+                case .pathErr:
+                    print("pathErr")
+                case .serverErr:
+                    print("serverErr")
+                case .networkFail:
+                    print("networkFail")
+            }
+        }
     }
     
     func alert(message : String) {
@@ -277,8 +280,7 @@ extension DayTextViewController {
 }
 
 extension DayTextViewController : UITextViewDelegate {
-    func textFieldDidBeginEditing(_ textView: UITextView) {
-        // Clear the existing text of the text field
+    func textViewDidBeginEditing(_ textView: UITextView) {
         textView.text = ""
     }
 }

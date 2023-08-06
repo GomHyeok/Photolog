@@ -101,6 +101,11 @@ class AfterKeywordViewController: UIViewController {
     @IBAction func Tag(_ sender: UIButton) {
         delegate?.switchToTag()
     }
+    
+    
+    @IBAction func Map(_ sender: UIButton) {
+        delegate?.switchToMap()
+    }
 }
 
 extension AfterKeywordViewController {

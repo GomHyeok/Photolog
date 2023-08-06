@@ -20,6 +20,6 @@ struct LocationInfoData :Codable {
     let photoIdList : [Int]
     let urlList : [String]
     let fullAddress : String
-    let description : String?
     let name : String?
+    let description : String?
 }

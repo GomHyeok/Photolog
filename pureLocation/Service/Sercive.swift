@@ -326,6 +326,8 @@ class UserService {
     func locationInfo ( locationId : Int, token : String, completion: @escaping (NetworkResult<Any>) -> Void) {
         let url = APIConstants.locationInfoURL + String(locationId)
         
+        print(url)
+        
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
             "Authorization" : token
@@ -929,12 +931,14 @@ class UserService {
         }
     }
     
-    func Tour(token : String, page : Int, tag : String?, completion : @escaping (NetworkResult<Any>) -> Void) {
+    func Tour(token : String, page : Int, tag : [String], completion : @escaping (NetworkResult<Any>) -> Void) {
         var url = APIConstants.TourURL + "page=" + String(page) + "&size=30"
         
-        if tag != "" && tag != nil{
-            url += "&keyword="
-            url += tag!
+        if tag.count > 0 {
+            for t in tag {
+                url += "&keyword="
+                url += t
+            }
         }
         
         let headers : HTTPHeaders = [
@@ -992,12 +996,14 @@ class UserService {
         }
     }
     
-    func PhotoTag(token : String, tag : String?, page : Int, completion : @escaping (NetworkResult<Any>) -> Void) {
+    func PhotoTag(token : String, tag : [String], page : Int, completion : @escaping (NetworkResult<Any>) -> Void) {
         var url = APIConstants.PhotoTagURL + "page=" + String(page) + "&size=30"
         
-        if tag != "" && tag != nil{
-            url += "&keyword="
-            url += tag!
+        if tag.count > 0 {
+            for t in tag {
+                url += "&keyword="
+                url += t
+            }
         }
         
         print(url)
@@ -1052,6 +1058,50 @@ class UserService {
                     let networkResult = self.judgeStatus(by : statusCode, value, types: "PhotoInfo")
                     completion(networkResult)
                 case .failure :
+                    completion(.networkFail)
+            }
+        }
+    }
+    
+    func Review(token : String, locationId : Int, keyword : [String], completion : @escaping (NetworkResult<Any>) -> Void) {
+        var url = APIConstants.ReviewURL + String(locationId)
+        
+        if keyword.count > 0 {
+            url += "?"
+            for key in keyword {
+                if let encodedKey = key.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+                    url += "keyword="
+                    url += encodedKey
+                    url += "&"
+                }
+            }
+            url = String(url.dropLast())
+        }
+        
+        print(url)
+        
+        let headers : HTTPHeaders = [
+            "Content-Type": "application/json",
+            "Authorization" : token
+        ]
+        let dataRequest = AF.request(
+            url,
+            method: .get,
+            encoding: JSONEncoding.default,
+            headers: headers
+        )
+        
+        dataRequest.responseData{
+            response in
+            switch response.result {
+                case .success :
+                    guard let statusCode = response.response?.statusCode else {return}
+                    guard let value = response.value else {return}
+                    
+                    let networkResult = self.judgeStatus(by : statusCode, value, types: "Review")
+                    completion(networkResult)
+                case .failure(let error):
+                    print("Network request error: \(error)")
                     completion(.networkFail)
             }
         }
@@ -1171,7 +1221,7 @@ class UserService {
             else {return .pathErr}
             decodeData = decoded
         }
-        else if types == "LocationName" || types == "Description" || types == "ArticleReport"{
+        else if types == "LocationName" || types == "Description" || types == "ArticleReport" || types == "Review"{
             guard let decoded = try? decoder.decode(staticResponse.self, from: data)
             else {return .pathErr}
             decodeData = decoded
