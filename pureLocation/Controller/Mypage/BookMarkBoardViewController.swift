@@ -62,6 +62,8 @@ extension BookMarkBoardViewController : UITableViewDataSource {
         cell.CellButton.tag = self.data?.data?[indexPath.row].id ?? 0
         cell.CellButton.addTarget(self, action: #selector(articleButton), for: .touchUpInside)
         
+        cell.BookMarkImage.layer.cornerRadius = 5
+        
         return cell
     }
     

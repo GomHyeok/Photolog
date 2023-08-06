@@ -48,6 +48,7 @@ class DayLogTextCell : UITableViewCell {
     @objc func buttontouch (_ sender : UIButton) {
         print(token)
         var keyword : [String] = []
+        sender.setImage(UIImage(named: "wand"), for: .normal)
         keyword = self.Description.text.split(separator: ",").map(String.init)
         Review(locationId: self.locationId, keyword: keyword) {
             self.Description.text! = self.st
