@@ -26,14 +26,16 @@ class DetailCell : UITableViewCell {
     
     override func awakeFromNib() {
         self.buttons = [self.Button1, self.Button2, self.Button3, self.Button4, self.Button5, self.Button6, self.Button7, self.Button8, self.Button9, self.Button10]
-        let font = UIFont(name: "Pretendard-Regular", size: 14)
+        let font = UIFont(name: "Pretendard-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14)
+        let buttonAttributes: [NSAttributedString.Key: Any] = [
+            .font: font
+        ]
         
         for setButton in buttons {
-            setButton.titleLabel?.font = font
+            setButton.setAttributedTitle(NSMutableAttributedString(string: setButton.titleLabel?.text ?? "", attributes: buttonAttributes), for: .normal)
             setButton.tag = 0
             setButton.layer.cornerRadius = 16
             setButton.addTarget(self, action: #selector(settingButton), for: .touchUpInside)
-            setButton.titleLabel?.font = UIFont(name: "Pretandard-Regular", size: 14)
         }
     }
     
