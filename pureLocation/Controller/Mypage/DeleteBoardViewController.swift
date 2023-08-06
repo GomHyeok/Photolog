@@ -81,6 +81,12 @@ extension DeleteBoardViewController : UITableViewDataSource {
     
     @objc func buttonTap (_ sender : UIButton) {
         sender.tag += 1
+        if(sender.tag % 2 == 1) {
+            sender.setImage(UIImage(named: "check"), for: .normal)
+        }
+        else {
+            sender.setImage(UIImage(named: "DeleteImage"), for: .normal)
+        }
     }
     
 }

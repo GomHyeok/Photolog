@@ -153,9 +153,10 @@ class TagMainViewController: UIViewController, UITextFieldDelegate {
             let button = UIButton(type: .system)
             button.tag = cnt
             cnt += 1
-            button.setTitle((title + "x"), for: .normal)
+            button.setTitle((" " + title + "  x "), for: .normal)
             button.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1.0) // Set your preferred color
             button.setTitleColor(UIColor(red: 0.45, green: 0.45, blue: 0.45, alpha: 1.0), for: .normal)
+            button.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
             button.layer.cornerRadius = 16
             button.addTarget(self, action: #selector(removeTag), for: .touchUpInside)
             stackView.addArrangedSubview(button)
@@ -163,7 +164,17 @@ class TagMainViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func removeTag (_ sender : UIButton) {
+        // tag array에서 해당 태그를 제거합니다.
         tag.remove(at: sender.tag)
-        createScrollViewWithButtons()
+
+        // 해당 버튼을 스택뷰에서 제거합니다.
+        if let stackView = sender.superview as? UIStackView {
+            sender.removeFromSuperview()
+
+            // 버튼의 태그를 업데이트합니다.
+            for (index, button) in stackView.arrangedSubviews.enumerated() where button is UIButton {
+                button.tag = index
+            }
+        }
     }
 }

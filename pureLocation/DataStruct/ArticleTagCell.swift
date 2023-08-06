@@ -16,4 +16,5 @@ class ArticleTagCell : UITableViewCell {
     @IBOutlet weak var CellContent: UITextView!
     @IBOutlet weak var CellTitle: UILabel!
     @IBOutlet weak var ArticleButton: UIButton!
+    
 }
