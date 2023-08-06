@@ -67,6 +67,10 @@ class TagMainViewController: UIViewController {
         delegate?.switchToMypage()
     }
     
+    @IBAction func Map(_ sender: UIButton) {
+        delegate?.switchToMap()
+    }
+    
     @IBAction func Board(_ sender: UIButton) {
         self.BoardButton.setBottomLines(borderColor: UIColor.black, hight: 2.0, bottom: 5)
         self.TourButton.setBottomLines(borderColor: UIColor.white, hight: 2.0, bottom: 5)

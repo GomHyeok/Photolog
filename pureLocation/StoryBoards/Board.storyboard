@@ -281,6 +281,9 @@
                                                 <buttonConfiguration key="configuration" style="plain">
                                                     <backgroundConfiguration key="background" image="map"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="Map:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="GSc-Y5-7EI"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P7B-eO-gJp" userLabel="collection">
                                                 <rect key="frame" x="245.66666666666663" y="35" width="24" height="24"/>
@@ -2458,6 +2461,9 @@
                                                 <buttonConfiguration key="configuration" style="plain">
                                                     <backgroundConfiguration key="background" image="map"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="Map:" destination="8IU-b2-PPH" eventType="touchUpInside" id="KQO-Nh-mxc"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KL7-Xv-INs" userLabel="collection">
                                                 <rect key="frame" x="245.66666666666663" y="35" width="24" height="24"/>

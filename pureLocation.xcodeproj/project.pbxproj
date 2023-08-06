@@ -84,6 +84,8 @@
 		D20BCA982A7E4AFA00F396AE /* TourInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA972A7E4AFA00F396AE /* TourInfoModel.swift */; };
 		D20BCA9A2A7E70FA00F396AE /* PhotoTagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA992A7E70FA00F396AE /* PhotoTagModel.swift */; };
 		D20BCA9C2A7E753400F396AE /* PhotoInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCA9B2A7E753400F396AE /* PhotoInfoModel.swift */; };
+		D20BCA9E2A7E7F9700F396AE /* Place.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D20BCA9D2A7E7F9700F396AE /* Place.storyboard */; };
+		D20BCAA12A7E981F00F396AE /* PlaceMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20BCAA02A7E981F00F396AE /* PlaceMainViewController.swift */; };
 		D22A57CA2A6B107900B5E55B /* MapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22A57C92A6B107900B5E55B /* MapTableViewCell.swift */; };
 		D22A57CC2A6B108600B5E55B /* LocationInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22A57CB2A6B108600B5E55B /* LocationInfoCell.swift */; };
 		D22D8A8F2A646B100015CB24 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22D8A8E2A646B100015CB24 /* CollectionViewCell.swift */; };
@@ -219,6 +221,8 @@
 		D20BCA972A7E4AFA00F396AE /* TourInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourInfoModel.swift; sourceTree = "<group>"; };
 		D20BCA992A7E70FA00F396AE /* PhotoTagModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoTagModel.swift; sourceTree = "<group>"; };
 		D20BCA9B2A7E753400F396AE /* PhotoInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoInfoModel.swift; sourceTree = "<group>"; };
+		D20BCA9D2A7E7F9700F396AE /* Place.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Place.storyboard; sourceTree = "<group>"; };
+		D20BCAA02A7E981F00F396AE /* PlaceMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceMainViewController.swift; sourceTree = "<group>"; };
 		D22A57C92A6B107900B5E55B /* MapTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTableViewCell.swift; sourceTree = "<group>"; };
 		D22A57CB2A6B108600B5E55B /* LocationInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInfoCell.swift; sourceTree = "<group>"; };
 		D22D8A8E2A646B100015CB24 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
@@ -340,6 +344,7 @@
 				D20BCA322A75DF7A00F396AE /* Board.storyboard */,
 				D20BCA602A7B162100F396AE /* MyPage.storyboard */,
 				D20BCA802A7D50BC00F396AE /* TagPage.storyboard */,
+				D20BCA9D2A7E7F9700F396AE /* Place.storyboard */,
 			);
 			path = StoryBoards;
 			sourceTree = "<group>";
@@ -407,6 +412,14 @@
 			path = Tag;
 			sourceTree = "<group>";
 		};
+		D20BCA9F2A7E980200F396AE /* Place */ = {
+			isa = PBXGroup;
+			children = (
+				D20BCAA02A7E981F00F396AE /* PlaceMainViewController.swift */,
+			);
+			path = Place;
+			sourceTree = "<group>";
+		};
 		D22D8A8D2A646AD30015CB24 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -418,6 +431,7 @@
 		D2541F662A5DA216000AC372 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D20BCA9F2A7E980200F396AE /* Place */,
 				D20BCA822A7DE10400F396AE /* Tag */,
 				D20BCA622A7B992100F396AE /* Mypage */,
 				D231BA692A63CAF5009D0B82 /* RegisterViewController.swift */,
@@ -638,6 +652,7 @@
 				95A387EE2A7D487A003D5AC3 /* style.json in Resources */,
 				D2E14D262A6FFD96000D2CF0 /* Pretendard-Bold.otf in Resources */,
 				D2E14D272A6FFD9A000D2CF0 /* Pretendard-ExtraBold.otf in Resources */,
+				D20BCA9E2A7E7F9700F396AE /* Place.storyboard in Resources */,
 				D29BD9592A5D970D0010587C /* LaunchScreen.storyboard in Resources */,
 				D231BA752A642876009D0B82 /* Home.storyboard in Resources */,
 				D2E14D282A6FFD9E000D2CF0 /* Pretendard-Regular.otf in Resources */,
@@ -739,6 +754,7 @@
 				D20BCA6F2A7BCD6600F396AE /* DeleteBoardViewController.swift in Sources */,
 				D22A57CA2A6B107900B5E55B /* MapTableViewCell.swift in Sources */,
 				D20BCA4B2A78F70300F396AE /* Budgets.swift in Sources */,
+				D20BCAA12A7E981F00F396AE /* PlaceMainViewController.swift in Sources */,
 				D2E14D2A2A70022E000D2CF0 /* HomeCell.swift in Sources */,
 				D29BD94D2A5D970C0010587C /* AppDelegate.swift in Sources */,
 				D20BCA572A7949FC00F396AE /* DayLabel.swift in Sources */,

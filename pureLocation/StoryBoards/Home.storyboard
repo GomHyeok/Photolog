@@ -262,6 +262,9 @@
                                                 <buttonConfiguration key="configuration" style="plain">
                                                     <backgroundConfiguration key="background" image="map"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="Map:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="1W4-VZ-t8g"/>
+                                                </connections>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ellipse 3" translatesAutoresizingMaskIntoConstraints="NO" id="9vp-zr-u3t">
                                                 <rect key="frame" x="45.666666666666657" y="63.333333333333371" width="5" height="5"/>
@@ -614,6 +617,9 @@
                                                 <buttonConfiguration key="configuration" style="plain">
                                                     <backgroundConfiguration key="background" image="map"/>
                                                 </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="Map:" destination="pFb-jS-aWK" eventType="touchUpInside" id="IjH-zE-jJl"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BIO-ir-hVA" userLabel="collection">
                                                 <rect key="frame" x="242" y="29.666666666666742" width="24" height="24"/>

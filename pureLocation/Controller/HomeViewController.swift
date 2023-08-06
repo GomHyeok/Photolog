@@ -98,6 +98,9 @@ class HomeViewController: UIViewController {
         delegate?.switchToTag()
     }
     
+    @IBAction func Map(_ sender: UIButton) {
+        delegate?.switchToMap()
+    }
     
     
     @IBAction func TravelCreate(_ sender: UIButton) {
