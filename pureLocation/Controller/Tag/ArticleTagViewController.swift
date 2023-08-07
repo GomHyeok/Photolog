@@ -23,7 +23,7 @@ class ArticleTagViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = false
         self.navigationItem.title = ""
         
-        if let backButtonImage = UIImage(named: "back")?.withRenderingMode(.alwaysOriginal) {
+        if let backButtonImage = UIImage(named: "backButton")?.withRenderingMode(.alwaysOriginal) {
             let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonAction))
             
             navigationItem.leftBarButtonItem = backButton
@@ -147,6 +147,9 @@ extension ArticleTagViewController : UITableViewDataSource {
             cell.ArticleButton.tag = self.settingData?.data.articleId ?? 0
             cell.ArticleButton.addTarget(self, action: #selector(switchArticle), for: .touchUpInside)
             
+            cell.CellContent.isEditable = false
+            cell.CellContent.isScrollEnabled = true
+            
             return cell
         }
         else {
@@ -200,7 +203,7 @@ extension ArticleTagViewController {
                 case .pathErr:
                     print("pathErr")
                 case .serverErr:
-                    self.alert(message: "내가 쓴 글에는 신고할 수 없어요")
+                    self.alert(message: "불러오는것에 실패하였습니다")
                     print("serverErr")
                 case .networkFail:
                     print("networkFail")
@@ -253,7 +256,7 @@ extension ArticleTagViewController {
                 case .pathErr:
                     print("pathErr")
                 case .serverErr:
-                    self.alert(message: "내가 쓴 글에는 신고할 수 없어요")
+                    self.alert(message: "내가 쓴 글에는 북마크 할 수 없어요")
                     print("serverErr")
                 case .networkFail:
                     print("networkFail")
@@ -272,7 +275,7 @@ extension ArticleTagViewController {
                 case .pathErr:
                     print("pathErr")
                 case .serverErr:
-                    self.alert(message: "내가 쓴 글에는 신고할 수 없어요")
+                    self.alert(message: "내가 쓴 글에는 북마크 할 수 없어요")
                     print("serverErr")
                 case .networkFail:
                     print("networkFail")

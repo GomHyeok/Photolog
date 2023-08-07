@@ -1064,7 +1064,7 @@ class UserService {
     }
     
     func Review(token : String, locationId : Int, keyword : [String], completion : @escaping (NetworkResult<Any>) -> Void) {
-        var url = APIConstants.ReviewURL + String(locationId)
+        var url = APIConstants.ReviewURL
         
         if keyword.count > 0 {
             url += "?"

@@ -22,13 +22,15 @@ class TagViewController: UIViewController {
         
         self.navigationController?.isNavigationBarHidden = false
         self.navigationItem.title = ""
-        if let backButtonImage = UIImage(named: "back")?.withRenderingMode(.alwaysOriginal) {
+        if let backButtonImage = UIImage(named: "backButton")?.withRenderingMode(.alwaysOriginal) {
             let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonAction))
             
             navigationItem.leftBarButtonItem = backButton
         } else {
             print("backButton image not found")
         }
+        
+        
         
         TableViewin.delegate = self
         TableViewin.dataSource = self
@@ -127,8 +129,21 @@ extension TagViewController : UITableViewDataSource {
                 cell.Category.text! += self.settingData.data?.cat3 ?? ""
                 cell.Category.font = UIFont(name: "Pretendard-Regular", size: 14)
                 
+                self.bookmarkStatus = self.settingData.data?.bookmarkStatus ?? false
+                
+                cell.BookMark.addTarget(self, action: #selector(bookmarks(_:)), for: .touchUpInside)
+                
+                if bookmarkStatus {
+                    cell.BookMark.setImage(UIImage(named: "blackBook"), for: .normal)
+                }
+                else {
+                    cell.BookMark.setImage(UIImage(named: "bookmark_FILL0_wght400_GRAD0_opsz48 1"), for: .normal)
+                }
                 
             }
+            
+            cell.CellContent.isEditable = false
+            cell.CellContent.isScrollEnabled = true
             
             
             return cell
@@ -155,23 +170,22 @@ extension TagViewController : UITableViewDataSource {
         }
     }
     
-//    @objc func bookmarks(_ sender : UIButton) {
-//        if bookmarkStatus {
-//            tourCancle(tourId: contentId){
-//                
-//            }
-//            bookmarkStatus = false
-//            sender.setImage(UIImage(named: "bookmark"), for: .normal)
-//
-//        }
-//        else {
-//            tourBookMark {
-//                <#code#>
-//            }
-//            bookmarkStatus = true
-//            sender.setImage(UIImage(named: "blackBook"), for: .normal)
-//        }
-//    }
+    @objc func bookmarks(_ sender : UIButton) {
+        if bookmarkStatus {
+            tourCancle(tourId: contentId){
+                
+            }
+            self.settingData.data?.bookmarkStatus = false
+            sender.setImage(UIImage(named: "bookmark_FILL0_wght400_GRAD0_opsz48 1"), for: .normal)
+        }
+        else {
+            tourBookMark(tourId : contentId) {
+                
+            }
+            self.settingData.data?.bookmarkStatus = false
+            sender.setImage(UIImage(named: "blackBook"), for: .normal)
+        }
+    }
     
     
 }
@@ -215,6 +229,27 @@ extension TagViewController {
             }
         }
     }
+    
+    func tourBookMark(tourId : Int ,completion : @escaping () -> Void ) {
+        UserService.shared.makeTourBookMark(token: token, tourID: tourId) {
+            response in
+            switch response {
+                case .success(let data) :
+                    completion()
+                case .requsetErr(let err) :
+                    print(err)
+                case .pathErr:
+                    completion()
+                    print("pathErr")
+                case .serverErr:
+                    print("serverErr")
+                case .networkFail:
+                    print("networkFail")
+            }
+        }
+    }
+    
+    
     
     func alert(message : String) {
         let alertVC = UIAlertController(title: message, message: nil, preferredStyle: .alert)

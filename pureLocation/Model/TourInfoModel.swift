@@ -10,7 +10,7 @@ import Foundation
 struct TourInfoResponse: Codable {
     let status: Bool
     let message: String
-    let data: DataDetails?
+    var data: DataDetails?
 }
 
 struct DataDetails: Codable {
@@ -19,8 +19,8 @@ struct DataDetails: Codable {
     let cat2: String
     let cat3: String
     let title: String
-    let bookmarkCount: Int?
-    let address: String
+    var bookmarkStatus: Bool
+    let address: String?
     let content: String
     let infoCall: String
     let restDate: String?

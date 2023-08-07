@@ -56,6 +56,7 @@ class MapViewController: UIViewController, UITextViewDelegate {
         
         let width = CGFloat(0.5)
         
+        
         // 하단에 경계선을 추가
         let bottomBorder = CALayer()
         bottomBorder.borderColor = UIColor(red: 227/255, green: 227/255, blue: 227/255, alpha: 1.0).cgColor
@@ -96,6 +97,9 @@ class MapViewController: UIViewController, UITextViewDelegate {
         
         TravelMapTable.delegate = self
         TravelMapTable.dataSource = self
+        
+        TravelMapTable.rowHeight = UITableView.automaticDimension
+        TravelMapTable.estimatedRowHeight = 44
         
         fullAddress = datas?.data?.locationAddress ?? []
         
@@ -183,25 +187,35 @@ class MapViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-    func setLineSpacing(_ spacing: CGFloat, text: String) -> NSAttributedString {
-      let paragraphStyle = NSMutableParagraphStyle()
-      paragraphStyle.lineSpacing = spacing
-        
-      return NSAttributedString(
-        string: text,
-        attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle]
-      )
+    func setLineSpacing(_ lineSpacing: CGFloat, textView: UITextView) -> NSAttributedString {
+        let attributedString: NSMutableAttributedString
+        if let attributedText = textView.attributedText {
+            attributedString = NSMutableAttributedString(attributedString: attributedText)
+        } else {
+            attributedString = NSMutableAttributedString(string: textView.text)
+        }
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = lineSpacing
+        attributedString.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
+        return attributedString
     }
     
     func textViewDidChange(_ textView: UITextView) {
-            let cursorPosition = textView.selectedRange // 현재 커서 위치를 저장
+        let cursorPosition = textView.selectedRange // 현재 커서 위치를 저장
 
-            // 줄간격 적용
-            textView.attributedText = setLineSpacing(10.0, text: textView.text)
+        // 줄간격 적용
+        textView.attributedText = setLineSpacing(10.0, textView: textView)
 
-            // 커서 위치 복원
-            textView.selectedRange = cursorPosition
-        }
+        // 커서 위치 복원
+        textView.selectedRange = cursorPosition
+            
+        TravelMapTable.beginUpdates()
+        TravelMapTable.endUpdates()
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textView.text = ""
+    }
 }
 
 
@@ -401,6 +415,7 @@ extension MapViewController : UITableViewDataSource {
                     .foregroundColor: UIColor(red: 0.026, green: 0.026, blue: 0.026, alpha: 1)
                 ]
                 cell.Descriptions.attributedText = NSMutableAttributedString(string: cell.Descriptions.text ?? "", attributes: descriptionsAttributes)
+                cell.Descriptions.delegate = self
 
                 cell.FullAddress.text = citys[indexPath.section][indexPath.row-1]
                 let fullAddressFont = UIFont(name: "Pretendard-Medium", size: 13) ?? UIFont.systemFont(ofSize: 13)
@@ -419,17 +434,17 @@ extension MapViewController : UITableViewDataSource {
 }
 
 extension MapViewController : UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == locationArray.count{
-            return 230.0
-        }
-        if indexPath.row == 0 {
-            return 200.0
-        }
-        else {
-            return 337.0
-        }
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        if indexPath.section == locationArray.count{
+//            return 230.0
+//        }
+//        if indexPath.row == 0 {
+//            return 200.0
+//        }
+//        else {
+//            return 337.0
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section < locationArray.count {

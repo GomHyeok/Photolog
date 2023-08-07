@@ -65,12 +65,12 @@ class DayTextViewController: UIViewController, UITextFieldDelegate {
         
         locationInfoSequentially(index: 0)
         
-        let footerView = UIView(frame: CGRect(x: 30, y: 10, width: TagTable.frame.size.width-40, height: 53))
+        let footerView = UIView(frame: CGRect(x: 22, y: 20, width: TagTable.frame.size.width-22, height: 53))
         let button = UIButton(frame: footerView.bounds)
         button.setTitle("다음", for: .normal)
-        button.backgroundColor  = UIColor(red: 1, green: 0.44, blue: 0.26, alpha: 1)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.backgroundColor  = UIColor(red: 1, green: 0.44, blue: 0.26, alpha: 0.9)
         button.layer.cornerRadius = 24
-        button.setTitleColor(UIColor.black, for: .normal)
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         footerView.addSubview(button)
         TagTable.tableFooterView = footerView
@@ -158,6 +158,21 @@ class DayTextViewController: UIViewController, UITextFieldDelegate {
        textField.text = ""
        return true
    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        guard let stringRange = Range(range, in: currentText) else { return false }
+        let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+        
+        // 특정 조건에 따라 글자 색을 변경합니다.
+        if updatedText == "[장소명]" {
+            textField.textColor = UIColor(red: 0.58, green: 0.58, blue: 0.58, alpha : 1.0)
+        } else {
+            textField.textColor = UIColor.black
+        }
+
+        return true
+    }
 }
 
 extension DayTextViewController : UITableViewDelegate {
@@ -184,7 +199,12 @@ extension DayTextViewController : UITableViewDataSource, DayLogTextCellDelegate 
             cell.LocationName.text = "Loading..."
         }
         cell.LocationName.font = UIFont(name: "Pretendard-Medium", size: 24)
-        cell.LocationName.textColor = UIColor(red: 0.58, green: 0.58, blue: 0.58, alpha : 1.0)
+        if cell.LocationName.text == "[장소명]" {
+            cell.LocationName.textColor = UIColor(red: 0.58, green: 0.58, blue: 0.58, alpha : 1.0)
+        }
+        else {
+            cell.LocationName.textColor = UIColor.black
+        }
 
         if indexPath.row < fullAddress.count {
             print(fullAddress[indexPath.row])
@@ -204,7 +224,16 @@ extension DayTextViewController : UITableViewDataSource, DayLogTextCellDelegate 
         cell.token = self.token
         cell.locationId = self.locationId[indexPath.row]
         cell.LocationName.delegate = self
-        cell.PlaceName.font = UIFont(name: "Pretendard-Medium", size: 13)
+        
+        let PlaceNameFont = UIFont(name: "Pretendard-Medium", size: 13) ?? UIFont.systemFont(ofSize: 13)
+        let PlaceName: [NSAttributedString.Key: Any] = [
+            .font: PlaceNameFont,
+            .kern: 1.2,
+        ]
+        
+        cell.PlaceName.attributedText = NSMutableAttributedString(string: cell.PlaceName.text ?? "", attributes: PlaceName)
+        
+        
         cell.delegate = self
         
         cell.setData(urlArray[indexPath.row])
@@ -234,7 +263,7 @@ extension DayTextViewController {
                     case .success(let data) :
                         guard let data = data as? LocationInfoResponse else {return}
                         self.fullAddress.append(data.data?.fullAddress ?? "장소를 알 수 없습니다.")
-                        self.placeNames.append(data.data?.name ?? "이름을 입력해주세요")
+                        self.placeNames.append(data.data?.name ?? "[장소명]")
                         self.descriptions.append(data.data?.description ?? "정보를 입력해주세요")
                         self.settingData = data
                         completion()
@@ -320,11 +349,15 @@ extension DayTextViewController {
 
 extension DayTextViewController : UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        textView.text = ""
+        if textView.text == "정보를 입력해주세요" {
+            textView.text = ""
+        }
     }
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
-        textView.text = ""
+        if textView.text == "정보를 입력해주세요" {
+            textView.text = ""
+        }
         return true
     }
 }

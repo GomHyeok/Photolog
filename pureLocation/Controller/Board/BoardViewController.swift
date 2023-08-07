@@ -2,7 +2,7 @@
 import UIKit
 import GoogleMaps
 
-class BoardViewController: UIViewController {
+class BoardViewController: UIViewController, UITextViewDelegate {
     
     var token : String = ""
     var id : Int = 0
@@ -69,7 +69,8 @@ class BoardViewController: UIViewController {
         TravelTable.delegate = self
         TravelTable.dataSource = self
         
-        
+        TravelTable.rowHeight = UITableView.automaticDimension
+        TravelTable.estimatedRowHeight = 44
         
         articleInfo {
             self.HartNum.text = String(self.settingData?.data?.likes ?? 0)
@@ -142,7 +143,11 @@ class BoardViewController: UIViewController {
         self.BookNum.text! = String(self.settingData?.data?.bookmarks ?? 0)
     }
     
-    
+    func textViewDidChange(_ textView: UITextView) {
+            
+        TravelTable.beginUpdates()
+        TravelTable.endUpdates()
+    }
 
 }
 
@@ -340,20 +345,20 @@ extension BoardViewController : UITableViewDataSource {
 }
 
 extension BoardViewController : UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            return 600
-        }
-        else if indexPath.section ==  (self.settingData?.data?.days?.count ?? 0) + 1{
-            return 100.0
-        }
-        else if indexPath.row == 0{
-            return 200.0
-        }
-        else {
-            return 360.0
-        }
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        if indexPath.section == 0 {
+//            return 600
+//        }
+//        else if indexPath.section ==  (self.settingData?.data?.days?.count ?? 0) + 1{
+//            return 100.0
+//        }
+//        else if indexPath.row == 0{
+//            return 200.0
+//        }
+//        else {
+//            return 360.0
+//        }
+//    }
     
 }
 
