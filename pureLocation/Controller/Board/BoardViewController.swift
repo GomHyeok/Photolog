@@ -81,13 +81,13 @@ class BoardViewController: UIViewController, UITextViewDelegate {
                 self.HartImg.image = UIImage(named: "blackHart")
             }
             else {
-                self.HartImg.image = UIImage(named: "articleHeart")
+                self.HartImg.image = UIImage(named: "hart")
             }
             if(self.bookmarkStatus) {
                 self.BookImg.image = UIImage(named: "blackBook")
             }
             else {
-                self.BookImg.image = UIImage(named: "book")
+                self.BookImg.image = UIImage(named: "bookmark")
             }
             self.TravelTable.reloadData()
         }
@@ -111,15 +111,17 @@ class BoardViewController: UIViewController, UITextViewDelegate {
     @IBAction func LikeButton(_ sender: Any) {
         if likeStatus {
             likeCancle()
-            likeStatus = false
-            HartImg.image = UIImage(named: "hart")
-            self.settingData?.data?.likes -= 1
+            if !likeStatus {
+                HartImg.image = UIImage(named: "hart")
+                self.settingData?.data?.likes -= 1
+            }
         }
         else {
             like()
-            likeStatus = true
-            HartImg.image = UIImage(named: "blackHart")
-            self.settingData?.data?.likes += 1
+            if likeStatus {
+                HartImg.image = UIImage(named: "blackHart")
+                self.settingData?.data?.likes += 1
+            }
         }
         self.HartNum.text! = String(self.settingData?.data?.likes ?? 0)
     }
@@ -128,17 +130,19 @@ class BoardViewController: UIViewController, UITextViewDelegate {
     @IBAction func BookMark(_ sender: Any) {
         if bookmarkStatus {
             bookmarkCancle()
-            bookmarkStatus = false
-            BookImg.image = UIImage(named: "bookmark")
-            
-            self.settingData?.data?.bookmarks -= 1
+            if !bookmarkStatus {
+                BookImg.image = UIImage(named: "bookmark")
+                
+                self.settingData?.data?.bookmarks -= 1
+            }
         }
         else {
             bookmark()
-            bookmarkStatus = true
-            BookImg.image = UIImage(named: "blackBook")
-            
-            self.settingData?.data?.bookmarks += 1
+            if bookmarkStatus {
+                BookImg.image = UIImage(named: "blackBook")
+                
+                self.settingData?.data?.bookmarks += 1
+            }
         }
         self.BookNum.text! = String(self.settingData?.data?.bookmarks ?? 0)
     }
@@ -313,20 +317,16 @@ extension BoardViewController : UITableViewDataSource {
                     cell.Descriptions.text = "Loading..."
                 }
                 
-                let descriptionsFont = UIFont(name: "Pretendard-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14)
-                
+                cell.Descriptions.font = UIFont(name: "Pretendard-Regular", size: 14)
+
                 let paragraphStyle = NSMutableParagraphStyle()
-                paragraphStyle.lineSpacing = 10
-                
-                let descriptionsAttributes: [NSAttributedString.Key: Any] = [
-                    .font: descriptionsFont,
-                    .kern: 1.2,
-                    .foregroundColor: UIColor(red: 0.026, green: 0.026, blue: 0.026, alpha: 1),
-                    .paragraphStyle: paragraphStyle
+                paragraphStyle.lineHeightMultiple = 1.48
+
+                let descriptAttributes: [NSAttributedString.Key: Any] = [
+                    NSAttributedString.Key.kern: 0.84,
+                    NSAttributedString.Key.paragraphStyle: paragraphStyle
                 ]
-                
-                
-                cell.Descriptions.attributedText = NSMutableAttributedString(string: cell.Descriptions.text ?? "", attributes: descriptionsAttributes)
+                cell.Descriptions.attributedText = NSMutableAttributedString(string: cell.Descriptions.text ?? "", attributes: descriptAttributes)
                 
                 
                 cell.FullAddress.text = self.settingData?.data?.days?[indexPath.section-1].locations?[indexPath.row-1].degree ?? ""
@@ -352,20 +352,7 @@ extension BoardViewController : UITableViewDataSource {
 }
 
 extension BoardViewController : UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath.section == 0 {
-//            return 600
-//        }
-//        else if indexPath.section ==  (self.settingData?.data?.days?.count ?? 0) + 1{
-//            return 100.0
-//        }
-//        else if indexPath.row == 0{
-//            return 200.0
-//        }
-//        else {
-//            return 360.0
-//        }
-//    }
+
     
 }
 
@@ -429,6 +416,7 @@ extension BoardViewController {
             response in
             switch response {
                 case .success(let data) :
+                    self.likeStatus = true
                     self.alert(message: "게시글 좋아요 선택")
                 case .requsetErr(let err) :
                     print(err)
@@ -448,6 +436,7 @@ extension BoardViewController {
             response in
             switch response {
                 case .success(let data) :
+                    self.likeStatus = false
                     self.alert(message: "게시글 좋아요 취소")
                 case .requsetErr(let err) :
                     print(err)
@@ -467,6 +456,7 @@ extension BoardViewController {
             response in
             switch response {
                 case .success(let data) :
+                    self.bookmarkStatus = true
                     self.alert(message: "게시글이 북마크 되었습니다.")
                 case .requsetErr(let err) :
                     print(err)
@@ -486,6 +476,7 @@ extension BoardViewController {
             response in
             switch response {
                 case .success(let data) :
+                    self.bookmarkStatus = false
                     self.alert(message: "게시글이 북마크 해제되었습니다.")
                 case .requsetErr(let err) :
                     print(err)

@@ -7,8 +7,10 @@
 
 import UIKit
 
-protocol CustomCellDelegate: AnyObject {
-    func didTapAIButton(in cell: UITableViewCell)
+
+enum TextViewType {
+    case description
+    case locationName
 }
 
 class DayTextViewController: UIViewController, UITextFieldDelegate {
@@ -79,18 +81,13 @@ class DayTextViewController: UIViewController, UITextFieldDelegate {
     func locationInfoSequentially(index: Int) {
         guard index < locationId.count else {
             DispatchQueue.main.async {
-                print("reload")
-                print(self.fullAddress)
-                print(self.placeNames)
                 self.TagTable.reloadData()
             }
             return
         }
 
         let id = locationId[index]
-        print("id")
         locationInfo(locationId: id) {
-            print("completion")
             self.locationInfoSequentially(index: index + 1)
         }
     }
@@ -98,10 +95,8 @@ class DayTextViewController: UIViewController, UITextFieldDelegate {
     @objc func buttonTapped() {
         let dispatchGroup = DispatchGroup()
         for i in 0..<locationId.count {
-            let indexPath = IndexPath(row: i, section: 0) // change these numbers to the index of the cell you want
-            let cell = TagTable.cellForRow(at: indexPath) as! DayLogTextCell
-            let text = cell.Description.text!
-            let name = cell.LocationName.text!
+            let text = descriptions[i] // Modify this to fetch description from your data model
+            let name = placeNames[i] // Modify this to fetch name from your data model
             dispatchGroup.enter()
             locationDescription(locationId: locationId[i], description: text) {
                 self.locationName(locationId: self.locationId[i], title: name) {
@@ -130,7 +125,23 @@ class DayTextViewController: UIViewController, UITextFieldDelegate {
                 self.locationId = []
                 self.fullAddress = []
                 self.placeNames = []
-                self.viewDidLoad()
+                self.descriptions = []
+                self.days = self.datas?.data?.days[self.cnt]
+                if let locations = self.days?.locations {
+                    for location in locations {
+                        var arr : [URL] = []
+                        for url in location.photoUrls {
+                            arr.append(URL(string: url)!)
+                        }
+                        self.urlArray.append(arr)
+                        self.locationId.append(location.id)
+                    }
+                }
+                self.Day.text = "Day "
+                self.Day.text! += String(self.days?.sequence ?? 0)
+                self.During.text = self.days?.date
+                
+                self.locationInfoSequentially(index: 0)
             }
         }
     }
@@ -199,7 +210,7 @@ extension DayTextViewController : UITableViewDataSource, DayLogTextCellDelegate 
             cell.LocationName.text = "Loading..."
         }
         cell.LocationName.font = UIFont(name: "Pretendard-Medium", size: 24)
-        if cell.LocationName.text == "[장소명]" {
+        if cell.LocationName.text == "장소명을 입력해주세요" {
             cell.LocationName.textColor = UIColor(red: 0.58, green: 0.58, blue: 0.58, alpha : 1.0)
         }
         else {
@@ -207,7 +218,6 @@ extension DayTextViewController : UITableViewDataSource, DayLogTextCellDelegate 
         }
 
         if indexPath.row < fullAddress.count {
-            print(fullAddress[indexPath.row])
             cell.PlaceName.text = fullAddress[indexPath.row]
         } else {
             cell.PlaceName.text = "Loadin16g..."
@@ -220,10 +230,8 @@ extension DayTextViewController : UITableViewDataSource, DayLogTextCellDelegate 
             cell.Description.text = "Loading..."
         }
         cell.Description.font = UIFont(name: "Pretendard-Regular", size: 14)
-        cell.Description.delegate = self
         cell.token = self.token
         cell.locationId = self.locationId[indexPath.row]
-        cell.LocationName.delegate = self
         
         let PlaceNameFont = UIFont(name: "Pretendard-Medium", size: 13) ?? UIFont.systemFont(ofSize: 13)
         let PlaceName: [NSAttributedString.Key: Any] = [
@@ -233,7 +241,7 @@ extension DayTextViewController : UITableViewDataSource, DayLogTextCellDelegate 
         
         cell.PlaceName.attributedText = NSMutableAttributedString(string: cell.PlaceName.text ?? "", attributes: PlaceName)
         
-        
+        cell.index = indexPath.row
         cell.delegate = self
         
         cell.setData(urlArray[indexPath.row])
@@ -251,6 +259,14 @@ extension DayTextViewController : UITableViewDataSource, DayLogTextCellDelegate 
         hideLoading()
     }
     
+    func textViewDidChange(text: String, type: TextViewType, at index: Int) {
+        switch type {
+        case .description:
+            descriptions[index] = text
+        case .locationName:
+            placeNames[index] = text
+        }
+    }
 }
 
 
@@ -361,4 +377,5 @@ extension DayTextViewController : UITextViewDelegate {
         return true
     }
 }
+
 

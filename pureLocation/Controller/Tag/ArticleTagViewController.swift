@@ -7,7 +7,8 @@
 
 import UIKit
 
-class ArticleTagViewController: UIViewController {
+class ArticleTagViewController: UIViewController, UITextViewDelegate {
+    var delegate : tagCollectDelegate?
     
     var token : String = ""
     var id : Int = 0
@@ -42,8 +43,13 @@ class ArticleTagViewController: UIViewController {
         TableViewin.delegate = self
         TableViewin.dataSource = self
         
+        TableViewin.rowHeight = UITableView.automaticDimension
+        TableViewin.estimatedRowHeight = 44
+        
         photoInfo {
             self.TableViewin.reloadData()
+            self.TableViewin.beginUpdates()
+            self.TableViewin.endUpdates()
         }
         
     }
@@ -67,46 +73,23 @@ class ArticleTagViewController: UIViewController {
     
     
     @IBAction func Board(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "Board", bundle: nil)
-        if let home = storyboard.instantiateViewController(withIdentifier: "BoardMainViewController") as? BoardMainViewController{
-            home.token = self.token
-            home.id = self.id
-            
-            home.navigationController?.isNavigationBarHidden = true
-            self.navigationController?.pushViewController(home, animated: true)
-        }
+        delegate?.switchToBoard()
+        navigationController?.popViewController(animated: true)
     }
     
     
     @IBAction func Ta(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "TagPage", bundle: nil)
-        if let home = storyboard.instantiateViewController(withIdentifier: "TagMainViewController") as? TagMainViewController{
-            home.token = self.token
-            home.id = self.id
-            
-            home.navigationController?.isNavigationBarHidden = true
-            self.navigationController?.pushViewController(home, animated: true)
-        }
+        delegate?.switchToTag()
+        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func MyPage(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "MyPage", bundle: nil)
-        if let home = storyboard.instantiateViewController(withIdentifier: "MyPageMainViewController") as? MyPageMainViewController{
-            home.token = self.token
-            home.id = self.id
-            
-            self.navigationController?.pushViewController(home, animated: true)
-        }
+        delegate?.switchToMypage()
+        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func Map(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "Place", bundle: nil)
-        if let home = storyboard.instantiateViewController(withIdentifier: "PlaceMainViewController") as? PlaceMainViewController{
-            home.token = self.token
-            home.id = self.id
-            
-            self.navigationController?.pushViewController(home, animated: true)
-        }
+        
     }
     
     
@@ -121,15 +104,15 @@ class ArticleTagViewController: UIViewController {
 }
 
 extension ArticleTagViewController : UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
-            return 615
-        }
-        else {
-            return 415
-        }
-        
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        if indexPath.row == 0 {
+//            return 615
+//        }
+//        else {
+//            return 415
+//        }
+//
+//    }
 }
 
 extension ArticleTagViewController : UITableViewDataSource {
@@ -148,7 +131,8 @@ extension ArticleTagViewController : UITableViewDataSource {
             cell.ArticleButton.addTarget(self, action: #selector(switchArticle), for: .touchUpInside)
             
             cell.CellContent.isEditable = false
-            cell.CellContent.isScrollEnabled = true
+            
+            cell.CellContent.delegate = self
             
             return cell
         }

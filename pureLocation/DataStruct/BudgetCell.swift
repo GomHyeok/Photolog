@@ -84,7 +84,7 @@ class BudgetCell : UITableViewCell {
         let colorRed = UIColor(red: red, green: green, blue: blue, alpha: 1.0)
 
         
-        for setButton in buttons {
+        for setButton in groupButton {
             setButton.setTitleColor(color, for: .normal)
             setButton.setTitleColor(color, for: .highlighted)
             setButton.setTitleColor(color, for: .selected)
@@ -106,7 +106,7 @@ class BudgetCell : UITableViewCell {
                 break
             }
         }
-        return budget
+        return budget*10000
     }
     
     func getGroup() -> String {

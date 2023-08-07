@@ -1,6 +1,11 @@
 import UIKit
 
-class MyPageMainViewController: UIViewController {
+protocol ViewControllerBDelegate: AnyObject {
+    func callFunctionInViewControllerA()
+    func callFunctionInViewControllerB()
+}
+
+class MyPageMainViewController: UIViewController, ViewControllerBDelegate {
     weak var delegate : homeDelegate?
     
     var token : String = ""
@@ -49,6 +54,8 @@ class MyPageMainViewController: UIViewController {
                 let storyboard = UIStoryboard(name: "MyPage", bundle: nil)
                 let initialViewController = storyboard.instantiateViewController(withIdentifier: "NoBookMarkBoardViewController") as! NoBookMarkBoardViewController
                 
+                initialViewController.delegate = self
+                
                 initialViewController.token = self.token
                 initialViewController.id = self.id
                 
@@ -78,8 +85,8 @@ class MyPageMainViewController: UIViewController {
             }
         }
         Board.setBottomLines(borderColor: UIColor.black, hight: 2.0, bottom: 5)
-        UserId.font = UIFont(name: "Pretendard-SemiBold", size: 20)
-        NickName.font = UIFont(name: "Pretendard-Medium", size: 14)
+        UserId.font = UIFont(name: "Pretendard-SemiBold", size: 14)
+        NickName.font = UIFont(name: "Pretendard-Medium", size: 20)
         BookMarkLabel.font = UIFont(name: "Pretendard-SemiBold", size: 20)
     }
     
@@ -101,6 +108,14 @@ class MyPageMainViewController: UIViewController {
         self.delegate?.switchToMap()
     }
     
+    func callFunctionInViewControllerA() {
+        self.delegate?.switchToBoard()
+    }
+    
+    func callFunctionInViewControllerB() {
+        self.delegate?.switchToTag()
+    }
+    
     @IBAction func TourButton(_ sender: UIButton) {
         self.Board.setBottomLines(borderColor: UIColor.white, hight: 2.0, bottom: 5)
         self.Tour.setBottomLines(borderColor: UIColor.black, hight: 2.0, bottom: 5)
@@ -112,6 +127,7 @@ class MyPageMainViewController: UIViewController {
                 
                 initialViewController.token = self.token
                 initialViewController.id = self.id
+                initialViewController.delegate = self
                 
                 self.addChild(initialViewController)
                 initialViewController.view.frame = self.ContainerView.bounds
@@ -156,6 +172,7 @@ class MyPageMainViewController: UIViewController {
                 
                 initialViewController.token = self.token
                 initialViewController.id = self.id
+                initialViewController.delegate = self
                 
                 self.addChild(initialViewController)
                 initialViewController.view.frame = self.ContainerView.bounds

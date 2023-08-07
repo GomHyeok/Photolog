@@ -67,11 +67,11 @@ class budgets : UITableViewCell {
     func getBudget() -> Int {
         var budget : Int = 0
         for setButton in buttons {
-            if setButton.tag > 100 {
+            if setButton.tag > 120 {
                 budget = setButton.tag/100
                 break
             }
         }
-        return budget
+        return budget*10000
     }
 }

@@ -8,11 +8,12 @@
 import Foundation
 import UIKit
 
-class DayLogTextCell : UITableViewCell {
+class DayLogTextCell : UITableViewCell, UITextViewDelegate, UITextFieldDelegate {
     var data : [URL] = []
     var token : String = ""
     var locationId : Int = 0
     var st : String = ""
+    var index : Int?
     
     weak var delegate: DayLogTextCellDelegate?
 
@@ -28,9 +29,11 @@ class DayLogTextCell : UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        // Delegate와 DataSource를 설정
         self.DayLogCollection.delegate = self
         self.DayLogCollection.dataSource = self
+        
+        Description.delegate = self
+        LocationName.delegate = self
         
         self.AIButton.addTarget(self, action: #selector(buttontouch), for: .touchUpInside)
         
@@ -53,6 +56,11 @@ class DayLogTextCell : UITableViewCell {
         var keyword : [String] = []
         sender.setImage(UIImage(named: "wand"), for: .normal)
         keyword = self.Description.text.split(separator: ",").map(String.init)
+        
+        if LocationName.text != "장소명을 입력해주세요" {
+            keyword.append(LocationName.text ?? "")
+        }
+        
         Review(locationId: self.locationId, keyword: keyword) {
             self.delegate?.didTapAIButtons(in: self)
             self.typeTextAnimation(text: self.st)
@@ -71,6 +79,43 @@ class DayLogTextCell : UITableViewCell {
                 timer.invalidate()
             }
         }
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == "정보를 입력해주세요" {
+            textView.text = ""
+        }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        guard let index = index else {
+            print("index is nil")
+            return
+        }
+        if textView == Description {
+            delegate?.textViewDidChange(text: textView.text, type: .description, at: index)
+        }
+    }
+    
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        if textView.text == "정보를 입력해주세요" {
+            textView.text = ""
+        }
+        return true
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+       textField.text = ""
+       return true
+   }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let index = index!
+        if textField == LocationName {
+            let newText = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+            delegate?.textViewDidChange(text: newText, type: .locationName, at: index)
+        }
+        return true
     }
 }
 
@@ -101,6 +146,8 @@ extension DayLogTextCell : UICollectionViewDataSource {
         location.kf.setImage(with: data[indexPath.item])
         return cell
     }
+    
+    
 }
 
 extension DayLogTextCell {

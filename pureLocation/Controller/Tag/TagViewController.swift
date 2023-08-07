@@ -7,7 +7,8 @@
 
 import UIKit
 
-class TagViewController: UIViewController {
+class TagViewController: UIViewController, UITextViewDelegate {
+    var delegate : tagCollectDelegate?
     
     var token : String = ""
     var id : Int = 0
@@ -35,8 +36,13 @@ class TagViewController: UIViewController {
         TableViewin.delegate = self
         TableViewin.dataSource = self
         
+        TableViewin.rowHeight = UITableView.automaticDimension
+        TableViewin.estimatedRowHeight = 44
+        
         tourContent {
             self.TableViewin.reloadData()
+            self.TableViewin.beginUpdates()
+            self.TableViewin.endUpdates()
         }
         
     }
@@ -59,51 +65,31 @@ class TagViewController: UIViewController {
     
     
     @IBAction func My(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "MyPage", bundle: nil)
-        if let home = storyboard.instantiateViewController(withIdentifier: "MyPageMainViewController") as? MyPageMainViewController{
-            home.token = self.token
-            home.id = self.id
-            
-            home.navigationController?.isNavigationBarHidden = true
-            self.navigationController?.pushViewController(home, animated: true)
-        }
-        
+        delegate?.switchToMypage()
+        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func Tag(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "TagPage", bundle: nil)
-        if let home = storyboard.instantiateViewController(withIdentifier: "TagMainViewController") as? TagMainViewController{
-            home.token = self.token
-            home.id = self.id
-            
-            home.navigationController?.isNavigationBarHidden = true
-            self.navigationController?.pushViewController(home, animated: true)
-        }
-        
+        delegate?.switchToTag()
+        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func Board(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Board", bundle: nil)
-        if let home = storyboard.instantiateViewController(withIdentifier: "BoardMainViewController") as? BoardMainViewController{
-            home.token = self.token
-            home.id = self.id
-            
-            home.navigationController?.isNavigationBarHidden = true
-            self.navigationController?.pushViewController(home, animated: true)
-        }
+        delegate?.switchToBoard()
+        navigationController?.popViewController(animated: true)
     }
     
 }
 
 extension TagViewController : UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
-            return 615
-        }
-        else {
-            return 415
-        }
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        if indexPath.row == 0 {
+//            return 615
+//        }
+//        else {
+//            return 415
+//        }
+//    }
 }
 
 extension TagViewController : UITableViewDataSource {
@@ -143,7 +129,8 @@ extension TagViewController : UITableViewDataSource {
             }
             
             cell.CellContent.isEditable = false
-            cell.CellContent.isScrollEnabled = true
+            
+            cell.CellContent.delegate = self
             
             
             return cell

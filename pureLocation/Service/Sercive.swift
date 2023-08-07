@@ -877,6 +877,9 @@ class UserService {
     
     func makeTourBookMark(token : String, tourID : Int, completion : @escaping (NetworkResult<Any>) -> Void) {
         let url = APIConstants.TourBookmarkURL + String(tourID)
+        
+        print(url)
+        
         let headers : HTTPHeaders = [
             "Content-Type": "application/json",
             "Authorization" : token
@@ -905,6 +908,9 @@ class UserService {
     
     func TourBookMarkCancle(token : String, tourId : Int, completion : @escaping (NetworkResult<Any>) -> Void) {
         let url = APIConstants.TourBookmarkURL + String(tourId)
+        
+        print(url)
+        
         let headers : HTTPHeaders = [
             "Content-Type": "application/json",
             "Authorization" : token

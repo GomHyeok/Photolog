@@ -131,6 +131,7 @@
 		D29BD94F2A5D970C0010587C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29BD94E2A5D970C0010587C /* SceneDelegate.swift */; };
 		D29BD9542A5D970C0010587C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D29BD9522A5D970C0010587C /* Main.storyboard */; };
 		D29BD9592A5D970D0010587C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D29BD9572A5D970D0010587C /* LaunchScreen.storyboard */; };
+		D2B7B8362A8177E200B8A7BB /* boolModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B7B8352A8177E200B8A7BB /* boolModel.swift */; };
 		D2CFEEAC2A6C755B000BAC7A /* SummaryViewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CFEEAB2A6C755B000BAC7A /* SummaryViewCollectionViewCell.swift */; };
 		D2CFEEAF2A6E04CF000BAC7A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D2CFEEAE2A6E04CF000BAC7A /* Kingfisher */; };
 		D2E14D262A6FFD96000D2CF0 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D2E14D232A6FFC64000D2CF0 /* Pretendard-Bold.otf */; };
@@ -269,6 +270,7 @@
 		D29BD9532A5D970C0010587C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D29BD9582A5D970D0010587C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D29BD95A2A5D970D0010587C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2B7B8352A8177E200B8A7BB /* boolModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = boolModel.swift; sourceTree = "<group>"; };
 		D2CFEEAB2A6C755B000BAC7A /* SummaryViewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewCollectionViewCell.swift; sourceTree = "<group>"; };
 		D2E14D232A6FFC64000D2CF0 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-Bold.otf"; path = "Pretendard-1.3.8/public/static/Pretendard-Bold.otf"; sourceTree = SOURCE_ROOT; };
 		D2E14D242A6FFC64000D2CF0 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-ExtraBold.otf"; path = "Pretendard-1.3.8/public/static/Pretendard-ExtraBold.otf"; sourceTree = SOURCE_ROOT; };
@@ -488,6 +490,7 @@
 				D20BCA972A7E4AFA00F396AE /* TourInfoModel.swift */,
 				D20BCA992A7E70FA00F396AE /* PhotoTagModel.swift */,
 				D20BCA9B2A7E753400F396AE /* PhotoInfoModel.swift */,
+				D2B7B8352A8177E200B8A7BB /* boolModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -741,6 +744,7 @@
 				D20BCA3C2A76904600F396AE /* ArticleFilteringModel.swift in Sources */,
 				D231BA772A6428C8009D0B82 /* HomeViewController.swift in Sources */,
 				D20BCA8A2A7DEF3B00F396AE /* TourModel.swift in Sources */,
+				D2B7B8362A8177E200B8A7BB /* boolModel.swift in Sources */,
 				D20BCA922A7E41E300F396AE /* otherCell.swift in Sources */,
 				D2323EEA2A6669FD0040F165 /* StaticModel.swift in Sources */,
 				D25343A92A673D9D007558CD /* TotalViewController.swift in Sources */,

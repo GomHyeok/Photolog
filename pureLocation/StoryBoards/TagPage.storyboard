@@ -362,12 +362,9 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="한라산 꼭대기 까지 갑돌이랑 같이 올라오다니... 확실히 강아지가 사람보다는 체력이 좋다" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ijf-PA-h8I">
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="한라산 꼭대기 까지 갑돌이랑 같이 올라오다니... 확실히 강아지가 사람보다는 체력이 좋다" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ijf-PA-h8I">
                                                             <rect key="frame" x="24" y="455" width="340" height="60"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="60" id="PGr-v8-aR8"/>
-                                                            </constraints>
                                                             <color key="textColor" systemColor="labelColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -394,6 +391,9 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WiX-Dx-3Mc">
                                                             <rect key="frame" x="0.0" y="0.0" width="393" height="375"/>
                                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.1603373344" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="375" id="oIE-GI-scJ"/>
+                                                            </constraints>
                                                         </view>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1p-CL-atW">
                                                             <rect key="frame" x="0.0" y="0.0" width="393" height="375"/>
@@ -445,6 +445,9 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SjI-MR-J9x">
                                                             <rect key="frame" x="0.0" y="60" width="393" height="351"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="351" id="5MN-t9-PzV"/>
+                                                            </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="유사한 사진 더보기" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Xh-hp-TtX">
                                                             <rect key="frame" x="0.0" y="0.0" width="393" height="60"/>
@@ -525,9 +528,7 @@
                                                     <constraint firstAttribute="width" constant="24" id="mty-mh-7Sg"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="dashboard_FILL0_wght400_GRAD0_opsz48 1">
-                                                    <backgroundConfiguration key="background" image="dashboard_FILL0_wght400_GRAD0_opsz48 1"/>
-                                                </buttonConfiguration>
+                                                <buttonConfiguration key="configuration" style="plain" image="dashboard_FILL0_wght400_GRAD0_opsz48 1"/>
                                                 <connections>
                                                     <action selector="Ta:" destination="PD7-PJ-XjJ" eventType="touchUpInside" id="h3q-9h-9wu"/>
                                                 </connections>
@@ -694,12 +695,9 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="한라산 꼭대기 까지 갑돌이랑 같이 올라오다니... 확실히 강아지가 사람보다는 체력이 좋다" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="UeN-5F-DbO">
-                                                            <rect key="frame" x="24" y="477" width="340" height="60"/>
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="한라산 꼭대기 까지 갑돌이랑 같이 올라오다니... 확실히 강아지가 사람보다는 체력이 좋다" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="UeN-5F-DbO">
+                                                            <rect key="frame" x="24" y="476" width="340" height="61"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="60" id="U7f-5c-gAc"/>
-                                                            </constraints>
                                                             <color key="textColor" systemColor="labelColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -723,10 +721,12 @@
                                                             <state key="normal" title="Button"/>
                                                             <buttonConfiguration key="configuration" style="plain" image="square.and.arrow.up" catalog="system"/>
                                                         </button>
-                                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8hI-rC-H6k">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8hI-rC-H6k">
                                                             <rect key="frame" x="0.0" y="0.0" width="393" height="375"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.1603373344" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="375" id="mha-Os-qlc"/>
+                                                            </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="산봉우리&gt;강이지&gt;일리삼사오육칠팔" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfl-7V-bxo">
                                                             <rect key="frame" x="24" y="400" width="349" height="20"/>
@@ -747,14 +747,16 @@
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="HYx-Mh-11D" secondAttribute="trailing" id="1Bj-3a-1wM"/>
-                                                        <constraint firstItem="UeN-5F-DbO" firstAttribute="top" secondItem="1Ze-Q3-Zg7" secondAttribute="bottom" constant="16" id="7Lw-h3-iyp"/>
+                                                        <constraint firstItem="8hI-rC-H6k" firstAttribute="trailing" secondItem="HYx-Mh-11D" secondAttribute="trailing" id="74t-9l-ONK"/>
                                                         <constraint firstAttribute="trailing" secondItem="UeN-5F-DbO" secondAttribute="trailing" constant="29" id="BXX-FZ-u2E"/>
                                                         <constraint firstItem="HYx-Mh-11D" firstAttribute="leading" secondItem="iBX-Mm-ClW" secondAttribute="leading" id="IMM-be-PMb"/>
                                                         <constraint firstItem="tfl-7V-bxo" firstAttribute="top" secondItem="HYx-Mh-11D" secondAttribute="bottom" constant="25" id="LI4-9n-OcN"/>
                                                         <constraint firstItem="UeN-5F-DbO" firstAttribute="top" secondItem="u2t-vU-0qP" secondAttribute="bottom" constant="16" id="Mk1-Ze-cyt"/>
                                                         <constraint firstItem="u2t-vU-0qP" firstAttribute="leading" secondItem="1Ze-Q3-Zg7" secondAttribute="trailing" constant="2" id="Ozd-Rd-2Ed"/>
+                                                        <constraint firstItem="8hI-rC-H6k" firstAttribute="top" secondItem="HYx-Mh-11D" secondAttribute="top" id="Rak-Gf-Uu1"/>
                                                         <constraint firstItem="1Ze-Q3-Zg7" firstAttribute="top" secondItem="tfl-7V-bxo" secondAttribute="bottom" constant="15" id="TQr-TM-eAz"/>
                                                         <constraint firstItem="u2t-vU-0qP" firstAttribute="top" secondItem="tfl-7V-bxo" secondAttribute="bottom" constant="16" id="TjH-dK-PVt"/>
+                                                        <constraint firstItem="qjo-6n-jp7" firstAttribute="top" secondItem="UeN-5F-DbO" secondAttribute="bottom" constant="29" id="ZCe-ID-nNO"/>
                                                         <constraint firstItem="qjo-6n-jp7" firstAttribute="leading" secondItem="iBX-Mm-ClW" secondAttribute="leadingMargin" constant="285" id="dpc-dF-V2H"/>
                                                         <constraint firstItem="tfl-7V-bxo" firstAttribute="leading" secondItem="iBX-Mm-ClW" secondAttribute="leadingMargin" constant="4" id="fRk-if-RqB"/>
                                                         <constraint firstAttribute="trailingMargin" secondItem="tfl-7V-bxo" secondAttribute="trailing" id="fwF-vw-FLY"/>
@@ -762,6 +764,7 @@
                                                         <constraint firstAttribute="bottom" secondItem="qjo-6n-jp7" secondAttribute="bottom" constant="20" id="iwa-lY-Vfm"/>
                                                         <constraint firstItem="UeN-5F-DbO" firstAttribute="leading" secondItem="iBX-Mm-ClW" secondAttribute="leadingMargin" constant="4" id="nYU-vO-Sxs"/>
                                                         <constraint firstItem="HYx-Mh-11D" firstAttribute="top" secondItem="iBX-Mm-ClW" secondAttribute="top" id="pvY-ea-O31"/>
+                                                        <constraint firstItem="8hI-rC-H6k" firstAttribute="leading" secondItem="HYx-Mh-11D" secondAttribute="leading" id="rWG-OD-nJi"/>
                                                         <constraint firstItem="BhY-l5-3ed" firstAttribute="leading" secondItem="qjo-6n-jp7" secondAttribute="trailing" constant="16" id="wAB-Qv-7PB"/>
                                                         <constraint firstItem="1Ze-Q3-Zg7" firstAttribute="leading" secondItem="iBX-Mm-ClW" secondAttribute="leadingMargin" constant="4" id="wEt-du-cgm"/>
                                                     </constraints>
@@ -787,6 +790,9 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uDB-sK-oAr">
                                                             <rect key="frame" x="0.0" y="60" width="393" height="351"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="351" id="5zW-tS-tVK"/>
+                                                            </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="유사한 사진 더보기" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3OW-Gm-F6t">
                                                             <rect key="frame" x="0.0" y="0.0" width="393" height="60"/>
@@ -864,9 +870,7 @@
                                                     <constraint firstAttribute="height" constant="24" id="hGE-gX-iTk"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="dashboard_FILL0_wght400_GRAD0_opsz48 1">
-                                                    <backgroundConfiguration key="background" image="dashboard_FILL0_wght400_GRAD0_opsz48 1"/>
-                                                </buttonConfiguration>
+                                                <buttonConfiguration key="configuration" style="plain" image="dashboard_FILL0_wght400_GRAD0_opsz48 1"/>
                                                 <connections>
                                                     <action selector="Tag:" destination="H5O-ui-dpQ" eventType="touchUpInside" id="F4r-xN-Ket"/>
                                                 </connections>

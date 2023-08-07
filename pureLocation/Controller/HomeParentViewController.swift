@@ -11,6 +11,7 @@ import BSImagePicker
 import Kingfisher
 
 class HomeParentViewController: UIViewController, homeDelegate {
+    
     var firstChild : HomeViewController!
     var secondChild : HomeNameViewController!
     var boardChild : BoardMainViewController!
@@ -20,6 +21,7 @@ class HomeParentViewController: UIViewController, homeDelegate {
     var placeChild : PlaceMainViewController!
     var loading : LoadingViewController!
     var parents : HomeParentViewController!
+    var search : SearchViewController!
     
     
     var homeData : TravelAPIResponse?
@@ -104,6 +106,8 @@ class HomeParentViewController: UIViewController, homeDelegate {
         let tagpage = UIStoryboard(name: "TagPage", bundle: nil)
         tagChild = tagpage.instantiateViewController(withIdentifier: "TagMainViewController") as? TagMainViewController
         
+        search = tagpage.instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController
+        
         let place = UIStoryboard(name: "Place", bundle: nil)
         placeChild = place.instantiateViewController(withIdentifier: "PlaceMainViewController") as? PlaceMainViewController
         
@@ -114,6 +118,7 @@ class HomeParentViewController: UIViewController, homeDelegate {
         boardChild.delegate = self
         myPageChild.delegate = self
         tagChild.delegate = self
+        search.delegate = self
         
         TravelApi {
             self.firstChild.token = self.token
@@ -277,6 +282,36 @@ class HomeParentViewController: UIViewController, homeDelegate {
         addChild(placeChild)
         view.addSubview(placeChild.view)
         placeChild.didMove(toParent: self)
+    }
+    
+    func switchToSearch(tag : [String]) {
+        currentViewController.willMove(toParent: nil)
+        currentViewController.view.removeFromSuperview()
+        currentViewController.removeFromParent()
+        
+        currentViewController = self.search
+        search.tags = tag
+        
+        addChild(search)
+        view.addSubview(search.view)
+        search.didMove(toParent: self)
+        
+    }
+    func switchToSTag(tag : [String]) {
+        currentViewController.willMove(toParent: nil)
+        currentViewController.view.removeFromSuperview()
+        currentViewController.removeFromParent()
+        
+        currentViewController = self.tagChild
+        
+        tagChild.token = self.token
+        tagChild.id = self.id
+        tagChild.tag = tag
+        tagChild.creatButton()
+        
+        addChild(tagChild)
+        view.addSubview(tagChild.view)
+        tagChild.didMove(toParent: self)
     }
     
     func showLoading() {

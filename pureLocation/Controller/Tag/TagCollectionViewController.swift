@@ -8,6 +8,7 @@
 import UIKit
 
 class TagCollectionViewController: UIViewController {
+    var delegate : tagDelegate?
     
     var token : String = ""
     var id : Int = 0
@@ -116,6 +117,7 @@ extension TagCollectionViewController : UICollectionViewDataSource {
             boardView.token = self.token
             boardView.id = self.id
             boardView.ArticleId = sender.tag
+            boardView.delegate = self
             
             self.navigationController?.pushViewController(boardView, animated: true)
         }
@@ -129,6 +131,7 @@ extension TagCollectionViewController : UICollectionViewDataSource {
             boardView.token = self.token
             boardView.id = self.id
             boardView.contentId = sender.tag
+            boardView.delegate = self
             
             self.navigationController?.pushViewController(boardView, animated: true)
         }
@@ -200,4 +203,20 @@ extension TagCollectionViewController {
             }
         }
     }
+}
+
+extension TagCollectionViewController : tagCollectDelegate {
+    func switchToMypage() {
+        self.delegate?.switchToMypage()
+    }
+    
+    func switchToTag() {
+        self.delegate?.switchToTag()
+    }
+    
+    func switchToBoard() {
+        self.delegate?.switchToBoard()
+    }
+    
+    
 }
