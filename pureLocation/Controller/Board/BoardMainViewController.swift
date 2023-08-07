@@ -46,10 +46,36 @@ class BoardMainViewController: UIViewController {
         
         self.navigationController?.isNavigationBarHidden = true
         
-        KeywordSearch.font = UIFont(name: "Pretendard-Regular", size: 14)
-        SortRecent.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
-        SortLike.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
-        
+        // KeywordSearch 설정
+        let KeywordSearchColor = UIColor(red: 0.026, green: 0.026, blue: 0.026, alpha: 1)
+        let keywordSearchFont = UIFont(name: "Pretendard-Medium", size: 14) ?? UIFont.systemFont(ofSize: 14)
+        let keywordSearchAttributes: [NSAttributedString.Key: Any] = [
+            .font: keywordSearchFont,
+            .foregroundColor: KeywordSearchColor,
+            .kern: 1.2
+        ]
+        KeywordSearch.attributedText = NSMutableAttributedString(string: KeywordSearch.text ?? "", attributes: keywordSearchAttributes)
+
+        // SortRecent 설정
+        let sortRecentColor = UIColor(red: 0.026, green: 0.026, blue: 0.026, alpha: 1)
+        let sortRecentFont = UIFont(name: "Pretendard-Light", size: 15) ?? UIFont.systemFont(ofSize: 15)
+        let sortRecentAttributes: [NSAttributedString.Key: Any] = [
+            .font: sortRecentFont,
+            .foregroundColor: sortRecentColor, // 이 부분을 수정했습니다.
+            .kern: 1.2
+        ]
+        SortRecent.setAttributedTitle(NSMutableAttributedString(string: SortRecent.titleLabel?.text ?? "", attributes: sortRecentAttributes), for: .normal)
+
+        // SortLike 설정
+        let sortLikeColor =  UIColor(red: 0.026, green: 0.026, blue: 0.026, alpha: 1)
+        let sortLikeFont = UIFont(name: "Pretendard-Light", size: 15) ?? UIFont.systemFont(ofSize: 15)
+        let sortLikeAttributes: [NSAttributedString.Key: Any] = [
+            .font: sortLikeFont,
+            .foregroundColor: sortLikeColor, // 이 부분을 수정했습니다.
+            .kern: 1.2
+        ]
+        SortLike.setAttributedTitle(NSMutableAttributedString(string: SortLike.titleLabel?.text ?? "", attributes: sortLikeAttributes), for: .normal)
+
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         BoardCollection.collectionViewLayout = layout
@@ -143,21 +169,58 @@ extension BoardMainViewController : UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainBoardCell", for: indexPath) as! MainBoardCell
-        
+            
+        // 이미지 설정
         cell.BoardImage.kf.setImage(with: URL(string : settingData?.data?[indexPath.row].thumbnail ?? ""))
-        cell.Title.text = self.settingData?.data?[indexPath.row].title ?? "제목이 없습니다."
-        cell.Title.font = UIFont(name: "Pretendard-Medium", size: 14)
-        
-        cell.City.text = self.settingData?.data?[indexPath.row].city ?? "도시를 알 수 없습니다."
-        cell.City.font = UIFont(name: "Pretendard-Regular", size: 8)
-        cell.City.setBottomLine(borderColor: UIColor(red: 227/255, green: 227/255, blue: 227/255, alpha: 1.0), hight: 0.5, bottom: 0)
-        
-        cell.HartNum.text = String(self.settingData?.data?[indexPath.row].likes ?? 0)
-        
-        cell.Creator.text = "by."
-        cell.Creator.text! += self.settingData?.data?[indexPath.row].nickname ?? ""
-        cell.Creator.font = UIFont(name: "Pretendard-Regular", size: 10)
+            
+        // Title 설정
+        let titleText = self.settingData?.data?[indexPath.row].title ?? "제목이 없습니다."
+        let titleFont = UIFont(name: "Pretendard-Medium", size: 14) ?? UIFont.systemFont(ofSize: 14)
+        let titleColor = UIColor(red: 0.026, green: 0.026, blue: 0.026, alpha: 1)
+        let titleAttributes: [NSAttributedString.Key: Any] = [
+            .font: titleFont,
+            .foregroundColor: titleColor,
+            .kern: 1.2
+        ]
+        cell.Title.attributedText = NSMutableAttributedString(string: titleText, attributes: titleAttributes)
+
+        // City 설정
+        let cityText = self.settingData?.data?[indexPath.row].city ?? "도시를 알 수 없습니다."
+        let cityFont = UIFont(name: "Pretendard-Regular", size: 10) ?? UIFont.systemFont(ofSize: 10)
+        let cityColor = UIColor(red: 0.651, green: 0.651, blue: 0.651, alpha: 1)
+        let cityAttributes: [NSAttributedString.Key: Any] = [
+            .font: cityFont,
+            .foregroundColor: cityColor,
+            .underlineStyle: NSUnderlineStyle.single.rawValue,
+            .kern: -0.16
+        ]
+        cell.City.attributedText = NSMutableAttributedString(string: cityText, attributes: cityAttributes)
+
+        // HartNum 설정
+        let hartNumText = String(self.settingData?.data?[indexPath.row].likes ?? 0)
+        let hartNumColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+        let hartNumFont = UIFont(name: "Pretendard-Medium", size: 13) ?? UIFont.systemFont(ofSize: 13)
+        let hartNumAttributes: [NSAttributedString.Key: Any] = [
+            .font: hartNumFont,
+            .foregroundColor: hartNumColor,
+            .kern: -0.26
+        ]
+        cell.HartNum.attributedText = NSMutableAttributedString(string: hartNumText, attributes: hartNumAttributes)
+
+        // Creator 설정
+        let creatorText = "By. " + (self.settingData?.data?[indexPath.row].nickname ?? "")
+        let creatorFont = UIFont(name: "Pretendard-Regular", size: 10) ?? UIFont.systemFont(ofSize: 10)
+        let creatorColor = UIColor(red: 0.455, green: 0.455, blue: 0.479, alpha: 1)
+        let creatorAttributes: [NSAttributedString.Key: Any] = [
+            .font: creatorFont,
+            .foregroundColor: creatorColor,
+            .kern: -0.2
+        ]
+        cell.Creator.attributedText = NSMutableAttributedString(string: creatorText, attributes: creatorAttributes)
+        cell.Creator.textAlignment = .right
+
         
         cell.BoardButton.tag = self.settingData?.data?[indexPath.row].id ?? 0
         cell.BoardButton.addTarget(self, action: #selector(ButtonAction(_:)),for: .touchUpInside)
@@ -188,7 +251,7 @@ extension BoardMainViewController: UICollectionViewDelegateFlowLayout {
         let availableWidth = collectionView.frame.width - paddingSpace
         let widthPerItem = availableWidth / itemsPerRow
         
-        return CGSize(width: widthPerItem, height: widthPerItem * 1.6)  // 높이를 두 배로 늘림
+        return CGSize(width: widthPerItem, height: 324)  // 높이를 두 배로 늘림
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

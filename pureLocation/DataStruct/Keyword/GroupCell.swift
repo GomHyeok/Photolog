@@ -21,14 +21,16 @@ class GroupCell : UITableViewCell {
     
     override func awakeFromNib() {
         self.buttons = [self.alon, self.Date, self.Family, self.Friend]
-        let font = UIFont(name: "Pretendard-Regular", size: 14)
+        let font = UIFont(name: "Pretendard-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14)
+        let buttonAttributes: [NSAttributedString.Key: Any] = [
+            .font: font
+        ]
         
         for setButton in buttons {
-            setButton.titleLabel?.font = font
+            setButton.setAttributedTitle(NSMutableAttributedString(string: setButton.titleLabel?.text ?? "", attributes: buttonAttributes), for: .normal)
             setButton.tag = 0
             setButton.layer.cornerRadius = 16
             setButton.addTarget(self, action: #selector(settingButton), for: .touchUpInside)
-            setButton.titleLabel?.font = UIFont(name: "Pretandard-Regular", size: 14)
         }
     }
     

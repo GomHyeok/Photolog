@@ -23,14 +23,16 @@ class budgets : UITableViewCell {
     
     override func awakeFromNib() {
         self.buttons = [self.two, self.four, self.six, self.eight, self.ten, self.moreTen]
-        let font = UIFont(name: "Pretendard-Regular", size: 14)
-        
+        let font = UIFont(name: "Pretendard-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14)
+        let buttonAttributes: [NSAttributedString.Key: Any] = [
+            .font: font
+        ]
+
         for setButton in buttons {
-            setButton.titleLabel?.font = font
+            setButton.setAttributedTitle(NSMutableAttributedString(string: setButton.titleLabel?.text ?? "", attributes: buttonAttributes), for: .normal)
             setButton.tag = 0
             setButton.layer.cornerRadius = 16
             setButton.addTarget(self, action: #selector(ButtonsAction), for: .touchUpInside)
-            setButton.titleLabel?.font = UIFont(name: "Pretandard-Regular", size: 14)
         }
     }
     

@@ -23,6 +23,8 @@ class KeywordViewController: UIViewController {
         
         self.navigationController?.isNavigationBarHidden = false
         
+        KeywordTable.separatorStyle = .none
+        
         if let backButtonImage = UIImage(named: "backButton")?.withRenderingMode(.alwaysOriginal) {
             let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonAction))
             
@@ -31,19 +33,52 @@ class KeywordViewController: UIViewController {
             print("backButton image not found")
         }
         
-        KeywardLabel.font = UIFont(name: "Pretendard-Bold", size: 20)
-        LabelTom.font = UIFont(name: "Pretendard_Regular", size: 14)
-        LabelBottom.font = UIFont(name: "Pretendard_Regular", size: 14)
+        // KeywardLabel 설정
+        let keywardLabelColor = UIColor(red: 0.026, green: 0.026, blue: 0.026, alpha: 1)
+        let keywardLabelFont = UIFont(name: "Pretendard-SemiBold", size: 20) ?? UIFont.systemFont(ofSize: 20)
+        let keywardLabelAttributes: [NSAttributedString.Key: Any] = [
+            .font: keywardLabelFont,
+            .foregroundColor: keywardLabelColor
+        ]
+        KeywardLabel.attributedText = NSMutableAttributedString(string: KeywardLabel.text ?? "", attributes: keywardLabelAttributes)
+
+        // LabelTom 설정
+        let labelTomText = "여행과 관련된 키워드를 선택해 주세요."
+        let labelTomColor = UIColor(red: 0.578, green: 0.578, blue: 0.578, alpha: 1)
+        let labelTomFont = UIFont(name: "Pretendard-Medium", size: 14) ?? UIFont.systemFont(ofSize: 14)
+        let paragraphStyleTom = NSMutableParagraphStyle()
+        paragraphStyleTom.lineHeightMultiple = 1.18
+        let labelTomAttributes: [NSAttributedString.Key: Any] = [
+            .font: labelTomFont,
+            .foregroundColor: labelTomColor,
+            .paragraphStyle: paragraphStyleTom
+        ]
+        LabelTom.attributedText = NSMutableAttributedString(string: labelTomText, attributes: labelTomAttributes)
+
+        // LabelBottom 설정
+        let labelBottomText = "상관없으면 선택하지 않아도 좋아요."
+        let labelBottomColor = UIColor(red: 0.578, green: 0.578, blue: 0.578, alpha: 1)
+        let labelBottomFont = UIFont(name: "Pretendard-Medium", size: 14) ?? UIFont.systemFont(ofSize: 14)
+        let paragraphStyleBottom = NSMutableParagraphStyle()
+        paragraphStyleBottom.lineHeightMultiple = 1.18
+        let labelBottomAttributes: [NSAttributedString.Key: Any] = [
+            .font: labelBottomFont,
+            .foregroundColor: labelBottomColor,
+            .paragraphStyle: paragraphStyleBottom
+        ]
+        LabelBottom.attributedText = NSMutableAttributedString(string: labelBottomText, attributes: labelBottomAttributes)
+
         
         KeywordTable.delegate = self
         KeywordTable.dataSource = self
         
-        let footerView = UIView(frame: CGRect(x: 20, y: 0, width: KeywordTable.frame.size.width-20, height: 40))
+        let footerView = UIView(frame: CGRect(x: 22, y: 0, width: KeywordTable.frame.size.width-22, height: 53))
         let button = UIButton(frame: footerView.bounds)
         button.setTitle("다음", for: .normal)
         button.backgroundColor  = UIColor(red: 255/255, green: 112/255, blue: 66/255, alpha: 1.0)
-        button.layer.cornerRadius = 10
-        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.cornerRadius = 24
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         footerView.addSubview(button)
         KeywordTable.tableFooterView = footerView
@@ -104,16 +139,19 @@ class KeywordViewController: UIViewController {
 extension KeywordViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
-            return 200
+            return 180
         }
-        else if indexPath.row < 3 {
-            return 150
+        else if indexPath.row == 1 {
+            return 125
+        }
+        else if indexPath.row == 2 {
+            return 120
         }
         else if indexPath.row == 3 {
-            return 250
+            return 215
         }
         else {
-            return 100
+            return 90
         }
     }
 }
@@ -124,39 +162,32 @@ extension KeywordViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellTextColor = UIColor(red: 0.026, green: 0.026, blue: 0.026, alpha: 1)
+        let cellTextFont = UIFont(name: "Pretendard-SemiBold", size: 16) ?? UIFont.systemFont(ofSize: 16)
+        let cellTextAttributes: [NSAttributedString.Key: Any] = [
+            .font: cellTextFont,
+            .foregroundColor: cellTextColor
+        ]
+
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PlaceCell", for: indexPath) as! PlaceCell
-            
-            cell.PlaceLabel.font = UIFont(name: "Pretendard-Regular", size: 16)
-            
+            cell.PlaceLabel.attributedText = NSMutableAttributedString(string: cell.PlaceLabel.text ?? "", attributes: cellTextAttributes)
             return cell
-        }
-        else if indexPath.row == 1 {
+        } else if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "budgets", for: indexPath) as! budgets
-            
-            cell.Budget.font = UIFont(name: "Pretendard-Regular", size: 16)
-            
+            cell.Budget.attributedText = NSMutableAttributedString(string: cell.Budget.text ?? "", attributes: cellTextAttributes)
             return cell
-        }
-        else if indexPath.row == 2 {
+        } else if indexPath.row == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "NingtCell", for: indexPath) as! NingtCell
-            
-            cell.NigntLabel.font = UIFont(name: "Pretendard-Regular", size: 16)
-            
+            cell.NigntLabel.attributedText = NSMutableAttributedString(string: cell.NigntLabel.text ?? "", attributes: cellTextAttributes)
             return cell
-        }
-        else if indexPath.row == 3 {
+        } else if indexPath.row == 3 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ThemaCell", for: indexPath) as! ThemaCell
-            
-            cell.PlaceLabel.font = UIFont(name: "Pretendard-Regular", size: 16)
-            
+            cell.PlaceLabel.attributedText = NSMutableAttributedString(string: cell.PlaceLabel.text ?? "", attributes: cellTextAttributes)
             return cell
-        }
-        else {
+        } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "GroupCell", for: indexPath) as! GroupCell
-            
-            cell.GroupLabel.font = UIFont(name: "Pretendard-Regular", size: 16)
-            
+            cell.GroupLabel.attributedText = NSMutableAttributedString(string: cell.GroupLabel.text ?? "", attributes: cellTextAttributes)
             return cell
         }
     }
