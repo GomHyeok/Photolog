@@ -16,6 +16,7 @@ class ParentViewController: UIViewController, ChildViewControllerDelegate {
     var travelId : Int = 0
     var datas : CalculateResponse?
     var check : Bool = false
+    var merge : Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
