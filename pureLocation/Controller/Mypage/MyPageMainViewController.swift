@@ -37,7 +37,6 @@ class MyPageMainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        delegate?.setCurrentView(pos: 3)
         
         SeaImage.layer.cornerRadius = SeaImage.frame.size.height / 2
         userInfo {

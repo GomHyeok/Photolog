@@ -26,7 +26,6 @@ class TagMainViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        delegate?.setCurrentView(pos: 2)
         
         self.navigationController?.isNavigationBarHidden = true
         
