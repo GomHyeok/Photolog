@@ -49,6 +49,8 @@ class PlaceCell : UITableViewCell {
         let green: CGFloat = 112.0 / 255.0
         let blue: CGFloat = 66.0 / 255.0
         let colorRed = UIColor(red: red, green: green, blue: blue, alpha: 1.0)
+        var check = false
+        if sender.tag == 0 {check = true}
         
         for setButton in buttons {
             setButton.setTitleColor(color, for: .normal)
@@ -57,7 +59,7 @@ class PlaceCell : UITableViewCell {
             setButton.tag = 0
         }
         
-        if(sender.tag == 0) {
+        if(check) {
             sender.setTitleColor(colorRed, for: .normal)
             sender.setTitleColor(colorRed, for: .highlighted)
             sender.setTitleColor(colorRed, for: .selected)

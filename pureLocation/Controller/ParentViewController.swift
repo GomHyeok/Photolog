@@ -100,7 +100,7 @@ class ParentViewController: UIViewController, ChildViewControllerDelegate {
         let alertVC = UIAlertController(title: message, message: nil, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "확인", style: .default) { (action) in
             let storyboard = UIStoryboard(name: "Home", bundle: nil)
-            if let homeView = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController {
+            if let homeView = storyboard.instantiateViewController(withIdentifier: "HomeParentViewController") as? HomeParentViewController {
                 homeView.token = self.token
                 homeView.id = self.id
                 homeView.travelId = self.travelId
