@@ -19,29 +19,11 @@ class TotalViewController: UIViewController {
     var locationArray : [[LocationData]] = []
     var dates : [String] = []
     
-    @IBOutlet weak var TopView: UIView!
     @IBOutlet weak var InfoTable: UITableView!
     @IBOutlet weak var TravelTitle: UILabel!
     @IBOutlet weak var NextButton: UIButton!
     
     override func viewDidLayoutSubviews() {
-        DispatchQueue.main.async {
-            let border = CALayer()
-            let width = CGFloat(0.5)
-            border.borderColor = UIColor(red: 227/255, green: 227/255, blue: 227/255, alpha: 1.0).cgColor
-            border.frame = CGRect(x: 20, y: self.TopView.frame.size.height - width, width:  self.TopView.frame.size.width, height: width)
-            border.borderWidth = width
-            self.TopView.layer.addSublayer(border)
-            self.TopView.layer.masksToBounds = true
-            
-            let upper = CALayer()// 선의 두께
-            upper.borderColor = UIColor(red: 227/255, green: 227/255, blue: 227/255, alpha: 1.0).cgColor// 선의 색상
-            upper.frame = CGRect(x: 0, y: 0, width:  self.TopView.frame.size.width, height: width) // 상단에 선을 추가하기 위해 y: 0으로 설정
-            upper.borderWidth = width
-            self.TopView.layer.addSublayer(upper)
-            self.TopView.layer.masksToBounds = true
-        }
-        
         InfoTable.separatorStyle = .none
     }
     
@@ -50,14 +32,9 @@ class TotalViewController: UIViewController {
         
         InfoTable.dataSource = self
         InfoTable.delegate = self
-        TravelTitle.font = UIFont(name: "Pretendard-SemiBold", size: 20)
-        
-        NextButton.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 16)
-        NextButton.layer.cornerRadius = 24
         
         travelInfo {
             DispatchQueue.main.async {
-                self.TravelTitle.text = self.settingData?.data?.title ?? "여행 제목을 찾을 수 없습니다."
                 let days = self.settingData?.data?.days ?? []
                 
                 for day in days {
