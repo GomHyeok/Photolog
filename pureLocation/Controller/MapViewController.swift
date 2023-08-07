@@ -54,13 +54,7 @@ class MapViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 상단에 경계선을 추가
-//        let topBorder = CALayer()
         let width = CGFloat(0.5)
-//        topBorder.borderColor =  UIColor(red: 227/255, green: 227/255, blue: 227/255, alpha: 1.0).cgColor
-//        topBorder.frame = CGRect(x: 0, y: 0, width: BottomLine.frame.size.width+20, height: width)
-//        topBorder.borderWidth = width
-//        BottomLine.layer.addSublayer(topBorder)
         
         // 하단에 경계선을 추가
         let bottomBorder = CALayer()
@@ -178,6 +172,7 @@ class MapViewController: UIViewController, UITextViewDelegate {
             self.navigationController?.popViewController(animated: true)
             let storyboard = UIStoryboard(name: "Home", bundle: nil)
             if let homeView = storyboard.instantiateViewController(withIdentifier: "HomeParentViewController") as? HomeParentViewController {
+                
                 homeView.token = self.token
                 homeView.id = self.id
                 

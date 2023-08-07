@@ -45,6 +45,9 @@ class budgets : UITableViewCell {
         
         var cnt = 1
         
+        var check = false
+        if sender.tag <= 200 {check = true}
+        
         for setButton in buttons {
             setButton.setTitleColor(color, for: .normal)
             setButton.setTitleColor(color, for: .highlighted)
@@ -53,10 +56,12 @@ class budgets : UITableViewCell {
             cnt+=1
         }
         
-        sender.setTitleColor(colorRed, for: .normal)
-        sender.setTitleColor(colorRed, for: .highlighted)
-        sender.setTitleColor(colorRed, for: .selected)
-        sender.tag = sender.tag * 100
+        if check {
+            sender.setTitleColor(colorRed, for: .normal)
+            sender.setTitleColor(colorRed, for: .highlighted)
+            sender.setTitleColor(colorRed, for: .selected)
+            sender.tag = sender.tag * 100
+        }
     }
     
     func getBudget() -> Int {

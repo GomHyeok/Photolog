@@ -1559,7 +1559,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="예산 (인당)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WTN-Bd-9iA">
-                                                            <rect key="frame" x="24" y="15.999999999999998" width="131" height="19.333333333333329"/>
+                                                            <rect key="frame" x="24" y="16" width="131" height="19.333333333333329"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="71.329999999999998" id="T6d-sM-Vhp"/>
                                                                 <constraint firstAttribute="height" constant="19.329999999999998" id="kbz-of-evW"/>
@@ -1569,7 +1569,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2xs-0j-lNs" userLabel="top">
-                                                            <rect key="frame" x="0.0" y="43.333333333333336" width="375" height="31.000000000000007"/>
+                                                            <rect key="frame" x="0.0" y="43.333333333333343" width="375" height="31"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O25-VG-0NA">
                                                                     <rect key="frame" x="18.666666666666671" y="1" width="61" height="29"/>
@@ -2025,7 +2025,7 @@
                                                                 <constraint firstAttribute="trailing" secondItem="NdV-NB-Ta2" secondAttribute="trailing" constant="25" id="gWo-cA-Vmt"/>
                                                             </constraints>
                                                         </view>
-                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mpk-PZ-rVa">
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mpk-PZ-rVa">
                                                             <rect key="frame" x="24" y="382" width="327" height="178"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <constraints>
@@ -2322,6 +2322,9 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XVo-mO-nTG">
                                                             <rect key="frame" x="321.66666666666669" y="18" width="29" height="18.666666666666671"/>
                                                             <subviews>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BG" translatesAutoresizingMaskIntoConstraints="NO" id="dO3-cZ-RD9">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="29" height="18.666666666666668"/>
+                                                                </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hF6-9L-ECm">
                                                                     <rect key="frame" x="9" y="3.3333333333333321" width="11.333333333333336" height="12"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
@@ -2329,12 +2332,15 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
-                                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.1603373344" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <constraints>
                                                                 <constraint firstItem="hF6-9L-ECm" firstAttribute="centerY" secondItem="XVo-mO-nTG" secondAttribute="centerY" id="5Ms-ZG-zyE"/>
+                                                                <constraint firstItem="dO3-cZ-RD9" firstAttribute="top" secondItem="XVo-mO-nTG" secondAttribute="top" id="5rf-Qv-zY5"/>
+                                                                <constraint firstAttribute="trailing" secondItem="dO3-cZ-RD9" secondAttribute="trailing" id="7wn-nu-lM4"/>
                                                                 <constraint firstAttribute="height" constant="18.670000000000002" id="C7v-Gm-sEg"/>
                                                                 <constraint firstItem="hF6-9L-ECm" firstAttribute="centerX" secondItem="XVo-mO-nTG" secondAttribute="centerX" id="H3f-XH-lsC"/>
+                                                                <constraint firstItem="dO3-cZ-RD9" firstAttribute="leading" secondItem="XVo-mO-nTG" secondAttribute="leading" id="s6v-kL-BXc"/>
                                                                 <constraint firstAttribute="width" constant="28.670000000000002" id="uCQ-Pq-ENm"/>
+                                                                <constraint firstAttribute="bottom" secondItem="dO3-cZ-RD9" secondAttribute="bottom" id="xZn-Qf-e0O"/>
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="서울특별시" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lAh-kE-SxA">
@@ -2361,6 +2367,7 @@
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
+                                                    <outlet property="BG" destination="dO3-cZ-RD9" id="GFN-8r-BcN"/>
                                                     <outlet property="BookMark" destination="Lju-B9-t84" id="soL-UV-6cd"/>
                                                     <outlet property="BookNum" destination="uPX-E9-AV6" id="kCU-J5-WYg"/>
                                                     <outlet property="City" destination="lAh-kE-SxA" id="idV-Ls-QwJ"/>
@@ -2501,12 +2508,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="BG" width="29" height="20"/>
         <image name="BoardButton" width="72" height="32"/>
         <image name="Ellipse 3" width="4" height="5"/>
         <image name="Group 238479" width="20" height="20"/>
-        <image name="Home" width="22" height="22"/>
+        <image name="Home" width="22" height="23"/>
         <image name="Line" width="1" height="40"/>
-        <image name="Search" width="22" height="22"/>
+        <image name="Search" width="28" height="28"/>
         <image name="blackBook" width="27" height="27"/>
         <image name="blackHart" width="23" height="22"/>
         <image name="bookmark" width="27" height="28"/>

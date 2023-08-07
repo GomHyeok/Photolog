@@ -48,9 +48,24 @@ class DayLogTextCell : UITableViewCell {
     @objc func buttontouch (_ sender : UIButton) {
         print(token)
         var keyword : [String] = []
+        sender.setImage(UIImage(named: "wand"), for: .normal)
         keyword = self.Description.text.split(separator: ",").map(String.init)
         Review(locationId: self.locationId, keyword: keyword) {
-            self.Description.text! = self.st
+            self.typeTextAnimation(text: self.st)
+        }
+    }
+    
+    func typeTextAnimation(text: String) {
+        Description.text = ""
+        let characters = Array(text)
+        var index = 0
+        Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { (timer) in
+            if index < characters.count {
+                self.Description.text?.append(characters[index])
+                index += 1
+            } else {
+                timer.invalidate()
+            }
         }
     }
 }
