@@ -144,7 +144,6 @@ class BoardViewController: UIViewController, UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-            
         TravelTable.beginUpdates()
         TravelTable.endUpdates()
     }
@@ -315,12 +314,20 @@ extension BoardViewController : UITableViewDataSource {
                 }
                 
                 let descriptionsFont = UIFont(name: "Pretendard-Regular", size: 14) ?? UIFont.systemFont(ofSize: 14)
+                
+                let paragraphStyle = NSMutableParagraphStyle()
+                paragraphStyle.lineSpacing = 10
+                
                 let descriptionsAttributes: [NSAttributedString.Key: Any] = [
                     .font: descriptionsFont,
                     .kern: 1.2,
-                    .foregroundColor: UIColor(red: 0.026, green: 0.026, blue: 0.026, alpha: 1)
+                    .foregroundColor: UIColor(red: 0.026, green: 0.026, blue: 0.026, alpha: 1),
+                    .paragraphStyle: paragraphStyle
                 ]
+                
+                
                 cell.Descriptions.attributedText = NSMutableAttributedString(string: cell.Descriptions.text ?? "", attributes: descriptionsAttributes)
+                
                 
                 cell.FullAddress.text = self.settingData?.data?.days?[indexPath.section-1].locations?[indexPath.row-1].degree ?? ""
                 

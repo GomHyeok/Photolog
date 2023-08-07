@@ -165,7 +165,7 @@ class DayTextViewController: UIViewController, UITextFieldDelegate {
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
         
         // 특정 조건에 따라 글자 색을 변경합니다.
-        if updatedText == "[장소명]" {
+        if updatedText == "장소명을 입력해주세요" {
             textField.textColor = UIColor(red: 0.58, green: 0.58, blue: 0.58, alpha : 1.0)
         } else {
             textField.textColor = UIColor.black
@@ -263,7 +263,7 @@ extension DayTextViewController {
                     case .success(let data) :
                         guard let data = data as? LocationInfoResponse else {return}
                         self.fullAddress.append(data.data?.fullAddress ?? "장소를 알 수 없습니다.")
-                        self.placeNames.append(data.data?.name ?? "[장소명]")
+                        self.placeNames.append(data.data?.name ?? "장소명을 입력해주세요")
                         self.descriptions.append(data.data?.description ?? "정보를 입력해주세요")
                         self.settingData = data
                         completion()

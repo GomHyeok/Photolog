@@ -13,6 +13,7 @@ class MyPageMainViewController: UIViewController {
     var userData : UserInfoResponse?
     var tourData : TourBookMarkResponse?
     
+    @IBOutlet weak var SeaImage: UIImageView!
     @IBOutlet weak var BookMarkLabel: UILabel!
     @IBOutlet weak var EditButton: UIButton!
     @IBOutlet weak var BottomNavigation: UIView!
@@ -36,6 +37,9 @@ class MyPageMainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        delegate?.setCurrentView(pos: 3)
+        
+        SeaImage.layer.cornerRadius = SeaImage.frame.size.height / 2
         userInfo {
             self.UserId.text = self.userData?.data?.email ?? ""
             self.NickName.text = self.userData?.data?.nickName ?? ""

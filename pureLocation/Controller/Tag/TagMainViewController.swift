@@ -8,7 +8,7 @@
 import UIKit
 
 class TagMainViewController: UIViewController, UITextFieldDelegate {
-    weak var delegate : homeDelegate?
+    var delegate : homeDelegate?
     
     var token : String = ""
     var id : Int = 0
@@ -25,6 +25,9 @@ class TagMainViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        delegate?.setCurrentView(pos: 2)
+        
         self.navigationController?.isNavigationBarHidden = true
         
         let storyboard = UIStoryboard(name: "TagPage", bundle: nil)
@@ -59,21 +62,47 @@ class TagMainViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func Home(_ sender: UIButton) {
-        delegate?.switchToHome()
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        if let home = storyboard.instantiateViewController(withIdentifier: "HomeParentViewController") as? HomeParentViewController{
+            home.token = self.token
+            home.id = self.id
+            
+            home.navigationController?.isNavigationBarHidden = true
+            self.navigationController?.pushViewController(home, animated: true)
+        }
     }
     
     
     @IBAction func goBoard(_ sender: Any) {
-        delegate?.switchToBoard()
+        let storyboard = UIStoryboard(name: "Board", bundle: nil)
+        if let home = storyboard.instantiateViewController(withIdentifier: "BoardMainViewController") as? BoardMainViewController{
+            home.token = self.token
+            home.id = self.id
+            
+            home.navigationController?.isNavigationBarHidden = true
+            self.navigationController?.pushViewController(home, animated: true)
+        }
     }
     
     
     @IBAction func myPage(_ sender: UIButton) {
-        delegate?.switchToMypage()
+        let storyboard = UIStoryboard(name: "MyPage", bundle: nil)
+        if let home = storyboard.instantiateViewController(withIdentifier: "MyPageMainViewController") as? MyPageMainViewController{
+            home.token = self.token
+            home.id = self.id
+            
+            self.navigationController?.pushViewController(home, animated: true)
+        }
     }
     
     @IBAction func Map(_ sender: UIButton) {
-        delegate?.switchToMap()
+        let storyboard = UIStoryboard(name: "Place", bundle: nil)
+        if let home = storyboard.instantiateViewController(withIdentifier: "PlaceMainViewController") as? PlaceMainViewController{
+            home.token = self.token
+            home.id = self.id
+            
+            self.navigationController?.pushViewController(home, animated: true)
+        }
     }
     
     @IBAction func Board(_ sender: UIButton) {
@@ -153,7 +182,7 @@ class TagMainViewController: UIViewController, UITextFieldDelegate {
             let button = UIButton(type: .system)
             button.tag = cnt
             cnt += 1
-            button.setTitle((" " + title + "  x "), for: .normal)
+            button.setTitle(("    " + title + "  x   "), for: .normal)
             button.backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1.0) // Set your preferred color
             button.setTitleColor(UIColor(red: 0.45, green: 0.45, blue: 0.45, alpha: 1.0), for: .normal)
             button.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
@@ -175,6 +204,23 @@ class TagMainViewController: UIViewController, UITextFieldDelegate {
             for (index, button) in stackView.arrangedSubviews.enumerated() where button is UIButton {
                 button.tag = index
             }
+            
+            self.BoardButton.setBottomLines(borderColor: UIColor.black, hight: 2.0, bottom: 5)
+            self.TourButton.setBottomLines(borderColor: UIColor.white, hight: 2.0, bottom: 5)
+            let storyboard = UIStoryboard(name: "TagPage", bundle: nil)
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "TagCollectionViewController") as! TagCollectionViewController
+            
+            initialViewController.token = self.token
+            initialViewController.id = self.id
+            initialViewController.kind = false
+            initialViewController.tag = self.tag
+            
+            self.addChild(initialViewController)
+            initialViewController.view.frame = self.ContainerView.bounds
+            self.ContainerView.addSubview(initialViewController.view)
+            initialViewController.didMove(toParent: self)
+            
+            self.currentVC = initialViewController
         }
     }
 }

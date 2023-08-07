@@ -44,6 +44,8 @@ class BoardMainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        delegate?.setCurrentView(pos: 1)
+        
         self.navigationController?.isNavigationBarHidden = true
         
         // KeywordSearch 설정

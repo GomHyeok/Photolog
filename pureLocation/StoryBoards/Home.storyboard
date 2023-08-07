@@ -384,10 +384,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="FHr-cR-Xqt">
-                                <rect key="frame" x="0.0" y="47" width="375" height="765"/>
+                                <rect key="frame" x="0.0" y="47" width="375" height="465"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="9e4-3F-tO4">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="765"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="465"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="HomeNameCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HomeNameCell" rowHeight="144" id="p4Z-ah-tQS" customClass="HomeNameCell" customModule="pureLocation" customModuleProvider="target">
@@ -481,12 +481,6 @@
                                         </prototypes>
                                     </tableView>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="9e4-3F-tO4" firstAttribute="top" secondItem="FHr-cR-Xqt" secondAttribute="top" id="1jk-qg-QL0"/>
-                                    <constraint firstAttribute="bottom" secondItem="9e4-3F-tO4" secondAttribute="bottom" id="Twr-Ek-myx"/>
-                                    <constraint firstItem="9e4-3F-tO4" firstAttribute="leading" secondItem="FHr-cR-Xqt" secondAttribute="leading" id="Wiu-Xf-Ais"/>
-                                    <constraint firstAttribute="trailing" secondItem="9e4-3F-tO4" secondAttribute="trailing" id="vBM-cL-YbP"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="oSn-D9-0Nq"/>
@@ -494,7 +488,7 @@
                         <constraints>
                             <constraint firstItem="FHr-cR-Xqt" firstAttribute="leading" secondItem="oSn-D9-0Nq" secondAttribute="leading" id="ALZ-p0-Ord"/>
                             <constraint firstItem="FHr-cR-Xqt" firstAttribute="trailing" secondItem="oSn-D9-0Nq" secondAttribute="trailing" id="Ddc-Qz-k2B"/>
-                            <constraint firstAttribute="bottom" secondItem="FHr-cR-Xqt" secondAttribute="bottom" id="TZV-AL-JjO"/>
+                            <constraint firstAttribute="bottom" secondItem="FHr-cR-Xqt" secondAttribute="bottom" constant="300" id="TZV-AL-JjO"/>
                             <constraint firstItem="FHr-cR-Xqt" firstAttribute="top" secondItem="oSn-D9-0Nq" secondAttribute="top" id="X10-zq-gn1"/>
                         </constraints>
                     </view>
@@ -1413,6 +1407,12 @@
                                                                                 <constraint firstAttribute="width" constant="124" id="qWA-mt-69g"/>
                                                                             </constraints>
                                                                         </imageView>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="2e8-c2-u3d">
+                                                                            <rect key="frame" x="184" y="0.0" width="124" height="129"/>
+                                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                            <state key="normal" title="Button"/>
+                                                                            <buttonConfiguration key="configuration" style="plain"/>
+                                                                        </button>
                                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ACC-rc-vPj">
                                                                             <rect key="frame" x="0.0" y="0.0" width="176" height="129"/>
                                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1444,12 +1444,6 @@
                                                                 <constraint firstItem="GQB-tr-e4R" firstAttribute="height" secondItem="E9K-bc-9qv" secondAttribute="height" multiplier="3" id="qu7-2p-Zla"/>
                                                             </constraints>
                                                         </stackView>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="2e8-c2-u3d">
-                                                            <rect key="frame" x="0.0" y="0.0" width="361" height="204"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <state key="normal" title="Button"/>
-                                                            <buttonConfiguration key="configuration" style="plain"/>
-                                                        </button>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="yHB-zu-VAA" secondAttribute="bottom" constant="16" id="49f-xl-bfv"/>

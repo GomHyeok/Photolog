@@ -935,11 +935,13 @@ class UserService {
         var url = APIConstants.TourURL + "page=" + String(page) + "&size=30"
         
         if tag.count > 0 {
-            for t in tag {
-                url += "&keyword="
-                url += t
+                for t in tag {
+                    if let encodedTag = t.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+                        url += "&keyword="
+                        url += encodedTag
+                    }
+                }
             }
-        }
         
         let headers : HTTPHeaders = [
             "Content-Type": "application/json",
@@ -1000,11 +1002,13 @@ class UserService {
         var url = APIConstants.PhotoTagURL + "page=" + String(page) + "&size=30"
         
         if tag.count > 0 {
-            for t in tag {
-                url += "&keyword="
-                url += t
+                for t in tag {
+                    if let encodedTag = t.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+                        url += "&keyword="
+                        url += encodedTag
+                    }
+                }
             }
-        }
         
         print(url)
         

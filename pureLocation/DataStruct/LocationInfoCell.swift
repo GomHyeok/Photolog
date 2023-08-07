@@ -56,8 +56,7 @@ extension LocationInfoCell : UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MapCollectionCell
         
         cell.contentView.layer.cornerRadius = 8
-        cell.contentView.layer.borderWidth = 0.5
-        cell.contentView.layer.borderColor = UIColor.gray.cgColor
+        
         guard let location = cell.locations else {
             return cell
         }

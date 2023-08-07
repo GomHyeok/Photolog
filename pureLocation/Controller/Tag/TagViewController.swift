@@ -123,9 +123,9 @@ extension TagViewController : UITableViewDataSource {
                 cell.CellContent.font = UIFont(name: "Pretendard-Regular", size: 13)
                 
                 cell.Category.text = self.settingData.data?.cat1 ?? ""
-                cell.Category.text! += ">"
+                cell.Category.text! += " > "
                 cell.Category.text! += self.settingData.data?.cat2 ?? ""
-                cell.Category.text! += ">"
+                cell.Category.text! += " > "
                 cell.Category.text! += self.settingData.data?.cat3 ?? ""
                 cell.Category.font = UIFont(name: "Pretendard-Regular", size: 14)
                 

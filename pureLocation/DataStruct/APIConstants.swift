@@ -101,5 +101,5 @@ struct APIConstants {
     static let PhotoInfo = baseURL + "/api/photo/"
     
     //review
-    static let ReviewURL = baseURL + "/api/articles/review/"
+    static let ReviewURL = baseURL + "/api/articles/review"
 }
