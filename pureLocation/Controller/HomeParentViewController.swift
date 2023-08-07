@@ -18,6 +18,7 @@ class HomeParentViewController: UIViewController, homeDelegate {
     var myPageChild : MyPageMainViewController!
     var tagChild : TagMainViewController!
     var placeChild : PlaceMainViewController!
+    var loading : LoadingViewController!
     
     var homeData : TravelAPIResponse?
     var currentViewController : UIViewController!
@@ -36,7 +37,9 @@ class HomeParentViewController: UIViewController, homeDelegate {
     var currentAssetIndex : Int = 0
     var assetsCount : Int = 0
     var check = true
-
+    var loadingView: UIView!
+    var spinner: UIActivityIndicatorView!
+    
     @IBOutlet weak var allLabel: UILabel!
     @IBOutlet weak var Mylabel: UILabel!
     @IBOutlet weak var allView: UIView!
@@ -55,7 +58,7 @@ class HomeParentViewController: UIViewController, homeDelegate {
                 self.allView.layer.masksToBounds = true
                 
                 let upper = CALayer()// 선의 두께
-                upper.borderColor = UIColor.darkGray.cgColor // 선의 색상
+                upper.borderColor = UIColor(red: 227/255, green: 227/255, blue: 227/255, alpha: 1.0).cgColor // 선의 색상
                 upper.frame = CGRect(x: 0, y: 0, width:  self.bottomNavigation.frame.size.width, height: width) // 상단에 선을 추가하기 위해 y: 0으로 설정
                 upper.borderWidth = width
                 
@@ -82,6 +85,8 @@ class HomeParentViewController: UIViewController, homeDelegate {
         firstChild = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController
         
         secondChild = storyboard.instantiateViewController(withIdentifier: "HomeNameViewController") as? HomeNameViewController
+        
+        loading = storyboard.instantiateViewController(withIdentifier: "LoadingViewController") as? LoadingViewController
         
         let board = UIStoryboard(name: "Board", bundle: nil)
         boardChild = board.instantiateViewController(withIdentifier: "BoardMainViewController") as? BoardMainViewController
@@ -148,41 +153,55 @@ class HomeParentViewController: UIViewController, homeDelegate {
         }
     }
     
-    func switchTotaltToMap(data : TravelAPIResponse?) {
+    
+    func switchTotaltToMap(data: TravelAPIResponse?) {
         firstChild.willMove(toParent: nil)
-        firstChild.view.removeFromSuperview()
-        firstChild.removeFromParent()
-        
         secondChild.token = self.token
         secondChild.id = self.id
         secondChild.homeData = self.homeData
-        
         currentViewController = secondChild
-        
-        // 두 번째 자식 뷰 컨트롤러를 추가합니다.
+
+        // 뷰의 초기 위치를 설정합니다.
+        secondChild.view.frame.origin.x = self.ContainerView.frame.width
         self.addChild(secondChild)
-        secondChild.view.frame = self.ContainerView.bounds
         self.ContainerView.addSubview(secondChild.view)
-        secondChild.didMove(toParent: self)
+
+        // 슬라이드 애니메이션 적용
+        UIView.animate(withDuration: 0.3, animations: {
+            self.firstChild.view.frame.origin.x = -self.ContainerView.frame.width
+            self.secondChild.view.frame.origin.x = 0
+        }) { (finished) in
+            self.firstChild.view.removeFromSuperview()
+            self.firstChild.removeFromParent()
+            self.secondChild.didMove(toParent: self)
+        }
     }
+    
     
     func switchMaptoTotal() {
         secondChild.willMove(toParent: nil)
-        secondChild.view.removeFromSuperview()
-        secondChild.removeFromParent()
-        
         firstChild.token = self.token
         firstChild.id = self.id
         firstChild.homeData = self.homeData
-        
-        
         currentViewController = firstChild
-        
+
+        // 뷰의 초기 위치를 설정합니다.
+        firstChild.view.frame.origin.x = -self.ContainerView.frame.width
         self.addChild(firstChild)
-        firstChild.view.frame = self.ContainerView.bounds
         self.ContainerView.addSubview(firstChild.view)
-        firstChild.didMove(toParent: self)
+
+        // 슬라이드 애니메이션 적용
+        UIView.animate(withDuration: 0.3, animations: {
+            self.secondChild.view.frame.origin.x = self.ContainerView.frame.width
+            self.firstChild.view.frame.origin.x = 0
+        }) { (finished) in
+            self.secondChild.view.removeFromSuperview()
+            self.secondChild.removeFromParent()
+            self.firstChild.didMove(toParent: self)
+        }
     }
+
+
     
     func switchToBoard() {
         currentViewController.willMove(toParent: nil)
@@ -200,7 +219,6 @@ class HomeParentViewController: UIViewController, homeDelegate {
     }
     
     func switchToHome() {
-        print("home")
         currentViewController.willMove(toParent: nil)
         currentViewController.view.removeFromSuperview()
         currentViewController.removeFromParent()
@@ -261,6 +279,25 @@ class HomeParentViewController: UIViewController, homeDelegate {
         placeChild.didMove(toParent: self)
     }
     
+    func showLoading() {
+        loadingView = UIView()
+        loadingView.frame = self.view.frame
+        loadingView.backgroundColor = UIColor(white: 0.5, alpha: 0.7) // 반투명 검은색 배경
+        self.view.addSubview(loadingView)
+        self.view.bringSubviewToFront(loadingView)
+        
+        // 스피너의 초기화
+        spinner = UIActivityIndicatorView(style: .large)
+        spinner.center = loadingView.center
+        spinner.startAnimating()
+        loadingView.addSubview(spinner)
+    }
+    
+    func hideLoading() {
+        spinner.stopAnimating()
+        loadingView.removeFromSuperview()
+    }
+    
     func getPhotoLocationInfo(asset: PHAsset) -> (longitude: Double, latitude: Double) {
 
         guard let location = asset.location else {
@@ -305,6 +342,9 @@ class HomeParentViewController: UIViewController, homeDelegate {
             
         } else {
             calculate {
+                DispatchQueue.main.async {
+                    self.hideLoading()
+                }
                 let storyboard = UIStoryboard(name: "Home", bundle: nil)
                 if let summaryView = storyboard.instantiateViewController(withIdentifier: "SummaryViewController") as? SummaryViewController {
                     summaryView.token = self.token
@@ -373,6 +413,9 @@ class HomeParentViewController: UIViewController, homeDelegate {
             }
             
             dispatchGroup.notify(queue : .main) {
+                DispatchQueue.main.async {
+                    self?.showLoading()
+                }
                 self?.assetsCount = self!.assets.count
                 self?.processNextAsset()
             }
