@@ -30,8 +30,8 @@
             filePath = "pureLocation/Controller/ParentViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
             landmarkName = "alert(message:)"
             landmarkType = "7">
          </BreakpointContent>

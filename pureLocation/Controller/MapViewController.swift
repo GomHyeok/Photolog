@@ -427,7 +427,7 @@ extension MapViewController : UITableViewDelegate {
             return 200.0
         }
         else {
-            return 314.0
+            return 337.0
         }
     }
     
@@ -469,4 +469,11 @@ extension MapViewController : UITableViewDelegate {
         }
     }
 
+}
+
+extension MapViewController : UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        // Clear the existing text of the text field
+        textField.text = ""
+    }
 }

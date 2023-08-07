@@ -17,6 +17,7 @@ class ParentViewController: UIViewController, ChildViewControllerDelegate {
     var datas : CalculateResponse?
     var check : Bool = false
     var settingData : TravelInfoResponse?
+    var currentViewController : UIViewController!
     
     
     override func viewDidLayoutSubviews() {
@@ -38,6 +39,7 @@ class ParentViewController: UIViewController, ChildViewControllerDelegate {
         }
     }
     
+    @IBOutlet weak var ContainerView: UIView!
     @IBOutlet weak var TopView: UIView!
     @IBOutlet weak var NextButton: UIButton!
     @IBOutlet weak var MapButton: UIButton!
@@ -87,7 +89,18 @@ class ParentViewController: UIViewController, ChildViewControllerDelegate {
         travelInfo {
             DispatchQueue.main.async {
                 self.TitleName.text = self.settingData?.data?.title ?? "여행 제목을 찾을 수 없습니다."
-                let days = self.settingData?.data?.days ?? []
+                
+                self.firstChild.token = self.token
+                self.firstChild.id = self.id
+                self.firstChild.travelId = self.travelId
+                self.firstChild.datas = self.datas
+                
+                self.currentViewController = self.firstChild
+                
+                self.addChild(self.firstChild)
+                self.firstChild.view.frame = self.ContainerView.bounds
+                self.ContainerView.addSubview(self.firstChild.view)
+                self.firstChild.didMove(toParent: self)
             }
         }
     }
@@ -102,10 +115,20 @@ class ParentViewController: UIViewController, ChildViewControllerDelegate {
         secondChild.travelId = self.travelId
         secondChild.datas = self.datas
         
-        // 두 번째 자식 뷰 컨트롤러를 추가합니다.
-        addChild(secondChild)
-        view.addSubview(secondChild.view)
-        secondChild.didMove(toParent: self)
+        // 뷰의 초기 위치를 설정합니다.
+        secondChild.view.frame.origin.x = self.ContainerView.frame.width
+        self.addChild(secondChild)
+        self.ContainerView.addSubview(secondChild.view)
+
+        // 슬라이드 애니메이션 적용
+        UIView.animate(withDuration: 0.3, animations: {
+            self.firstChild.view.frame.origin.x = -self.ContainerView.frame.width
+            self.secondChild.view.frame.origin.x = 0
+        }) { (finished) in
+            self.firstChild.view.removeFromSuperview()
+            self.firstChild.removeFromParent()
+            self.secondChild.didMove(toParent: self)
+        }
     }
     
     func switchMaptoTotal() {
@@ -118,22 +141,45 @@ class ParentViewController: UIViewController, ChildViewControllerDelegate {
         firstChild.travelId = self.travelId
         firstChild.datas = self.datas
         
-        // 두 번째 자식 뷰 컨트롤러를 추가합니다.
-        addChild(firstChild)
-        view.addSubview(firstChild.view)
-        firstChild.didMove(toParent: self)
+        // 뷰의 초기 위치를 설정합니다.
+        firstChild.view.frame.origin.x = -self.ContainerView.frame.width
+        self.addChild(firstChild)
+        self.ContainerView.addSubview(firstChild.view)
+
+        // 슬라이드 애니메이션 적용
+        UIView.animate(withDuration: 0.3, animations: {
+            self.secondChild.view.frame.origin.x = self.ContainerView.frame.width
+            self.firstChild.view.frame.origin.x = 0
+        }) { (finished) in
+            self.secondChild.view.removeFromSuperview()
+            self.secondChild.removeFromParent()
+            self.firstChild.didMove(toParent: self)
+        }
     }
     
     
     @IBAction func NextButton(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        if let
+            saveView = storyboard.instantiateViewController(withIdentifier: "MapViewController") as? MapViewController {
+            saveView.token = self.token
+            saveView.id = self.id
+            saveView.travelId = self.travelId
+            saveView.datas = self.datas
+            
+            self.navigationController?.pushViewController(saveView, animated: true)
+        }
+        else {print("total 문제")}
     }
     
     
     @IBAction func TextAction(_ sender: UIButton) {
+        switchMaptoTotal()
     }
     
     
     @IBAction func MapAction(_ sender: Any) {
+        switchTotaltToMap()
     }
     
     @objc func backButtonAction() {

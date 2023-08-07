@@ -1373,12 +1373,6 @@
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Rectangle 2675" translatesAutoresizingMaskIntoConstraints="NO" id="pbb-q6-l6D">
                                                             <rect key="frame" x="16" y="2" width="343" height="200"/>
                                                         </imageView>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="2e8-c2-u3d">
-                                                            <rect key="frame" x="0.0" y="0.0" width="361" height="204"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <state key="normal" title="Button"/>
-                                                            <buttonConfiguration key="configuration" style="plain"/>
-                                                        </button>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yHB-zu-VAA">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="188"/>
                                                             <subviews>
@@ -1450,6 +1444,12 @@
                                                                 <constraint firstItem="GQB-tr-e4R" firstAttribute="height" secondItem="E9K-bc-9qv" secondAttribute="height" multiplier="3" id="qu7-2p-Zla"/>
                                                             </constraints>
                                                         </stackView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="2e8-c2-u3d">
+                                                            <rect key="frame" x="0.0" y="0.0" width="361" height="204"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <state key="normal" title="Button"/>
+                                                            <buttonConfiguration key="configuration" style="plain"/>
+                                                        </button>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="yHB-zu-VAA" secondAttribute="bottom" constant="16" id="49f-xl-bfv"/>
@@ -1811,11 +1811,11 @@
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="서초구 서초동 123456789" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NR9-Vm-fHY">
                                                                     <rect key="frame" x="56" y="0.0" width="319" height="17"/>
-                                                                    <fontDescription key="fontDescription" name="NanumSquareRoundR" family="NanumSquareRound" pointSize="15"/>
+                                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                                                     <color key="textColor" red="0.41176470590000003" green="0.41176470590000003" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ping" translatesAutoresizingMaskIntoConstraints="NO" id="lTd-eh-EPL">
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ping2" translatesAutoresizingMaskIntoConstraints="NO" id="lTd-eh-EPL">
                                                                     <rect key="frame" x="24" y="0.0" width="32" height="17"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="32" id="soK-kH-O54"/>
@@ -2009,7 +2009,6 @@
                                                     <color key="baseForegroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </buttonConfiguration>
                                                 <connections>
-                                                    <action selector="HomeButton:" destination="yka-rm-xH4" eventType="touchUpInside" id="qiI-23-lPl"/>
                                                     <action selector="NextButton:" destination="2cm-ID-ru4" eventType="touchUpInside" id="qSP-xr-o7N"/>
                                                 </connections>
                                             </button>
@@ -2038,6 +2037,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="ContainerView" destination="e2b-i4-gTz" id="H4A-31-gmQ"/>
                         <outlet property="MapButton" destination="Y4M-ba-cFW" id="vX6-V1-orj"/>
                         <outlet property="NextButton" destination="hpw-Qj-t3j" id="Dwm-9t-gjD"/>
                         <outlet property="TextButton" destination="NgW-Vi-rqP" id="kgj-lD-Twc"/>
@@ -2064,15 +2064,15 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="765"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RTO-77-wjR">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="515"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="415"/>
                                                 <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                                             </view>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="A7W-6f-kMv">
-                                                <rect key="frame" x="10" y="515" width="361" height="250"/>
+                                                <rect key="frame" x="10" y="415" width="361" height="350"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="361" id="Ohe-hV-okC"/>
-                                                    <constraint firstAttribute="height" constant="250" id="tKj-86-Zgx"/>
+                                                    <constraint firstAttribute="height" constant="350" id="tKj-86-Zgx"/>
                                                 </constraints>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="SummuryMapCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SummuryMapCell" rowHeight="36" id="kq1-mM-I29" customClass="SummuryMapCell" customModule="pureLocation" customModuleProvider="target">
@@ -2747,7 +2747,6 @@
         <image name="location_on_FILL0_wght400_GRAD0_opsz48 1" width="24" height="25"/>
         <image name="map" width="28" height="28"/>
         <image name="mypage" width="28" height="28"/>
-        <image name="ping" width="24" height="25"/>
         <image name="ping2" width="17" height="17"/>
         <image name="wand" width="24" height="24"/>
         <systemColor name="labelColor">

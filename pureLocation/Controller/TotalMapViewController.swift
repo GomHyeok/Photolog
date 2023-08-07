@@ -36,10 +36,8 @@ class TotalMapViewController: UIViewController {
         UIImage(named: "day6")!,
         UIImage(named: "day7")!
     ]
-    @IBOutlet weak var TitleLabel: UILabel!
     @IBOutlet weak var ConTainView: UIView!
     @IBOutlet weak var MapTableView: UITableView!
-    @IBOutlet weak var NextButton: UIButton!
     
     override func viewDidLayoutSubviews() {
     
@@ -52,9 +50,6 @@ class TotalMapViewController: UIViewController {
         MapTableView.dataSource = self
         MapTableView.separatorStyle = .none
         
-        TitleLabel.font = UIFont(name: "Pretendard-Bold", size: 20)
-        NextButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 15)
-        NextButton.layer.cornerRadius = 24
         
         MapInfo {
             DispatchQueue.main.async {
@@ -63,9 +58,7 @@ class TotalMapViewController: UIViewController {
                     self.locationArray.append(day.locations)
                     self.sequences.append(day.sequence)
                 }
-                
-                self.TitleLabel.text = self.settingData?.data?.title ?? "제목을 찾을 수 없습니다."
-                
+
                 let mapView = GMSMapView(frame: self.ConTainView.bounds)
                                 
                 do {

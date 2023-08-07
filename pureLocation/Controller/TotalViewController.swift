@@ -192,7 +192,7 @@ extension TotalViewController : UITableViewDataSource {
             var text = cell.ButtonLabel.text!
 
             let fontSize: CGFloat = 12
-            let lineHeightPercent: CGFloat = 12*1.63 // 163% = 1.63 in decimal
+            let lineHeightPercent: CGFloat = 1.63 // 163% = 1.63 in decimal
             let lineSpacing: CGFloat = fontSize * lineHeightPercent - fontSize
 
             let paragraphStyle = NSMutableParagraphStyle()

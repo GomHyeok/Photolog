@@ -19,6 +19,8 @@ class HomeParentViewController: UIViewController, homeDelegate {
     var tagChild : TagMainViewController!
     var placeChild : PlaceMainViewController!
     var loading : LoadingViewController!
+    var parents : HomeParentViewController!
+    
     
     var homeData : TravelAPIResponse?
     var currentViewController : UIViewController!
@@ -83,6 +85,8 @@ class HomeParentViewController: UIViewController, homeDelegate {
         
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         firstChild = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController
+        
+        parents = storyboard.instantiateViewController(withIdentifier: "HomeParentViewController") as? HomeParentViewController
         
         secondChild = storyboard.instantiateViewController(withIdentifier: "HomeNameViewController") as? HomeNameViewController
         
@@ -219,19 +223,15 @@ class HomeParentViewController: UIViewController, homeDelegate {
     }
     
     func switchToHome() {
-        currentViewController.willMove(toParent: nil)
-        currentViewController.view.removeFromSuperview()
-        currentViewController.removeFromParent()
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        if let summaryView = storyboard.instantiateViewController(withIdentifier: "HomeParentViewController") as? HomeParentViewController {
+            summaryView.token = self.token
+            summaryView.id = self.id
+            summaryView.travelId = self.travelId
             
-        firstChild.token = self.token
-        firstChild.id = self.id
-        firstChild.viewDidLoad()
-        
-        currentViewController = firstChild
-        
-        addChild(firstChild)
-        view.addSubview(firstChild.view)
-        firstChild.didMove(toParent: self)
+            self.navigationController?.pushViewController(summaryView, animated: true)
+        }
+        else {print("summary 문제")}
     }
     
     func switchToMypage() {

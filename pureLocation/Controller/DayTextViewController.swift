@@ -11,7 +11,7 @@ protocol CustomCellDelegate: AnyObject {
     func didTapAIButton(in cell: UITableViewCell)
 }
 
-class DayTextViewController: UIViewController {
+class DayTextViewController: UIViewController, UITextFieldDelegate {
     weak var delegate : ChildDelegate?
     
     var token : String = ""
@@ -28,6 +28,8 @@ class DayTextViewController: UIViewController {
     var placeNames : [String] = []
     var descriptions : [String] = []
     var st : String = ""
+    var loadingView: UIView!
+    var spinner: UIActivityIndicatorView!
     
     @IBOutlet weak var Day: UILabel!
     @IBOutlet weak var During: UILabel!
@@ -63,7 +65,7 @@ class DayTextViewController: UIViewController {
         
         locationInfoSequentially(index: 0)
         
-        let footerView = UIView(frame: CGRect(x: 30, y: 0, width: TagTable.frame.size.width-40, height: 53))
+        let footerView = UIView(frame: CGRect(x: 30, y: 10, width: TagTable.frame.size.width-40, height: 53))
         let button = UIButton(frame: footerView.bounds)
         button.setTitle("다음", for: .normal)
         button.backgroundColor  = UIColor(red: 1, green: 0.44, blue: 0.26, alpha: 1)
@@ -132,6 +134,30 @@ class DayTextViewController: UIViewController {
             }
         }
     }
+    
+    func showLoading() {
+        loadingView = UIView()
+        loadingView.frame = self.view.frame
+        loadingView.backgroundColor = UIColor(white: 0.5, alpha: 0.7) // 반투명 검은색 배경
+        self.view.addSubview(loadingView)
+        self.view.bringSubviewToFront(loadingView)
+        
+        // 스피너의 초기화
+        spinner = UIActivityIndicatorView(style: .large)
+        spinner.center = loadingView.center
+        spinner.startAnimating()
+        loadingView.addSubview(spinner)
+    }
+    
+    func hideLoading() {
+        spinner.stopAnimating()
+        loadingView.removeFromSuperview()
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+       textField.text = ""
+       return true
+   }
 }
 
 extension DayTextViewController : UITableViewDelegate {
@@ -141,7 +167,7 @@ extension DayTextViewController : UITableViewDelegate {
     }
 }
 
-extension DayTextViewController : UITableViewDataSource {
+extension DayTextViewController : UITableViewDataSource, DayLogTextCellDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.locationId.count
     }
@@ -158,6 +184,7 @@ extension DayTextViewController : UITableViewDataSource {
             cell.LocationName.text = "Loading..."
         }
         cell.LocationName.font = UIFont(name: "Pretendard-Medium", size: 24)
+        cell.LocationName.textColor = UIColor(red: 0.58, green: 0.58, blue: 0.58, alpha : 1.0)
 
         if indexPath.row < fullAddress.count {
             print(fullAddress[indexPath.row])
@@ -165,7 +192,6 @@ extension DayTextViewController : UITableViewDataSource {
         } else {
             cell.PlaceName.text = "Loadin16g..."
         }
-        cell.PlaceName.font = UIFont(name: "Pretendard-Medium", size: 13)
         
         if indexPath.row < descriptions.count {
             print(descriptions[indexPath.row])
@@ -177,11 +203,24 @@ extension DayTextViewController : UITableViewDataSource {
         cell.Description.delegate = self
         cell.token = self.token
         cell.locationId = self.locationId[indexPath.row]
+        cell.LocationName.delegate = self
+        cell.PlaceName.font = UIFont(name: "Pretendard-Medium", size: 13)
+        cell.delegate = self
         
         cell.setData(urlArray[indexPath.row])
         return cell
     }
     
+    
+    func didTapAIButton(in cell: DayLogTextCell) {
+        // Handle button tap
+        showLoading()
+    }
+    
+    func didTapAIButtons(in cell: DayLogTextCell) {
+        // Handle button tap
+        hideLoading()
+    }
     
 }
 
@@ -283,4 +322,10 @@ extension DayTextViewController : UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         textView.text = ""
     }
+    
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        textView.text = ""
+        return true
+    }
 }
+

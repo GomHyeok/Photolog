@@ -26,3 +26,8 @@ protocol homeDelegate : AnyObject {
     func switchToTag()
     func switchToMap()
 }
+
+protocol DayLogTextCellDelegate: AnyObject {
+    func didTapAIButton(in cell: DayLogTextCell)
+    func didTapAIButtons(in cell : DayLogTextCell)
+}

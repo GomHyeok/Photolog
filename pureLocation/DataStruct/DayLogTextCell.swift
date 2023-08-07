@@ -13,6 +13,8 @@ class DayLogTextCell : UITableViewCell {
     var token : String = ""
     var locationId : Int = 0
     var st : String = ""
+    
+    weak var delegate: DayLogTextCellDelegate?
 
     
     @IBOutlet weak var AIButton: UIButton!
@@ -38,6 +40,7 @@ class DayLogTextCell : UITableViewCell {
         }
     }
     
+    
     func setData(_ newData: [URL]) {
         self.data = newData
         DispatchQueue.main.async {
@@ -46,11 +49,12 @@ class DayLogTextCell : UITableViewCell {
     }
     
     @objc func buttontouch (_ sender : UIButton) {
-        print(token)
+        delegate?.didTapAIButton(in: self)
         var keyword : [String] = []
         sender.setImage(UIImage(named: "wand"), for: .normal)
         keyword = self.Description.text.split(separator: ",").map(String.init)
         Review(locationId: self.locationId, keyword: keyword) {
+            self.delegate?.didTapAIButtons(in: self)
             self.typeTextAnimation(text: self.st)
         }
     }
