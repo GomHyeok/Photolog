@@ -18,6 +18,10 @@ class TotalViewController: UIViewController {
     var sequences : [Int] = []
     var locationArray : [[LocationData]] = []
     var dates : [String] = []
+    var locationId : [Int] = []
+    var placeName : [String] = []
+    var description : [String] = []
+    
     
     @IBOutlet weak var InfoTable: UITableView!
     @IBOutlet weak var TravelTitle: UILabel!
@@ -42,12 +46,15 @@ class TotalViewController: UIViewController {
                     self.sequences.append(day.sequence)
                     self.locationArray.append(day.locations)
                 }
+                
+                
             }
             
             DispatchQueue.main.async{
                 self.InfoTable.reloadData()
             }
         }
+        
         
     }
     

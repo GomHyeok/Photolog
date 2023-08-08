@@ -16,4 +16,5 @@ struct TourBookMarkResponse : Codable {
 struct TourBookMarkData : Codable {
     let tourId : Int
     let firstImage : String?
+    let contentId : Int
 }

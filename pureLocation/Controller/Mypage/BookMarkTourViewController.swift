@@ -42,9 +42,9 @@ extension BookMarkTourViewController : UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyPageTour", for: indexPath) as! MyPageTour
         
         cell.TourImage.kf.setImage(with: URL(string: self.data?.data?[indexPath.row].firstImage ?? "")!)
-        //self.tourId[self.data?.data?[indexPath.row].contentId ?? 0] = self.data?.data?[indexPath.row].tourId ?? 0
+        self.tourId[self.data?.data?[indexPath.row].contentId ?? 0] = self.data?.data?[indexPath.row].tourId ?? 0
         
-        //cell.TourButton.tag = self.data?.data?[indexPath.row].contentId ?? 0
+        cell.TourButton.tag = self.data?.data?[indexPath.row].contentId ?? 0
         cell.TourButton.addTarget(self, action: #selector(tourButton), for: .touchUpInside)
         
         return cell

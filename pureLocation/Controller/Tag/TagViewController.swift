@@ -68,7 +68,7 @@ extension TagViewController : UITableViewDelegate {
 
 extension TagViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -106,6 +106,24 @@ extension TagViewController : UITableViewDataSource {
             
             cell.CellContent.delegate = self
             
+            
+            return cell
+        }
+        else if indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TourInfoCell", for : indexPath) as! TourInfoCell
+            
+            if self.settingData?.data != nil {
+                cell.Address.text = self.settingData.data?.address ?? "주소를 알 수 없습니다."
+                cell.PhoneNumber.text = self.settingData.data?.infoCall ?? "번호를 알 수 없습니다."
+                cell.RestTime.text = self.settingData.data?.restDate ?? "휴무를 알 수 없습니다."
+                cell.UseTime.text = self.settingData.data?.useTime ?? "영업시간을 알 수 없습니다."
+            }
+            else {
+                cell.Address.text = "주소를 알 수 없습니다."
+                cell.PhoneNumber.text = "번호를 알 수 없습니다."
+                cell.RestTime.text =  "휴무를 알 수 없습니다."
+                cell.UseTime.text = "영업시간을 알 수 없습니다."
+            }
             
             return cell
         }

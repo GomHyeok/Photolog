@@ -132,6 +132,7 @@
 		D29BD9542A5D970C0010587C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D29BD9522A5D970C0010587C /* Main.storyboard */; };
 		D29BD9592A5D970D0010587C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D29BD9572A5D970D0010587C /* LaunchScreen.storyboard */; };
 		D2B7B8362A8177E200B8A7BB /* boolModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B7B8352A8177E200B8A7BB /* boolModel.swift */; };
+		D2B7B8382A8213FA00B8A7BB /* TourInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B7B8372A8213FA00B8A7BB /* TourInfoCell.swift */; };
 		D2CFEEAC2A6C755B000BAC7A /* SummaryViewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CFEEAB2A6C755B000BAC7A /* SummaryViewCollectionViewCell.swift */; };
 		D2CFEEAF2A6E04CF000BAC7A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D2CFEEAE2A6E04CF000BAC7A /* Kingfisher */; };
 		D2E14D262A6FFD96000D2CF0 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D2E14D232A6FFC64000D2CF0 /* Pretendard-Bold.otf */; };
@@ -271,6 +272,7 @@
 		D29BD9582A5D970D0010587C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D29BD95A2A5D970D0010587C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2B7B8352A8177E200B8A7BB /* boolModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = boolModel.swift; sourceTree = "<group>"; };
+		D2B7B8372A8213FA00B8A7BB /* TourInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourInfoCell.swift; sourceTree = "<group>"; };
 		D2CFEEAB2A6C755B000BAC7A /* SummaryViewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewCollectionViewCell.swift; sourceTree = "<group>"; };
 		D2E14D232A6FFC64000D2CF0 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-Bold.otf"; path = "Pretendard-1.3.8/public/static/Pretendard-Bold.otf"; sourceTree = SOURCE_ROOT; };
 		D2E14D242A6FFC64000D2CF0 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Pretendard-ExtraBold.otf"; path = "Pretendard-1.3.8/public/static/Pretendard-ExtraBold.otf"; sourceTree = SOURCE_ROOT; };
@@ -520,6 +522,7 @@
 				D20BCA8D2A7E3EDB00F396AE /* ArticleTagCell.swift */,
 				D20BCA912A7E41E300F396AE /* otherCell.swift */,
 				D20BCA952A7E49A400F396AE /* TagViewCell.swift */,
+				D2B7B8372A8213FA00B8A7BB /* TourInfoCell.swift */,
 			);
 			path = DataStruct;
 			sourceTree = "<group>";
@@ -721,6 +724,7 @@
 				D253B9342A72A8F500326A84 /* SwitchChildProtocol.swift in Sources */,
 				D25343AB2A673F51007558CD /* TravelInfoModel.swift in Sources */,
 				D2541F812A5FC844000AC372 /* DeleteModel.swift in Sources */,
+				D2B7B8382A8213FA00B8A7BB /* TourInfoCell.swift in Sources */,
 				D20BCA452A7723D400F396AE /* NigntCell.swift in Sources */,
 				D2541F892A604BBA000AC372 /* PhotoSaveModel.swift in Sources */,
 				D2323EEE2A6677D30040F165 /* DayLogcollectionViewCell.swift in Sources */,
@@ -852,6 +856,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = PhotoLog;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -907,6 +912,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = PhotoLog;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
