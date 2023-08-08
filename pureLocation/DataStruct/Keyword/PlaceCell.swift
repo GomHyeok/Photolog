@@ -72,7 +72,14 @@ class PlaceCell : UITableViewCell {
     func getString() -> String? {
         for button in buttons {
             if button.tag == 1 {
-                return button.titleLabel?.text
+                var text = button.titleLabel!.text!
+                if text == "경기도" {text = "경기"}
+                else if text == "강원도" {text = "강원"}
+                else if text == "충청도" {text = "충청"}
+                else if text == "전라도" {text = "전라"}
+                else if text == "제주도" {text = "제주"}
+                else if text == "경상도" {text = "경상"}
+                return text
             }
         }
         return nil

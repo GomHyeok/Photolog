@@ -200,8 +200,20 @@ extension AfterKeywordViewController : UITableViewDataSource {
         ]
         let bookNumText = String(self.settingData?.data?[indexPath.row].bookmarks ?? 0)
         cell.BookNum.attributedText = NSMutableAttributedString(string: bookNumText, attributes: bookNumAttributes)
-
+        cell.CellButton.tag = self.settingData?.data?[indexPath.row].id ?? 0
+        cell.CellButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         
         return cell
+    }
+    
+    @objc func buttonAction(_ sender : UIButton) {
+        let storyboard = UIStoryboard(name: "Board", bundle: nil)
+        if let home = storyboard.instantiateViewController(withIdentifier: "BoardViewController") as? BoardViewController{
+            home.token = self.token
+            home.id = self.id
+            home.ArticleId = sender.tag
+            
+            self.navigationController?.pushViewController(home, animated: true)
+        }
     }
 }

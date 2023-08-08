@@ -15,6 +15,7 @@ class TagViewController: UIViewController, UITextViewDelegate {
     var contentId : Int = 0
     var settingData : TourInfoResponse!
     var bookmarkStatus : Bool = false
+    var tourId : Int = 0
     
     @IBOutlet weak var TableViewin: UITableView!
     
@@ -49,33 +50,6 @@ class TagViewController: UIViewController, UITextViewDelegate {
     
     @objc func backButtonAction() {
         self.navigationController?.isNavigationBarHidden = true
-        navigationController?.popViewController(animated: true)
-    }
-    
-    @IBAction func Home(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        if let home = storyboard.instantiateViewController(withIdentifier: "HomeParentViewController") as? HomeParentViewController{
-            home.token = self.token
-            home.id = self.id
-            
-            home.navigationController?.isNavigationBarHidden = true
-            self.navigationController?.pushViewController(home, animated: true)
-        }
-    }
-    
-    
-    @IBAction func My(_ sender: Any) {
-        delegate?.switchToMypage()
-        navigationController?.popViewController(animated: true)
-    }
-    
-    @IBAction func Tag(_ sender: UIButton) {
-        delegate?.switchToTag()
-        navigationController?.popViewController(animated: true)
-    }
-    
-    @IBAction func Board(_ sender: Any) {
-        delegate?.switchToBoard()
         navigationController?.popViewController(animated: true)
     }
     
@@ -159,18 +133,16 @@ extension TagViewController : UITableViewDataSource {
     
     @objc func bookmarks(_ sender : UIButton) {
         if bookmarkStatus {
-            tourCancle(tourId: contentId){
-                
+            tourCancle(){
+                self.bookmarkStatus = false
+                sender.setImage(UIImage(named: "bookmark_FILL0_wght400_GRAD0_opsz48 1"), for: .normal)
             }
-            self.settingData.data?.bookmarkStatus = false
-            sender.setImage(UIImage(named: "bookmark_FILL0_wght400_GRAD0_opsz48 1"), for: .normal)
         }
         else {
-            tourBookMark(tourId : contentId) {
-                
+            tourBookMark() {
+                self.bookmarkStatus = true
+                sender.setImage(UIImage(named: "blackBook"), for: .normal)
             }
-            self.settingData.data?.bookmarkStatus = false
-            sender.setImage(UIImage(named: "blackBook"), for: .normal)
         }
     }
     
@@ -198,15 +170,17 @@ extension TagViewController {
         }
     }
     
-    func tourCancle(tourId : Int, completion : @escaping () ->Void) {
+    func tourCancle(completion : @escaping () ->Void) {
         UserService.shared.TourBookMarkCancle(token: token, tourId: tourId) {
             response in
             switch response {
                 case .success(let data) :
+                    self.alert(message: "북마크 취소 되었습니다.")
                     completion()
                 case .requsetErr(let err) :
                     print(err)
                 case .pathErr:
+                    self.alert(message: "북마크 취소 되었습니다.")
                     completion()
                     print("pathErr")
                 case .serverErr:
@@ -217,15 +191,17 @@ extension TagViewController {
         }
     }
     
-    func tourBookMark(tourId : Int ,completion : @escaping () -> Void ) {
+    func tourBookMark(completion : @escaping () -> Void ) {
         UserService.shared.makeTourBookMark(token: token, tourID: tourId) {
             response in
             switch response {
                 case .success(let data) :
+                    self.alert(message: "북마크 되었습니다.")
                     completion()
                 case .requsetErr(let err) :
                     print(err)
                 case .pathErr:
+                    self.alert(message: "북마크 되었습니다.")
                     completion()
                     print("pathErr")
                 case .serverErr:

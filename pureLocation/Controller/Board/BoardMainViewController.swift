@@ -237,6 +237,7 @@ extension BoardMainViewController : UICollectionViewDataSource {
             Keyword.token = self.token
             Keyword.id = self.id
             Keyword.ArticleId = sender.tag
+            Keyword.back = true
             
             self.navigationController?.pushViewController(Keyword, animated: true)
         }

@@ -27,7 +27,7 @@ class SearchViewController: UIViewController {
     }
     
     @objc func backButtonAction() {
-        delegate?.switchToSTag(tag: [])
+        delegate?.switchToSTag(tag: tags)
     }
 }
 

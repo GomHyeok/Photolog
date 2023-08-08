@@ -18,6 +18,7 @@ class TagCollectionViewController: UIViewController {
     var tag : [String] = []
     var currentPage : Int = 0
     var isLoading : Bool = false
+    var tourId : [Int : Int] = [:]
 
     @IBOutlet weak var TagCollection: UICollectionView!
     
@@ -91,6 +92,8 @@ extension TagCollectionViewController : UICollectionViewDataSource {
             }
             cell.TagButton.tag = tourData[indexPath.row].contentId
             cell.TagButton.addTarget(self, action: #selector(tourButton), for: .touchUpInside)
+            self.tourId[tourData[indexPath.row].contentId] = tourData[indexPath.row].id
+
         }
         else {
             if self.articleData[indexPath.row].photoUrl != "" {
@@ -132,6 +135,7 @@ extension TagCollectionViewController : UICollectionViewDataSource {
             boardView.id = self.id
             boardView.contentId = sender.tag
             boardView.delegate = self
+            boardView.tourId = self.tourId[sender.tag] ?? 0
             
             self.navigationController?.pushViewController(boardView, animated: true)
         }
@@ -171,6 +175,7 @@ extension TagCollectionViewController {
                     case .success(let data) :
                     guard let data = data as? TourResponse else {return}
                         self.tourData.append(contentsOf: data.data?.content ?? [])
+                        print(self.tourData)
                         completion()
                     case .requsetErr(let err) :
                         print(err)

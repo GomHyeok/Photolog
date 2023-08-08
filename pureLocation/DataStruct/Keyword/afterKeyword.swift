@@ -16,6 +16,7 @@ class AfterKeyword : UITableViewCell {
     @IBOutlet weak var TableImage: UIImageView!
     @IBOutlet weak var Days: UILabel!
     
+    @IBOutlet weak var CellButton: UIButton!
     @IBOutlet weak var BG: UIImageView!
     @IBOutlet weak var PhotoNum: UILabel!
     @IBOutlet weak var BookNum: UILabel!

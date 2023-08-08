@@ -9,6 +9,7 @@ class BoardViewController: UIViewController, UITextViewDelegate {
     var ArticleId : Int = 0
     var likeStatus : Bool = false
     var bookmarkStatus : Bool = false
+    var back : Bool = false
     var settingData : ArticleInfoResponse?
     let pingColor : [UIColor] = [UIColor(hexString: "FF9292"),
                                  UIColor(hexString: "FFD392"),
@@ -70,7 +71,7 @@ class BoardViewController: UIViewController, UITextViewDelegate {
         TravelTable.dataSource = self
         
         TravelTable.rowHeight = UITableView.automaticDimension
-        TravelTable.estimatedRowHeight = 44
+        TravelTable.estimatedRowHeight = 80
         
         articleInfo {
             self.HartNum.text = String(self.settingData?.data?.likes ?? 0)
@@ -94,7 +95,7 @@ class BoardViewController: UIViewController, UITextViewDelegate {
     }
     
     @objc func backButtonAction() {
-        self.navigationController?.isNavigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = back
         navigationController?.popViewController(animated: true)
     }
     
